@@ -38,6 +38,10 @@ public class ControlUnit {
 	private static BigDecimal[] coinDenominations;
 	private static int scaleMaximumWeight;
 	private static int scaleSensitivity;
+
+	public static PaperLow paperLow;
+	public static InkLow inkLow;
+	
 //	private static State currentState;
 //	private static int option;
 //	
@@ -65,6 +69,9 @@ public class ControlUnit {
 		membershipScan = new ScanMembership(checkoutStation);
 		sessionData = new CurrentSessionData();
 		paymentProcessing = new CardPaymentProcessing();
+		
+		paperLow = new PaperLow(checkoutStation);
+		inkLow = new InkLow(checkoutStation);
 		
 //		setCurrentState(option);
 //		
