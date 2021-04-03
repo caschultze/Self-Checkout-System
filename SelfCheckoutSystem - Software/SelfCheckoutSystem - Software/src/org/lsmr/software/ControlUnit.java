@@ -33,6 +33,7 @@ public class ControlUnit {
 	public static ScanMembership membershipScan;
 	public static CurrentSessionData sessionData;
 	public static CardPaymentProcessing paymentProcessing;
+	public static AttendantLogin login;
 	private static Currency currency;
 	private static int[] banknoteDenominations;
 	private static BigDecimal[] coinDenominations;
@@ -65,6 +66,12 @@ public class ControlUnit {
 		membershipScan = new ScanMembership(checkoutStation);
 		sessionData = new CurrentSessionData();
 		paymentProcessing = new CardPaymentProcessing();
+		login = new AttendantLogin();
+		
+		// Instantiate attendant-specific use cases in here
+		if (sessionData.getAttendantLoggedIn()) {
+			
+		}
 		
 //		setCurrentState(option);
 //		

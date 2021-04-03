@@ -22,7 +22,7 @@ public class CardPaymentProcessing {
 	private String TD_digits = "4504";
 	private String Tangerine_digits = "4505";
 	
-	private static final HashMap<String, CardIssuer> banks = new HashMap<>();
+	private static final HashMap<String, CardIssuer> banks = new HashMap<String, CardIssuer>();
 	public CurrentSessionData sessionData = new CurrentSessionData();
 	private boolean paid = false;
 	

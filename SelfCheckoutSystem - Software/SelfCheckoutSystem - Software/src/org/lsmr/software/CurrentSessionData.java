@@ -26,6 +26,8 @@ public class CurrentSessionData {
 	private static ArrayList <BarcodedItem> scannedItems = new ArrayList<BarcodedItem>();
 	private static BigDecimal currentAmountOwing = new BigDecimal("0.00");
 	private static BigDecimal totalPrice = new BigDecimal("0.00");
+	private static boolean attendantLoggedIn = false;
+	private static Attendant currentAttendant = null;
 
 	/*
 	 * Function to add products to a saved HashMap of items scanned -> this HashMap explicitly associates each item scanned with 
@@ -124,5 +126,21 @@ public class CurrentSessionData {
 	
 	public void payBanknote(int amo) {
 		currentAmountOwing = currentAmountOwing.subtract(new BigDecimal(amo));
+	}
+	
+	public boolean getAttendantLoggedIn() {
+		return attendantLoggedIn;
+	}
+	
+	public void setAttendantLoggedIn(boolean loggedIn) {
+		attendantLoggedIn = loggedIn;
+	}
+	
+	public Attendant getCurrentAttendant() {
+		return currentAttendant;
+	}
+	
+	public void setCurrentAttendant(Attendant attendant) {
+		currentAttendant = attendant;
 	}
 }
