@@ -10,6 +10,7 @@ import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.external.ProductDatabases;
 import org.lsmr.selfcheckout.products.BarcodedProduct;
+import org.lsmr.selfcheckout.products.PLUCodedProduct;
 
 public class CurrentSessionData {
 
@@ -26,7 +27,7 @@ public class CurrentSessionData {
 	private static ArrayList <BarcodedItem> scannedItems = new ArrayList<BarcodedItem>();
 	private static BigDecimal currentAmountOwing = new BigDecimal("0.00");
 	private static BigDecimal totalPrice = new BigDecimal("0.00");
-
+	private static ArrayList<PLUCodedProduct> PLUProducts = new ArrayList<PLUCodedProduct>();
 	/*
 	 * Function to add products to a saved HashMap of items scanned -> this HashMap explicitly associates each item scanned with 
 	 * it's price and description -> used to help calculate final costs/the receipt
@@ -125,4 +126,13 @@ public class CurrentSessionData {
 	public void payBanknote(int amo) {
 		currentAmountOwing = currentAmountOwing.subtract(new BigDecimal(amo));
 	}
+	
+	public void addPLUProduct(PLUCodedProduct product) {
+		PLUProducts.add(product);
+	}
+	
+	public ArrayList<PLUCodedProduct> getPLUProducts() {
+		return PLUProducts;
+	}
+	
 }
