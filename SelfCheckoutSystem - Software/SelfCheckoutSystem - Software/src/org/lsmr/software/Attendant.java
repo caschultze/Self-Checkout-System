@@ -4,6 +4,8 @@ import org.lsmr.selfcheckout.devices.SimulationException;
 
 public class Attendant {
 
+	public CurrentSessionData sessionData;
+	
 	private String name;
 	private String username;
 	private String password;
@@ -57,7 +59,12 @@ public class Attendant {
 	}
 	
 	public LoginData requestLogin() {
-		return new LoginData();
+		
+		if (sessionData.getAttendantLoggedInMiddleCheck()) {
+			return new LoginData();
+		}
+		
+		return null;
 	}
 	
 	public class LoginData {

@@ -28,6 +28,7 @@ public class CurrentSessionData {
 	private static BigDecimal totalPrice = new BigDecimal("0.00");
 	private static boolean attendantLoggedIn = false;
 	private static Attendant currentAttendant = null;
+	private static boolean attendantLoggedInMiddleCheck = false;
 
 	/*
 	 * Function to add products to a saved HashMap of items scanned -> this HashMap explicitly associates each item scanned with 
@@ -134,6 +135,14 @@ public class CurrentSessionData {
 	
 	public void setAttendantLoggedIn(boolean loggedIn) {
 		attendantLoggedIn = loggedIn;
+	}
+	
+	public boolean getAttendantLoggedInMiddleCheck() {
+		return attendantLoggedInMiddleCheck;
+	}
+	
+	public void setAttendantLoggedInMiddleCheck(boolean loggedIn) {
+		attendantLoggedInMiddleCheck = loggedIn;
 	}
 	
 	public Attendant getCurrentAttendant() {

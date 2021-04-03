@@ -40,6 +40,10 @@ public class AttendantLogin {
 	
 	public boolean verifyLogin(String username, String password) {
 		
+		sessionData.setAttendantLoggedInMiddleCheck(false);
+		sessionData.setAttendantLoggedIn(false);
+		sessionData.setCurrentAttendant(null);
+		
 		if (username == null || password == null) {
 			throw new SimulationException(new NullPointerException("No argument may be null"));
 		}
@@ -53,6 +57,8 @@ public class AttendantLogin {
 			System.out.println("Sorry, your password entry does not match our records. Please try again.");
 			return false;
 		}
+		
+		sessionData.setAttendantLoggedInMiddleCheck(true);
 		
 		for (Attendant attendant : database.employees) {
 			LoginData loginData = attendant.requestLogin();
