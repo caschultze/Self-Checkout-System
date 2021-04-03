@@ -11,26 +11,40 @@ public class InkLow {
 	private SelfCheckoutStation station;
 	private boolean noInk;
 		
+	/**
+	 * Constructor for the use case "Station detects that the ink in a receipt printer is low."
+	 * 
+	 * @param station	The SelfCheckoutStation of the system
+	 */
 	public InkLow (SelfCheckoutStation station){
 		this.station = station; 
 		registerRPListener();
-	
 	}
 	
+	/**
+	 * Calls the print method of the station's printer
+	 */
 	public void print (char c) {
 		station.printer.print(c);
-
 	}
 	
+	/** 
+	 * Calls the addPaper method of the station's printer
+	 */
 	public void addPaper(int amount) {
 		station.printer.addPaper(amount);
 	}
 	
+	/** 
+	 * Calls the addInk method of the station's printer
+	 */
 	public void addInk(int amount) {
 		station.printer.addInk(amount);
 	}
 	
-	
+	/**
+	 * Registers a ReceiptPrinter listener
+	 */
 	private void registerRPListener() {
 		
 		ReceiptPrinterListener rp_listener = new ReceiptPrinterListener() {
@@ -79,6 +93,10 @@ public class InkLow {
 			
 	}
 	
+	/**
+	 * Returns true if the printer is out of ink.
+	 * Otherwise false.
+	 */
 	public boolean getNoInk() {
 		return noInk;
 	}

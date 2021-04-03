@@ -16,6 +16,7 @@ public class InkLowTest {
 	
 	public ControlUnit control;
 	
+	
 	@Before
 	public void setup() {
 		Currency currency = Currency.getInstance(Locale.CANADA);
@@ -32,15 +33,16 @@ public class InkLowTest {
 		control = null;
 	}
 	
+	
 	@Test (expected = SimulationException.class)
-	public void printWhenNoInk() {
+	public void testPrintWhenNoInk() {
 		control.inkLow.addPaper(1);
 		control.inkLow.print('a');
 		
 	}
 	
 	@Test
-	public void noInkAfterPrintingOneChar() {
+	public void testNoInkAfterPrintingOneChar() {
 		control.inkLow.addInk(1);
 		control.inkLow.addPaper(1);
 		control.inkLow.print('a');
@@ -51,17 +53,11 @@ public class InkLowTest {
 	}
 	
 	@Test (expected = SimulationException.class)
-	public void printWhenNoInkAfterRefill() {
+	public void testPrintWhenNoInkAfterRefill() {
 		control.inkLow.addInk(1);
 		control.inkLow.addPaper(1);
 		control.inkLow.print('a');
 		control.inkLow.print('\n');
 		control.inkLow.print('b');
 	}
-	
-	
-	
-	
-	
-	
 }

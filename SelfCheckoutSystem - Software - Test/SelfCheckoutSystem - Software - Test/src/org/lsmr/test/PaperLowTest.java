@@ -32,14 +32,15 @@ public class PaperLowTest {
 		control = null;
 	}
 	
+	
 	@Test (expected = SimulationException.class)
-	public void printWhenNoPaper() {
+	public void testPrintWhenNoPaper() {
 		control.paperLow.print('a');
 		
 	}
 	
 	@Test
-	public void noPaperAfterPrinting() {
+	public void testNoPaperAfterPrinting() {
 		control.paperLow.addInk(1);
 		control.paperLow.addPaper(1);
 		control.paperLow.print('a');
@@ -50,17 +51,11 @@ public class PaperLowTest {
 	}
 	
 	@Test (expected = SimulationException.class)
-	public void printWhenNoPaperAfterRefill() {
+	public void testPrintWhenNoPaperAfterRefill() {
 		control.paperLow.addInk(1);
 		control.paperLow.addPaper(1);
 		control.paperLow.print('a');
 		control.paperLow.print('\n');
 		control.paperLow.print('b');
 	}
-	
-	
-	
-	
-	
-	
 }
