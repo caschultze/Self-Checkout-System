@@ -3,6 +3,7 @@ package org.lsmr.software;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.lsmr.selfcheckout.devices.SimulationException;
 import org.lsmr.software.Attendant.LoginData;
 
 public class AttendantLogin {
@@ -38,12 +39,17 @@ public class AttendantLogin {
 	}
 	
 	public boolean verifyLogin(String username, String password) {
+		
+		if (username == null || password == null) {
+			throw new SimulationException(new NullPointerException("No argument may be null"));
+		}
+		
 		AttendantLoginDatabase database = new AttendantLoginDatabase();
 		
 		if (!(database.loginDatabase.containsKey(username))) {
 			System.out.println("Sorry, your username entry does not match our records. Please try again.");
 			return false;
-		} else if ((database.loginDatabase.get(username)) != password) {
+		} else if (!(database.loginDatabase.get(username).equals(password))) {
 			System.out.println("Sorry, your password entry does not match our records. Please try again.");
 			return false;
 		}
@@ -61,7 +67,10 @@ public class AttendantLogin {
 	}
 	
 	public void attendantLogOut() {
-		sessionData.setAttendantLoggedIn(false);
-		sessionData.setCurrentAttendant(null);
+		
+		if (sessionData.getAttendantLoggedIn()) {
+			sessionData.setAttendantLoggedIn(false);
+			sessionData.setCurrentAttendant(null);
+		}
 	}
 }
