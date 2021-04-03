@@ -50,6 +50,15 @@ public class InkLowTest {
 		assertEquals(expected, control.inkLow.getNoInk());
 	}
 	
+	@Test (expected = SimulationException.class)
+	public void printWhenNoInkAfterRefill() {
+		control.inkLow.addInk(1);
+		control.inkLow.addPaper(1);
+		control.inkLow.print('a');
+		control.inkLow.print('\n');
+		control.inkLow.print('b');
+	}
+	
 	
 	
 	

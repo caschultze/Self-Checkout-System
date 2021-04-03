@@ -49,6 +49,15 @@ public class PaperLowTest {
 		assertEquals(expected, control.paperLow.getNoPaper());
 	}
 	
+	@Test (expected = SimulationException.class)
+	public void printWhenNoPaperAfterRefill() {
+		control.paperLow.addInk(1);
+		control.paperLow.addPaper(1);
+		control.paperLow.print('a');
+		control.paperLow.print('\n');
+		control.paperLow.print('b');
+	}
+	
 	
 	
 	
