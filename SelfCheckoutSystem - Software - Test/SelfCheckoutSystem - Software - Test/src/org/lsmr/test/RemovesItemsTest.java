@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.BarcodedItem;
+import org.lsmr.selfcheckout.devices.OverloadException;
 import org.lsmr.software.ControlUnit;
 
 public class RemovesItemsTest {
@@ -50,6 +51,19 @@ public class RemovesItemsTest {
 	}
 	
 	@Test
+	public void testCurrentWeightInGramsSingleItem() throws OverloadException {
+		
+		Barcode itemCode = new Barcode("2222");
+		
+		control.placesItems.placesItems(itemsDatabase.get(itemCode));
+		assertTrue("20.0".equals(String.valueOf(control.placesItems.station.baggingArea.getCurrentWeight())));
+		
+		control.removesItems.removesItems(itemsDatabase.get(itemCode));
+		assertTrue("0.0".equals(String.valueOf(control.removesItems.station.baggingArea.getCurrentWeight())));
+		
+	}
+	
+	@Test
 	public void testRemovesMultipleItems() {
 		
 		Barcode itemCode0 = new Barcode("1111");
@@ -65,6 +79,27 @@ public class RemovesItemsTest {
 		control.removesItems.removesItems(itemsDatabase.get(itemCode2));
 		
 		assertEquals(control.removesItems.getCountWeightChanged(), 6);
+		
+	}
+	
+	@Test
+	public void testCurrentWeightInGramsMultipleItems() throws OverloadException {
+		
+		Barcode itemCode0 = new Barcode("1111");
+		Barcode itemCode1 = new Barcode("2222");
+		Barcode itemCode2 = new Barcode("3333");
+		
+		control.placesItems.placesItems(itemsDatabase.get(itemCode0));
+		control.placesItems.placesItems(itemsDatabase.get(itemCode1));
+		control.placesItems.placesItems(itemsDatabase.get(itemCode2));
+		
+		assertTrue("545.0".equals(String.valueOf(control.placesItems.station.baggingArea.getCurrentWeight())));
+		
+		control.removesItems.removesItems(itemsDatabase.get(itemCode0));
+		control.removesItems.removesItems(itemsDatabase.get(itemCode1));
+		control.removesItems.removesItems(itemsDatabase.get(itemCode2));
+		
+		assertTrue("0.0".equals(String.valueOf(control.removesItems.station.baggingArea.getCurrentWeight())));
 		
 	}
 	
