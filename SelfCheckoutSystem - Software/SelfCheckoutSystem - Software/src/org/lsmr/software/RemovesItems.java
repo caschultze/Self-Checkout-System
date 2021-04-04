@@ -39,11 +39,15 @@ public class RemovesItems {
 		
 	}
 	
+	/**
+	 * Adds an item to the station's baggingArea 
+	 * 
+	 * @param item
+	 * 		The Item to be added to the station's baggingArea
+	 */
 	public void placesItems(Item item) {
 		
 		station.baggingArea.add(item);
-		
-		//CurrentWeightInGrams += item.getWeight();
 		
 	}
 	
@@ -69,7 +73,6 @@ public class RemovesItems {
 			@Override 
 			public void weightChanged(ElectronicScale scale, double weightInGrams) {
 				countWeightChanged++;
-				//CurrentWeightInGrams -= weightInGrams;
 				
 			}
 			
@@ -89,12 +92,9 @@ public class RemovesItems {
 		
 	}
 
+	// Getter
 	public int getCountWeightChanged() {
 		return countWeightChanged;
 	}
-
-	//public double getCurrentWeightInGrams() {
-	//	return CurrentWeightInGrams;
-	//}
 
 }
