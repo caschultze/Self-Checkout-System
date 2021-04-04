@@ -22,6 +22,20 @@ public class AddPaperInk {
 		registerRPListener();
 	}
 	
+	/** 
+	 * Calls the addPaper method of the station's printer
+	 */
+	public void addPaper(int amount) {
+		station.printer.addPaper(amount);
+	}
+	
+	/** 
+	 * Calls the addInk method of the station's printer
+	 */
+	public void addInk(int amount) {
+		station.printer.addInk(amount);
+	}
+	
 	/**
 	 * The machine can only print if there is paper and ink added.
 	 * 

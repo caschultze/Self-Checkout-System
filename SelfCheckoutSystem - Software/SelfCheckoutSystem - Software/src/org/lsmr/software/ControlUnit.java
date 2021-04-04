@@ -42,6 +42,8 @@ public class ControlUnit {
 	public static PaperLow paperLow;
 	public static InkLow inkLow;
 	
+	public static AddPaperInk addPaperInk;
+	
 //	private static State currentState;
 //	private static int option;
 //	
@@ -72,6 +74,8 @@ public class ControlUnit {
 		
 		paperLow = new PaperLow(checkoutStation);
 		inkLow = new InkLow(checkoutStation);
+		
+		addPaperInk = new AddPaperInk(checkoutStation);
 		
 //		setCurrentState(option);
 //		
