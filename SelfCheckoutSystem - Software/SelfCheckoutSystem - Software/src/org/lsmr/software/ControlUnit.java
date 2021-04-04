@@ -38,6 +38,8 @@ public class ControlUnit {
 	private static BigDecimal[] coinDenominations;
 	private static int scaleMaximumWeight;
 	private static int scaleSensitivity;
+	public static RemovesItems removesItems;
+	public static RemovesItems placesItems;   
 //	private static State currentState;
 //	private static int option;
 //	
@@ -65,6 +67,8 @@ public class ControlUnit {
 		membershipScan = new ScanMembership(checkoutStation);
 		sessionData = new CurrentSessionData();
 		paymentProcessing = new CardPaymentProcessing();
+		removesItems = new RemovesItems(checkoutStation);
+		placesItems = new RemovesItems(checkoutStation);
 		
 //		setCurrentState(option);
 //		
