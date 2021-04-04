@@ -37,6 +37,13 @@ public class AddPaperInk {
 	}
 	
 	/**
+	 * Calls the print method of the station's printer
+	 */
+	public void print (char c) {
+		station.printer.print(c);
+	}
+	
+	/**
 	 * The machine can only print if there is paper and ink added.
 	 * 
 	 * @return true if there is paper and ink in the machine, false otherwise

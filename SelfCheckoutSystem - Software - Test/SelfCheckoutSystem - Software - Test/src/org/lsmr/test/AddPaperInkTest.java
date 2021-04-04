@@ -10,6 +10,7 @@ import java.util.Locale;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.lsmr.selfcheckout.devices.SimulationException;
 import org.lsmr.software.ControlUnit;
 
 public class AddPaperInkTest {
@@ -41,6 +42,24 @@ public class AddPaperInkTest {
 	}
 	
 	@Test
+	public void testAddInkThenRunOut() {
+		control.addPaperInk.addPaper(5);
+		control.addPaperInk.addInk(1);
+		control.addPaperInk.print('a');
+		
+		assertFalse(control.addPaperInk.getInkAdded());
+	}
+	
+	@Test
+	public void testAddPaperThenRunOut() {
+		control.addPaperInk.addPaper(1);
+		control.addPaperInk.addInk(5);
+		control.addPaperInk.print('\n');
+		
+		assertFalse(control.addPaperInk.getPaperAdded());
+	}
+	
+	@Test
 	public void testCanMachinePrintTrue() {
 		control.addPaperInk.addInk(1);
 		control.addPaperInk.addPaper(1);
@@ -60,6 +79,5 @@ public class AddPaperInkTest {
 		control.addPaperInk.addPaper(1);
 		
 		assertFalse(control.addPaperInk.CanMachinePrint());
-	}
-	
+	}	
 }
