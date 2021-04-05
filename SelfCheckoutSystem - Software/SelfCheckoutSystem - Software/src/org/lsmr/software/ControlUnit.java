@@ -35,6 +35,11 @@ public class ControlUnit {
 	public static CardPaymentProcessing paymentProcessing;
 	public static AttendantLogin login;
 	public static AttendantApprovesWeight approveWeight;
+	public static DetectUnexpectedWeight checkWrongWeight;
+	public static PaperLow paperLow;
+	public static InkLow inkLow;
+	public static AddPaperInk addPaperInk;
+	
 	private static Currency currency;
 	private static int[] banknoteDenominations;
 	private static BigDecimal[] coinDenominations;
@@ -58,6 +63,7 @@ public class ControlUnit {
 		itemBag = new BagItem(checkoutStation);
 		payCoin = new CoinPayment(checkoutStation);
 		payBanknote = new BanknotePayment(checkoutStation);
+		
 		ownBag = new AddOwnBag(checkoutStation);
 		addFinish = new FinishAdding(checkoutStation);
 		creditPayment = new PayCredit(checkoutStation);
@@ -67,8 +73,13 @@ public class ControlUnit {
 		membershipScan = new ScanMembership(checkoutStation);
 		sessionData = new CurrentSessionData();
 		paymentProcessing = new CardPaymentProcessing();
+		
 		login = new AttendantLogin();
 		approveWeight = new AttendantApprovesWeight();
+		checkWrongWeight = new DetectUnexpectedWeight(checkoutStation);
+		paperLow = new PaperLow(checkoutStation);
+		inkLow = new InkLow(checkoutStation);
+		addPaperInk = new AddPaperInk(checkoutStation);
 		
 		// Instantiate attendant-specific use cases in here
 		if (sessionData.getAttendantLoggedIn()) {
