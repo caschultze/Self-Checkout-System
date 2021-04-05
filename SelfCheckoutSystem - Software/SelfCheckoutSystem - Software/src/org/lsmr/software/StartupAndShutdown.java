@@ -42,6 +42,19 @@ public class StartupAndShutdown {
 	
 	public void shutdown () {
 		PowerOn = false;
+		itemScan = null;
+		itemBag = null;
+		payCoin = null;
+		payBanknote = null;
+		ownBag = null;
+		addFinish = null;
+		creditPayment = null;
+		debitPayment = null;
+		failPlaceItem = null;
+		changeReceive = null;
+		membershipScan = null;
+		sessionData = null;
+		paymentProcessing = null;
 		//System.exit(1);
 	}
 }
