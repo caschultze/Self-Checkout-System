@@ -28,9 +28,11 @@ public class ControlUnit {
 	public static FinishAdding addFinish;
 	public static PayCredit creditPayment;
 	public static PayDebit debitPayment;
+	public static PayGiftCard giftcardPayment;
 	public static PlaceItemFail failPlaceItem;
 	public static ReceiveChange changeReceive;
 	public static ScanMembership membershipScan;
+	public static EnterMembership membershipEnter;
 	public static CurrentSessionData sessionData;
 	public static CardPaymentProcessing paymentProcessing;
 	private static Currency currency;
@@ -60,9 +62,11 @@ public class ControlUnit {
 		addFinish = new FinishAdding(checkoutStation);
 		creditPayment = new PayCredit(checkoutStation);
 		debitPayment = new PayDebit(checkoutStation);
+		giftcardPayment = new PayGiftCard(checkoutStation);
 		failPlaceItem = new PlaceItemFail(checkoutStation);
 		changeReceive = new ReceiveChange(checkoutStation);
 		membershipScan = new ScanMembership(checkoutStation);
+		membershipEnter = new EnterMembership(checkoutStation);
 		sessionData = new CurrentSessionData();
 		paymentProcessing = new CardPaymentProcessing();
 		

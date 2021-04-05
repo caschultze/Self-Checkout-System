@@ -14,6 +14,7 @@ public class CardPaymentProcessing {
 	private CardIssuer RBC = new CardIssuer("Royal Bank of Canada");
 	private CardIssuer TD = new CardIssuer("Toronto-Dominion Bank");
 	private CardIssuer Tangerine = new CardIssuer("Tangerine Bank");
+	private CardIssuer Coop = new CardIssuer("Coop");
 
 	private String BMO_digits = "4500";
 	private String Scotiabank_digits = "4501";
@@ -21,6 +22,7 @@ public class CardPaymentProcessing {
 	private String RBC_digits = "4503";
 	private String TD_digits = "4504";
 	private String Tangerine_digits = "4505";
+	private String Coop_digits = "3003";
 	
 	private static final HashMap<String, CardIssuer> banks = new HashMap<>();
 	public CurrentSessionData sessionData = new CurrentSessionData();
@@ -33,6 +35,7 @@ public class CardPaymentProcessing {
 		banks.put(RBC_digits, RBC);
 		banks.put(TD_digits, TD);
 		banks.put(Tangerine_digits, Tangerine);
+		banks.put(Coop_digits, Coop);
 	}
 	
 	public CardIssuer getBank(String fourDigits) {
