@@ -5,14 +5,11 @@ import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Currency;
-import java.util.Locale;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.lsmr.selfcheckout.PriceLookupCode;
-import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.external.ProductDatabases;
 import org.lsmr.selfcheckout.products.PLUCodedProduct;
 import org.lsmr.software.CurrentSessionData;
@@ -20,7 +17,6 @@ import org.lsmr.software.EnterPLUCode;;
 
 public class EnterPLUCodeTest {
 
-	private SelfCheckoutStation station;
 	private EnterPLUCode epc;
 	private CurrentSessionData data;
 	private PLUCodedProduct product1;
@@ -45,15 +41,9 @@ public class EnterPLUCodeTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		Currency currency = Currency.getInstance(Locale.CANADA);
-		int[] banknoteDenominations = {5,10,20,50,100};
-		BigDecimal[] coinDenominations = {new BigDecimal(0.05),new BigDecimal(0.10),new BigDecimal(0.25),new BigDecimal(1.00),new BigDecimal(2.00)};
-		int scaleMaximum = 136078;	// 300 pounds
-		int scaleSensitivity = 10;	// 10 grams
-
-		station = new SelfCheckoutStation(currency,banknoteDenominations,coinDenominations,scaleMaximum,scaleSensitivity);
+		
 		data = new CurrentSessionData();
-		epc = new EnterPLUCode(station,data);
+		epc = new EnterPLUCode(data);
 		
 		makeTestDatabase();
 		

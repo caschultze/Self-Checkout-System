@@ -2,7 +2,6 @@ package org.lsmr.software;
 
 import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.PriceLookupCode;
-import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.external.ProductDatabases;
 import org.lsmr.selfcheckout.products.BarcodedProduct;
 import org.lsmr.selfcheckout.products.PLUCodedProduct;
@@ -16,10 +15,8 @@ import org.lsmr.selfcheckout.products.PLUCodedProduct;
 
 public class LookUpProduct {
 
-	private SelfCheckoutStation station;
 	
-	public LookUpProduct(SelfCheckoutStation station) {
-		this.station = station;
+	public LookUpProduct() {
 		
 	}
 	

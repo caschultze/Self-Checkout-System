@@ -1,7 +1,6 @@
 package org.lsmr.software;
 
 import org.lsmr.selfcheckout.PriceLookupCode;
-import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.external.ProductDatabases;
 import org.lsmr.selfcheckout.products.PLUCodedProduct;
 
@@ -13,11 +12,9 @@ import org.lsmr.selfcheckout.products.PLUCodedProduct;
 
 public class EnterPLUCode {
 
-	private SelfCheckoutStation station;
 	private CurrentSessionData data;
 	
-	public EnterPLUCode(SelfCheckoutStation station, CurrentSessionData data) {
-		this.station = station;
+	public EnterPLUCode(CurrentSessionData data) {
 		this.data = data;
 	}
 	
