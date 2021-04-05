@@ -4,7 +4,7 @@ import org.lsmr.selfcheckout.devices.SimulationException;
 
 public class AttendantApprovesWeight {
 	
-	CurrentSessionData data = new CurrentSessionData();
+	CurrentSessionData data = ControlUnit.sessionData;
 	private boolean approved;
 	private double expectedWeight;
 	private double actualWeight;
@@ -16,11 +16,14 @@ public class AttendantApprovesWeight {
 	 * double actualWeight = the weight of the item on the scale, should be unequal to expectedWeight
 	 * double maxDiscrepancy =
 	*/
-	
+
 	public void checkDiscrepancy(double expectedWeight, double actualWeight, double maxDiscrepancy) {
 		//If there is no attendant present, then throw an exception as this use case should not even exist without one
 		if(data.getCurrentAttendant() == null)
 			throw new SimulationException("There is no attendant available to help");
+		if(expectedWeight < 0 || actualWeight < 0)
+			throw new SimulationException("Negative Weights not Accepted");
+		
 		this.expectedWeight = expectedWeight;
 		this.actualWeight = actualWeight;
 		this.maxDiscrepancy = maxDiscrepancy;
