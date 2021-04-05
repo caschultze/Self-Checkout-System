@@ -40,6 +40,8 @@ public class RemovesItemsTest {
 		
 	}
 	
+	// Testing the bagging area for use case "Customer removes purchased items from bagging area"
+	
 	@Test
 	public void testRemoveAnItem() {
 		
