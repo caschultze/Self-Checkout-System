@@ -17,10 +17,10 @@ public class AttendantApprovesWeightTest  {
 
 	public ControlUnit cu;
 	CurrentSessionData data;
-	String name = "Brianna";
-	String username = "Bhoang";
-	String password = "hihihihihihihihihihellothere";
-	String jobTitle = "Attendant";
+	String name = "Mario";
+	String username = "Mario";
+	String password = "itsameeeeeeeee";
+	String jobTitle = "Plumber";
 	String department = "Customer service";
 	
 	double actualWeight1 = 19.4;
@@ -28,6 +28,7 @@ public class AttendantApprovesWeightTest  {
 	double actualWeight2 = 4.0;
 	double expectedWeight2 = 15.0;
 	double maxDiscrepancy = 10.0;
+	double invalidWeight = -0.90;
 	
 	@Before
 	public void setup() {
@@ -63,5 +64,15 @@ public class AttendantApprovesWeightTest  {
 	public void noAttendant() {
 		data.setCurrentAttendant(null);
 		cu.approveWeight.checkDiscrepancy(expectedWeight2, actualWeight2, maxDiscrepancy);
+	}
+	
+	@Test(expected = SimulationException.class)
+	public void invalidWeight1() {
+		cu.approveWeight.checkDiscrepancy(expectedWeight2, invalidWeight, maxDiscrepancy);
+	}
+	
+	@Test(expected = SimulationException.class)
+	public void invalidWeight2() {
+		cu.approveWeight.checkDiscrepancy(invalidWeight, actualWeight2, maxDiscrepancy);
 	}
 }
