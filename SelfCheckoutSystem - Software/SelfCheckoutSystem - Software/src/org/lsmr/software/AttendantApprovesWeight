@@ -17,16 +17,14 @@ public class AttendantApprovesWeight {
 	 * double maxDiscrepancy =
 	*/
 	
-	public AttendantApprovesWeight(double expectedWeight, double actualWeight, double maxDiscrepancy) {
+	public void checkDiscrepancy(double expectedWeight, double actualWeight, double maxDiscrepancy) {
 		//If there is no attendant present, then throw an exception as this use case should not even exist without one
 		if(data.getCurrentAttendant() == null)
 			throw new SimulationException("There is no attendant available to help");
 		this.expectedWeight = expectedWeight;
 		this.actualWeight = actualWeight;
 		this.maxDiscrepancy = maxDiscrepancy;
-	}
-
-	public void checkDiscrepancy() {
+		
 		//Use the absolute value here to determine the difference between the expected/actual weight
 		if(Math.abs(expectedWeight - actualWeight) <= maxDiscrepancy) 
 			this.approved = true;
@@ -39,7 +37,4 @@ public class AttendantApprovesWeight {
 		return this.approved;
 	}
 
-	public double getMaxDiscrepancy() {
-		return maxDiscrepancy;
-	}
 }
