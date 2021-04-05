@@ -9,7 +9,7 @@ import org.lsmr.selfcheckout.devices.listeners.ElectronicScaleListener;
 
 public class RemovesItems {
 	
-	private SelfCheckoutStation station;
+	public SelfCheckoutStation station;
 	private int countWeightChanged;
 	
 	/**
