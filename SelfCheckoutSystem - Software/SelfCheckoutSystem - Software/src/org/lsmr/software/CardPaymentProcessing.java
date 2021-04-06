@@ -22,7 +22,7 @@ public class CardPaymentProcessing {
 	private String TD_digits = "4504";
 	private String Tangerine_digits = "4505";
 	
-	private static final HashMap<String, CardIssuer> banks = new HashMap<>();
+	private static final HashMap<String, CardIssuer> banks = new HashMap<String, CardIssuer>();
 	public CurrentSessionData sessionData = new CurrentSessionData();
 	private boolean paid = false;
 	
@@ -54,7 +54,7 @@ public class CardPaymentProcessing {
 		paid = getBank(cardNumber.substring(0, 4)).postTransaction(cardNumber, holdNumber, actualAmount);
 		
 		if (paid) {
-			sessionData.getCurrentAmountOwing(actualAmount);
+			sessionData.deductCurrentAmountOwing(actualAmount);
 		}
 		
 		return paid;

@@ -114,7 +114,7 @@ public class ReceiveChangeTest {
 	 
 	@Test
 	public void properNickelTest() throws Exception {
-		cu.sessionData.getTotalPrice(0);
+		cu.sessionData.getTotalPrice();
 		cu.sessionData.setAndGetTotalPrice(new BigDecimal(0));
 		cu.payCoin.payWithCoins(new Coin(new BigDecimal("0.05"),currency));
 		try {
@@ -127,7 +127,7 @@ public class ReceiveChangeTest {
 	
 	@Test
 	public void properMulitpleCoinTest() throws Exception {
-		cu.sessionData.getTotalPrice(0);
+		cu.sessionData.getTotalPrice();
 		cu.sessionData.setAndGetTotalPrice(new BigDecimal(0));
 		cu.payCoin.payWithCoins(new Coin(new BigDecimal("0.05"),currency));
 		cu.payCoin.payWithCoins(new Coin(new BigDecimal("0.05"),currency));
@@ -141,7 +141,7 @@ public class ReceiveChangeTest {
 	
 	@Test
 	public void properFiveTest() throws Exception {
-		cu.sessionData.getTotalPrice(0);
+		cu.sessionData.getTotalPrice();
 		cu.sessionData.setAndGetTotalPrice(new BigDecimal(0));
 		cu.payBanknote.payWithBanknotes(new Banknote(5,currency));
 		Banknote[] notes = new Banknote[1];
@@ -156,7 +156,7 @@ public class ReceiveChangeTest {
 	
 	@Test
 	public void properMulitpleFiveTest() throws Exception {
-		cu.sessionData.getTotalPrice(0);
+		cu.sessionData.getTotalPrice();
 		cu.sessionData.setAndGetTotalPrice(new BigDecimal(0));
 		cu.payBanknote.payWithBanknotes(new Banknote(5,currency));
 		cu.payBanknote.payWithBanknotes(new Banknote(5,currency));
@@ -225,7 +225,7 @@ public class ReceiveChangeTest {
 	@Test
 	public void noChange() {
 		try {
-			cu.sessionData.getTotalPrice(0);
+			cu.sessionData.getTotalPrice();
 			cu.sessionData.setAndGetTotalPrice(new BigDecimal(0));
 			cu.changeReceive.giveChange();
 			boolean result = (coinChange.compareTo(new BigDecimal("0")) == 0);
@@ -239,7 +239,7 @@ public class ReceiveChangeTest {
 	
 	@Test
 	public void emptyFiveTest() throws Exception {
-		cu.sessionData.getTotalPrice(0);
+		cu.sessionData.getTotalPrice();
 		cu.sessionData.setAndGetTotalPrice(new BigDecimal(0));
 		cu.payBanknote.payWithBanknotes(new Banknote(5,currency));
 		cu.changeReceive.unloadBanknotes(5);
@@ -251,7 +251,7 @@ public class ReceiveChangeTest {
 	
 	@Test
 	public void loadTooMuchCoin() {
-		cu.sessionData.getTotalPrice(0);
+		cu.sessionData.getTotalPrice();
 		cu.sessionData.setAndGetTotalPrice(new BigDecimal(0));
 		cu.payBanknote.payWithBanknotes(new Banknote(5,currency));
 		Coin[] notes = new Coin[201];
@@ -269,7 +269,7 @@ public class ReceiveChangeTest {
 	
 	@Test
 	public void loadTooMuchNote() {
-		cu.sessionData.getTotalPrice(0);
+		cu.sessionData.getTotalPrice();
 		cu.sessionData.setAndGetTotalPrice(new BigDecimal(0));
 		cu.payBanknote.payWithBanknotes(new Banknote(5,currency));
 		Banknote[] notes = new Banknote[201];
@@ -287,7 +287,7 @@ public class ReceiveChangeTest {
 	
 	@Test
 	public void disabledNickelTest() throws Exception {
-		cu.sessionData.getTotalPrice(0);
+		cu.sessionData.getTotalPrice();
 		cu.sessionData.setAndGetTotalPrice(new BigDecimal(0));
 		cu.payCoin.payWithCoins(new Coin(new BigDecimal("0.05"),currency));
 		try {
@@ -301,7 +301,7 @@ public class ReceiveChangeTest {
 	
 	@Test
 	public void disabledFiveTest() throws Exception {
-		cu.sessionData.getTotalPrice(0);
+		cu.sessionData.getTotalPrice();
 		cu.sessionData.setAndGetTotalPrice(new BigDecimal(0));
 		cu.payBanknote.payWithBanknotes(new Banknote(5,currency));
 		Banknote[] notes = new Banknote[1];
@@ -316,7 +316,7 @@ public class ReceiveChangeTest {
 	
 	@Test
 	public void tooMuchChange() {
-		cu.sessionData.getTotalPrice(0);
+		cu.sessionData.getTotalPrice();
 		cu.sessionData.setAndGetTotalPrice(new BigDecimal(0));
 		cu.payBanknote.payWithBanknotes(new Banknote(5,currency));
 		cu.payBanknote.payWithBanknotes(new Banknote(5,currency));
@@ -338,7 +338,7 @@ public class ReceiveChangeTest {
 	
 	@Test
 	public void properPennyTest() throws Exception {
-		cu.sessionData.getTotalPrice(0);
+		cu.sessionData.getTotalPrice();
 		cu.sessionData.setAndGetTotalPrice(new BigDecimal("0.06"));
 		cu.payBanknote.payWithBanknotes(new Banknote(5,currency));
 		Banknote[] notes = new Banknote[1];

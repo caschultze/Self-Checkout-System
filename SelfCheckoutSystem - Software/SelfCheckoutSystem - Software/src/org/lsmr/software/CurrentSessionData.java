@@ -26,6 +26,9 @@ public class CurrentSessionData {
 	private static ArrayList <BarcodedItem> scannedItems = new ArrayList<BarcodedItem>();
 	private static BigDecimal currentAmountOwing = new BigDecimal("0.00");
 	private static BigDecimal totalPrice = new BigDecimal("0.00");
+	private static boolean attendantLoggedIn = false;
+	private static Attendant currentAttendant = null;
+	private static boolean attendantLoggedInMiddleCheck = false;
 
 	/*
 	 * Function to add products to a saved HashMap of items scanned -> this HashMap explicitly associates each item scanned with 
@@ -62,7 +65,7 @@ public class CurrentSessionData {
 	public ArrayList<BarcodedItem> getScannedItems() {
 		
 		ArrayList<BarcodedItem> newArray = new ArrayList<BarcodedItem>();
-		for (BarcodedItem newItem : newArray) {
+		for (BarcodedItem newItem : scannedItems) {
 			newArray.add(newItem);
 		}
 		
@@ -75,8 +78,15 @@ public class CurrentSessionData {
 	 * @param deduction
 	 * @return
 	 */
-	public BigDecimal getCurrentAmountOwing(BigDecimal deduction) {
-		return currentAmountOwing.subtract(deduction);
+	public BigDecimal getCurrentAmountOwing() {
+		return currentAmountOwing;
+	}
+	
+	public void deductCurrentAmountOwing(BigDecimal deduction) {
+		
+		if (deduction.doubleValue() > 0) {
+			currentAmountOwing.subtract(deduction);
+		}
 	}
 	
 	/**
@@ -84,7 +94,7 @@ public class CurrentSessionData {
 	 * at any point in time. Use this method for the 3rd Iteration, or if it currently applies to you.
 	 * @return
 	 */
-	public BigDecimal getTotalPrice(int numBags) {
+	public BigDecimal getTotalPrice() {
 		
 		Collection<BarcodedProduct> calcPrice = scannedProducts.values();
 		
@@ -96,14 +106,19 @@ public class CurrentSessionData {
 		totalPrice = totalPrice.multiply(GST);
 		totalPrice = totalPrice.setScale(2, RoundingMode.HALF_EVEN);
 		
-		BigDecimal bag = new BigDecimal("0.05");
-		
-		for (int i = 0; i < numBags; i++) {
-			totalPrice = totalPrice.add(bag);
-		}
-		
 		currentAmountOwing = totalPrice;
 		return totalPrice;
+	}
+	
+	public void addNumberOfBagsToTotalPrice(int numBags) {
+		
+		if (numBags >= 0) {
+			BigDecimal bag = new BigDecimal("0.05");
+			for (int i = 0; i < numBags; i++) {
+				totalPrice = totalPrice.add(bag);
+				currentAmountOwing = currentAmountOwing.add(bag);
+			}
+		}
 	}
 	
 	/**
@@ -124,5 +139,29 @@ public class CurrentSessionData {
 	
 	public void payBanknote(int amo) {
 		currentAmountOwing = currentAmountOwing.subtract(new BigDecimal(amo));
+	}
+	
+	public boolean getAttendantLoggedIn() {
+		return attendantLoggedIn;
+	}
+	
+	public void setAttendantLoggedIn(boolean loggedIn) {
+		attendantLoggedIn = loggedIn;
+	}
+	
+	public boolean getAttendantLoggedInMiddleCheck() {
+		return attendantLoggedInMiddleCheck;
+	}
+	
+	public void setAttendantLoggedInMiddleCheck(boolean loggedIn) {
+		attendantLoggedInMiddleCheck = loggedIn;
+	}
+	
+	public Attendant getCurrentAttendant() {
+		return currentAttendant;
+	}
+	
+	public void setCurrentAttendant(Attendant attendant) {
+		currentAttendant = attendant;
 	}
 }

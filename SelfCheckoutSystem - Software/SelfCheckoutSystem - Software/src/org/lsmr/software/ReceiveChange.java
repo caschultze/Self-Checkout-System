@@ -97,7 +97,7 @@ public class ReceiveChange {
 	}
 	
 	public void giveChange() throws DisabledException, EmptyException, OverloadException {
-		BigDecimal payed = session.getCurrentAmountOwing(new BigDecimal(0));
+		BigDecimal payed = session.getCurrentAmountOwing();
 		if (payed.compareTo(new BigDecimal(0)) < 0) {
 			BigDecimal change = payed.negate();
 			int[] banknotes = station.banknoteDenominations;
