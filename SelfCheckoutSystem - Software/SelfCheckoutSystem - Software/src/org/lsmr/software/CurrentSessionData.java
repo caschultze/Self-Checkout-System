@@ -32,7 +32,7 @@ public class CurrentSessionData {
 	private static boolean attendantLoggedInMiddleCheck = false;
 	private static double currentTotalWeight = 0.0;
 	private static ArrayList<PLUCodedProduct> PLUProducts = new ArrayList<PLUCodedProduct>();
-
+	
 	/*
 	 * Function to add products to a saved HashMap of items scanned -> this HashMap explicitly associates each item scanned with 
 	 * it's price and description -> used to help calculate final costs/the receipt
