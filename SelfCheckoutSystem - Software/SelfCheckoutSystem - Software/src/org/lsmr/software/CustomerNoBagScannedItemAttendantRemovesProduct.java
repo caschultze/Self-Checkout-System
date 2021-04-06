@@ -1,5 +1,6 @@
 package org.lsmr.software;
 
+import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.Item;
 import org.lsmr.selfcheckout.devices.AbstractDevice;
 import org.lsmr.selfcheckout.devices.ElectronicScale;
@@ -26,7 +27,7 @@ public class CustomerNoBagScannedItemAttendantRemovesProduct {
 	
 	
 	public SelfCheckoutStation station;
-	private boolean AttendantApproval = false;
+	private boolean attendantApproval = false;
 	private int countWeightChanged;
 	public CurrentSessionData data = new CurrentSessionData();
 	
@@ -45,7 +46,7 @@ public class CustomerNoBagScannedItemAttendantRemovesProduct {
 	
 	public void DontBagScannedItem(BarcodedItem item) {
 		
-		if (AttendantApproval == true) {
+		if (attendantApproval == true) {
 			
 			data.setCurrentTotalWeight(item.getWeight());
 			
@@ -59,7 +60,7 @@ public class CustomerNoBagScannedItemAttendantRemovesProduct {
 	
 	public void removeProductFromPurchases(BarcodedItem item) {
 		
-		if (AttendantApproval == true) {
+		if (attendantApproval == true) {
 			
 			station.baggingArea.remove(item);
 			data.removeScannedItem(item);
@@ -72,13 +73,13 @@ public class CustomerNoBagScannedItemAttendantRemovesProduct {
 	
 	public void setAttendantApproval(boolean input) {
 		
-		 dontBagItemAttendantApproval = input;
+		 attendantApproval = input;
 		
 	}
 	
 	public boolean getAttendantApproval() {
 		
-		return dontBagItemAttendantApproval;
+		return attendantApproval;
 		
 	}
 
