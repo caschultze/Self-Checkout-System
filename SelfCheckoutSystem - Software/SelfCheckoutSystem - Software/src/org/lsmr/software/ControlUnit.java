@@ -33,6 +33,7 @@ public class ControlUnit {
 	public static ScanMembership membershipScan;
 	public static CurrentSessionData sessionData;
 	public static CardPaymentProcessing paymentProcessing;
+	public static refillCoin_Banknote refillMoney;
 	private static Currency currency;
 	private static int[] banknoteDenominations;
 	private static BigDecimal[] coinDenominations;
@@ -65,6 +66,9 @@ public class ControlUnit {
 		membershipScan = new ScanMembership(checkoutStation);
 		sessionData = new CurrentSessionData();
 		paymentProcessing = new CardPaymentProcessing();
+		
+		
+		refillMoney = new refillCoin_Banknote(checkoutStation);
 		
 //		setCurrentState(option);
 //		
