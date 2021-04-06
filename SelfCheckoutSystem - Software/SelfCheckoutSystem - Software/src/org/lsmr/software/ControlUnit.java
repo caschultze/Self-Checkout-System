@@ -41,16 +41,21 @@ public class ControlUnit {
 	public static BlockStationSetup blocker;
 	public static AttendantLogin login;
 	public static EnterNumberOfBags enterNumBags;
+	public static AttendantApprovesWeight approveWeight;
+	public static DetectUnexpectedWeight checkWrongWeight;
+	public static PaperLow paperLow;
+	public static InkLow inkLow;
+	public static AddPaperInk addPaperInk;
+	public static RemovesItems removesItems;
+	public static RemovesItems placesItems;
+	
+	// instantiate station variables below
 	private static Currency currency;
 	private static int[] banknoteDenominations;
 	private static BigDecimal[] coinDenominations;
 	private static int scaleMaximumWeight;
 	private static int scaleSensitivity;
-	public static PaperLow paperLow;
-	public static InkLow inkLow;
-	public static RemovesItems removesItems;
-	public static RemovesItems placesItems;
-	public static AddPaperInk addPaperInk;
+	
 	
 //	private static State currentState;
 //	private static int option;
@@ -70,6 +75,7 @@ public class ControlUnit {
 		itemBag = new BagItem(checkoutStation);
 		payCoin = new CoinPayment(checkoutStation);
 		payBanknote = new BanknotePayment(checkoutStation);
+		
 		ownBag = new AddOwnBag(checkoutStation);
 		addFinish = new FinishAdding(checkoutStation);
 		creditPayment = new PayCredit(checkoutStation);
@@ -97,6 +103,18 @@ public class ControlUnit {
 		removesItems = new RemovesItems(checkoutStation);
 		placesItems = new RemovesItems(checkoutStation);
 		addPaperInk = new AddPaperInk(checkoutStation);
+		
+		login = new AttendantLogin();
+		approveWeight = new AttendantApprovesWeight();
+		checkWrongWeight = new DetectUnexpectedWeight(checkoutStation);
+		paperLow = new PaperLow(checkoutStation);
+		inkLow = new InkLow(checkoutStation);
+		addPaperInk = new AddPaperInk(checkoutStation);
+		
+		// Instantiate attendant-specific use cases in here
+		if (sessionData.getAttendantLoggedIn()) {
+			
+		}
 		
 //		setCurrentState(option);
 //		

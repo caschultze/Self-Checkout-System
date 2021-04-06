@@ -10,6 +10,7 @@ import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.external.ProductDatabases;
 import org.lsmr.selfcheckout.products.BarcodedProduct;
+import org.lsmr.selfcheckout.products.PLUCodedProduct;
 
 public class CurrentSessionData {
 
@@ -30,6 +31,7 @@ public class CurrentSessionData {
 	private static Attendant currentAttendant = null;
 	private static boolean attendantLoggedInMiddleCheck = false;
 	private static double currentTotalWeight = 0.0;
+	private static ArrayList<PLUCodedProduct> PLUProducts = new ArrayList<PLUCodedProduct>();
 
 	/*
 	 * Function to add products to a saved HashMap of items scanned -> this HashMap explicitly associates each item scanned with 
@@ -47,7 +49,7 @@ public class CurrentSessionData {
 	public HashMap<Barcode, BarcodedProduct> getScannedProducts() {
 		return scannedProducts;
 	}
-	
+
 	/*
 	 * Function to add items to saved ArrayList of scanned items -> used to determine use cases about the bagging area
 	 * 
@@ -190,4 +192,13 @@ public class CurrentSessionData {
 	public void setCurrentTotalWeight(double deduction) {
 		currentTotalWeight -= deduction;
 	}
+	
+	public void addPLUProduct(PLUCodedProduct product) {
+		PLUProducts.add(product);
+	}
+	
+	public ArrayList<PLUCodedProduct> getPLUProducts() {
+		return PLUProducts;
+	}
+	
 }
