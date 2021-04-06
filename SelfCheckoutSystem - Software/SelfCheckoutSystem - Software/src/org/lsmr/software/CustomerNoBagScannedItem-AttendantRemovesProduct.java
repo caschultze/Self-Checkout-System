@@ -26,16 +26,16 @@ public class CustomerNoBagScannedItemAttendantRemovesProduct {
 	
 	
 	public SelfCheckoutStation station;
-	public boolean AttendantApproval = false;
+	private boolean AttendantApproval = false;
 	private int countWeightChanged;
-	public CurrentSessionData data = ControlUnit.sessionData;
+	public CurrentSessionData data = new CurrentSessionData();
+	
 	
 	//constructor
 	
 	public CustomerNoBagScannedItemAttendantRemovesProduct(SelfCheckoutStation checkoutStation) {
 		
 		this.station = checkoutStation;
-		registerESListener()
 		
 	}
 	
@@ -47,9 +47,8 @@ public class CustomerNoBagScannedItemAttendantRemovesProduct {
 		
 		if (AttendantApproval == true) {
 			
-			station.baggingArea.add(item);
-			data.addScannedItem(item);
-		
+			data.setCurrentTotalWeight(item.getWeight());
+			
 		}
 		
 	}
@@ -68,46 +67,6 @@ public class CustomerNoBagScannedItemAttendantRemovesProduct {
 		}
 	}
 	
-	/**
-	 * Registers an ElectronicScaleListener to the station's baggingArea
-	 */
-	private void registerESListener() {
-		
-		ElectronicScaleListener es_listener = new ElectronicScaleListener() {
-			
-			@Override 
-			public void enabled(AbstractDevice<? extends AbstractDeviceListener> device) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void disabled(AbstractDevice<? extends AbstractDeviceListener> device) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override 
-			public void weightChanged(ElectronicScale scale, double weightInGrams) {
-				//noticably don't change the weight on the scale
-				
-			}
-			
-			@Override
-			public void overload(ElectronicScale scale) {
-					
-			}
-			
-			@Override
-			public void outOfOverload(ElectronicScale scale) {
-				
-			}
-			
-		};
-		
-		station.baggingArea.register(es_listener);
-		
-	}
 	
 	//setter and getter for the attendant approval variable
 	

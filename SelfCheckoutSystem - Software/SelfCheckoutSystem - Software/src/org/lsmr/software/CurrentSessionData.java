@@ -26,6 +26,7 @@ public class CurrentSessionData {
 	private static ArrayList <BarcodedItem> scannedItems = new ArrayList<BarcodedItem>();
 	private static BigDecimal currentAmountOwing = new BigDecimal("0.00");
 	private static BigDecimal totalPrice = new BigDecimal("0.00");
+	private static double currentTotalWeight = 0.0;
 
 	/*
 	 * Function to add products to a saved HashMap of items scanned -> this HashMap explicitly associates each item scanned with 
@@ -58,6 +59,7 @@ public class CurrentSessionData {
 		Barcode code = item.getBarcode();
 		BarcodedProduct pro = ProductDatabases.BARCODED_PRODUCT_DATABASE.get(code);
 		scannedProducts.put(code, pro);
+		currentTotalWeight += item.getWeight();
 	}
 	
 	/*
@@ -70,6 +72,7 @@ public class CurrentSessionData {
 		
 		Barcode code = item.getBarcode();
 		scannedProducts.remove(code);
+		currentTotalWeight -= item.getWeight();
 		
 	}
 	
@@ -139,5 +142,16 @@ public class CurrentSessionData {
 	
 	public void payBanknote(int amo) {
 		currentAmountOwing = currentAmountOwing.subtract(new BigDecimal(amo));
+	}
+	
+	public double getCurrentTotalWeight() {
+		
+		return currentTotalWeight;
+		
+	}
+	
+	public void setCurrentTotalWeight(double deduction) {
+		
+		currentTotalWeight -= deduction;
 	}
 }
