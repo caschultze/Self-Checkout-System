@@ -50,6 +50,8 @@ public class ControlUnit {
 	public static InkLow inkLow;
 	public static RemovesItems removesItems;
 	public static RemovesItems placesItems;
+	public static AddPaperInk addPaperInk;
+	
 //	private static State currentState;
 //	private static int option;
 //	
@@ -94,6 +96,7 @@ public class ControlUnit {
 		}
 		removesItems = new RemovesItems(checkoutStation);
 		placesItems = new RemovesItems(checkoutStation);
+		addPaperInk = new AddPaperInk(checkoutStation);
 		
 //		setCurrentState(option);
 //		
