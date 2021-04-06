@@ -29,6 +29,7 @@ public class ControlUnit {
 	public static PayCredit creditPayment;
 	public static PayDebit debitPayment;
 	public static PlaceItemFail failPlaceItem;
+	public static CustomerReturnsToAddingItems customerReturnsToAddingItems;
 	public static ReceiveChange changeReceive;
 	public static ScanMembership membershipScan;
 	public static EmptyBanknoteStorage emptyBanknote;
@@ -46,7 +47,7 @@ public class ControlUnit {
 	public static PaperLow paperLow;
 	public static InkLow inkLow;
 	public static RemovesItems removesItems;
-	public static RemovesItems placesItems;   
+	public static RemovesItems placesItems;
 //	private static State currentState;
 //	private static int option;
 //	
@@ -70,6 +71,7 @@ public class ControlUnit {
 		creditPayment = new PayCredit(checkoutStation);
 		debitPayment = new PayDebit(checkoutStation);
 		failPlaceItem = new PlaceItemFail(checkoutStation);
+		customerReturnsToAddingItems = new CustomerReturnsToAddingItems(checkoutStation);
 		changeReceive = new ReceiveChange(checkoutStation);
 		membershipScan = new ScanMembership(checkoutStation);
 		emptyBanknote = new EmptyBanknoteStorage(checkoutStation);
