@@ -29,6 +29,7 @@ public class ControlUnit {
 	public static PayCredit creditPayment;
 	public static PayDebit debitPayment;
 	public static PlaceItemFail failPlaceItem;
+	public static customerReturnsToAddingItems;
 	public static ReceiveChange changeReceive;
 	public static ScanMembership membershipScan;
 	public static CurrentSessionData sessionData;
@@ -61,6 +62,7 @@ public class ControlUnit {
 		creditPayment = new PayCredit(checkoutStation);
 		debitPayment = new PayDebit(checkoutStation);
 		failPlaceItem = new PlaceItemFail(checkoutStation);
+		customerReturnsToAddingItems = new CustomerReturnsToAddingItems(checkoutStation);
 		changeReceive = new ReceiveChange(checkoutStation);
 		membershipScan = new ScanMembership(checkoutStation);
 		sessionData = new CurrentSessionData();
