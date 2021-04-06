@@ -31,6 +31,8 @@ public class ControlUnit {
 	public static PlaceItemFail failPlaceItem;
 	public static ReceiveChange changeReceive;
 	public static ScanMembership membershipScan;
+	public static EmptyBanknoteStorage emptyBanknote;
+	public static EmptyCoinStorage emptyCoin;
 	public static CurrentSessionData sessionData;
 	public static CardPaymentProcessing paymentProcessing;
 	private static Currency currency;
@@ -38,6 +40,7 @@ public class ControlUnit {
 	private static BigDecimal[] coinDenominations;
 	private static int scaleMaximumWeight;
 	private static int scaleSensitivity;
+
 //	private static State currentState;
 //	private static int option;
 //	
@@ -63,6 +66,8 @@ public class ControlUnit {
 		failPlaceItem = new PlaceItemFail(checkoutStation);
 		changeReceive = new ReceiveChange(checkoutStation);
 		membershipScan = new ScanMembership(checkoutStation);
+		emptyBanknote = new EmptyBanknoteStorage(checkoutStation);
+		emptyCoin = new EmptyCoinStorage(checkoutStation);
 		sessionData = new CurrentSessionData();
 		paymentProcessing = new CardPaymentProcessing();
 		
