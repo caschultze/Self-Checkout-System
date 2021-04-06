@@ -1,10 +1,12 @@
 package org.lsmr.software;
 
+import java.util.ArrayList;
+
 import org.lsmr.selfcheckout.devices.SimulationException;
 
 public class Attendant {
 
-	public CurrentSessionData sessionData;
+	private CurrentSessionData sessionData = new CurrentSessionData();
 	
 	private String name;
 	private String username;
@@ -58,22 +60,29 @@ public class Attendant {
 		System.out.println("Employee department: " + getDepartment());
 	}
 	
-	public LoginData requestLogin() {
-		
+	public ArrayList<String> requestLogin() {
 		if (sessionData.getAttendantLoggedInMiddleCheck()) {
-			return new LoginData();
+			LoginData data = new LoginData();
+			return data.getLoginData();
 		}
 		
 		return null;
 	}
 	
-	public class LoginData {
+	private class LoginData {
 		
-		public String getUsername() {
+		protected ArrayList<String> getLoginData() { 
+			ArrayList<String> loginData = new ArrayList<String>();
+			loginData.add(getUsername());
+			loginData.add(getPassword());
+			return loginData;
+		}
+		
+		private String getUsername() {
 			return new String(username);
 		}
 		
-		public String getPassword() {
+		private String getPassword() {
 			return new String(password);
 		}
 	}

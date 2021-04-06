@@ -4,22 +4,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.lsmr.selfcheckout.devices.SimulationException;
-import org.lsmr.software.Attendant.LoginData;
 
 public class AttendantLogin {
 
-	public CurrentSessionData sessionData = new CurrentSessionData();
+	private CurrentSessionData sessionData = new CurrentSessionData();
 	
-	private static class AttendantLoginDatabase {
-		static Attendant Jake = new Attendant("Jake Kim", "geesjake", "freshwaterGORILLA@9to5", "Service Clerk", "Customer Service");
-		static Attendant Sami = new Attendant("Sami Zeremariam", "samiz50", "monkeLegion!", "Service Clerk", "Customer Service");
-		static Attendant Raymond = new Attendant("Raymond Vong", "rayray22", "meOrangutanOohOohAhAh111", "Utility Clerk", "Customer Service");
-		static Attendant Austin = new Attendant("Austin Ficzere", "Bruh", "#$4CalgarybornChimpanzeeAustron", "Cashier", "Customer Service");
-		static Attendant Manbir = new Attendant("Manbir Sandhu", "Mana24129", "SCARYguineaBaboon#587", "Grocery Clerk", "Produce");
-		static Attendant Robert = new Attendant("Robert James Walker", "rjwalker", "realWorld123", "Store Manager", "Human Resources");
+	private class AttendantLoginDatabase {
+		private Attendant Jake = new Attendant("Jake Kim", "geesjake", "freshwaterGORILLA@9to5", "Service Clerk", "Customer Service");
+		private Attendant Sami = new Attendant("Sami Zeremariam", "samiz50", "monkeLegion!", "Service Clerk", "Customer Service");
+		private Attendant Raymond = new Attendant("Raymond Vong", "rayray22", "meOrangutanOohOohAhAh111", "Utility Clerk", "Customer Service");
+		private Attendant Austin = new Attendant("Austin Ficzere", "Bruh", "#$4CalgarybornChimpanzeeAustron", "Cashier", "Customer Service");
+		private Attendant Manbir = new Attendant("Manbir Sandhu", "Mana24129", "SCARYguineaBaboon#587", "Grocery Clerk", "Produce");
+		private Attendant Robert = new Attendant("Robert James Walker", "rjwalker", "realWorld123", "Store Manager", "Human Resources");
 		
-		static ArrayList<Attendant> employees = new ArrayList<Attendant>();
-		static HashMap<String, String> loginDatabase= new HashMap<String, String>();
+		private ArrayList<Attendant> employees = new ArrayList<Attendant>();
+		private HashMap<String, String> loginDatabase= new HashMap<String, String>();
 		
 		private AttendantLoginDatabase() {
 			employees.add(Jake);
@@ -61,8 +60,10 @@ public class AttendantLogin {
 		sessionData.setAttendantLoggedInMiddleCheck(true);
 		
 		for (Attendant attendant : database.employees) {
-			LoginData loginData = attendant.requestLogin();
-			if (loginData.getUsername().equals(username)) {
+			ArrayList<String> data = new ArrayList<String>();
+			data = attendant.requestLogin();
+			
+			if (data.get(0).equals(username) && data.get(1).equals(password)) {
 				sessionData.setCurrentAttendant(attendant);
 				sessionData.setAttendantLoggedIn(true);
 				break;
@@ -75,6 +76,7 @@ public class AttendantLogin {
 	public void attendantLogOut() {
 		
 		if (sessionData.getAttendantLoggedIn()) {
+			sessionData.setAttendantLoggedInMiddleCheck(false);
 			sessionData.setAttendantLoggedIn(false);
 			sessionData.setCurrentAttendant(null);
 		}

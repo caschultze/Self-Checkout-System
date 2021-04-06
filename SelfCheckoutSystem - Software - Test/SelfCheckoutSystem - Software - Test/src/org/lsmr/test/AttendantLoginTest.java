@@ -16,7 +16,7 @@ import org.lsmr.software.ControlUnit;
 
 public class AttendantLoginTest {
 
-public ControlUnit control;
+	public ControlUnit control;
 	
 	@Before
 	public void setup() {
