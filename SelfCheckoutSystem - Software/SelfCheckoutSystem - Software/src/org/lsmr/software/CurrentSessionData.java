@@ -50,6 +50,7 @@ public class CurrentSessionData {
 	 * BarcodedItem item: item that has just been scanned successfully
 	 * 
 	 * Jake: I've modified this method so that when you add an item, it automatically updates scannedProducts accordingly
+	 * 
 	 */
 	public void addScannedItem(BarcodedItem item) {
 		scannedItems.add(item);
@@ -58,6 +59,20 @@ public class CurrentSessionData {
 		BarcodedProduct pro = ProductDatabases.BARCODED_PRODUCT_DATABASE.get(code);
 		scannedProducts.put(code, pro);
 	}
+	
+	/*
+	 * Function to remove added items from the scanned items arrayList
+	 * 
+	 * Jeremy: I added this function to support the use case: Attendant removes product from purchases 
+	 */
+	public void removeScannedItem(BarcodedItem item) {
+		scannedItems.remove(item);
+		
+		Barcode code = item.getBarcode();
+		scannedProducts.remove(code);
+		
+	}
+	
 	
 	public ArrayList<BarcodedItem> getScannedItems() {
 		
