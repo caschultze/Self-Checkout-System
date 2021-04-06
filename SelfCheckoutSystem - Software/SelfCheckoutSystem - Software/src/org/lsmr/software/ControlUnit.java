@@ -43,10 +43,10 @@ public class ControlUnit {
 	private static BigDecimal[] coinDenominations;
 	private static int scaleMaximumWeight;
 	private static int scaleSensitivity;
-
 	public static PaperLow paperLow;
 	public static InkLow inkLow;
-	
+	public static RemovesItems removesItems;
+	public static RemovesItems placesItems;   
 //	private static State currentState;
 //	private static int option;
 //	
@@ -86,6 +86,8 @@ public class ControlUnit {
 		if (sessionData.getAttendantLoggedIn()) {
 			
 		}
+		removesItems = new RemovesItems(checkoutStation);
+		placesItems = new RemovesItems(checkoutStation);
 		
 //		setCurrentState(option);
 //		
@@ -156,4 +158,5 @@ public class ControlUnit {
 //			currentState = State.ALL_FUNC;
 //		}
 //	}
+
 }
