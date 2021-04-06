@@ -34,6 +34,7 @@ public class ControlUnit {
 	public static CurrentSessionData sessionData;
 	public static CardPaymentProcessing paymentProcessing;
 	public static AttendantLogin login;
+	public static EnterNumberOfBags enterNumBags;
 	private static Currency currency;
 	private static int[] banknoteDenominations;
 	private static BigDecimal[] coinDenominations;
@@ -67,6 +68,7 @@ public class ControlUnit {
 		sessionData = new CurrentSessionData();
 		paymentProcessing = new CardPaymentProcessing();
 		login = new AttendantLogin();
+		enterNumBags = new EnterNumberOfBags();
 		
 		// Instantiate attendant-specific use cases in here
 		if (sessionData.getAttendantLoggedIn()) {

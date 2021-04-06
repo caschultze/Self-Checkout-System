@@ -78,8 +78,15 @@ public class CurrentSessionData {
 	 * @param deduction
 	 * @return
 	 */
-	public BigDecimal getCurrentAmountOwing(BigDecimal deduction) {
-		return currentAmountOwing.subtract(deduction);
+	public BigDecimal getCurrentAmountOwing() {
+		return currentAmountOwing;
+	}
+	
+	public void deductCurrentAmountOwing(BigDecimal deduction) {
+		
+		if (deduction.doubleValue() > 0) {
+			currentAmountOwing.subtract(deduction);
+		}
 	}
 	
 	/**
@@ -87,7 +94,7 @@ public class CurrentSessionData {
 	 * at any point in time. Use this method for the 3rd Iteration, or if it currently applies to you.
 	 * @return
 	 */
-	public BigDecimal getTotalPrice(int numBags) {
+	public BigDecimal getTotalPrice() {
 		
 		Collection<BarcodedProduct> calcPrice = scannedProducts.values();
 		
@@ -99,14 +106,19 @@ public class CurrentSessionData {
 		totalPrice = totalPrice.multiply(GST);
 		totalPrice = totalPrice.setScale(2, RoundingMode.HALF_EVEN);
 		
-		BigDecimal bag = new BigDecimal("0.05");
-		
-		for (int i = 0; i < numBags; i++) {
-			totalPrice = totalPrice.add(bag);
-		}
-		
 		currentAmountOwing = totalPrice;
 		return totalPrice;
+	}
+	
+	public void addNumberOfBagsToTotalPrice(int numBags) {
+		
+		if (numBags >= 0) {
+			BigDecimal bag = new BigDecimal("0.05");
+			for (int i = 0; i < numBags; i++) {
+				totalPrice = totalPrice.add(bag);
+				currentAmountOwing = currentAmountOwing.add(bag);
+			}
+		}
 	}
 	
 	/**
