@@ -54,7 +54,7 @@ public class CardPaymentProcessing {
 		paid = getBank(cardNumber.substring(0, 4)).postTransaction(cardNumber, holdNumber, actualAmount);
 		
 		if (paid) {
-			sessionData.getCurrentAmountOwing(actualAmount);
+			sessionData.deductCurrentAmountOwing(actualAmount);
 		}
 		
 		return paid;
