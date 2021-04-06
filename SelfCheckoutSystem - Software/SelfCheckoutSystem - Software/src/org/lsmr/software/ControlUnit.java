@@ -2,20 +2,7 @@ package org.lsmr.software;
 
 import java.math.BigDecimal;
 import java.util.Currency;
-import java.util.Locale;
-
-import org.lsmr.selfcheckout.Barcode;
-import org.lsmr.selfcheckout.devices.AbstractDevice;
-import org.lsmr.selfcheckout.devices.BanknoteValidator;
-import org.lsmr.selfcheckout.devices.BarcodeScanner;
-import org.lsmr.selfcheckout.devices.CoinValidator;
-import org.lsmr.selfcheckout.devices.ElectronicScale;
 import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
-import org.lsmr.selfcheckout.devices.listeners.AbstractDeviceListener;
-import org.lsmr.selfcheckout.devices.listeners.BanknoteValidatorListener;
-import org.lsmr.selfcheckout.devices.listeners.BarcodeScannerListener;
-import org.lsmr.selfcheckout.devices.listeners.CoinValidatorListener;
-import org.lsmr.selfcheckout.devices.listeners.ElectronicScaleListener;
 
 public class ControlUnit {
 	
@@ -48,6 +35,7 @@ public class ControlUnit {
 	public static AddPaperInk addPaperInk;
 	public static RemovesItems removesItems;
 	public static RemovesItems placesItems;
+	public static refillCoin_Banknote refillMoney;
 	
 	// instantiate station variables below
 	private static Currency currency;
@@ -115,6 +103,9 @@ public class ControlUnit {
 		if (sessionData.getAttendantLoggedIn()) {
 			
 		}
+		
+		
+		refillMoney = new refillCoin_Banknote(checkoutStation);
 		
 //		setCurrentState(option);
 //		
