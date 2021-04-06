@@ -65,7 +65,7 @@ public class CurrentSessionData {
 	public ArrayList<BarcodedItem> getScannedItems() {
 		
 		ArrayList<BarcodedItem> newArray = new ArrayList<BarcodedItem>();
-		for (BarcodedItem newItem : newArray) {
+		for (BarcodedItem newItem : scannedItems) {
 			newArray.add(newItem);
 		}
 		
