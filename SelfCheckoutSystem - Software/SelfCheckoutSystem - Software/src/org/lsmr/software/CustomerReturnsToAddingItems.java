@@ -13,7 +13,7 @@ import org.lsmr.selfcheckout.devices.listeners.ElectronicScaleListener;
  * items.
  * 
  * This class makes use of the bagItem class and assumes that there are already outstading
- * items to be bagged, NOTE: I havent tested this yet 
+ * items to be bagged, NOTE: the test case for this class has been created but not run 
  * 
  */
 
@@ -24,6 +24,7 @@ public class CustomerReturnsToAddingItems {
 	public BagItem b1;
 	public boolean helpNeeded;
 	private int countWeightChanged;
+	public CurrentSessionData data = new CurrentSessionData();
 	
 	public CustomerReturnsToAddingItems(SelfCheckoutStation checkoutStation) {
 		

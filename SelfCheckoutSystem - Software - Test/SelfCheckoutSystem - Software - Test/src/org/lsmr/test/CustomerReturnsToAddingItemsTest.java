@@ -24,39 +24,39 @@ import org.lsmr.software.ControlUnit;
 import org.lsmr.software.CurrentSessionData; 
 import org.lsmr.software.CustomerReturnsToAddingItems;
 
-
-//NOT DONE YET, I'M JUST PUSHING THIS B/C GITHUB IS WEIRD AND I NEED TO PUSH THIS BEFORE
-//I CREATE A NEW FILE IN THE BRANCH B/C I DON'T KNOW HOW ELSE TO CREATE A NEW FILE 
-//EXCEPT THROUGH GITHUB ITSELF
+//This test is completed but has not been ran yet
 
 public class CustomerReturnsToAddingItemsTest {
 	
 	public ControlUnit cu;
 	CurrentSessionData data;
+	ArrayList<BarcodedItem> itemsToBeBagged;
 	
-	Barcode one = new Barcode("12345");
-	Barcode two = new Barcode("000");
-	Barcode three = new Barcode("19823");
-	public ArrayList<BarcodedItem> itemsToBeBagged = new ArrayList<BarcodedItem>();
+
 	
 	@Before
 	public void setup() {
 	
-		BarcodedItem itemOne = new BarcodedItem(one, weightOne);
-		BarcodedItem itemTwo = new BarcodedItem(two, weightTwo);
-		BarcodedItem itemThree = new BarcodedItem(three, weightThree);
+		// Create a database of items
+		HashMap<Barcode, BarcodedItem> itemsDatabase = new HashMap<Barcode, BarcodedItem>();
+		itemsDatabase.put(new Barcode("1111"), new BarcodedItem(new Barcode("1111"), 25));
+		itemsDatabase.put(new Barcode("2222"), new BarcodedItem(new Barcode("2222"), 20));
+		itemsDatabase.put(new Barcode("3333"), new BarcodedItem(new Barcode("3333"), 500));
+		itemsDatabase.put(new Barcode("4444"), new BarcodedItem(new Barcode("4444"), 5));
+		this.itemsDatabase = itemsDatabase;
 		
-		BarcodedProduct firstProduct = new BarcodedProduct(one, "Chess set", new BigDecimal(10.40));
-		BarcodedProduct secondProduct = new BarcodedProduct(two, "Monopoly", new BigDecimal(11.12));
-		BarcodedProduct thirdProduct = new BarcodedProduct(three, "Watermelon", new BigDecimal(6.80));
+		Barcode itemCode1 = new Barcode("1111");
+		Barcode itemCode2 = new Barcode("2222");
+		Barcode itemCode3 = new Barcode("3333");
+		Barcode itemCode4 = new Barcode("4444");
+
 		
-		ProductDatabases.BARCODED_PRODUCT_DATABASE.put(one, firstProduct);
-		ProductDatabases.BARCODED_PRODUCT_DATABASE.put(two, secondProduct);
-		ProductDatabases.BARCODED_PRODUCT_DATABASE.put(three, thirdProduct);
+		itemsToBeBagged.add(itemsDatabase.get(itemCode1));
+		itemsToBeBagged.add(itemsDatabase.get(itemCode2));
+		itemsToBeBagged.add(itemsDatabase.get(itemCode3));
+		itemsToBeBagged.add(itemsDatabase.get(itemCode4));
 		
-		itemsToBeBagged.add(itemOne);
-		itemsToBeBagged.add(itemTwo);
-		itemsToBeBagged.add(itemThree);
+		//create a selfcheckout system
 		
 		Currency currency = Currency.getInstance(Locale.CANADA);
 		int[] banknoteDenominations = new int[] {5, 10, 20, 50, 100};
@@ -67,7 +67,7 @@ public class CustomerReturnsToAddingItemsTest {
 		cu = new ControlUnit(currency, banknoteDenominations, coinDenominations, scaleMaximumWeight, scaleSensitivity);	
 		cu.main(null);
 		data = cu.sessionData;
-		cu.customerReturnsToAddingItems.setHelpNeeded(false);
+		cu.CustomerReturnsToAddingItems.setHelpNeeded(false);
 		
 	}
 	
@@ -76,17 +76,17 @@ public class CustomerReturnsToAddingItemsTest {
 	@Test
 	public void checkItemPlacedWhenHelpNotNeeded() {
 		
+		cu.customerReturnsToAddingItems.setHelpNeeded(false);
 		cu.customerReturnsToAddingItems.returnAndBagItems(itemsToBeBagged);
-		assertTrue(itemBag.getBaggedItems.equals(itemsToBeBagged));
+		assertTrue(cu.itemBag.getBaggedItems.equals(itemsToBeBagged));
 	}
 	
-	//test for when the user doe need help and tries to bag an item, all items are expected not be bagged
+	//test for when the user does need help and tries to bag an item, all items are expected not be bagged
 
-	
 	@Test
 	public void checkItemPlacedWhenHelpNeeded() {
 		
-		cu.customerReturnsToAddingItems.setHelpNeeded(false);
+		cu.customerReturnsToAddingItems.setHelpNeeded(true);
 		cu.customerReturnsToAddingItems.returnAndBagItems(itemsToBeBagged);
 		assertFalse(itemBag.getBaggedItems.equals(itemsToBeBagged));
 		
