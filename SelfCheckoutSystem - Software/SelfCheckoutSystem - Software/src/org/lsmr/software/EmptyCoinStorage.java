@@ -23,7 +23,7 @@ public class EmptyCoinStorage {
 		scs = checkoutStation;
 		registerListeners();
 	}
-	
+	// nothing
 	public void registerListeners() {
 		csl = new CoinStorageUnitListener() {
 
