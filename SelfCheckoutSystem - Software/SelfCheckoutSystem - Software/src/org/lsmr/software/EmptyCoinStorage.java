@@ -12,7 +12,7 @@ import org.lsmr.selfcheckout.Coin;
 import java.util.List;
 
 
-public class EmptyCoinStorage {
+public class EmptyCoinStorage extends CoinPayment {
 	
 	public SelfCheckoutStation scs;
 	public CoinStorageUnitListener csl;
@@ -20,10 +20,12 @@ public class EmptyCoinStorage {
 	private List<Coin> unloadedCoins;
 	
 	public EmptyCoinStorage(SelfCheckoutStation checkoutStation) {
-		scs = checkoutStation;
-		registerListeners();
+//		scs = checkoutStation;
+//		registerListeners();
+		super(checkoutStation);
 	}
 	
+	@Override
 	public void registerListeners() {
 		csl = new CoinStorageUnitListener() {
 
@@ -60,7 +62,7 @@ public class EmptyCoinStorage {
 			@Override
 			public void coinsUnloaded(CoinStorageUnit unit) {
 				checkUnloaded = true;
-				
+				setFullStorageCheck(false);
 			}
 			
 		};

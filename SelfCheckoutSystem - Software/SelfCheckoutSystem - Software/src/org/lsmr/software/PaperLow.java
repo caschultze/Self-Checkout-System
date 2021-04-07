@@ -9,7 +9,7 @@ import org.lsmr.selfcheckout.devices.listeners.ReceiptPrinterListener;
 public class PaperLow {
 	
 	private SelfCheckoutStation station;
-	private boolean noPaper;
+	private static boolean noPaper;
 	
 	/**
 	 * Constructor for the use case "Station detects that the paper in a receipt printer is low."
@@ -46,7 +46,7 @@ public class PaperLow {
 	/**
 	 * Registers a ReceiptPrinter listener
 	*/
-	private void registerRPListener() {
+	public void registerRPListener() {
 		
 		ReceiptPrinterListener rp_listener = new ReceiptPrinterListener() {
 
@@ -76,7 +76,7 @@ public class PaperLow {
 
 			@Override
 			public void paperAdded(ReceiptPrinter printer) {
-				noPaper = false;
+				//noPaper = false;
 				
 			}
 
@@ -96,6 +96,10 @@ public class PaperLow {
 	 */
 	public boolean getNoPaper() {
 		return noPaper;
+	}
+	
+	public void setNoPaper(boolean flag) {
+		noPaper = flag;
 	}
 	
 	

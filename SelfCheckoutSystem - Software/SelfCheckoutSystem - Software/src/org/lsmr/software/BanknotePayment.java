@@ -26,13 +26,14 @@ public class BanknotePayment {
 	public BanknoteValidatorListener bvl;
 	public BanknoteStorageUnitListener bsul;
 	public BanknoteDispenserListener bdl;
-	private BigDecimal currentBalanceBD = new BigDecimal("0.0");
-	private int currentBalance;
-	private int currentBanknoteValue;
-	private boolean validCheck = false; 
-	private boolean storedCheck = false;
-	private boolean fullStorageCheck = false;
-	private int numInvalidBanknotes = 0;
+	private static BigDecimal currentBalanceBD = new BigDecimal("0.0");
+	private static int currentBalance;
+	private static int currentBanknoteValue;
+	private static boolean validCheck = false; 
+	private static boolean storedCheck = false;
+	private static boolean fullStorageCheck = false;
+	private static boolean emptyDispenserCheck = false;
+	private static int numInvalidBanknotes = 0;
 	private Currency currentCurrency;
 	private CurrentSessionData session;
 	
@@ -125,13 +126,14 @@ public class BanknotePayment {
 
 			@Override
 			public void banknotesFull(BanknoteDispenser dispenser) {
-				fullStorageCheck = true;
+				// TODO Auto-generated method stub
+
 				
 			}
 
 			@Override
 			public void banknotesEmpty(BanknoteDispenser dispenser) {
-				// TODO Auto-generated method stub
+				emptyDispenserCheck = true;
 				
 			}
 
@@ -149,7 +151,7 @@ public class BanknotePayment {
 
 			@Override
 			public void banknotesLoaded(BanknoteDispenser dispenser, Banknote... banknotes) {
-				// TODO Auto-generated method stub
+				emptyDispenserCheck = false;
 				
 			}
 
@@ -181,6 +183,10 @@ public class BanknotePayment {
 		return fullStorageCheck;
 	}
 	
+	public void setFullStorageCheck(boolean flag) {
+		fullStorageCheck = flag;
+	}
+	
 	public void payWithBanknotes(Banknote note) {
 		
 		if (note == null) {
@@ -210,4 +216,12 @@ public class BanknotePayment {
 			validCheck = false;
 			storedCheck = false;
 		}
+	
+	public boolean getEmptyDispenserCheck() {
+		return emptyDispenserCheck;
+	}
+	
+	public void setEmptyDispenserCheck(boolean flag) {
+		emptyDispenserCheck = flag;
+	}
 }

@@ -11,7 +11,7 @@ import org.lsmr.selfcheckout.Banknote;
 import java.util.List;
 
 
-public class EmptyBanknoteStorage {
+public class EmptyBanknoteStorage extends BanknotePayment {
 	
 	public SelfCheckoutStation scs;
 	public BanknoteStorageUnitListener bnl;
@@ -20,10 +20,12 @@ public class EmptyBanknoteStorage {
 	
 	
 	public EmptyBanknoteStorage(SelfCheckoutStation checkoutStation) {
-		scs = checkoutStation;
-		registerListeners();
+//		scs = checkoutStation;
+//		registerListeners();
+		super(checkoutStation);
 	}
 	
+	@Override
 	public void registerListeners() {
 		bnl = new BanknoteStorageUnitListener() {
 
@@ -60,7 +62,7 @@ public class EmptyBanknoteStorage {
 			@Override
 			public void banknotesUnloaded(BanknoteStorageUnit unit) {
 				checkUnloaded = true;
-				
+				setFullStorageCheck(false);
 			}
 			
 		};

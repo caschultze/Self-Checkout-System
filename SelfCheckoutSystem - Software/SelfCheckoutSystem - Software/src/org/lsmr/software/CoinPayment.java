@@ -24,13 +24,15 @@ public class CoinPayment {
 	public CoinValidatorListener cvl;
 	public CoinStorageUnitListener csul;
 	public CoinDispenserListener cdl;
-	private BigDecimal currentBalance = new BigDecimal("0.00");
-	private BigDecimal currentCoinValue = new BigDecimal("0.00");
-	private boolean validCheck = false; 
-	private boolean storedCheck = false;
-	private boolean fullStorageCheck = false;
-	private int numInvalidCoins = 0;
-	public boolean slotDisabled = false;
+	private static BigDecimal currentBalance = new BigDecimal("0.00");
+	private static BigDecimal currentCoinValue = new BigDecimal("0.00");
+	private static boolean validCheck = false; 
+	private static boolean storedCheck = false;
+	private static boolean fullStorageCheck = false;
+	private static boolean emptyDispenserCheck = false;
+	private static boolean coinsLoadedCheck = false;
+	private static int numInvalidCoins = 0;
+	public static boolean slotDisabled = false;
 	private CurrentSessionData session;
 	
 	public CoinPayment(SelfCheckoutStation checkoutStation) {
@@ -121,13 +123,13 @@ public class CoinPayment {
 			
 			@Override
 			public void coinsFull(CoinDispenser dispenser) {
-				fullStorageCheck = true;
-				
+				// TODO Auto-generated method stub
+
 			}
 
 			@Override
 			public void coinsEmpty(CoinDispenser dispenser) {
-				// TODO Auto-generated method stub
+				emptyDispenserCheck = true;
 				
 			}
 
@@ -145,7 +147,8 @@ public class CoinPayment {
 
 			@Override
 			public void coinsLoaded(CoinDispenser dispenser, Coin... coins) {
-				// TODO Auto-generated method stub
+				emptyDispenserCheck = false;
+				coinsLoadedCheck = true;
 				
 			}
 
@@ -170,6 +173,14 @@ public class CoinPayment {
 	
 	public int getNumInvalidCoins() {
 		return numInvalidCoins;
+	}
+	
+	public boolean getFullStorageCheck() {
+		return fullStorageCheck;
+	}
+	
+	public void setFullStorageCheck(boolean flag) {
+		fullStorageCheck = flag;
 	}
 	
 	public void payWithCoins(Coin c) {
@@ -199,4 +210,15 @@ public class CoinPayment {
 			validCheck = false;
 			storedCheck = false;
 		}
+
+	public boolean getEmptyDispenserCheck() {
+		return emptyDispenserCheck;
+	}
+	
+	public void setEmptyDispenserCheck(boolean flag) {
+		emptyDispenserCheck = flag;
+	}
+
+
+
 }

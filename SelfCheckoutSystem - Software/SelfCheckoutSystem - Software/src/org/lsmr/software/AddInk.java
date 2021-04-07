@@ -6,10 +6,9 @@ import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.devices.listeners.AbstractDeviceListener;
 import org.lsmr.selfcheckout.devices.listeners.ReceiptPrinterListener;
 
-public class AddPaperInk {
-
+public class AddInk extends InkLow {
+	
 	private SelfCheckoutStation station;
-	private boolean paperAdded = false;
 	private boolean inkAdded = false;
 	
 	/**
@@ -17,16 +16,10 @@ public class AddPaperInk {
 	 * 
 	 * @param station	The SelfCheckoutStation of the system
 	 */
-	public AddPaperInk(SelfCheckoutStation station){
-		this.station = station;
-		registerRPListener();
-	}
-	
-	/** 
-	 * Calls the addPaper method of the station's printer
-	 */
-	public void addPaper(int amount) {
-		station.printer.addPaper(amount);
+	public AddInk(SelfCheckoutStation station){
+//		this.station = station;
+//		registerRPListener();
+		super(station);
 	}
 	
 	/** 
@@ -36,30 +29,31 @@ public class AddPaperInk {
 		station.printer.addInk(amount);
 	}
 	
-	/**
-	 * Calls the print method of the station's printer
-	 */
-	public void print (char c) {
-		station.printer.print(c);
-	}
+//	/**
+//	 * Calls the print method of the station's printer
+//	 */
+//	public void print (char c) {
+//		station.printer.print(c);
+//	}
 	
-	/**
-	 * The machine can only print if there is paper and ink added.
-	 * 
-	 * @return true if there is paper and ink in the machine, false otherwise
-	 */
-	public boolean CanMachinePrint()
-	{
-		if (paperAdded && inkAdded) {
-			return true;
-		}
-		return false;
-	}
+//	/**
+//	 * The machine can only print if there is paper and ink added.
+//	 * 
+//	 * @return true if there is paper and ink in the machine, false otherwise
+//	 */
+//	public boolean CanMachinePrint()
+//	{
+//		if (paperAdded && inkAdded) {
+//			return true;
+//		}
+//		return false;
+//	}
 	
 	/**
 	 * Registers a ReceiptPrinter listener
 	*/
-	private void registerRPListener() {
+	@Override
+	public void registerRPListener() {
 		
 		ReceiptPrinterListener rp_listener = new ReceiptPrinterListener() {
 
@@ -75,33 +69,27 @@ public class AddPaperInk {
 
 			@Override
 			public void outOfPaper(ReceiptPrinter printer) {
-				paperAdded = false;
+				//paperAdded = false;
 			}
 
 			@Override
 			public void outOfInk(ReceiptPrinter printer) {
-				inkAdded = false;
+				//inkAdded = false;
 			}
 
 			@Override
 			public void paperAdded(ReceiptPrinter printer) {
-				paperAdded = true;
+				//paperAdded = true;
+				
 			}
 
 			@Override
 			public void inkAdded(ReceiptPrinter printer) {
 				inkAdded = true;
+				setNoInk(false);
 			}
 		};
 		station.printer.register(rp_listener);
-	}
-	
-	/**
-	 * Returns true if the attendant has recently added paper to the machine.
-	 * Returns false when the attendant has not added paper to the machine or if the machine is out of paper.
-	 */
-	public boolean getPaperAdded() {
-		return paperAdded;
 	}
 	
 	/**
@@ -111,4 +99,5 @@ public class AddPaperInk {
 	public boolean getInkAdded() {
 		return inkAdded;
 	}
+	
 }

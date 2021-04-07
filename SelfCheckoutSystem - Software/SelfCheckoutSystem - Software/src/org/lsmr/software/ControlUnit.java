@@ -32,10 +32,11 @@ public class ControlUnit {
 	public static DetectUnexpectedWeight checkWrongWeight;
 	public static PaperLow paperLow;
 	public static InkLow inkLow;
-	public static AddPaperInk addPaperInk;
+	public static AddPaper addPaperInk;
 	public static RemovesItems removesItems;
 	public static RemovesItems placesItems;
-	public static refillCoin_Banknote refillMoney;
+	public static refillCoin coinRefill;
+	public static refillBanknote banknoteRefill;
 	
 	// instantiate station variables below
 	private static Currency currency;
@@ -63,7 +64,7 @@ public class ControlUnit {
 		itemBag = new BagItem(checkoutStation);
 		payCoin = new CoinPayment(checkoutStation);
 		payBanknote = new BanknotePayment(checkoutStation);
-		
+	
 		ownBag = new AddOwnBag(checkoutStation);
 		addFinish = new FinishAdding(checkoutStation);
 		creditPayment = new PayCredit(checkoutStation);
@@ -83,30 +84,23 @@ public class ControlUnit {
 		inkLow = new InkLow(checkoutStation);
 		login = new AttendantLogin();
 		enterNumBags = new EnterNumberOfBags();
-		
-		// Instantiate attendant-specific use cases in here
-		if (sessionData.getAttendantLoggedIn()) {
-			
-		}
 		removesItems = new RemovesItems(checkoutStation);
 		placesItems = new RemovesItems(checkoutStation);
-		addPaperInk = new AddPaperInk(checkoutStation);
-		
+		addPaperInk = new AddPaper(checkoutStation);
 		login = new AttendantLogin();
 		approveWeight = new AttendantApprovesWeight();
 		checkWrongWeight = new DetectUnexpectedWeight(checkoutStation);
-		paperLow = new PaperLow(checkoutStation);
-		inkLow = new InkLow(checkoutStation);
-		addPaperInk = new AddPaperInk(checkoutStation);
+		coinRefill = new refillCoin(checkoutStation);
+		banknoteRefill = new refillBanknote(checkoutStation);
+		
+		
+		
 		
 		// Instantiate attendant-specific use cases in here
 		if (sessionData.getAttendantLoggedIn()) {
 			
 		}
-		
-		
-		refillMoney = new refillCoin_Banknote(checkoutStation);
-		
+
 //		setCurrentState(option);
 //		
 //		switch(currentState) {
@@ -131,7 +125,8 @@ public class ControlUnit {
 //			
 //			break;
 //		}
-	}
+	} // endmain
+	
 	
 	public ControlUnit(Currency currency, int[] banknoteDenominations, BigDecimal[] coinDenominations, int scaleMaximumWeight, int scaleSensitivity) {
 		
