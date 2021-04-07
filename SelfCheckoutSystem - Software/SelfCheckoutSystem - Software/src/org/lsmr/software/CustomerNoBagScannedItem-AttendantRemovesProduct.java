@@ -27,7 +27,6 @@ public class CustomerNoBagScannedItemAttendantRemovesProduct {
 	
 	public SelfCheckoutStation station;
 	private boolean AttendantApproval = false;
-	private int countWeightChanged;
 	public CurrentSessionData data = new CurrentSessionData();
 	
 	
