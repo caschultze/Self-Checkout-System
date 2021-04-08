@@ -47,8 +47,8 @@ public class CustomerNoBagScannedItemAttendantRemovesProduct {
 	public void DontBagScannedItem(BarcodedItem item) {
 		
 		if (attendantApproval == true) {
-			
-			data.setCurrentTotalWeight(item.getWeight());
+			double deduction = 0 - item.getWeight();
+			data.setCurrentExpectedWeight(deduction);
 			
 		}
 		

@@ -40,11 +40,11 @@ public class CustomerReturnsToAddingItems {
 	
 	//bag items if the customer no longer requires help
 	
-	public void returnAndBagItems(ArrayList<BarcodedItem> itemsToBeBagged) {
+	public void returnAndBagItems(BarcodedItem item) {
 		
 		if (helpNeeded == false) {
 			
-			b1.bagItems(itemsToBeBagged);
+			b1.bagItems(item);
 			
 		}		
 		

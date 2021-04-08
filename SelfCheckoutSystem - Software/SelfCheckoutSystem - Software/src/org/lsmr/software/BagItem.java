@@ -6,6 +6,7 @@ import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.devices.AbstractDevice;
 import org.lsmr.selfcheckout.devices.ElectronicScale;
 import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
+import org.lsmr.selfcheckout.devices.SimulationException;
 import org.lsmr.selfcheckout.devices.listeners.AbstractDeviceListener;
 import org.lsmr.selfcheckout.devices.listeners.ElectronicScaleListener;
 
@@ -14,6 +15,7 @@ public class BagItem {
 
 	public SelfCheckoutStation scs;
 	public ElectronicScaleListener esl;
+	public CurrentSessionData sessionData = new CurrentSessionData();
 	private static boolean validWeightCheck = false;
 	private static boolean checkOverloaded = false;
 	private boolean enableCheck = false;
@@ -85,23 +87,44 @@ public class BagItem {
 		return disabledCheck;
 	}
 	
-	public void bagItems(ArrayList<BarcodedItem> itemsToBeBagged) {	
-		
-		if (itemsToBeBagged == null) {
-			throw new NullPointerException("No argument may be null");
+//	public void bagItems(ArrayList<BarcodedItem> itemsToBeBagged) {	
+//		
+//		if (itemsToBeBagged == null) {
+//			throw new NullPointerException("No argument may be null");
+//		}
+//		
+//		validWeightCheck = false;
+//		checkOverloaded = false;
+//		for (BarcodedItem currentProduct : itemsToBeBagged) {
+//			scs.baggingArea.add(currentProduct);
+//			if(checkOverloaded) {
+//				scs.baggingArea.disable();
+//			}
+//			if(validWeightCheck) {
+//				baggedItems.add(currentProduct);
+//			}
+//		}
+//	}
+	
+	public void bagItems(BarcodedItem item) {
+		if (item == null) {
+			throw new SimulationException(new NullPointerException("No argument may be null."));
 		}
 		
 		validWeightCheck = false;
 		checkOverloaded = false;
-		for (BarcodedItem currentProduct : itemsToBeBagged) {
-			scs.baggingArea.add(currentProduct);
-			if(checkOverloaded) {
-				scs.baggingArea.disable();
-			}
-			if(validWeightCheck) {
-				baggedItems.add(currentProduct);
-			}
+		
+		scs.baggingArea.add(item);
+		if(checkOverloaded) {
+			scs.baggingArea.disable();
 		}
+//		if(validWeightCheck) {
+//			sessionData.setCurrentTotalBaggedWeight(item.getWeight());
+//		}
+//		
+//		if (sessionData.getCurrentExpectedWeight() != sessionData.getCurrentTotalBaggedWeight()) {
+//			System.out.println("Expected weight does not match actual bagged weight");
+//		}
 	}
 
 }

@@ -30,7 +30,7 @@ public class CurrentSessionData {
 	private static boolean attendantLoggedIn = false;
 	private static Attendant currentAttendant = null;
 	private static boolean attendantLoggedInMiddleCheck = false;
-	private static double currentTotalWeight = 0.0;
+	private static double currentExpectedWeight = 0.0;
 	private static ArrayList<PLUCodedProduct> PLUProducts = new ArrayList<PLUCodedProduct>();
 	
 	/*
@@ -64,7 +64,7 @@ public class CurrentSessionData {
 		Barcode code = item.getBarcode();
 		BarcodedProduct pro = ProductDatabases.BARCODED_PRODUCT_DATABASE.get(code);
 		scannedProducts.put(code, pro);
-		currentTotalWeight += item.getWeight();
+		currentExpectedWeight += item.getWeight();
 	}
 	
 	/*
@@ -77,7 +77,7 @@ public class CurrentSessionData {
 		
 		Barcode code = item.getBarcode();
 		scannedProducts.remove(code);
-		currentTotalWeight -= item.getWeight();
+		currentExpectedWeight -= item.getWeight();
 		
 	}
 	
@@ -184,13 +184,13 @@ public class CurrentSessionData {
 	public void setCurrentAttendant(Attendant attendant) {
 		currentAttendant = attendant;
 	}
-
-	public double getCurrentTotalWeight() {
-		return currentTotalWeight;
+	
+	public double getCurrentExpectedWeight() {
+		return currentExpectedWeight;
 	}
 	
-	public void setCurrentTotalWeight(double deduction) {
-		currentTotalWeight -= deduction;
+	public void setCurrentExpectedWeight(double deduction) {
+		currentExpectedWeight += deduction;
 	}
 	
 	public void addPLUProduct(PLUCodedProduct product) {
