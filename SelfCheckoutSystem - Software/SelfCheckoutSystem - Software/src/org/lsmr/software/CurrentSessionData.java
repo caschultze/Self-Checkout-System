@@ -30,8 +30,9 @@ public class CurrentSessionData {
 	private static boolean attendantLoggedIn = false;
 	private static Attendant currentAttendant = null;
 	private static boolean attendantLoggedInMiddleCheck = false;
-	private static double currentExpectedWeight = 0.0;
+	private static double currentTotalWeight = 0.0;
 	private static ArrayList<PLUCodedProduct> PLUProducts = new ArrayList<PLUCodedProduct>();
+	private static ArrayList<Double> PLUWeights = new ArrayList<Double>();
 	
 	/*
 	 * Function to add products to a saved HashMap of items scanned -> this HashMap explicitly associates each item scanned with 
@@ -64,7 +65,7 @@ public class CurrentSessionData {
 		Barcode code = item.getBarcode();
 		BarcodedProduct pro = ProductDatabases.BARCODED_PRODUCT_DATABASE.get(code);
 		scannedProducts.put(code, pro);
-		currentExpectedWeight += item.getWeight();
+		currentTotalWeight += item.getWeight();
 	}
 	
 	/*
@@ -77,7 +78,7 @@ public class CurrentSessionData {
 		
 		Barcode code = item.getBarcode();
 		scannedProducts.remove(code);
-		currentExpectedWeight -= item.getWeight();
+		currentTotalWeight -= item.getWeight();
 		
 	}
 	
@@ -141,6 +142,18 @@ public class CurrentSessionData {
 		}
 	}
 	
+	public void addPLUItemsToTotalPrice() {
+		int i = 0;
+		BigDecimal price = new BigDecimal("0.0");
+		for (PLUCodedProduct product : PLUProducts) {
+			BigDecimal weightInKg = BigDecimal.valueOf(PLUWeights.get(i));
+			price = (product.getPrice()).multiply(weightInKg);
+			totalPrice = totalPrice.add(price);
+			currentAmountOwing = currentAmountOwing.add(price);
+			i++;
+		}
+	}
+	
 	/**
 	 * Warning: Only use this method for simplification of test cases. You cannot use this for the 3rd Iteration.
 	 * @param temp
@@ -184,13 +197,13 @@ public class CurrentSessionData {
 	public void setCurrentAttendant(Attendant attendant) {
 		currentAttendant = attendant;
 	}
-	
-	public double getCurrentExpectedWeight() {
-		return currentExpectedWeight;
+
+	public double getCurrentTotalWeight() {
+		return currentTotalWeight;
 	}
 	
-	public void setCurrentExpectedWeight(double deduction) {
-		currentExpectedWeight += deduction;
+	public void setCurrentTotalWeight(double deduction) {
+		currentTotalWeight -= deduction;
 	}
 	
 	public void addPLUProduct(PLUCodedProduct product) {
@@ -199,6 +212,14 @@ public class CurrentSessionData {
 	
 	public ArrayList<PLUCodedProduct> getPLUProducts() {
 		return PLUProducts;
+	}
+	
+	public void addPLUWeight(double weight) {
+		PLUWeights.add(weight);
+	}
+	
+	public ArrayList<Double> getPLUWeights() {
+		return PLUWeights;
 	}
 	
 }

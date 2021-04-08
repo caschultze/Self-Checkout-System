@@ -5,11 +5,15 @@ import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Locale;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.lsmr.selfcheckout.PLUCodedItem;
 import org.lsmr.selfcheckout.PriceLookupCode;
+import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.external.ProductDatabases;
 import org.lsmr.selfcheckout.products.PLUCodedProduct;
 import org.lsmr.software.CurrentSessionData;
@@ -17,6 +21,7 @@ import org.lsmr.software.EnterPLUCode;;
 
 public class EnterPLUCodeTest {
 
+	private SelfCheckoutStation station;
 	private EnterPLUCode epc;
 	private CurrentSessionData data;
 	private PLUCodedProduct product1;
@@ -41,13 +46,43 @@ public class EnterPLUCodeTest {
 	
 	@Before
 	public void setUp() throws Exception {
+		Currency currency = Currency.getInstance(Locale.CANADA);
+		int[] banknoteDenominations = {5,10,20,50,100};
+		BigDecimal[] coinDenominations = {new BigDecimal(0.05),new BigDecimal(0.10),new BigDecimal(0.25),new BigDecimal(1.00),new BigDecimal(2.00)};
+		int scaleMaximum = 136078;	// 300 pounds
+		int scaleSensitivity = 10;	// 10 grams
+
+		station = new SelfCheckoutStation(currency,banknoteDenominations,coinDenominations,scaleMaximum,scaleSensitivity);
 		
 		data = new CurrentSessionData();
-		epc = new EnterPLUCode(data);
+		epc = new EnterPLUCode(station,data);
 		
 		makeTestDatabase();
 		
 	}
+	
+	@Test
+	public void testGetPLUWeight() {
+		PriceLookupCode code1 = new PriceLookupCode("12345");
+		PLUCodedItem item1 = new PLUCodedItem(code1,3000);
+		
+		epc.enterPLUProduct(code1);
+		station.scale.add(item1);
+		station.scale.remove(item1);
+		
+		ArrayList<Double> PLUWeights = data.getPLUWeights();
+		boolean weightEntered = false;
+		
+		for (double weights : PLUWeights) {
+			if (item1.getWeight()*0.001 == weights) {
+				weightEntered = true;
+			}
+		}
+		
+		assertTrue(weightEntered);
+		
+	}
+	
 	@Test
 	public void testGetPLUProductSuccess() {
 		PriceLookupCode code = new PriceLookupCode("12345");
@@ -86,10 +121,27 @@ public class EnterPLUCodeTest {
 		
 	}
 	
+	@Test
+	public void checkEnable() {
+		station.scale.enable();
+		boolean expected = true;
+		boolean actual = epc.getEnabled();
+		assertEquals(expected,actual);
+	}
+	
+	@Test
+	public void checkDisable() {
+		station.scale.disable();
+		boolean expected = true;
+		boolean actual = epc.getDisabled();
+		assertEquals(expected,actual);
+	}
 	
 	@After
 	public void tearDown() throws Exception {
 		ProductDatabases.PLU_PRODUCT_DATABASE.clear();
+		data.getPLUProducts().clear();
+		data.getPLUWeights().clear();
 	}
 	
 }
