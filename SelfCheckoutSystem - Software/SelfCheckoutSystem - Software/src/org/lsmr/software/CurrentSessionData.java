@@ -26,7 +26,7 @@ public class CurrentSessionData {
 	private static HashMap<Barcode, BarcodedProduct> scannedProducts = new HashMap<Barcode,BarcodedProduct>(); 
 	private static ArrayList <BarcodedItem> scannedItems = new ArrayList<BarcodedItem>();
 	private static BigDecimal currentAmountOwing = new BigDecimal("0.00");
-	private static BigDecimal totalPrice = new BigDecimal("0.00");
+	private static BigDecimal totalPrice = new BigDecimal("0.00"); 
 	private static boolean attendantLoggedIn = false;
 	private static Attendant currentAttendant = null;
 	private static boolean attendantLoggedInMiddleCheck = false;
@@ -114,7 +114,10 @@ public class CurrentSessionData {
 	 * at any point in time. Use this method for the 3rd Iteration, or if it currently applies to you.
 	 * @return
 	 */
-	public BigDecimal getTotalPrice() {
+	
+	
+	//CHANGED TO STATIC!!!
+	public static BigDecimal getTotalPrice() {
 		
 		Collection<BarcodedProduct> calcPrice = scannedProducts.values();
 		
@@ -157,7 +160,8 @@ public class CurrentSessionData {
 		currentAmountOwing = currentAmountOwing.subtract(amo);
 	}
 	
-	public void payBanknote(int amo) {
+	//CHANGED TO STATIC
+	public static void payBanknote(int amo) {
 		currentAmountOwing = currentAmountOwing.subtract(new BigDecimal(amo));
 	}
 	
