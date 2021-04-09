@@ -37,6 +37,8 @@ public class ControlUnit {
 	public static RemovesItems placesItems;
 	public static refillCoin coinRefill;
 	public static refillBanknote banknoteRefill;
+	public static EnterPLUCode enterPLUCode;
+	public static LookUpProduct lookUpProduct;
 	
 	// instantiate station variables below
 	private static Currency currency;
@@ -92,7 +94,8 @@ public class ControlUnit {
 		checkWrongWeight = new DetectUnexpectedWeight(checkoutStation);
 		coinRefill = new refillCoin(checkoutStation);
 		banknoteRefill = new refillBanknote(checkoutStation);
-		
+		enterPLUCode = new EnterPLUCode(checkoutStation,sessionData);
+		lookUpProduct = new LookUpProduct();
 		
 		
 		

@@ -1,7 +1,7 @@
 package org.lsmr.software;
 
-import org.lsmr.selfcheckout.Barcode;
-import org.lsmr.selfcheckout.PriceLookupCode;
+import java.util.ArrayList;
+
 import org.lsmr.selfcheckout.external.ProductDatabases;
 import org.lsmr.selfcheckout.products.BarcodedProduct;
 import org.lsmr.selfcheckout.products.PLUCodedProduct;
@@ -15,43 +15,44 @@ import org.lsmr.selfcheckout.products.PLUCodedProduct;
 
 public class LookUpProduct {
 
+	private ArrayList<String> prices = new ArrayList<String>();
+	private ArrayList<String> descriptions = new ArrayList<String>();
+	private ArrayList<String> codes = new ArrayList<String>();
 	
 	public LookUpProduct() {
 		
 	}
 	
 	/**
-	 * Checks to see if a barcoded product is in the product database
-	 * 
-	 * @param product
-	 * @return true if the product is in the database and false otherwise. 
+	 * Puts all the info of each product in the database into their respective arrays
+	 * Arrays will be used to display, where the information matches depending on the index.
 	 * 
 	 */
 	
-	public boolean checkBarcodedProductInDatabase(BarcodedProduct product) {
-		for (Barcode barcode : ProductDatabases.BARCODED_PRODUCT_DATABASE.keySet()) {
-			if (product.getBarcode().equals(barcode)) {
-				return true; 
-			}
+	public void getAllProducts() {
+		for (BarcodedProduct product : ProductDatabases.BARCODED_PRODUCT_DATABASE.values()) {
+			prices.add(product.getPrice().toString());
+			descriptions.add(product.getDescription());
+			codes.add(product.getBarcode().toString());
 		}
-		return false;
+		for (PLUCodedProduct product : ProductDatabases.PLU_PRODUCT_DATABASE.values()) {
+			prices.add(product.getPrice().toString());
+			descriptions.add(product.getDescription());
+			codes.add(product.getPLUCode().toString());
+		}
 	}
 	
-	/**
-	 * Checks to see if a PLU coded product is in the product database
-	 * 
-	 * @param product
-	 * @return true if the product is in the database and false otherwise. 
-	 * 
-	 */
-	
-	public boolean checkPLUProductInDatabase(PLUCodedProduct product) {
-		for (PriceLookupCode code : ProductDatabases.PLU_PRODUCT_DATABASE.keySet()) {
-			if (product.getPLUCode().equals(code)) {
-				return true; 
-			}
-		}
-		return false;
+	public ArrayList<String> getProductPrices() {
+		return prices;
 	}
+	
+	public ArrayList<String> getProductDescriptions() {
+		return descriptions;
+	}
+	
+	public ArrayList<String> getProductCodes() {
+		return codes;
+	}
+	
 	
 }

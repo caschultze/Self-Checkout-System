@@ -1,9 +1,10 @@
 package org.lsmr.test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.After;
 import org.junit.Before;
@@ -55,31 +56,73 @@ public class LookUpProductTest {
 	public void setUp() throws Exception {
 		lup = new LookUpProduct();
 		makeTestDatabase();
-		
+		lup.getAllProducts();
 	}
 
 	@Test
-	public void testBarcodedProduct() {
-		BarcodedProduct product = new BarcodedProduct(new Barcode("95975982146"),"1.89L Lemonade",BigDecimal.valueOf(2.00));
-		assertTrue(lup.checkBarcodedProductInDatabase(product));
+	public void testProductCodes() {
 		
-		BarcodedProduct product2 = new BarcodedProduct(new Barcode("029348"),"",BigDecimal.valueOf(2.20));
-		assertFalse(lup.checkBarcodedProductInDatabase(product2));
+		ArrayList<String> expected = new ArrayList<String>(Arrays.asList("111","1473892","95975982146","12345","6283","93204"));
+		ArrayList<String> actual = lup.getProductCodes();
+		
+		int correctCount = 0;
+		
+		for (int i = 0; i < expected.size(); i++) {
+			for (int j = 0; j < actual.size(); j++) {
+				if (expected.get(i).equals(actual.get(j))) {
+					correctCount++;
+				}
+			}
+		}
+		
+		assertEquals(correctCount,6);
+		
 	}
 	
 	@Test
-	public void testPLUCodedProduct() {
-		PLUCodedProduct product = new PLUCodedProduct(new PriceLookupCode("6283"),"Celery",BigDecimal.valueOf(2.47));
-		assertTrue(lup.checkPLUProductInDatabase(product));
+	public void testProductDescriptions() {
+
+		ArrayList<String> expected = new ArrayList<String>(Arrays.asList("4L Milk","570g Whole Wheat Bread","1.89L Lemonade","Apples","Celery","Mango"));
+		ArrayList<String> actual = lup.getProductDescriptions();
 		
-		PLUCodedProduct product2 = new PLUCodedProduct(new PriceLookupCode("1032"),"",BigDecimal.valueOf(3.86));
-		assertFalse(lup.checkPLUProductInDatabase(product2));
+		int correctCount = 0;
 		
+		for (int i = 0; i < expected.size(); i++) {
+			for (int j = 0; j < actual.size(); j++) {
+				if (expected.get(i).equals(actual.get(j))) {
+					correctCount++;
+				}
+			}
+		}
+		
+		assertEquals(correctCount,6);
+	}
+	
+	@Test
+	public void testProductPrices() {
+
+		ArrayList<String> expected = new ArrayList<String>(Arrays.asList("4.87","1.57","2.0","1.19","2.47","1.27"));
+		ArrayList<String> actual = lup.getProductPrices();
+		
+		int correctCount = 0;
+		
+		for (int i = 0; i < expected.size(); i++) {
+			for (int j = 0; j < actual.size(); j++) {
+				if (expected.get(i).equals(actual.get(j))) {
+					correctCount++;
+				}
+			}
+		}
+		
+		assertEquals(correctCount,6);
 	}
 	
 	@After
 	public void tearDown() throws Exception {
 		ProductDatabases.BARCODED_PRODUCT_DATABASE.clear();
 		ProductDatabases.PLU_PRODUCT_DATABASE.clear();
+		lup.getProductCodes().clear();
+		lup.getProductDescriptions().clear();
+		lup.getProductPrices().clear();
 	}
 }
