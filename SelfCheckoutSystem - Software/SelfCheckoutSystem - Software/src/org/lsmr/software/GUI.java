@@ -104,7 +104,7 @@ public class GUI extends AbstractDevice <TouchScreenListener>{
         back.addActionListener(new backButtonHandler());
         
         //COLOR
-        mainPanel.setBackground(Color.PINK);
+        mainPanel.setBackground(Color.decode("#48cae4"));
         
         frame.add(mainPanel);
         mainPanel.add(hundred);
@@ -134,6 +134,9 @@ public class GUI extends AbstractDevice <TouchScreenListener>{
 		public void actionPerformed(ActionEvent e) {
 			int value = 100;
 			Banknote hundred = new Banknote(value, Currency.getInstance("CAD"));
+			
+			
+			
 			ControlUnit.payBanknote.payWithBanknotes(hundred);
 			CurrentSessionData.payBanknote(value);
 			total = new JLabel("Total: " + CurrentSessionData.getTotalPrice());

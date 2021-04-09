@@ -189,6 +189,11 @@ public class BanknotePayment {
 	
 	public void payWithBanknotes(Banknote note) {
 		
+		//moved
+		currentBanknoteValue = 0;
+		validCheck = false;
+		storedCheck = false;
+		
 		if (note == null) {
 			throw new NullPointerException("No argument may be null");
 		}
@@ -199,22 +204,18 @@ public class BanknotePayment {
 				if (fullStorageCheck) {
 					scs.banknoteInput.disable();
 				}
+				
+				if (validCheck && storedCheck && note.getValue() == currentBanknoteValue && note.getCurrency().equals(currentCurrency)) {
+					session.payBanknote(note.getValue());
+				}
 			} 
 			catch (DisabledException e) {
 				e.printStackTrace();
 			} catch (OverloadException e) {
 				fullStorageCheck = true;
 				e.printStackTrace();
-			}
+			}	
 			
-			
-			if (validCheck && storedCheck && note.getValue() == currentBanknoteValue && note.getCurrency().equals(currentCurrency)) {
-				session.payBanknote(note.getValue());
-			}
-			
-			currentBanknoteValue = 0;
-			validCheck = false;
-			storedCheck = false;
 		}
 	
 	public boolean getEmptyDispenserCheck() {
