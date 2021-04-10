@@ -47,7 +47,7 @@ public final class TouchScreen extends AbstractDevice<TouchScreenListener> {
 			public void windowOpened(WindowEvent e) {
 				super.windowOpened(e);
 				ready = true;
-				frame.setVisible(false);
+				//frame.setVisible(false);
 			}
 		});
 
