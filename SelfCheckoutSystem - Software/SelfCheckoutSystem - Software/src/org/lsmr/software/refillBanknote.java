@@ -11,7 +11,6 @@ import org.lsmr.selfcheckout.devices.SimulationException;
 
 public class refillBanknote extends BanknotePayment {
 
-	public SelfCheckoutStation station;
 	public Map<Integer, BanknoteDispenserListenerStub> banknoteDispensersLis;
 	private CurrentSessionData session;
 	
@@ -27,7 +26,7 @@ public class refillBanknote extends BanknotePayment {
 		banknoteDispensersLis = new HashMap<>();
 		
 		for(int i = 0; i < super.scs.banknoteDenominations.length; i++)
-			banknoteDispensersLis.put(new Integer(station.banknoteDenominations[i]), new BanknoteDispenserListenerStub(super.scs.banknoteDenominations[i]));
+			banknoteDispensersLis.put(new Integer(super.scs.banknoteDenominations[i]), new BanknoteDispenserListenerStub(super.scs.banknoteDenominations[i]));
 
 		for(BanknoteDispenserListenerStub noteDispenerLisn: banknoteDispensersLis.values()) {
 			super.scs.banknoteDispensers.get(noteDispenerLisn.getValue()).register(noteDispenerLisn);

@@ -14,7 +14,6 @@ import java.util.List;
 
 public class EmptyCoinStorage extends CoinPayment {
 	
-	public SelfCheckoutStation scs;
 	public CoinStorageUnitListener csl;
 	private boolean checkUnloaded = false;
 	private List<Coin> unloadedCoins;

@@ -12,9 +12,6 @@ import org.lsmr.selfcheckout.devices.SimulationException;
 
 public class refillCoin extends CoinPayment {
 
-	
-	
-	public SelfCheckoutStation station;
 	public Map<BigDecimal, CoinDispenserListenerStub> coinDispensersLis;
 	private CurrentSessionData session;
 	

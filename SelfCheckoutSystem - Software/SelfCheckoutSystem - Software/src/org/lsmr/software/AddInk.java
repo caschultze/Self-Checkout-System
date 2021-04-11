@@ -8,7 +8,6 @@ import org.lsmr.selfcheckout.devices.listeners.ReceiptPrinterListener;
 
 public class AddInk extends InkLow {
 	
-	private SelfCheckoutStation station;
 	private boolean inkAdded = false;
 	
 	/**

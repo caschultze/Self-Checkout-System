@@ -8,7 +8,6 @@ import org.lsmr.selfcheckout.devices.listeners.ReceiptPrinterListener;
 
 public class AddPaper extends PaperLow {
 
-	private SelfCheckoutStation station;
 	private boolean paperAdded = false;
 	
 	/**

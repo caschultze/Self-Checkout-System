@@ -46,16 +46,16 @@ public class ControlUnit {
 	private static int scaleSensitivity;
 	
 	
-	private static State currentState;
-	private static int option;
-	
-	enum State {
-		SCAN,
-		BAG,
-		PAY_COIN,
-		PAY_BANKNOTE,
-		ALL_FUNC
-	}
+//	private static State currentState;
+//	private static int option;
+//	
+//	enum State {
+//		SCAN,
+//		BAG,
+//		PAY_COIN,
+//		PAY_BANKNOTE,
+//		ALL_FUNC
+//	}
 	
 	public static void main(String args[]) {
 	
@@ -100,30 +100,30 @@ public class ControlUnit {
 			
 		}
 
-		setCurrentState(option);
-		
-		switch(currentState) {
-		case SCAN:
-			
-			// currentState = State.Bag;
-			break;
-			
-		case BAG:
-			
-			break;
-			
-		case PAY_COIN:
-			
-			break;
-			
-		case PAY_BANKNOTE:
-			
-			break;
-			
-		case ALL_FUNC:
-			
-			break;
-		}
+//		setCurrentState(option);
+//		
+//		switch(currentState) {
+//		case SCAN:
+//			
+//			// currentState = State.Bag;
+//			break;
+//			
+//		case BAG:
+//			
+//			break;
+//			
+//		case PAY_COIN:
+//			
+//			break;
+//			
+//		case PAY_BANKNOTE:
+//			
+//			break;
+//			
+//		case ALL_FUNC:
+//			
+//			break;
+//		}
 	} // endmain
 	
 	
@@ -157,18 +157,18 @@ public class ControlUnit {
 		return scaleSensitivity;
 	}
 	
-	public static void setCurrentState(int option) {
-		if (option == 1) {
-			currentState = State.SCAN;
-		} else if (option == 2) {
-			currentState = State.BAG;
-		} else if (option == 3) {
-			currentState = State.PAY_COIN;
-		} else if (option == 4) {
-			currentState = State.PAY_BANKNOTE;
-		} else if (option == 5) {
-			currentState = State.ALL_FUNC;
-		}
-	}
+//	public static void setCurrentState(int option) {
+//		if (option == 1) {
+//			currentState = State.SCAN;
+//		} else if (option == 2) {
+//			currentState = State.BAG;
+//		} else if (option == 3) {
+//			currentState = State.PAY_COIN;
+//		} else if (option == 4) {
+//			currentState = State.PAY_BANKNOTE;
+//		} else if (option == 5) {
+//			currentState = State.ALL_FUNC;
+//		}
+//	}
 
 }
