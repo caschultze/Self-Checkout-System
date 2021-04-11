@@ -17,7 +17,6 @@ public class BlockStationSetup {
 	public void blockStation() {
 		station.scale.disable();
 		station.baggingArea.disable();
-		station.screen.disable();
 		station.printer.disable();
 		station.cardReader.disable();
 		station.mainScanner.disable();
@@ -33,7 +32,6 @@ public class BlockStationSetup {
 	public void unblockStation() {
 		station.scale.enable();
 		station.baggingArea.enable();
-		station.screen.enable();
 		station.printer.enable();
 		station.cardReader.enable();
 		station.mainScanner.enable();
