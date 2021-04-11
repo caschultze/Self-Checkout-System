@@ -8,6 +8,9 @@ import java.util.Locale;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.devices.OverloadException;
@@ -77,35 +80,38 @@ public class PlaceItemFailTest {
 		data.addScannedItem(itemTwo);
 		data.addScannedItem(itemThree);
 	} 
-	
-	//Test to deteremine if the function predicts the right weight/compares weights properly
+
+	//Test to determine if the function predicts the right weight/compares weights properly
 	@Test
 	public void testCheckWeightsRight() throws OverloadException {
-		cu.itemBag.bagItems(data.getScannedItems());
+		for(BarcodedItem i : data.getScannedItems()) {
+			cu.itemBag.bagItems(i);
+		}
 		cu.failPlaceItem.checkWeights();
 
 		BarcodedItem itemFour = new BarcodedItem(four, weightFour);
-		ArrayList<BarcodedItem> addedItem = new ArrayList<BarcodedItem>();
-		addedItem.add(itemFour);
-		
+
 		data.addScannedItem(itemFour);
-		cu.itemBag.bagItems(addedItem);
-		cu.failPlaceItem.checkWeights();
+		cu.itemBag.bagItems(itemFour);
+		boolean actual = cu.failPlaceItem.checkWeights();
+		assertTrue(actual);
 	}
 	
 	//Test to determine if the function handles no weight change properly
 	@Test
-	(expected = SimulationException.class)
 	public void testCheckWeightsNoChange() throws OverloadException {
-		cu.failPlaceItem.checkWeights();
+		boolean actual = cu.failPlaceItem.checkWeights();
+		assertFalse(actual);
 	}
 	
 	
 	//Test to determine if the program correctly registers when an item has not been placed
 	@Test
 	public void checkItemPlacedFalse() throws OverloadException {
-		System.out.println("CHECKITEMPLACEDFALSE");
-		cu.itemBag.bagItems(data.getScannedItems());
+		for(BarcodedItem i : data.getScannedItems()) {
+			cu.itemBag.bagItems(i);
+		}
+		
 		cu.failPlaceItem.checkWeights();
 		
 		BarcodedItem itemFive = new BarcodedItem(five, weightFive);
@@ -113,7 +119,7 @@ public class PlaceItemFailTest {
 		addedItem.add(itemFive);
 		
 		data.addScannedItem(itemFive);
-		cu.itemBag.bagItems(addedItem);
+		cu.itemBag.bagItems(itemFive);
 
 		cu.failPlaceItem.checkWeights();
 		
