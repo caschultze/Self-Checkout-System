@@ -1,9 +1,13 @@
 package org.lsmr.software;
 import java.awt.Color;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.awt.Font;
 
 import javax.swing.ImageIcon;
@@ -12,32 +16,36 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.lsmr.selfcheckout.Barcode;
+import org.lsmr.selfcheckout.BarcodedItem;
+import org.lsmr.selfcheckout.PLUCodedItem;
+import org.lsmr.selfcheckout.PriceLookupCode;
 import org.lsmr.selfcheckout.devices.AbstractDevice;
 import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.devices.TouchScreen;
 import org.lsmr.selfcheckout.devices.listeners.TouchScreenListener;
+import org.lsmr.selfcheckout.products.BarcodedProduct;
+import org.lsmr.selfcheckout.products.PLUCodedProduct;
+
+//private static HashMap<Barcode, BarcodedProduct> scannedProducts = new HashMap<Barcode,BarcodedProduct>(); 
+//private static ArrayList <BarcodedItem> scannedItems = new ArrayList<BarcodedItem>();
 
 
 public class ListProductScreen extends AbstractDevice <TouchScreenListener> {
 	
-	private JFrame frame;
-	private JPanel userPanel;
-	private SelfCheckoutStation station;
-	private ControlUnit cu;
-	private static JTextField jtext;
-	static JPanel jp;
-	private static TouchScreen tsl;
-	
-	public static void main(String[] args) throws IOException {
-		tsl = new TouchScreen();
+		private static JFrame frame;
+		private static JPanel jp;
+		private static TouchScreen tsl;
+		private SelfCheckoutStation scs;
+		private CurrentSessionData csd;
+		
+		public ListProductScreen () {
+		
+		JPanel jp = new JPanel();
+		TouchScreen tsl = new TouchScreen();
 		JFrame frame = tsl.getFrame();
-		ProductScreen(frame);
-	}
-
-	public static void ProductScreen(JFrame frame) throws IOException {
-		
 		jp = new JPanel(new GridLayout(0, 3, 20, 20));
-		
+
 		JButton apple = new JButton("Apple", new ImageIcon(ListProductScreen.class.getResource("apple.jpeg")));
 		apple.setFont(new Font("Arial", Font.BOLD,40));	
 		apple.setBackground(Color.LIGHT_GRAY);
@@ -45,7 +53,11 @@ public class ListProductScreen extends AbstractDevice <TouchScreenListener> {
 		jp.add(apple);
 		apple.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+				BigDecimal ApplePrice = new BigDecimal(1.10);
+				PriceLookupCode AppleCode = new PriceLookupCode("4123");
+				PLUCodedProduct Apple = new PLUCodedProduct(AppleCode, "Apple", ApplePrice);
+				csd.addPLUProduct(Apple);
+				//TRANSITION: BACK TO PRODUCT AND TOTAL SCREEN
 			}
 		});
 		
@@ -56,7 +68,11 @@ public class ListProductScreen extends AbstractDevice <TouchScreenListener> {
 		jp.add(mango);
 		mango.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+				BigDecimal MangoPrice = new BigDecimal(1.44);
+				PriceLookupCode MangoCode = new PriceLookupCode("4051");
+				PLUCodedProduct Mango = new PLUCodedProduct(MangoCode, "Apple", MangoPrice);
+				csd.addPLUProduct(Mango);
+				//TRANSITION: BACK TO PRODUCT AND TOTAL SCREEN
 			}
 		});
 		
@@ -67,6 +83,11 @@ public class ListProductScreen extends AbstractDevice <TouchScreenListener> {
 		jp.add(grapes);
 		grapes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				BigDecimal GrapePrice = new BigDecimal(6.99);
+				PriceLookupCode GrapeCode = new PriceLookupCode("4022");
+				PLUCodedProduct Grapes = new PLUCodedProduct(GrapeCode, "Apple", GrapePrice);
+				csd.addPLUProduct(Grapes);
+				//TRANSITION: BACK TO PRODUCT AND TOTAL SCREEN
 		
 			}
 		});
@@ -78,7 +99,11 @@ public class ListProductScreen extends AbstractDevice <TouchScreenListener> {
 		jp.add(bananas);
 		bananas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				BigDecimal bananaPrice = new BigDecimal(1.00);
+				PriceLookupCode bananaCode = new PriceLookupCode("4123");
+				PLUCodedProduct Banana = new PLUCodedProduct(bananaCode, "Apple", bananaPrice);
+				csd.addPLUProduct(Banana);
+				//TRANSITION: BACK TO PRODUCT AND TOTAL SCREEN
 			}
 		});
 		
@@ -89,6 +114,13 @@ public class ListProductScreen extends AbstractDevice <TouchScreenListener> {
 		jp.add(chocolate);
 		chocolate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String chocoString = "12345678910";
+				Barcode chocoBarcode = new Barcode(chocoString);
+				ArrayList<BarcodedItem> BarcodeList = null;
+				BarcodedItem chocoScan = new BarcodedItem(chocoBarcode, 200.0);
+				BarcodeList.add(chocoScan);
+				ControlUnit.itemScan.scanItems(BarcodeList);
+				//TRANSITION: BACK TO PRODUCT AND TOTAL SCREEN
 	
 			}
 		});
@@ -100,6 +132,13 @@ public class ListProductScreen extends AbstractDevice <TouchScreenListener> {
 		jp.add(cupcake);
 		cupcake.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String cupString = "22345678910";
+				Barcode cupBarcode = new Barcode(cupString);
+				ArrayList<BarcodedItem> BarcodeList = null;
+				BarcodedItem cupScan = new BarcodedItem(cupBarcode, 500.0);
+				BarcodeList.add(cupScan);
+				ControlUnit.itemScan.scanItems(BarcodeList);
+				//TRANSITION: BACK TO PRODUCT AND TOTAL SCREEN
 
 			}
 		});
@@ -111,7 +150,13 @@ public class ListProductScreen extends AbstractDevice <TouchScreenListener> {
 		jp.add(eggs);
 		eggs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				String eggString = "32345678910";
+				Barcode eggBarcode = new Barcode(eggString);
+				ArrayList<BarcodedItem> BarcodeList = null;
+				BarcodedItem eggScan = new BarcodedItem(eggBarcode, 500.0);
+				BarcodeList.add(eggScan);
+				ControlUnit.itemScan.scanItems(BarcodeList);
+				//TRANSITION: BACK TO PRODUCT AND TOTAL SCREEN
 			}
 		});
 		
@@ -121,7 +166,13 @@ public class ListProductScreen extends AbstractDevice <TouchScreenListener> {
 		jp.add(milk);
 		milk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				String milkString = "42345678910";
+				Barcode milkBarcode = new Barcode(milkString);
+				ArrayList<BarcodedItem> BarcodeList = null;
+				BarcodedItem eggScan = new BarcodedItem(milkBarcode, 1000.0);
+				BarcodeList.add(eggScan);
+				ControlUnit.itemScan.scanItems(BarcodeList);
+				//TRANSITION: BACK TO PRODUCT AND TOTAL SCREEN
 			}
 		});
 		
@@ -132,6 +183,13 @@ public class ListProductScreen extends AbstractDevice <TouchScreenListener> {
 		jp.add(water);
 		water.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String waterString = "52345678910";
+				Barcode waterBarcode = new Barcode(waterString);
+				ArrayList<BarcodedItem> BarcodeList = null;
+				BarcodedItem waterScan = new BarcodedItem(waterBarcode, 500.0);
+				BarcodeList.add(waterScan);
+				ControlUnit.itemScan.scanItems(BarcodeList);
+				//TRANSITION: BACK TO PRODUCT AND TOTAL SCREEN
 
 			}
 		});
@@ -140,7 +198,6 @@ public class ListProductScreen extends AbstractDevice <TouchScreenListener> {
 		jp.setBackground(Color.pink);
 		frame.add(jp);
 		frame.setVisible(true);
-	
-		
 		}
-}
+	}
+
