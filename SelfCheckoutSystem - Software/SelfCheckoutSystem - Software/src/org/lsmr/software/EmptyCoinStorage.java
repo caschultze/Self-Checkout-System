@@ -67,14 +67,14 @@ public class EmptyCoinStorage extends CoinPayment {
 			
 		};
 		
-		scs.coinStorage.register(csl);
+		super.scs.coinStorage.register(csl);
 	}
 	
 	public List<Coin> emptyCoinStorage() {
 		if(ControlUnit.sessionData.getCurrentAttendant() == null) {
 			throw new SimulationException("There is no attendant available to empty storage");
 		}
-		return scs.coinStorage.unload();
+		return super.scs.coinStorage.unload();
 	}
 	
 	public void addToUnloaded(List<Coin> coin) {
@@ -86,6 +86,12 @@ public class EmptyCoinStorage extends CoinPayment {
 		return unloadedCoins;
 	}
 
-
+	public boolean getCheckUnloaded() {
+		return checkUnloaded;
+	}
+	
+	public void setCheckUnloaded(boolean set) {
+		checkUnloaded = set;
+	}
 }
 

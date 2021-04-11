@@ -27,11 +27,11 @@ public class refillCoin extends CoinPayment {
 	public void registerListeners() {
 		coinDispensersLis = new HashMap<>();
 		
-		for(int i = 0; i < station.coinDenominations.size(); i++)
-			coinDispensersLis.put(station.coinDenominations.get(i), new CoinDispenserListenerStub(station.coinDenominations.get(i)));
+		for(int i = 0; i < super.scs.coinDenominations.size(); i++)
+			coinDispensersLis.put(super.scs.coinDenominations.get(i), new CoinDispenserListenerStub(super.scs.coinDenominations.get(i)));
 
 		for(CoinDispenserListenerStub coinDispenerLisn: coinDispensersLis.values()) {
-			station.coinDispensers.get(coinDispenerLisn.getValue()).register(coinDispenerLisn);
+			super.scs.coinDispensers.get(coinDispenerLisn.getValue()).register(coinDispenerLisn);
 		}
 	}
 	
@@ -44,7 +44,7 @@ public class refillCoin extends CoinPayment {
 					throw new SimulationException("Not all the coins are of the same value");
 				}
 			}
-			station.coinDispensers.get(val).load(Coins);
+			super.scs.coinDispensers.get(val).load(Coins);
 			this.setEmptyDispenserCheck(false);
 		}catch(OverloadException e) {
 			System.out.println("The despenser will over flow when loading theses coins."); throw e;

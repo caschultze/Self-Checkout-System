@@ -67,14 +67,14 @@ public class EmptyBanknoteStorage extends BanknotePayment {
 			
 		};
 		
-		scs.banknoteStorage.register(bnl);
+		super.scs.banknoteStorage.register(bnl);
 	}
 	
 	public List<Banknote> emptyBanknoteStorage() {
 		if(ControlUnit.sessionData.getCurrentAttendant() == null) {
 			throw new SimulationException("There is no attendant available to empty storage");
 		}
-		return scs.banknoteStorage.unload();
+		return super.scs.banknoteStorage.unload();
 
 	}
 	
@@ -87,4 +87,12 @@ public class EmptyBanknoteStorage extends BanknotePayment {
 		return unloadedBanknotes;
 	}
 
+	public boolean getCheckUnloaded() {
+		return checkUnloaded;
+	}
+	
+	public void setCheckUnloaded(boolean set) {
+		checkUnloaded = set;
+	}
+	
 }

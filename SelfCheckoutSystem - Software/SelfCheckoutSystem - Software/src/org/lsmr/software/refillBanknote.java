@@ -26,11 +26,11 @@ public class refillBanknote extends BanknotePayment {
 	public void registerListeners() {
 		banknoteDispensersLis = new HashMap<>();
 		
-		for(int i = 0; i < station.banknoteDenominations.length; i++)
-			banknoteDispensersLis.put(new Integer(station.banknoteDenominations[i]), new BanknoteDispenserListenerStub(station.banknoteDenominations[i]));
+		for(int i = 0; i < super.scs.banknoteDenominations.length; i++)
+			banknoteDispensersLis.put(new Integer(station.banknoteDenominations[i]), new BanknoteDispenserListenerStub(super.scs.banknoteDenominations[i]));
 
 		for(BanknoteDispenserListenerStub noteDispenerLisn: banknoteDispensersLis.values()) {
-			station.banknoteDispensers.get(noteDispenerLisn.getValue()).register(noteDispenerLisn);
+			super.scs.banknoteDispensers.get(noteDispenerLisn.getValue()).register(noteDispenerLisn);
 		}
 	}
 	
@@ -42,7 +42,7 @@ public class refillBanknote extends BanknotePayment {
 					throw new SimulationException("Not all the Banknotes are of the same value");
 				}
 			}
-			station.banknoteDispensers.get(val).load(Banknotes);
+			super.scs.banknoteDispensers.get(val).load(Banknotes);
 			this.setEmptyDispenserCheck(false);
 		}catch(OverloadException e) {
 			System.out.println("The despenser will over flow when loading theses banknotes."); throw e;

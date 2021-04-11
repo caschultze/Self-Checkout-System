@@ -26,7 +26,7 @@ public class AddPaper extends PaperLow {
 	 * Calls the addPaper method of the station's printer
 	 */
 	public void addPaper(int amount) {
-		station.printer.addPaper(amount);
+		super.station.printer.addPaper(amount);
 	}
 	
 
@@ -89,7 +89,7 @@ public class AddPaper extends PaperLow {
 				//inkAdded = true;
 			}
 		};
-		station.printer.register(rp_listener);
+		super.station.printer.register(rp_listener);
 	}
 	
 	/**

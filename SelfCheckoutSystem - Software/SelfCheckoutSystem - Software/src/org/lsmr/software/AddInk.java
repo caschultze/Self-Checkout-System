@@ -26,7 +26,7 @@ public class AddInk extends InkLow {
 	 * Calls the addInk method of the station's printer
 	 */
 	public void addInk(int amount) {
-		station.printer.addInk(amount);
+		super.station.printer.addInk(amount);
 	}
 	
 //	/**
@@ -89,7 +89,7 @@ public class AddInk extends InkLow {
 				setNoInk(false);
 			}
 		};
-		station.printer.register(rp_listener);
+		super.station.printer.register(rp_listener);
 	}
 	
 	/**
