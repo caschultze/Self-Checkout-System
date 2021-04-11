@@ -138,8 +138,8 @@ public class GUI extends AbstractDevice <TouchScreenListener>{
 			
 			
 			ControlUnit.payBanknote.payWithBanknotes(hundred);
-			CurrentSessionData.payBanknote(value);
-			total = new JLabel("Total: " + CurrentSessionData.getTotalPrice());
+			//CurrentSessionData.payBanknote(value);
+			total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
 			
 		}
 		
@@ -153,8 +153,8 @@ public class GUI extends AbstractDevice <TouchScreenListener>{
 			int value = 50;
 			Banknote fifty = new Banknote(value, Currency.getInstance("CAD"));
 			ControlUnit.payBanknote.payWithBanknotes(fifty);
-			CurrentSessionData.payBanknote(value);
-			total = new JLabel("Total: " + CurrentSessionData.getTotalPrice());
+			//CurrentSessionData.payBanknote(value);
+			total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
 					
 		}
 				
@@ -168,8 +168,8 @@ public class GUI extends AbstractDevice <TouchScreenListener>{
 			int value = 20;
 			Banknote twenty = new Banknote(value, Currency.getInstance("CAD"));
 			ControlUnit.payBanknote.payWithBanknotes(twenty);
-			CurrentSessionData.payBanknote(value);
-			total = new JLabel("Total: " + CurrentSessionData.getTotalPrice());
+			//CurrentSessionData.payBanknote(value);
+			total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
 							
 		}
 						
@@ -183,8 +183,8 @@ public class GUI extends AbstractDevice <TouchScreenListener>{
 			int value = 10;
 			Banknote ten = new Banknote(value, Currency.getInstance("CAD"));
 			ControlUnit.payBanknote.payWithBanknotes(ten);
-			CurrentSessionData.payBanknote(value);
-			total = new JLabel("Total: " + CurrentSessionData.getTotalPrice());
+			//CurrentSessionData.payBanknote(value);
+			total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
 		}
 						
 	}
@@ -198,8 +198,8 @@ public class GUI extends AbstractDevice <TouchScreenListener>{
 			int value = 5;
 			Banknote five = new Banknote(value, Currency.getInstance("CAD"));
 			ControlUnit.payBanknote.payWithBanknotes(five);
-			CurrentSessionData.payBanknote(value);
-			total = new JLabel("Total: " + CurrentSessionData.getTotalPrice());
+			//CurrentSessionData.payBanknote(value);
+			total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
 							
 		}
 						
