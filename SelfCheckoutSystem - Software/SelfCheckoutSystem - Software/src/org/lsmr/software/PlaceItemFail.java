@@ -35,7 +35,7 @@ public class PlaceItemFail extends BagItem{
 	 * Function used to determine if added weight to the scale is correct (checks one item at a time)
 	 * Should be called upon if weight has been changed/been registered by the scale listener 
 	 */
-	public void checkWeights() throws OverloadException {
+	public boolean checkWeights() throws OverloadException {
 		scannedItems.addAll(data.getScannedItems());
 		
 		//items should be bagged in the order they were scanned -> first scanned, first bagged
@@ -58,8 +58,9 @@ public class PlaceItemFail extends BagItem{
 		//get weight of the individual item just added
 		double addedWeight = currentWeight - pastWeight;
 		
-		if(predicted != addedWeight) //if the just-added weight is not what it should be
-			throw new SimulationException("Weight placed on scale is incorrect");
+		if(predicted != addedWeight) { //if the just-added weight is not what it should be
+			return false;
+		}
 		
 		this.pastWeight = currentWeight;
 		
@@ -75,6 +76,8 @@ public class PlaceItemFail extends BagItem{
 		
 		//reset scannedItems
 		scannedItems.clear();
+		
+		return true;
 	}
 	
 	/*
