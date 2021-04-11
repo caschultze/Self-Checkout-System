@@ -23,8 +23,8 @@ public class BlockStationSetup {
 		station.handheldScanner.disable();
 		station.banknoteInput.disable();
 		station.banknoteOutput.disable();		
-		station.banknoteValidator.disable();
-		station.coinValidator.disable();
+		station.coinSlot.disable();
+		station.banknoteInput.disable();
 		 
 		blockedFlag = true;	
 	}
@@ -40,7 +40,9 @@ public class BlockStationSetup {
 		station.banknoteOutput.enable();		
 		station.banknoteValidator.enable();
 		station.coinValidator.enable();
-		 
+		station.coinSlot.enable();
+		station.banknoteInput.enable(); 
+		
 		blockedFlag = false;	
 	}
 }
