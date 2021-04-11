@@ -31,8 +31,14 @@ public class GUIMembershipLogIn extends AbstractDevice<AbstractDeviceListener> {
 	private static String membershipID = "";
 	private static int style;
 	private static int fontSize;
+	private ControlUnit cu;
 	
-	public static void main(String[] args) {
+	public GUIMembershipLogIn (ControlUnit cu) {
+		this.cu = cu;
+		makeFrame();
+	}
+	
+	public static void makeFrame() {
 		touchScreen = new TouchScreen();
 		frame = touchScreen.getFrame();
 		
@@ -228,9 +234,18 @@ public class GUIMembershipLogIn extends AbstractDevice<AbstractDeviceListener> {
 		padPanel.add(key_Enter);
 		
 		
+		key_Enter.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
+		
 		fontname = key_1.getFont().getName();
 		style = key_1.getFont().getStyle();
 		fontSize = 30;
+		
 		
 		key_1.setFont(new Font(fontname, style, fontSize));
 		key_2.setFont(new Font(fontname, style, fontSize));

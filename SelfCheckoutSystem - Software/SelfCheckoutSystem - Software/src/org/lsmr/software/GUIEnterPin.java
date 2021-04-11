@@ -28,7 +28,7 @@ public class GUIEnterPin extends AbstractDevice<AbstractDeviceListener> {
 	private static JPanel textPanel;
 	private static String fontname;
 	private static JTextField numberDisplay;
-	private static String pin = "";
+	private static String membershipID = "";
 	private static int style;
 	private static int fontSize;
 	
@@ -72,7 +72,7 @@ public class GUIEnterPin extends AbstractDevice<AbstractDeviceListener> {
 	}
 	
 	public static void addTextfield() {
-		JTextField numberDisplay = new JTextField(4);
+		numberDisplay = new JTextField(16);
 		//numberDisplay.setFont(new Font(fontname, style, fontSize));
 		numberDisplay.setMinimumSize(new Dimension(1000, 250));
 		numberDisplay.setPreferredSize(new Dimension(1000, 500));
@@ -88,8 +88,8 @@ public class GUIEnterPin extends AbstractDevice<AbstractDeviceListener> {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String num = e.getActionCommand();
-				pin += num;
-				numberDisplay.setText(pin);
+				membershipID += num;
+				numberDisplay.setText(membershipID);
 			}
 		});
 		
@@ -101,8 +101,8 @@ public class GUIEnterPin extends AbstractDevice<AbstractDeviceListener> {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String num = e.getActionCommand();
-				pin += num;
-				numberDisplay.setText(pin);
+				membershipID += num;
+				numberDisplay.setText(membershipID);
 			}
 		});
 		
@@ -114,8 +114,8 @@ public class GUIEnterPin extends AbstractDevice<AbstractDeviceListener> {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String num = e.getActionCommand();
-				pin += num;
-				numberDisplay.setText(pin);
+				membershipID += num;
+				numberDisplay.setText(membershipID);
 			}
 		});
 		
@@ -127,8 +127,8 @@ public class GUIEnterPin extends AbstractDevice<AbstractDeviceListener> {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String num = e.getActionCommand();
-				pin += num;
-				numberDisplay.setText(pin);
+				membershipID += num;
+				numberDisplay.setText(membershipID);
 			}
 		});
 		
@@ -140,8 +140,8 @@ public class GUIEnterPin extends AbstractDevice<AbstractDeviceListener> {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String num = e.getActionCommand();
-				pin += num;
-				numberDisplay.setText(pin);
+				membershipID += num;
+				numberDisplay.setText(membershipID);
 			}
 		});
 		
@@ -153,8 +153,8 @@ public class GUIEnterPin extends AbstractDevice<AbstractDeviceListener> {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String num = e.getActionCommand();
-				pin += num;
-				numberDisplay.setText(pin);
+				membershipID += num;
+				numberDisplay.setText(membershipID);
 			}
 		});
 		
@@ -166,8 +166,8 @@ public class GUIEnterPin extends AbstractDevice<AbstractDeviceListener> {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String num = e.getActionCommand();
-				pin += num;
-				numberDisplay.setText(pin);
+				membershipID += num;
+				numberDisplay.setText(membershipID);
 			}
 		});
 		
@@ -179,8 +179,8 @@ public class GUIEnterPin extends AbstractDevice<AbstractDeviceListener> {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String num = e.getActionCommand();
-				pin += num;
-				numberDisplay.setText(pin);
+				membershipID += num;
+				numberDisplay.setText(membershipID);
 			}
 		});
 		
@@ -192,8 +192,8 @@ public class GUIEnterPin extends AbstractDevice<AbstractDeviceListener> {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String num = e.getActionCommand();
-				pin += num;
-				numberDisplay.setText(pin);
+				membershipID += num;
+				numberDisplay.setText(membershipID);
 			}
 		});
 		
@@ -205,8 +205,8 @@ public class GUIEnterPin extends AbstractDevice<AbstractDeviceListener> {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String num = e.getActionCommand();
-				pin += num;
-				numberDisplay.setText(pin);
+				membershipID += num;
+				numberDisplay.setText(membershipID);
 			}
 		});
 		
@@ -218,11 +218,10 @@ public class GUIEnterPin extends AbstractDevice<AbstractDeviceListener> {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String num = e.getActionCommand();
-				pin = pin.substring(0, pin.length()-1);
-				numberDisplay.setText(pin);
+				membershipID = membershipID.substring(0, membershipID.length()-1);
+				numberDisplay.setText(membershipID);
 			}
 		});
-		
 		
 		JButton key_Enter = new JButton("Enter");
 		key_Enter.setPreferredSize(new Dimension(100, 50));
@@ -247,8 +246,8 @@ public class GUIEnterPin extends AbstractDevice<AbstractDeviceListener> {
 		key_back.setFont(new Font(fontname, style, fontSize));
 	}
 	
-	public static String returnpin () {
-		return pin;
+	public static String returnMembership () {
+		return membershipID;
 	}
 	
 	public static void addExtraButtons () {
@@ -256,12 +255,12 @@ public class GUIEnterPin extends AbstractDevice<AbstractDeviceListener> {
 		key_ADMIN.setPreferredSize(new Dimension(500, 50));
 		extraPanel.add(key_ADMIN);
 		
-		JButton key_NonMem = new JButton("Back");
-		key_NonMem.setPreferredSize(new Dimension(500, 50));
-		extraPanel.add(key_NonMem);
+		JButton key_backScreen = new JButton("BACK");
+		key_backScreen.setPreferredSize(new Dimension(500, 50));
+		extraPanel.add(key_backScreen);
 		
 		key_ADMIN.setFont(new Font(fontname, style, fontSize));
-		key_NonMem.setFont(new Font(fontname, style, fontSize));
+		key_backScreen.setFont(new Font(fontname, style, fontSize));
 	}
 }
 
