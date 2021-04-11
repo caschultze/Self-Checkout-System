@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -17,9 +19,17 @@ import javax.swing.SwingConstants;
 import org.lsmr.selfcheckout.devices.AbstractDevice;
 import org.lsmr.selfcheckout.devices.TouchScreen;
 import org.lsmr.selfcheckout.devices.listeners.TouchScreenListener;
+import org.lsmr.selfcheckout.products.BarcodedProduct;
+import org.lsmr.selfcheckout.products.PLUCodedProduct;
 
 public class SceenScan extends AbstractDevice<TouchScreenListener>{
-	public static void main(String[] args) {
+	
+	CurrentSessionData session = new CurrentSessionData();
+    static JLabel shopCartPrice = new JLabel("Prices\n");
+    static JLabel shopCart = new JLabel("Items\n");
+    static JLabel totalPrice = new JLabel("Total = $$$");
+	
+    public SceenScan(){
 		TouchScreen tsl = new TouchScreen();
         JFrame frame = tsl.getFrame();
         frame.setVisible(true);
@@ -93,7 +103,6 @@ public class SceenScan extends AbstractDevice<TouchScreenListener>{
         
         gc.gridx = 0;
         gc.gridy = 1;
-        JLabel totalPrice = new JLabel("Total = $$$");
         totalPrice.setOpaque(true);
         jpleft.add(totalPrice,gc);
         
@@ -104,7 +113,6 @@ public class SceenScan extends AbstractDevice<TouchScreenListener>{
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         gc.gridx = 0;
         gc.gridy = 0;
-        JLabel shopCart = new JLabel("Items\n");
         shopCart.setBackground(Color.white);
         shopCart.setOpaque(true);
         shopCart.setVerticalAlignment(SwingConstants.TOP);
@@ -115,14 +123,101 @@ public class SceenScan extends AbstractDevice<TouchScreenListener>{
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         gc.gridx = 1;
         gc.gridy = 0;
-        JLabel shopCartPrice = new JLabel("Prices\n");
+
         shopCartPrice.setBackground(Color.white);
         shopCartPrice.setOpaque(true);
         shopCartPrice.setVerticalAlignment(SwingConstants.TOP);
         shopCartPrice.setHorizontalAlignment(SwingConstants.LEFT);
         jpleft.add(shopCartPrice,gc);
         
+        
+        
+        class adminButtoneHandler implements ActionListener{
+        	
+
+
+    		@Override
+    		public void actionPerformed(ActionEvent e) {
+    			//move to frame 11
+    			
+    		}
+        
+        }
+        adminButton.addActionListener(new adminButtoneHandler());
+        
+        
+        
+        class lookupButtoneHandler implements ActionListener{
+        	
+
+
+    		@Override
+    		public void actionPerformed(ActionEvent e) {
+    			//move to frame 9
+    			
+    		}
+        
+        }
+        lookButton.addActionListener(new lookupButtoneHandler());
+        pluButton.addActionListener(new lookupButtoneHandler());
+        
+        class finishButtoneHandler implements ActionListener{
+        	
+
+
+    		@Override
+    		public void actionPerformed(ActionEvent e) {
+    			//move to frame 3
+    			
+    		}
+        
+        }
+        finishButton.addActionListener(new finishButtoneHandler());
+        
+        
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // So we can click X to close
         frame.setVisible(true);
 	}
+	
+	
+	
+	public void updateList() {
+		
+		for(BarcodedProduct item : session.getScannedProducts().values()) {
+			String textItem = shopCart.getText();
+			String textPrice = shopCartPrice.getText();
+			
+			textItem = textItem.concat(item.getDescription());
+			textItem = textItem.concat("\n");
+			shopCart.setText(textItem);
+			
+			
+			textPrice = textPrice.concat("$");
+			textPrice = textPrice.concat(item.getPrice().toString());
+			textPrice = textPrice.concat("\n");
+			shopCartPrice.setText(textPrice);
+			
+			totalPrice.setText("Total = " + session.getTotalPrice());
+		}
+		for(PLUCodedProduct item : session.getPLUProducts()) {
+			String textItem = shopCart.getText();
+			String textPrice = shopCartPrice.getText();
+			
+			textItem = textItem.concat(item.getDescription());
+			textItem = textItem.concat("\n");
+			shopCart.setText(textItem);
+			
+			
+			textPrice = textPrice.concat("$");
+			textPrice = textPrice.concat(item.getPrice().toString());
+			textPrice = textPrice.concat("\n");
+			shopCartPrice.setText(textPrice);
+			
+			totalPrice.setText("Total = " + session.getTotalPrice());
+		}
+		
+	}
+	
+	
+	
 }

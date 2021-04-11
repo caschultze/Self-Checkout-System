@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 
 import org.lsmr.selfcheckout.devices.TouchScreen;
 
-public class SceenBootUp {
+public class ScreenAdminLog {
 	
 	static ControlUnit control;
     static JTextField jtext = new JTextField(16);
@@ -277,7 +277,7 @@ public class SceenBootUp {
 			String username = jtext.getText();
 			String password = jPass.getText();
 			if (control.login.verifyLogin(username, password)) {
-				//swap to 1	
+				//swap to 6	
 			}else {
 				jtext.setText("");
 				jPass.setText("");

@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -58,6 +60,37 @@ public class SceenStart extends AbstractDevice<TouchScreenListener> {
         JButton memButton = new JButton("Member Start");
         memButton.setPreferredSize(new Dimension(frame.getWidth()/3,frame.getHeight()/5));
         jp.add(memButton, gc);
+        
+        
+        class memButtoneHandler implements ActionListener{
+        	
+
+
+    		@Override
+    		public void actionPerformed(ActionEvent e) {
+    			//move to frame 11
+    			
+    		}
+        
+        }
+        memButton.addActionListener(new memButtoneHandler());
+        
+        class startButtoneHandler implements ActionListener{
+        	
+
+
+    		@Override
+    		public void actionPerformed(ActionEvent e) {
+    			//move to frame 2
+    			
+    		}
+        
+        }
+        startButton.addActionListener(new startButtoneHandler());
+        
+        
+        
+        
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // So we can click X to close
         frame.setVisible(false);
