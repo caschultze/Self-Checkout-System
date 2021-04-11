@@ -33,7 +33,7 @@ public class GUI extends AbstractDevice <TouchScreenListener>{
 	private static JLabel total;
 	private static JLabel cash;
 	
-	public static void main(String[] args) {
+	public GUI (MainGUI main) {
 		
 		mainPanel = new JPanel();
 		//centerPanel = new JPanel();
