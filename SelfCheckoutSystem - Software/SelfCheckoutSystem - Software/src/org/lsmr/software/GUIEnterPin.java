@@ -18,6 +18,8 @@ import org.lsmr.selfcheckout.devices.AbstractDevice;
 import org.lsmr.selfcheckout.devices.TouchScreen;
 import org.lsmr.selfcheckout.devices.listeners.AbstractDeviceListener;
 
+import com.sun.java.swing.plaf.windows.TMSchema.Control;
+
 public class GUIEnterPin extends AbstractDevice<AbstractDeviceListener> {
 	private static TouchScreen touchScreen;
 	private static JFrame frame;
@@ -32,7 +34,13 @@ public class GUIEnterPin extends AbstractDevice<AbstractDeviceListener> {
 	private static int style;
 	private static int fontSize;
 	
-	public static void main(String[] args) {
+	
+	public GUIEnterPin (ControlUnit cu) {
+		this.cu = cu;
+		makeFrame();
+	}
+	
+	public static void makeFrame() {
 		touchScreen = new TouchScreen();
 		frame = touchScreen.getFrame();
 		
