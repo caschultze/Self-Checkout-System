@@ -15,7 +15,9 @@ import org.lsmr.selfcheckout.devices.SimulationException;
 public class PlaceItemFail extends BagItem{
 
 	CurrentSessionData data = ControlUnit.sessionData;
+	SelfCheckoutStation station;
 	private double pastWeight = 0.0;
+	private boolean discrepancy;
 	final double threshold = 0.0001;
 
 	private ArrayList<BarcodedItem> scannedItems = new ArrayList<BarcodedItem>();
@@ -26,6 +28,7 @@ public class PlaceItemFail extends BagItem{
 	
 	public PlaceItemFail(SelfCheckoutStation checkoutStation) {
 		super(checkoutStation);
+		this.station = checkoutStation;
 	}
 	
 	/*
@@ -40,8 +43,10 @@ public class PlaceItemFail extends BagItem{
 		
 		double currentWeight = ControlUnit.itemBag.scs.baggingArea.getCurrentWeight();
 		
-		if(!checkItemPlaced() || scannedItems.isEmpty())
+		if(!checkItemPlaced() || scannedItems.isEmpty()) {
+			this.discrepancy = true;
 			throw new SimulationException("Weight should have changed");
+		}
 		
 		double predicted = 0.0;
 		
@@ -52,12 +57,6 @@ public class PlaceItemFail extends BagItem{
 		
 		//get weight of the individual item just added
 		double addedWeight = currentWeight - pastWeight;
-		
-		/*System.out.println("Current: " + currentWeight);
-		System.out.println("Past: " + pastWeight);
-		System.out.println("Predicted:  " + predicted);
-		System.out.println("Added: " + addedWeight);
-		System.out.println();*/
 		
 		if(predicted != addedWeight) //if the just-added weight is not what it should be
 			throw new SimulationException("Weight placed on scale is incorrect");
@@ -70,6 +69,9 @@ public class PlaceItemFail extends BagItem{
 			if(!baggedItems.contains(item))
 				baggedItems.add(item);
 		}
+		
+		this.discrepancy = false;
+		data.setCurrentTotalWeight(station.baggingArea.getCurrentWeight());
 		
 		//reset scannedItems
 		scannedItems.clear();
@@ -91,6 +93,10 @@ public class PlaceItemFail extends BagItem{
 			return false;
 	
 		return true;
+	}
+	
+	public boolean getDiscrepancy() {
+		return this.discrepancy;
 	}
 	
 }
