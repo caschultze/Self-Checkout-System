@@ -224,7 +224,7 @@ public class GUI extends AbstractDevice <TouchScreenListener>{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("admin");
-			//admin login 
+			//go to admin login screen
 							
 		}
 						
