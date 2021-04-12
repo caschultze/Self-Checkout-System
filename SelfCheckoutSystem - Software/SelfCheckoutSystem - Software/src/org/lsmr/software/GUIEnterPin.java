@@ -251,7 +251,7 @@ public class GUIEnterPin extends MainGUI {
 
 						if (actual) {
 							System.out.print("Credit card succesfully inserted and pin is correct, payment succesfully processed.\n");
-							//switch to post payment screen
+							switchScreen(14);
 						} else {
 							GUICreditScreen.invalidPIN.setVisible(true);
 							switchScreen(1);
@@ -272,7 +272,7 @@ public class GUIEnterPin extends MainGUI {
 
 						if (actual) {
 							System.out.print("Debit card succesfully inserted and pin is correct, payment succesfully processed.\n");
-							//switch to post payment screen
+							switchScreen(14);
 						} else {
 							GUIDebitScreen.invalidPIN.setVisible(true);
 							switchScreen(2);

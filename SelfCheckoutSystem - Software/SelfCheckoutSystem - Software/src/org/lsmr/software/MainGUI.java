@@ -53,7 +53,7 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 		GUIPayGiftCardScreen = new GUIPayGiftCardScreen();
 		ThanksForShoppingScreen = new ThanksForShoppingScreen();
 		control.sessionData.setAndGetTotalPrice(new BigDecimal("10"));
-		switchScreen(4);
+		switchScreen(1);
 		
 //		GUIEnterPin.setVisible(true);
 	}

@@ -165,7 +165,7 @@ public class GUIDebitScreen extends MainGUI {
 
 					if (actual) {
 						System.out.print("Debit card succesfully tapped, payment succesfully processed.\n");
-						//switch to post payment screen
+						switchScreen(14);
 					} else {
 						PayFailedMsg.setVisible(true);
 					}
@@ -189,7 +189,7 @@ public class GUIDebitScreen extends MainGUI {
 
 					if (actual) {
 						System.out.print("Debit card succesfully swiped, payment successfully processed.\n");
-						//switch to post payment screen
+						switchScreen(14);
 					} else {
 						PayFailedMsg.setVisible(true);
 					}
