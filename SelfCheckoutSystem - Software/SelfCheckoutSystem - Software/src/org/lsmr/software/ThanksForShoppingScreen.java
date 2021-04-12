@@ -28,11 +28,7 @@ public class ThanksForShoppingScreen extends MainGUI{
 		tsl = new TouchScreen();
 		frame = tsl.getFrame();
 		enterPanel(frame);
-
-	}
-	
-	public static void enterPanel(JFrame frame) {
-
+		
 		jp.setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
 		
@@ -55,16 +51,14 @@ public class ThanksForShoppingScreen extends MainGUI{
 		jp.add(finish, gc);
 		finish.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// go back to the start screen
-				// we just set visible to false here to exit easily for now
-				frame.setVisible(false);
+				switchScreen(5);
 			}
 		});
 		
 		jp.setBackground(new Color(204, 136, 153));
 		frame.add(jp);
 		frame.setVisible(true);
-		
+
 	}
 	
 	public JFrame getFrame() {
