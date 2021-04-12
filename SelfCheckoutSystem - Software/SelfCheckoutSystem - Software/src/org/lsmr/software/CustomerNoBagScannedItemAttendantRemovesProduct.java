@@ -9,11 +9,11 @@ import org.lsmr.selfcheckout.devices.listeners.AbstractDeviceListener;
 import org.lsmr.selfcheckout.devices.listeners.ElectronicScaleListener;
 import org.lsmr.software.BagItem;
 
-//This class covers 2 use caes: 
+//This class covers 2 use case: 
 //	
 //	-Customer does not want to bag a scanned item: the customer has already scanned an item
 //		-if the customer doesn't want to place their item in the bagging area, this action 
-//		 must be approved by an attendant, which will alter the expteced total weight
+//		 must be approved by an attendant, which will alter the expected total weight
 //		 (the expected weight of the scanned item is subtracted from the total expected weight,
 //		  which is done manually by the attendant)
 //
@@ -48,7 +48,7 @@ public class CustomerNoBagScannedItemAttendantRemovesProduct {
 		
 		if (attendantApproval == true) {
 			double deduction = 0 - item.getWeight();
-			data.setCurrentExpectedWeight(deduction);
+			data.setCurrentTotalWeight(deduction);
 			
 		}
 		

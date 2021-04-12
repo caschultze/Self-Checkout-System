@@ -22,7 +22,6 @@ public class PayGiftCard {
 	private boolean dataRead = false;
 	private boolean member = false;
 	private boolean cardSwiped = false;
-	private boolean cardInserted = false;
 	private boolean cardRemoved = false;
 	private boolean isEnabled = false;
 	private boolean isDisabled = false;
@@ -55,13 +54,10 @@ public void registerListeners() {
 
 			@Override
 			public void cardInserted(CardReader reader) {
-				cardInserted = true;
 			}
 
 			@Override
 			public void cardRemoved(CardReader reader) {
-				if (cardInserted)
-					cardRemoved = true;
 			}
 
 			@Override
@@ -92,43 +88,18 @@ public void registerListeners() {
 	}
 
 //method that handles the processing of membership information once card data is read
-public void swipeGiftCard(Card coopMember, BufferedImage signature) throws IOException {
+public CardData swipeGiftCard(Card coopMember, BufferedImage signature) throws IOException {
 	
 	if (coopMember == null) {
 		throw new NullPointerException("No argument may be null");
 	}
 	
-	station.cardReader.swipe(coopMember, signature);
+	CardData data = station.cardReader.swipe(coopMember, signature);
 
 	if (!type.equalsIgnoreCase(typeCard)) {
 		throw new SimulationException("Type of card is not Giftcard");
 	}
-	
-}
-
-
-public void insertGiftCard(Card coopMember, String pin) throws IOException {
-
-	if (coopMember == null || pin == null) {
-		throw new NullPointerException("No argument may be null");
-	}
-	
-	station.cardReader.insert(coopMember, pin);
-	
-	if (!(type.equalsIgnoreCase(typeCard))) {
-		throw new SimulationException("Type of card is not Giftcard");
-	}
-}
-
-public boolean giftRemove() {
-	if (cardInserted) {
-		station.cardReader.remove();
-	}
-	return cardRemoved;
-}
-
-public boolean getInsertCheck() {
-	return cardInserted;
+	return data;
 }
 
 public boolean getSwipeCheck() {

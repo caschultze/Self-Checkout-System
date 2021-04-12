@@ -32,11 +32,17 @@ public class ControlUnit {
 	public static DetectUnexpectedWeight checkWrongWeight;
 	public static PaperLow paperLow;
 	public static InkLow inkLow;
-	public static AddPaper addPaperInk;
+	public static AddPaper addPaper;
+	public static AddInk addInk;
 	public static RemovesItems removesItems;
 	public static RemovesItems placesItems;
 	public static refillCoin coinRefill;
 	public static refillBanknote banknoteRefill;
+	public static CustomerNoBagScannedItemAttendantRemovesProduct attendantRemovesProduct;
+	public static StartupAndShutdown startupShutdown;
+	public static int InkCounter;
+	public static int PaperCounter;
+	public static EnterPLUCode enterPLU;
 	
 	// instantiate station variables below
 	private static Currency currency;
@@ -85,13 +91,18 @@ public class ControlUnit {
 		enterNumBags = new EnterNumberOfBags();
 		removesItems = new RemovesItems(checkoutStation);
 		placesItems = new RemovesItems(checkoutStation);
-		addPaperInk = new AddPaper(checkoutStation);
+		addPaper = new AddPaper(checkoutStation);
 		login = new AttendantLogin();
 		approveWeight = new AttendantApprovesWeight();
 		checkWrongWeight = new DetectUnexpectedWeight(checkoutStation);
 		coinRefill = new refillCoin(checkoutStation);
 		banknoteRefill = new refillBanknote(checkoutStation);
-		
+		addInk = new AddInk(checkoutStation);
+		startupShutdown = new StartupAndShutdown(checkoutStation);
+		attendantRemovesProduct = new CustomerNoBagScannedItemAttendantRemovesProduct(checkoutStation);
+		enterPLU = new EnterPLUCode(checkoutStation);
+		InkCounter =  3;
+		PaperCounter = 3;
 		
 		
 		

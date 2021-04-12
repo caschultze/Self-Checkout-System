@@ -59,7 +59,7 @@ import org.lsmr.selfcheckout.devices.listeners.TouchScreenListener;
 
 public class GUIDebitScreen extends MainGUI {
 	
-	private static TouchScreen touchscreen;
+	public static TouchScreen touchscreen;
 	private static JFrame frame;
 	private static JPanel windowPanel;
 	private static JPanel topPanel;
@@ -75,28 +75,31 @@ public class GUIDebitScreen extends MainGUI {
 	private static JButton insertButton;
 	private static JButton invalidCardButton;
 	private static JButton tryAgainButton;
-	static Card card1 = new Card("Debit", "4500123412341235", "Dr. Walker", "123", "1234", true, true);
 	BufferedImage image = new BufferedImage(1, 1, 1);
 	private static ControlUnit control;
 	
-	public static void main(String[] args) {
-		Currency currency = Currency.getInstance(Locale.CANADA);
-		int[] banknoteDenominations = new int[] {5, 10, 20, 50, 100};
-		BigDecimal[] coinDenominations = new BigDecimal[] {new BigDecimal("0.05"), new BigDecimal("0.10"), new BigDecimal("0.25"), new BigDecimal("1.00"), new BigDecimal("2.00")};
-		int scaleMaximumWeight = 100;
-		int scaleSensitivity = 1;
-		ControlUnit control = new ControlUnit(currency, banknoteDenominations, coinDenominations, scaleMaximumWeight, scaleSensitivity);
-		control.main(null);
-		ControlUnit.sessionData.setAndGetTotalPrice(new BigDecimal("10"));
-		GUIDebitScreen gui = new GUIDebitScreen();
-		gui.setVisible(true);
-	}
+	public static JLabel invalidCardMsg = new JLabel("Card could not be scanned. Please try again (this may be because the card is invalid, or because of a random chance of failure).");
+	public static JLabel PayFailedMsg = new JLabel("Payment not processed. Please try again (this may be because of insufficient funds).");
+	public static JLabel invalidPIN = new JLabel("Invalid PIN entered, try again.");
 	
+//	public static void main(String[] args) {
+//		Currency currency = Currency.getInstance(Locale.CANADA);
+//		int[] banknoteDenominations = new int[] {5, 10, 20, 50, 100};
+//		BigDecimal[] coinDenominations = new BigDecimal[] {new BigDecimal("0.05"), new BigDecimal("0.10"), new BigDecimal("0.25"), new BigDecimal("1.00"), new BigDecimal("2.00")};
+//		int scaleMaximumWeight = 100;
+//		int scaleSensitivity = 1;
+//		ControlUnit control = new ControlUnit(currency, banknoteDenominations, coinDenominations, scaleMaximumWeight, scaleSensitivity);
+//		control.main(null);
+//		ControlUnit.sessionData.setAndGetTotalPrice(new BigDecimal("10"));
+//		GUIDebitScreen gui = new GUIDebitScreen();
+//		gui.setVisible(true);
+//	}
+//	
 	public GUIDebitScreen() {
 		Calendar expiry = Calendar.getInstance(TimeZone.getTimeZone("MDT"));
 		expiry.add(Calendar.YEAR, 2);
-		BigDecimal debitLimit = new BigDecimal("10000.00");
-		ControlUnit.paymentProcessing.addData("4500123412341235", "Dr. Walker", expiry, "555", debitLimit);
+		BigDecimal creditLimit = new BigDecimal("1000.00");
+		ControlUnit.paymentProcessing.addData("4500123412341235", "Dr. Walker", expiry, "555", creditLimit);
 		
 		BigDecimal totalPrice = ControlUnit.sessionData.getTotalPrice();
 
@@ -136,13 +139,14 @@ public class GUIDebitScreen extends MainGUI {
 		centerPanel.add(insertButton);
 		centerPanel.add(invalidCardButton);
 		
-		JLabel invalidCardMsg = new JLabel("Card could not be scanned. Please try again (this may be because the card is invalid, or because of a random chance of failure).");
 		centerPanel.add(invalidCardMsg);
 		invalidCardMsg.setVisible(false);
 		
-		JLabel PayFailedMsg = new JLabel("Payment not processed. Please try again (this may be because of insufficient funds).");
 		centerPanel.add(PayFailedMsg);
 		PayFailedMsg.setVisible(false);
+		
+		centerPanel.add(invalidPIN);
+		invalidPIN.setVisible(false);
 		
 		windowPanel = new JPanel(new BorderLayout());
 		windowPanel.add(topPanel, BorderLayout.PAGE_START);
@@ -154,7 +158,7 @@ public class GUIDebitScreen extends MainGUI {
 				invalidCardMsg.setVisible(false);
 				PayFailedMsg.setVisible(false);
 				try {
-					CardData data = ControlUnit.debitPayment.debitTap(card1);
+					CardData data = ControlUnit.debitPayment.debitTap(card2);
 					int holdNumber = ControlUnit.paymentProcessing.authorize(data.getNumber(), totalPrice);
 					boolean actual = ControlUnit.paymentProcessing.post(data.getNumber(), holdNumber, totalPrice);
 					ControlUnit.debitPayment.debitRemove();
@@ -178,7 +182,7 @@ public class GUIDebitScreen extends MainGUI {
 				invalidCardMsg.setVisible(false);
 				PayFailedMsg.setVisible(false);
 				try {
-					CardData data = ControlUnit.debitPayment.debitSwipe(card1, image);
+					CardData data = ControlUnit.debitPayment.debitSwipe(card2, image);
 					int holdNumber = ControlUnit.paymentProcessing.authorize(data.getNumber(), totalPrice);
 					boolean actual = ControlUnit.paymentProcessing.post(data.getNumber(), holdNumber, totalPrice);
 					ControlUnit.debitPayment.debitRemove();
@@ -201,7 +205,7 @@ public class GUIDebitScreen extends MainGUI {
 			public void actionPerformed(ActionEvent e) {
 				invalidCardMsg.setVisible(false);
 				PayFailedMsg.setVisible(false);
-				//Go to GUI PIN screen, make sure enter button in pin screen executes appropriate code
+				switchScreen(3);	//Go to GUI PIN screen, make sure enter button in pin screen executes appropriate code
 			}
 		});
 		
@@ -224,17 +228,19 @@ public class GUIDebitScreen extends MainGUI {
 		
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switchScreen(1);
-				System.out.print("Go Back");	//switch to payment screen
+				switchScreen(11);	
 			}
 		});
 		
+		adminLoginButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchScreen(7);
+			}
+		});
+		
+		
 		frame.add(windowPanel);    
 		touchscreen.setVisible(false);
-	}
-	
-	public void setVisible(boolean bool) {
-		touchscreen.setVisible(bool);
 	}
 }
 

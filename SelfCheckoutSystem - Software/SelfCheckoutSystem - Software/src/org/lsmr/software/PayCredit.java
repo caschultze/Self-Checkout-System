@@ -8,6 +8,7 @@ import org.lsmr.selfcheckout.Card.CardData;
 import org.lsmr.selfcheckout.Card.CardInsertData;
 import org.lsmr.selfcheckout.Card.CardSwipeData;
 import org.lsmr.selfcheckout.Card.CardTapData;
+import org.lsmr.selfcheckout.InvalidPINException;
 import org.lsmr.selfcheckout.devices.AbstractDevice;
 import org.lsmr.selfcheckout.devices.CardReader;
 import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
@@ -116,7 +117,7 @@ public class PayCredit {
 
 	}
 
-	public CardData creditInsert(Card card, String pin) throws IOException {
+	public CardData creditInsert(Card card, String pin) throws IOException, InvalidPINException {
 	
 		if (card == null || pin == null) {
 			throw new NullPointerException("No argument may be null");

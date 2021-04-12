@@ -57,7 +57,7 @@ import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.devices.TouchScreen;
 import org.lsmr.selfcheckout.devices.listeners.TouchScreenListener;
 
-public class GUICreditScreen extends MainGUI {
+public class GUIPayGiftCardScreen extends MainGUI {
 	
 	public static TouchScreen touchscreen;
 	private static JFrame frame;
@@ -70,9 +70,7 @@ public class GUICreditScreen extends MainGUI {
 	private static JButton helpButton;
 	private static JButton adminLoginButton;
 	private static JButton backButton;
-	private static JButton tapButton;
 	private static JButton swipeButton;
-	private static JButton insertButton;
 	private static JButton invalidCardButton;
 	private static JButton tryAgainButton;
 	BufferedImage image = new BufferedImage(1, 1, 1);
@@ -82,24 +80,11 @@ public class GUICreditScreen extends MainGUI {
 	public static JLabel PayFailedMsg = new JLabel("Payment not processed. Please try again (this may be because of insufficient funds).");
 	public static JLabel invalidPIN = new JLabel("Invalid PIN entered, try again.");
 	
-//	public static void main(String[] args) {
-//		Currency currency = Currency.getInstance(Locale.CANADA);
-//		int[] banknoteDenominations = new int[] {5, 10, 20, 50, 100};
-//		BigDecimal[] coinDenominations = new BigDecimal[] {new BigDecimal("0.05"), new BigDecimal("0.10"), new BigDecimal("0.25"), new BigDecimal("1.00"), new BigDecimal("2.00")};
-//		int scaleMaximumWeight = 100;
-//		int scaleSensitivity = 1;
-//		ControlUnit control = new ControlUnit(currency, banknoteDenominations, coinDenominations, scaleMaximumWeight, scaleSensitivity);
-//		control.main(null);
-//		ControlUnit.sessionData.setAndGetTotalPrice(new BigDecimal("10"));
-//		GUICreditScreen gui = new GUICreditScreen();
-//		gui.setVisible(true);
-//	}
-	
-	public GUICreditScreen() {
+	public GUIPayGiftCardScreen () {
 		Calendar expiry = Calendar.getInstance(TimeZone.getTimeZone("MDT"));
 		expiry.add(Calendar.YEAR, 2);
 		BigDecimal creditLimit = new BigDecimal("1000.00");
-		ControlUnit.paymentProcessing.addData("4500123412341234", "Dr. Walker", expiry, "555", creditLimit);
+		ControlUnit.paymentProcessing.addData("30031234", "Dr. Walker", expiry, "555", creditLimit);
 		
 		BigDecimal totalPrice = ControlUnit.sessionData.getTotalPrice();
 
@@ -110,7 +95,7 @@ public class GUICreditScreen extends MainGUI {
 		topPanel = new JPanel();
 		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.LINE_AXIS));
 		
-		JLabel membershipText = new JLabel("PAYING BY CREDIT");
+		JLabel membershipText = new JLabel("PAYING BY GIFT CARD");
 		membershipText.setFont(new Font(membershipText.getFont().getName(), membershipText.getFont().getStyle(), 50));
 		membershipText.setVerticalAlignment(JLabel.TOP);
 		membershipText.setHorizontalTextPosition(JLabel.LEFT);
@@ -129,14 +114,10 @@ public class GUICreditScreen extends MainGUI {
 		bottomPanel.add(Box.createHorizontalGlue());
 		
 		centerPanel = new JPanel(new FlowLayout());
-		tapButton = new JButton("Tap");
 		swipeButton = new JButton("Swipe");
-		insertButton = new JButton("Insert");
 		invalidCardButton = new JButton("Use card that doesn't scan");
 
-		centerPanel.add(tapButton);
 		centerPanel.add(swipeButton);
-		centerPanel.add(insertButton);
 		centerPanel.add(invalidCardButton);
 		
 		centerPanel.add(invalidCardMsg);
@@ -153,42 +134,17 @@ public class GUICreditScreen extends MainGUI {
 		windowPanel.add(centerPanel, BorderLayout.CENTER);
 		windowPanel.add(bottomPanel, BorderLayout.PAGE_END);		
 		
-		tapButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				invalidCardMsg.setVisible(false);
-				PayFailedMsg.setVisible(false);
-				try {
-					CardData data = ControlUnit.creditPayment.creditTap(card1);
-					int holdNumber = ControlUnit.paymentProcessing.authorize(data.getNumber(), totalPrice);
-					boolean actual = ControlUnit.paymentProcessing.post(data.getNumber(), holdNumber, totalPrice);
-					ControlUnit.creditPayment.creditRemove();
-
-					if (actual) {
-						System.out.print("Credit card succesfully tapped, payment succesfully processed.\n");
-						//switch to post payment screen
-					} else {
-						PayFailedMsg.setVisible(true);
-					}
-
-				} catch (IOException e1) {
-					ControlUnit.creditPayment.creditRemove();
-					invalidCardMsg.setVisible(true);
-				}
-			}
-		});
-		
 		swipeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				invalidCardMsg.setVisible(false);
 				PayFailedMsg.setVisible(false);
 				try {
-					CardData data = ControlUnit.creditPayment.creditSwipe(card1, image);
+					CardData data = ControlUnit.giftcardPayment.swipeGiftCard(card3, image);
 					int holdNumber = ControlUnit.paymentProcessing.authorize(data.getNumber(), totalPrice);
 					boolean actual = ControlUnit.paymentProcessing.post(data.getNumber(), holdNumber, totalPrice);
-					ControlUnit.creditPayment.creditRemove();
 
 					if (actual) {
-						System.out.print("Credit card succesfully swiped, payment successfully processed.\n");
+						System.out.print("Gift card succesfully swiped, payment successfully processed.\n");
 						//switch to post payment screen
 					} else {
 						PayFailedMsg.setVisible(true);
@@ -196,16 +152,7 @@ public class GUICreditScreen extends MainGUI {
 					
 				} catch (IOException e1) {
 					invalidCardMsg.setVisible(true);
-					ControlUnit.creditPayment.creditRemove();
 				}
-			}
-		});
-		
-		insertButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				invalidCardMsg.setVisible(false);
-				PayFailedMsg.setVisible(false);
-				switchScreen(3);	//Go to GUI PIN screen, make sure enter button in pin screen executes appropriate code
 			}
 		});
 		
@@ -228,7 +175,7 @@ public class GUICreditScreen extends MainGUI {
 		
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switchScreen(11);	
+				switchScreen(11);
 			}
 		});
 		

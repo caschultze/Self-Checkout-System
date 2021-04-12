@@ -71,7 +71,7 @@ public class PlaceItemFail extends BagItem{
 		}
 		
 		this.discrepancy = false;
-		data.setCurrentExpectedWeight(station.baggingArea.getCurrentWeight());
+		data.setCurrentTotalWeight(station.baggingArea.getCurrentWeight());
 		
 		//reset scannedItems
 		scannedItems.clear();
