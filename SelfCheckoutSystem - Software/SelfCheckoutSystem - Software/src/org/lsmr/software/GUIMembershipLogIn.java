@@ -231,15 +231,13 @@ public class GUIMembershipLogIn extends MainGUI {
 		key_Enter.setPreferredSize(new Dimension(100, 50));
 		padPanel.add(key_Enter);
 		
-		
 		key_Enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				switchScreen(6);
 			}
 		});
-		
-		
+				
 		fontname = key_1.getFont().getName();
 		style = key_1.getFont().getStyle();
 		fontSize = 30;
@@ -270,9 +268,24 @@ public class GUIMembershipLogIn extends MainGUI {
 		key_ADMIN.setPreferredSize(new Dimension(500, 50));
 		extraPanel.add(key_ADMIN);
 		
+		key_ADMIN.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				switchScreen(7);
+			}
+		});
+		
 		JButton key_NonMem = new JButton("NonMember");
 		key_NonMem.setPreferredSize(new Dimension(500, 50));
 		extraPanel.add(key_NonMem);
+		
+		key_NonMem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				switchScreen(6);
+			}
+		});
+		
 		
 		key_ADMIN.setFont(new Font(fontname, style, fontSize));
 		key_NonMem.setFont(new Font(fontname, style, fontSize));
