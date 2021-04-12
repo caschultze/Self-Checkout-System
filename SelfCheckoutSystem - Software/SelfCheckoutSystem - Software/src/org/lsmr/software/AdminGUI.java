@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,7 +52,7 @@ public class AdminGUI extends MainGUI {
         JPanel generalPanel = new JPanel();
         JPanel hiddenPanel = new JPanel();
         frame.add(adminPanel);
-        adminPanel.setLayout(new BorderLayout());
+        adminPanel.setLayout(new GridLayout());
         
         // Colours -----------------------------------------------------------
         Color blue = new Color(237, 246, 249);
@@ -79,15 +80,9 @@ public class AdminGUI extends MainGUI {
         removeBtn.setFont(new Font("Arial", Font.PLAIN, 30));
         removeBtn.setBackground(white);
           
-//        String adminName = ControlUnit.sessionData.getCurrentAttendant().getName();
-//        JLabel adminLabel = new JLabel("    Attendant: " + adminName); // has name for attendant
         
         // General Panel Setting --------------------------------------------
-
-		Dimension size = generalPanel.getPreferredSize();
-		size.width = 750;
-		generalPanel.setPreferredSize(size); // set it back on panel
-		
+        
 		generalPanel.setBackground(blue);
 		        
 		generalPanel.setLayout(new GridBagLayout());
@@ -98,11 +93,6 @@ public class AdminGUI extends MainGUI {
 		gc.insets = new Insets(6,20,6,20);
 		gc.weightx = 0.1;
 		gc.weighty = 0.1;
-		
-		gc.gridx = 0;
-		gc.gridy = 0;
-		gc.anchor = GridBagConstraints.FIRST_LINE_START;
-//		generalPanel.add(adminLabel,gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 1;
@@ -122,7 +112,7 @@ public class AdminGUI extends MainGUI {
 		gc.gridx = 0;
 		gc.gridy = 3;
 		gc.anchor = GridBagConstraints.PAGE_END;
-		//gc.insets = new Insets(2,2,2,2);
+		gc.insets = new Insets(2,2,2,2);
 		gc.weighty = 1.0;
 		generalPanel.add(logoutBtn,gc);
 		
@@ -131,7 +121,6 @@ public class AdminGUI extends MainGUI {
 		gc.weighty = 0;
 		
         adminPanel.add(generalPanel,BorderLayout.WEST);
-        
 		
 		// Hidden Panel ================================================================================================================================
         // (Buttons: Refill Paper, Refill Ink, Empty Coin Storage, Empty Banknote storage, Refill Coin Storage, Refill Banknote storage)
@@ -169,9 +158,6 @@ public class AdminGUI extends MainGUI {
         refillNoteBtn.setEnabled(false);
         
         // Hidden Panel Setting ------------------------------------------------
-		size = hiddenPanel.getPreferredSize();
-		size.width = 1175;
-		hiddenPanel.setPreferredSize(size); // set it back on panel
 		
 		hiddenPanel.setBackground(white);
 		        
@@ -189,24 +175,24 @@ public class AdminGUI extends MainGUI {
 		gc.gridy = 0;
 		hiddenPanel.add(paperBtn,gc);
 		
-		gc.gridx = 0;
-		gc.gridy = 1;
-		hiddenPanel.add(inkBtn,gc);
-		
 		gc.gridx = 1;
 		gc.gridy = 0;
+		hiddenPanel.add(inkBtn,gc);
+		
+		gc.gridx = 0;
+		gc.gridy = 1;
 		hiddenPanel.add(emptyCoinBtn,gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 1;
 		hiddenPanel.add(emptyNoteBtn,gc);
 		
-		gc.gridx = 2;
-		gc.gridy = 0;
+		gc.gridx = 0;
+		gc.gridy = 2;
 		hiddenPanel.add(refillCoinBtn,gc);
 		
-		gc.gridx = 2;
-		gc.gridy = 1;
+		gc.gridx = 1;
+		gc.gridy = 2;
 		hiddenPanel.add(refillNoteBtn,gc);
 		
         adminPanel.add(hiddenPanel,BorderLayout.EAST);
