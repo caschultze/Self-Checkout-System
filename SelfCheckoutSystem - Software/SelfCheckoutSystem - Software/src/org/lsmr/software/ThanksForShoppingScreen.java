@@ -51,6 +51,7 @@ public class ThanksForShoppingScreen extends MainGUI{
 				{
 					ControlUnit.removesItems.removesItems(item);
 				}
+				// reset the scale weight to zero here?
 				ControlUnit.sessionData = new CurrentSessionData();
 				switchScreen(5);
 			}
