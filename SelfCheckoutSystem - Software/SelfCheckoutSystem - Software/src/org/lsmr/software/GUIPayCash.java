@@ -79,6 +79,7 @@ public class GUIPayCash extends MainGUI{
         back = new JButton("Back");
         cash = new JLabel("CASH");
         //total = new JLabel("Total: " + CurrentSessionData.getTotalPrice());
+        total = new JLabel("Total: $$$");
         
         //SET BUTTON FONT
     	Font newbuttonFont = new Font(hundred.getFont().getName(), hundred.getFont().getStyle(), 16);
@@ -104,6 +105,11 @@ public class GUIPayCash extends MainGUI{
         gc.gridy = 1;
         gc.ipady = 40;
         mainPanel.add(help, gc);
+        
+        gc.gridx = 4;
+        gc.gridy = 2;
+        gc.ipady = 40;
+        mainPanel.add(back, gc);
         
         
         gc.gridx = 4;
