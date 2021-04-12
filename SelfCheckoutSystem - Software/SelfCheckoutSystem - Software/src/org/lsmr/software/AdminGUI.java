@@ -219,7 +219,7 @@ public class AdminGUI extends MainGUI {
 			public void actionPerformed(ActionEvent e) {
 				ControlUnit.startupShutdown.shutdown();
 				System.out.println("System has been shut down");
-				//Make black screen later, go to black screen
+				switchScreen(15);
 			}
 			
 		});
