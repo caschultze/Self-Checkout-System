@@ -259,6 +259,7 @@ public class GUIPayCash extends MainGUI{
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("admin");
 			//go to admin login screen
+			switchScreen(7);
 							
 		}
 						
@@ -272,6 +273,7 @@ public class GUIPayCash extends MainGUI{
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("back");
 			//go back to previous screen 
+			switchScreen(11);
 							
 		}
 						
