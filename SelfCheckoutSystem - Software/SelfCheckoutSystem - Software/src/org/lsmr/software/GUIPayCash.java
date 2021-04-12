@@ -1,27 +1,35 @@
 package org.lsmr.software;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Currency;
 
 import org.lsmr.software.CurrentSessionData;
+
+import java.awt.Insets;
+
 import org.lsmr.software.BanknotePayment;
 import org.lsmr.selfcheckout.Banknote;
 import org.lsmr.selfcheckout.devices.AbstractDevice;
 import org.lsmr.selfcheckout.devices.TouchScreen;
 import org.lsmr.selfcheckout.devices.listeners.TouchScreenListener;
 
-public class GUIPayCash extends MainGUI {
+public class GUIPayCash extends MainGUI{
 	
-	private static JFrame frame;
 	private static JPanel mainPanel;
-	public static TouchScreen tsl;
+	
+	public static TouchScreen touchscreen;
 	private static JButton hundred;
 	private static JButton fifty;
 	private static JButton twenty;
@@ -33,12 +41,23 @@ public class GUIPayCash extends MainGUI {
 	private static JLabel total;
 	private static JLabel cash;
 	
-	public GUIPayCash () {
+	//public GUI (/*MainGUI main*/) {
+	public GUIPayCash() {
 		
+		touchscreen = new TouchScreen();
+        JFrame frame = touchscreen.getFrame();
+        frame.setVisible(true);
 		mainPanel = new JPanel();
+		mainPanel.setLayout(new GridBagLayout());
+		GridBagConstraints gc = new GridBagConstraints();
+		gc.fill = GridBagConstraints.HORIZONTAL;
+		gc.insets = new Insets(5,5,5,5);
+		gc.weightx = 0.5;
+		gc.weighty = 0.5;
+		
 		//centerPanel = new JPanel();
-		tsl = new TouchScreen();
-        frame = tsl.getFrame();
+		//tsl = new TouchScreen();
+        //frame = tsl.getFrame();
         
         hundred = new JButton("$100");
         //hundred.setPreferredSize(new Dimension(100,100));
@@ -59,7 +78,7 @@ public class GUIPayCash extends MainGUI {
         admin = new JButton("Admin");
         back = new JButton("Back");
         cash = new JLabel("CASH");
-        total = new JLabel("Total: " + ControlUnit.sessionData.getTotalPrice());
+        //total = new JLabel("Total: " + CurrentSessionData.getTotalPrice());
         
         //SET BUTTON FONT
     	Font newbuttonFont = new Font(hundred.getFont().getName(), hundred.getFont().getStyle(), 16);
@@ -72,25 +91,25 @@ public class GUIPayCash extends MainGUI {
         admin.setFont(newbuttonFont);
         cash.setFont(newbuttonFont);
         back.setFont(newbuttonFont);
-        total.setFont(newbuttonFont);
+        //total.setFont(newbuttonFont);
         
         //MOVE BUTTONS 
-        mainPanel.setLayout(null);
-        hundred.setBounds(550, 250, 100, 100);
-        fifty.setBounds(700, 250, 100, 100);
-        twenty.setBounds(850, 250, 100, 100);
-        ten.setBounds(1000, 250, 100, 100);
-        five.setBounds(1150, 250, 100, 100);
-        help.setBounds(1500, 75, 100, 100);
-        admin.setBounds(1625, 75, 100, 100);
-        cash.setBounds(50,50,100,100);
-        back.setBounds(50,850,100,100);
-        total.setBounds(1500, 850, 100, 100);
+        gc.gridx = 0;
+        gc.gridy = 1;
+        gc.ipady = 40;
+        mainPanel.add(admin, gc);
         
         
+        gc.gridx = 1;
+        gc.gridy = 1;
+        gc.ipady = 40;
+        mainPanel.add(help, gc);
         
-        //BUTTON ICONS
-       // hundred.setIcon(new ImageIcon(Class.class.getResource("/src/100.jpg")));
+        
+        gc.gridx = 4;
+        gc.gridy = 1;
+        gc.ipady = 40;
+        mainPanel.add(total, gc);
 
 
         //REGISTER ACTION EVENTS FOR BUTTONS
@@ -107,21 +126,36 @@ public class GUIPayCash extends MainGUI {
         mainPanel.setBackground(Color.decode("#48cae4"));
         
         frame.add(mainPanel);
-        mainPanel.add(hundred);
-        mainPanel.add(fifty);
-        mainPanel.add(twenty);
-        mainPanel.add(ten);
-        mainPanel.add(five);
-        mainPanel.add(help);
-        mainPanel.add(admin);
-        mainPanel.add(cash);
-        mainPanel.add(back);
-        mainPanel.add(total);
+   
         
-        //System.out.println(ControlUnit.payBanknote.getBalance());
+        gc.gridx = 0;
+        gc.gridy = 0;
+        gc.ipady = 40;
+        mainPanel.add(hundred, gc);
+        
+        gc.gridx = 1;
+        gc.gridy = 0;
+        gc.ipady = 40;
+        mainPanel.add(fifty, gc);
+        
+        gc.gridx = 2;
+        gc.gridy = 0;
+        gc.ipady = 40;
+        mainPanel.add(twenty, gc);
+        
+        gc.gridx = 3;
+        gc.gridy = 0;
+        gc.ipady = 40;
+        mainPanel.add(ten, gc);
+        
+        gc.gridx = 4;
+        gc.gridy = 0;
+        gc.ipady = 40;
+        mainPanel.add(five, gc);
+       
        
         
-        frame.setVisible(false);
+        frame.setVisible(true);
        
     
 	}
@@ -139,7 +173,7 @@ public class GUIPayCash extends MainGUI {
 			
 			ControlUnit.payBanknote.payWithBanknotes(hundred);
 			//CurrentSessionData.payBanknote(value);
-			total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+			//total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
 			
 		}
 		
@@ -154,7 +188,7 @@ public class GUIPayCash extends MainGUI {
 			Banknote fifty = new Banknote(value, Currency.getInstance("CAD"));
 			ControlUnit.payBanknote.payWithBanknotes(fifty);
 			//CurrentSessionData.payBanknote(value);
-			total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+			//total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
 					
 		}
 				
@@ -169,7 +203,7 @@ public class GUIPayCash extends MainGUI {
 			Banknote twenty = new Banknote(value, Currency.getInstance("CAD"));
 			ControlUnit.payBanknote.payWithBanknotes(twenty);
 			//CurrentSessionData.payBanknote(value);
-			total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+			//total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
 							
 		}
 						
@@ -184,7 +218,7 @@ public class GUIPayCash extends MainGUI {
 			Banknote ten = new Banknote(value, Currency.getInstance("CAD"));
 			ControlUnit.payBanknote.payWithBanknotes(ten);
 			//CurrentSessionData.payBanknote(value);
-			total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+			//total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
 		}
 						
 	}
@@ -199,7 +233,7 @@ public class GUIPayCash extends MainGUI {
 			Banknote five = new Banknote(value, Currency.getInstance("CAD"));
 			ControlUnit.payBanknote.payWithBanknotes(five);
 			//CurrentSessionData.payBanknote(value);
-			total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+			//total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
 							
 		}
 						
@@ -225,6 +259,7 @@ public class GUIPayCash extends MainGUI {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("admin");
 			//go to admin login screen
+			switchScreen(7);
 							
 		}
 						
@@ -238,6 +273,7 @@ public class GUIPayCash extends MainGUI {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("back");
 			//go back to previous screen 
+			switchScreen(11);
 							
 		}
 						
