@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.Locale;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -126,6 +127,8 @@ public class AdminGUI extends MainGUI {
         // (Buttons: Refill Paper, Refill Ink, Empty Coin Storage, Empty Banknote storage, Refill Coin Storage, Refill Banknote storage)
         
         // Create Components -------------------------------------------------
+        
+        hiddenPanel.setBorder(BorderFactory.createTitledBorder("STATION MUST BE BLOCKED TO ACCESS"));
         
         paperBtn = new JButton("Add Paper");
         paperBtn.setFont(new Font("Arial", Font.PLAIN, 30));
