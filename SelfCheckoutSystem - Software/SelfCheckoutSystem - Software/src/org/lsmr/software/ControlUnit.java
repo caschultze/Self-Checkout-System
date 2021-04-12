@@ -34,7 +34,6 @@ public class ControlUnit {
 	public static InkLow inkLow;
 	public static AddPaper addPaperInk;
 	public static RemovesItems removesItems;
-	public static RemovesItems placesItems;
 	public static refillCoin coinRefill;
 	public static refillBanknote banknoteRefill;
 	
@@ -84,7 +83,6 @@ public class ControlUnit {
 		login = new AttendantLogin();
 		enterNumBags = new EnterNumberOfBags();
 		removesItems = new RemovesItems(checkoutStation);
-		placesItems = new RemovesItems(checkoutStation);
 		addPaperInk = new AddPaper(checkoutStation);
 		login = new AttendantLogin();
 		approveWeight = new AttendantApprovesWeight();
