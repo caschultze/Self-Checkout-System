@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.devices.TouchScreen;
 
 public class ThanksForShoppingScreen extends MainGUI{
@@ -46,6 +47,11 @@ public class ThanksForShoppingScreen extends MainGUI{
 		jp.add(finish, gc);
 		finish.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				for (BarcodedItem item : ControlUnit.sessionData.getScannedItems())
+				{
+					ControlUnit.removesItems.removesItems(item);
+				}
+				ControlUnit.sessionData = new CurrentSessionData();
 				switchScreen(5);
 			}
 		});
