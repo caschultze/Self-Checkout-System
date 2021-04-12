@@ -9,13 +9,19 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.util.Currency;
+import java.util.Locale;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.lsmr.selfcheckout.Banknote;
+import org.lsmr.selfcheckout.Coin;
 import org.lsmr.selfcheckout.devices.AbstractDevice;
+import org.lsmr.selfcheckout.devices.OverloadException;
 import org.lsmr.selfcheckout.devices.TouchScreen;
 import org.lsmr.selfcheckout.devices.listeners.TouchScreenListener;
 
@@ -31,6 +37,8 @@ public class AdminGUI extends AbstractDevice <TouchScreenListener>{
 	private static JButton emptyNoteBtn;
 	private static JButton refillCoinBtn;
 	private static JButton refillNoteBtn;
+	private static JButton backBtn;
+	private ControlUnit cu;
 	
 	public static void main(String[] args) {
 		
@@ -41,12 +49,15 @@ public class AdminGUI extends AbstractDevice <TouchScreenListener>{
 	}
 	
 	public static void adminPanel() {
+		
+		ControlUnit.main(null);
+		ControlUnit.login.verifyLogin("geesjake", "freshwaterGORILLA@9to5");
+		
         JPanel adminPanel = new JPanel();
         JPanel generalPanel = new JPanel();
         JPanel hiddenPanel = new JPanel();
         frame.add(adminPanel);
         adminPanel.setLayout(new BorderLayout());
-        
         // Colours -----------------------------------------------------------
         Color blue = new Color(237, 246, 249);
         Color white = new Color(255, 255, 255);
@@ -69,11 +80,16 @@ public class AdminGUI extends AbstractDevice <TouchScreenListener>{
         logoutBtn.setFont(new Font("Arial", Font.PLAIN, 30));
         logoutBtn.setBackground(white);
         
+        backBtn = new JButton("Back");
+        backBtn.setFont(new Font("Arial", Font.PLAIN, 30));
+        backBtn.setBackground(white);
+        
         removeBtn = new JButton("Remove Products");
         removeBtn.setFont(new Font("Arial", Font.PLAIN, 30));
         removeBtn.setBackground(white);
-        
-        JLabel adminLabel = new JLabel("    Attendant: "); // has name for attendant
+          
+        String adminName = ControlUnit.sessionData.getCurrentAttendant().getName();
+        JLabel adminLabel = new JLabel("    Attendant: " + adminName); // has name for attendant
         
         // General Panel Setting --------------------------------------------
 
@@ -115,9 +131,14 @@ public class AdminGUI extends AbstractDevice <TouchScreenListener>{
 		gc.gridx = 0;
 		gc.gridy = 3;
 		gc.anchor = GridBagConstraints.PAGE_END;
-		gc.insets = new Insets(2,2,2,2);
+		//gc.insets = new Insets(2,2,2,2);
 		gc.weighty = 1.0;
 		generalPanel.add(logoutBtn,gc);
+		
+		gc.gridx = 0;
+		gc.gridy = 4;
+		gc.weighty = 0;
+		generalPanel.add(backBtn,gc);
 		
         adminPanel.add(generalPanel,BorderLayout.WEST);
         
@@ -204,6 +225,7 @@ public class AdminGUI extends AbstractDevice <TouchScreenListener>{
         shutdownBtnAction();
 		blockBtnAction();
 		logoutBtnAction();
+		backBtnAction();
 		removeBtnAction();
 		paperBtnAction();
 		inkBtnAction();
@@ -220,18 +242,21 @@ public class AdminGUI extends AbstractDevice <TouchScreenListener>{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
+				ControlUnit.startupShutdown.shutdown();
+				System.out.println("System has been shut down");
+				// go to black screen?
 			}
 			
 		});
 	}
+	
 	public static void blockBtnAction() {
         blockBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (!paperBtn.isEnabled()) {
+				
+				if (ControlUnit.blocker.isBlocked() == false) {
 					paperBtn.setEnabled(true);
 					inkBtn.setEnabled(true);
 					emptyCoinBtn.setEnabled(true);
@@ -239,6 +264,7 @@ public class AdminGUI extends AbstractDevice <TouchScreenListener>{
 					refillCoinBtn.setEnabled(true);
 					refillNoteBtn.setEnabled(true);
 					blockBtn.setForeground(new Color(230, 57, 70));
+					ControlUnit.blocker.blockStation();
 					
 				}
 				else {
@@ -249,6 +275,7 @@ public class AdminGUI extends AbstractDevice <TouchScreenListener>{
 					refillCoinBtn.setEnabled(false);
 					refillNoteBtn.setEnabled(false);
 					blockBtn.setForeground(new Color(0, 0, 0));
+					ControlUnit.blocker.unblockStation();
 				}
 			}
         	
@@ -260,8 +287,20 @@ public class AdminGUI extends AbstractDevice <TouchScreenListener>{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
+				ControlUnit.login.attendantLogOut();
+				System.out.println("You have been logged out");
+				// Transition: Go to login screen
+			}
+			
+		});
+	}
+	
+	public static void backBtnAction () {
+		shutdownBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Transition: Switch to previous screen
 			}
 			
 		});
@@ -272,7 +311,9 @@ public class AdminGUI extends AbstractDevice <TouchScreenListener>{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				ControlUnit.attendantRemovesProduct.setAttendantApproval(true); // items are now able to be removed
 				
+				// Transition: ???
 				
 			}
 			
@@ -283,9 +324,14 @@ public class AdminGUI extends AbstractDevice <TouchScreenListener>{
 		paperBtn.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				
+			public void actionPerformed(ActionEvent e) {;
+				if (!ControlUnit.addPaper.getPaperAdded() || ControlUnit.paperLow.getNoPaper()) {
+					ControlUnit.addPaper.addPaper(1 << 10);
+					System.out.println("Paper has been added");
+				}
+				else {
+					System.out.println("Paper has already been added recently");
+				}
 			}
 			
 		});
@@ -295,9 +341,14 @@ public class AdminGUI extends AbstractDevice <TouchScreenListener>{
 		inkBtn.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				
+			public void actionPerformed(ActionEvent e) {	
+				if (!ControlUnit.addInk.getInkAdded() || ControlUnit.inkLow.getNoInk()) {
+					ControlUnit.addInk.addInk(50);
+					System.out.println("Ink has been added");
+				}
+				else {
+					System.out.println("Ink has already been added recently");
+				}
 			}
 			
 		});
@@ -308,7 +359,8 @@ public class AdminGUI extends AbstractDevice <TouchScreenListener>{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				ControlUnit.emptyCoin.emptyCoinStorage();
+				System.out.println("Coin Storage has been emptied");
 				
 			}
 			
@@ -320,7 +372,8 @@ public class AdminGUI extends AbstractDevice <TouchScreenListener>{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				ControlUnit.emptyBanknote.emptyBanknoteStorage();
+				System.out.println("Banknote Storage has been emptied");
 				
 			}
 			
@@ -333,6 +386,51 @@ public class AdminGUI extends AbstractDevice <TouchScreenListener>{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				// 0.05 -------------------------------------------------------------------------------
+				Coin[] coins = new Coin[200];
+				for(int i = 0; i < 200; i++) {
+					coins[i] = new Coin(new BigDecimal("0.05"),Currency.getInstance(Locale.CANADA));
+				}
+				try {
+					ControlUnit.coinRefill.loadCoins(coins);
+
+				} catch (OverloadException e1) {}
+				
+				// 0.10  ------------------------------------------------------------------------------
+				Coin[] coins2 = new Coin[200];
+				for(int i = 0; i < 200; i++) {
+					coins2[i] = new Coin(new BigDecimal("0.10"),Currency.getInstance(Locale.CANADA));
+				}
+				try {
+					ControlUnit.coinRefill.loadCoins(coins2);
+				} catch (OverloadException e1) {}
+				
+				// 0.25  ------------------------------------------------------------------------------
+				Coin[] coins3 = new Coin[200];
+				for(int i = 0; i < 200; i++) {
+					coins3[i] = new Coin(new BigDecimal("0.25"),Currency.getInstance(Locale.CANADA));
+				}
+				try {
+					ControlUnit.coinRefill.loadCoins(coins3);
+				} catch (OverloadException e1) {}
+				
+				// 1.00  ------------------------------------------------------------------------------
+				Coin[] coins4 = new Coin[200];
+				for(int i = 0; i < 200; i++) {
+					coins4[i] = new Coin(new BigDecimal("1.00"),Currency.getInstance(Locale.CANADA));
+				}
+				try {
+					ControlUnit.coinRefill.loadCoins(coins4);
+				} catch (OverloadException e1) {}
+				
+				// 2.00  ------------------------------------------------------------------------------
+				Coin[] coins5 = new Coin[200];
+				for(int i = 0; i < 200; i++) {
+					coins5[i] = new Coin(new BigDecimal("2.00"),Currency.getInstance(Locale.CANADA));
+				}
+				try {
+					ControlUnit.coinRefill.loadCoins(coins5);
+				} catch (OverloadException e1) {}
 				
 			}
 			
@@ -345,7 +443,55 @@ public class AdminGUI extends AbstractDevice <TouchScreenListener>{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				// 5  ------------------------------------------------------------------------------
+				Banknote[] notes = new Banknote[100];
+				for(int i = 0; i < 100; i++) {
+					notes[i] = new Banknote(5,Currency.getInstance(Locale.CANADA));
+				}
+				try {
+					ControlUnit.banknoteRefill.loadBanknotes(notes);
+
+				} catch (OverloadException e1) {}
 				
+				// 10  ------------------------------------------------------------------------------
+				Banknote[] notes2 = new Banknote[100];
+				for(int i = 0; i < 100; i++) {
+					notes2[i] = new Banknote(10,Currency.getInstance(Locale.CANADA));
+				}
+				try {
+					ControlUnit.banknoteRefill.loadBanknotes(notes2);
+
+				} catch (OverloadException e1) {}
+				
+				// 20  ------------------------------------------------------------------------------
+				Banknote[] notes3 = new Banknote[100];
+				for(int i = 0; i < 100; i++) {
+					notes3[i] = new Banknote(20,Currency.getInstance(Locale.CANADA));
+				}
+				try {
+					ControlUnit.banknoteRefill.loadBanknotes(notes3);
+
+				} catch (OverloadException e1) {}
+				
+				// 50  ------------------------------------------------------------------------------
+				Banknote[] notes4 = new Banknote[100];
+				for(int i = 0; i < 100; i++) {
+					notes4[i] = new Banknote(50,Currency.getInstance(Locale.CANADA));
+				}
+				try {
+					ControlUnit.banknoteRefill.loadBanknotes(notes4);
+
+				} catch (OverloadException e1) {}
+				
+				// 100  ------------------------------------------------------------------------------
+				Banknote[] notes5 = new Banknote[100];
+				for(int i = 0; i < 100; i++) {
+					notes5[i] = new Banknote(100,Currency.getInstance(Locale.CANADA));
+				}
+				try {
+					ControlUnit.banknoteRefill.loadBanknotes(notes5);
+
+				} catch (OverloadException e1) {}
 			}
 			
 		});
