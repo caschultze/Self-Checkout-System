@@ -16,37 +16,33 @@ import org.lsmr.selfcheckout.devices.listeners.TouchScreenListener;
 public class PaymentSelectionScreen extends MainGUI {
 	
 	static JPanel jp = new JPanel();
-	public static TouchScreen tsl;
+	private static TouchScreen tsl;
 	private static JFrame frame;
-	
-	/*
-	public PaymentSelectionScreen(MainGui main)
-	{
-		
-	}
-	*/
-	
+
 	public PaymentSelectionScreen() {
-		
+
 		tsl = new TouchScreen();
 		frame = tsl.getFrame();
-		enterPanel(frame);
-
-	}
-
-	public static void enterPanel(JFrame frame) {
-
-		jp.setLayout(null);
+		
+		jp.setLayout(new GridBagLayout());
+		GridBagConstraints gc = new GridBagConstraints();
+		
+		gc.fill = GridBagConstraints.HORIZONTAL;
+		gc.insets = new Insets(5,5,5,5);
+		gc.weightx = 0.1;
+		gc.weighty = 0.1;
 		
 		JButton debit_key = new JButton("Debit");
 		debit_key.setFont(new Font("Arial", Font.PLAIN, 40));
 		debit_key.setBackground(new Color(152, 251, 152));
 		debit_key.setForeground(new Color(204, 136, 153));
-		debit_key.setBounds(150, 150, 200, 200);
-		jp.add(debit_key);
+		gc.gridx = 0;
+		gc.gridy = 0;
+		gc.ipady = 40;
+		jp.add(debit_key, gc);
 		debit_key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// switch to debit payment screen
+				switchScreen(2);
 			}
 		});
 		
@@ -54,11 +50,13 @@ public class PaymentSelectionScreen extends MainGUI {
 		credit_key.setFont(new Font("Arial", Font.PLAIN, 40));
 		credit_key.setBackground(new Color(152, 251, 152));
 		credit_key.setForeground(new Color(204, 136, 153));
-		credit_key.setBounds(400, 150, 200, 200);
-		jp.add(credit_key);
+		gc.gridx = 1;
+		gc.gridy = 0;
+		gc.ipady = 40;
+		jp.add(credit_key,gc);
 		credit_key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// switch to credit payment screen
+				switchScreen(1);
 			}
 		});
 		
@@ -66,11 +64,13 @@ public class PaymentSelectionScreen extends MainGUI {
 		cash_key.setFont(new Font("Arial", Font.PLAIN, 40));
 		cash_key.setBackground(new Color(152, 251, 152));
 		cash_key.setForeground(new Color(204, 136, 153));
-		cash_key.setBounds(650, 150, 200, 200);
-		jp.add(cash_key);
+		gc.gridx = 2;
+		gc.gridy = 0;
+		gc.ipady = 40;
+		jp.add(cash_key,gc);
 		cash_key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// switch to cash payment screen
+				switchScreen(12);
 			}
 		});
 		
@@ -78,11 +78,13 @@ public class PaymentSelectionScreen extends MainGUI {
 		admin_key.setFont(new Font("Arial", Font.PLAIN, 40));
 		admin_key.setBackground(new Color(152, 251, 152));
 		admin_key.setForeground(new Color(204, 136, 153));
-		admin_key.setBounds(1000, 150, 200, 200);
-		jp.add(admin_key);
+		gc.gridx = 4;
+		gc.gridy = 0;
+		gc.ipady = 40;
+		jp.add(admin_key,gc);
 		admin_key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// switch to admin screen
+				switchScreen(10);
 			}
 		});
 		
@@ -90,11 +92,13 @@ public class PaymentSelectionScreen extends MainGUI {
 		giftcard_key.setFont(new Font("Arial", Font.PLAIN, 40));
 		giftcard_key.setBackground(new Color(152, 251, 152));
 		giftcard_key.setForeground(new Color(204, 136, 153));
-		giftcard_key.setBounds(200, 400, 600, 200);
-		jp.add(giftcard_key);
+		gc.gridx = 1;
+		gc.gridy = 1;
+		gc.ipady = 40;
+		jp.add(giftcard_key,gc);
 		giftcard_key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// switch to gift card payment screen
+				switchScreen(13);
 			}
 		});
 		
@@ -102,8 +106,9 @@ public class PaymentSelectionScreen extends MainGUI {
 		help_key.setFont(new Font("Arial", Font.PLAIN, 40));
 		help_key.setBackground(new Color(152, 251, 152));
 		help_key.setForeground(new Color(204, 136, 153));
-		help_key.setBounds(1000, 400, 200, 200);
-		jp.add(help_key);
+		gc.gridx = 4;
+		gc.gridy = 1;
+		jp.add(help_key,gc);
 		help_key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// switch to help screen
@@ -114,7 +119,7 @@ public class PaymentSelectionScreen extends MainGUI {
 		
 		jp.setBackground(new Color(204, 136, 153));
 		frame.add(jp);
-		frame.setVisible(false);
+		frame.setVisible(true);
 		
 	}
 	
