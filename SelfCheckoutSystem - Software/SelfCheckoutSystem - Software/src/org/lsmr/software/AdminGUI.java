@@ -38,7 +38,6 @@ public class AdminGUI extends AbstractDevice <TouchScreenListener>{
 	private static JButton refillCoinBtn;
 	private static JButton refillNoteBtn;
 	private static JButton backBtn;
-	private ControlUnit cu;
 	
 	public static void main(String[] args) {
 		
@@ -50,14 +49,17 @@ public class AdminGUI extends AbstractDevice <TouchScreenListener>{
 	
 	public static void adminPanel() {
 		
+		// Used to test out GUI - delete later
 		ControlUnit.main(null);
 		ControlUnit.login.verifyLogin("geesjake", "freshwaterGORILLA@9to5");
+		//-------------
 		
         JPanel adminPanel = new JPanel();
         JPanel generalPanel = new JPanel();
         JPanel hiddenPanel = new JPanel();
         frame.add(adminPanel);
         adminPanel.setLayout(new BorderLayout());
+        
         // Colours -----------------------------------------------------------
         Color blue = new Color(237, 246, 249);
         Color white = new Color(255, 255, 255);
