@@ -11,6 +11,8 @@ public class RemovesItems {
 	
 	public SelfCheckoutStation station;
 	private int countWeightChanged;
+	private double weight;
+	public CurrentSessionData sessionData = new CurrentSessionData();
 	
 	/**
 	 * Constructor for RemovesItems
@@ -37,17 +39,11 @@ public class RemovesItems {
 		
 		station.baggingArea.remove(item);
 		
-	}
-	
-	/**
-	 * Adds an item to the station's baggingArea 
-	 * 
-	 * @param item
-	 * 		The Item to be added to the station's baggingArea
-	 */
-	public void placesItems(Item item) {
-		
-		station.baggingArea.add(item);
+		if (weight == 0.0) {
+			
+			sessionData.setCurrentExpectedWeight(0.0);
+			
+		}
 		
 	}
 	
@@ -73,6 +69,7 @@ public class RemovesItems {
 			@Override 
 			public void weightChanged(ElectronicScale scale, double weightInGrams) {
 				countWeightChanged++;
+				weight =- weightInGrams;
 				
 			}
 			
