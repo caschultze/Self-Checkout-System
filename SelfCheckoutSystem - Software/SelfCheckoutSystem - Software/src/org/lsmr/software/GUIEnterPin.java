@@ -1,6 +1,7 @@
 package org.lsmr.software;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -36,6 +37,8 @@ public class GUIEnterPin extends MainGUI {
 	private static String membershipID = "";
 	private static int style;
 	private static int fontSize;
+	private static Color blue = new Color(237, 246, 249);
+    private static Color white = new Color(255, 255, 255);
 	
 	
 	public GUIEnterPin () {
@@ -51,19 +54,24 @@ public class GUIEnterPin extends MainGUI {
 		
 		topPanel = new JPanel(new BorderLayout());
 		windowPanel.add(topPanel, BorderLayout.PAGE_START);
+		windowPanel.setBackground(blue);
 		
 		textPanel = new JPanel(new BorderLayout());
 		textPanel.setPreferredSize(new Dimension(500, 200));
 		textPanel.setBorder(new EmptyBorder(50, 50, 50, 50));;
 		topPanel.add(textPanel, BorderLayout.PAGE_END);
+		topPanel.setBackground(blue);
+		textPanel.setBackground(blue);
 		
 		padPanel = new JPanel(new GridLayout(4, 3, 10, 10));
 		padPanel.setBorder(new EmptyBorder(50, 50, 50, 50));;
 		windowPanel.add(padPanel, BorderLayout.CENTER);
+		padPanel.setBackground(blue);
 		
 		extraPanel = new JPanel(new GridLayout(2,1,50,50));
 		extraPanel.setBorder(new EmptyBorder(50, 50, 50, 50));;
 		windowPanel.add(extraPanel ,BorderLayout.LINE_END);
+		extraPanel.setBackground(blue);
 		
 		windowTitle("Enter Pin.");
 		addTextfield();
@@ -304,6 +312,20 @@ public class GUIEnterPin extends MainGUI {
 		key_0.setFont(new Font(fontname, style, fontSize));
 		key_Enter.setFont(new Font(fontname, style, fontSize));
 		key_back.setFont(new Font(fontname, style, fontSize));
+		
+		key_0.setBackground(white);
+		key_1.setBackground(white);
+		key_2.setBackground(white);
+		key_3.setBackground(white);
+		key_4.setBackground(white);
+		key_5.setBackground(white);
+		key_6.setBackground(white);
+		key_7.setBackground(white);
+		key_8.setBackground(white);
+		key_9.setBackground(white);
+		key_Enter.setBackground(white);
+		key_back.setBackground(white);
+		
 }
 	
 	public static String returnMembership () {
@@ -334,6 +356,9 @@ public class GUIEnterPin extends MainGUI {
 		key_ADMIN.setFont(new Font(fontname, style, fontSize));
 		key_backScreen.setFont(new Font(fontname, style, fontSize));
 		touchscreen.setVisible(false);
+		
+		key_ADMIN.setBackground(white);
+		key_backScreen.setBackground(white);
 	}
 }
 

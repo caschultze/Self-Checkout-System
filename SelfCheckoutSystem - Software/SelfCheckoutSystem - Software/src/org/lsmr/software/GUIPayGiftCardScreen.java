@@ -75,6 +75,8 @@ public class GUIPayGiftCardScreen extends MainGUI {
 	private static JButton tryAgainButton;
 	BufferedImage image = new BufferedImage(1, 1, 1);
 	private static ControlUnit control;
+	private static Color blue = new Color(237, 246, 249);
+    private static Color white = new Color(255, 255, 255);
 	
 	public static JLabel invalidCardMsg = new JLabel("Card could not be scanned. Please try again (this may be because the card is invalid, or because of a random chance of failure).");
 	public static JLabel PayFailedMsg = new JLabel("Payment not processed. Please try again (this may be because of insufficient funds).");
@@ -116,6 +118,17 @@ public class GUIPayGiftCardScreen extends MainGUI {
 		centerPanel = new JPanel(new FlowLayout());
 		swipeButton = new JButton("Swipe");
 		invalidCardButton = new JButton("Use card that doesn't scan");
+		
+		adminLoginButton.setBackground(white);
+		helpButton.setBackground(white);
+		backButton.setBackground(white);
+		swipeButton.setBackground(white);
+		invalidCardButton.setBackground(white);
+		centerPanel.setBackground(blue);
+		bottomPanel.setBackground(blue);
+		topPanel.setBackground(blue);
+		
+		backButton.setPreferredSize(new Dimension(500, 100));
 
 		centerPanel.add(swipeButton);
 		centerPanel.add(invalidCardButton);
