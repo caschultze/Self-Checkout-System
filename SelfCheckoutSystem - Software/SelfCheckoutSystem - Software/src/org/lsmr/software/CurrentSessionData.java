@@ -142,26 +142,21 @@ public class CurrentSessionData {
 		totalPrice = new BigDecimal("0.00");
 		Collection<BarcodedProduct> calcPrice = scannedProducts.values();
 		
-		if (calcPrice.size() != 0) {
-			for (BarcodedProduct currentProduct : calcPrice) {
-				Integer i = scannedProductsDup.get(currentProduct.getBarcode());
-				while (i>0) {
-					totalPrice = totalPrice.add(currentProduct.getPrice());
-					i -= 1;
-				}
+		for (BarcodedProduct currentProduct : calcPrice) {
+			Integer i = scannedProductsDup.get(currentProduct.getBarcode());
+			while (i>0) {
+				totalPrice = totalPrice.add(currentProduct.getPrice());
+				i -= 1;
 			}
 		}
 
 		ArrayList<PLUCodedProduct> pluPrice = PLUProducts;
 		
 		int i = 0;
-		if (calcPrice.size() != 0) {
-			for (PLUCodedProduct currentProduct : pluPrice) {
-				totalPrice = totalPrice.add(currentProduct.getPrice());
-				i++;
-			}
+		for (PLUCodedProduct currentProduct : pluPrice) {
+			totalPrice = totalPrice.add(currentProduct.getPrice());
+			i++;
 		}
-		
 		currentAmountOwing = totalPrice;
 		return totalPrice;
 	}
