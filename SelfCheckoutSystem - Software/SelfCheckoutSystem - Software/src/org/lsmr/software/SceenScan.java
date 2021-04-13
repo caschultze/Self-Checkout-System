@@ -215,6 +215,7 @@ public class SceenScan extends MainGUI {
 			
 			totalPrice.setText("Total = " + session.getTotalPrice());
 		}
+		totalPrice.setText("Total = " + session.getTotalPrice());
 		
 	}
 	
