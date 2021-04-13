@@ -42,6 +42,8 @@ public class ListProductScreen extends MainGUI {
 		private static JFrame frame;
 		private static JPanel jp;
 		public static TouchScreen tsl;
+		private static Color blue = new Color(237, 246, 249);
+	    private static Color white = new Color(255, 255, 255);
 		
 		public ListProductScreen () {
 		
@@ -99,7 +101,7 @@ public class ListProductScreen extends MainGUI {
 		public static void backButton() {
 			JButton back = new JButton("BACK");
 			back.setFont(new Font("Arial", Font.BOLD,20));
-			back.setBackground(Color.white);
+			back.setBackground(white);
 			back.setForeground(Color.black);
 			back.setVerticalTextPosition(SwingConstants.CENTER);
 			back.setPreferredSize(new Dimension(500, 500));
@@ -160,7 +162,7 @@ public class ListProductScreen extends MainGUI {
 				}
 			});
 			
-			newP.setBackground(Color.green);
+			newP.setBackground(blue);
 			jp.add(newP);
 		}
 		
@@ -330,7 +332,7 @@ public class ListProductScreen extends MainGUI {
 			}
 		});
 		frame.add(jp);
-		jp.setBackground(Color.LIGHT_GRAY);
+		jp.setBackground(blue);
 	}
 			
 		
