@@ -57,7 +57,7 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 		control.sessionData.setAndGetTotalPrice(new BigDecimal("10"));
 
 
-		switchScreen(4);
+		switchScreen(1);
 
 
 		
