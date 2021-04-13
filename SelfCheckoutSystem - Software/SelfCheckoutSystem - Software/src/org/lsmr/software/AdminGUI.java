@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.Locale;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -38,6 +40,7 @@ public class AdminGUI extends MainGUI {
 	private static JButton emptyNoteBtn;
 	private static JButton refillCoinBtn;
 	private static JButton refillNoteBtn;
+	private static JButton backBtn;
 	
 	public AdminGUI() {
 		tsl = new TouchScreen();
@@ -51,7 +54,7 @@ public class AdminGUI extends MainGUI {
         JPanel generalPanel = new JPanel();
         JPanel hiddenPanel = new JPanel();
         frame.add(adminPanel);
-        adminPanel.setLayout(new BorderLayout());
+        adminPanel.setLayout(new GridLayout());
         
         // Colours -----------------------------------------------------------
         Color blue = new Color(237, 246, 249);
@@ -78,16 +81,13 @@ public class AdminGUI extends MainGUI {
         removeBtn = new JButton("Remove Products");
         removeBtn.setFont(new Font("Arial", Font.PLAIN, 30));
         removeBtn.setBackground(white);
-          
-//        String adminName = ControlUnit.sessionData.getCurrentAttendant().getName();
-//        JLabel adminLabel = new JLabel("    Attendant: " + adminName); // has name for attendant
+        
+        backBtn = new JButton("Back");
+        backBtn.setFont(new Font("Arial", Font.PLAIN, 30));
+        backBtn.setBackground(white);
         
         // General Panel Setting --------------------------------------------
-
-		Dimension size = generalPanel.getPreferredSize();
-		size.width = 750;
-		generalPanel.setPreferredSize(size); // set it back on panel
-		
+        
 		generalPanel.setBackground(blue);
 		        
 		generalPanel.setLayout(new GridBagLayout());
@@ -98,11 +98,6 @@ public class AdminGUI extends MainGUI {
 		gc.insets = new Insets(6,20,6,20);
 		gc.weightx = 0.1;
 		gc.weighty = 0.1;
-		
-		gc.gridx = 0;
-		gc.gridy = 0;
-		gc.anchor = GridBagConstraints.FIRST_LINE_START;
-//		generalPanel.add(adminLabel,gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 1;
@@ -122,21 +117,23 @@ public class AdminGUI extends MainGUI {
 		gc.gridx = 0;
 		gc.gridy = 3;
 		gc.anchor = GridBagConstraints.PAGE_END;
-		//gc.insets = new Insets(2,2,2,2);
+		gc.insets = new Insets(2,2,2,2);
 		gc.weighty = 1.0;
 		generalPanel.add(logoutBtn,gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 4;
 		gc.weighty = 0;
+		generalPanel.add(backBtn,gc);
 		
         adminPanel.add(generalPanel,BorderLayout.WEST);
-        
 		
 		// Hidden Panel ================================================================================================================================
         // (Buttons: Refill Paper, Refill Ink, Empty Coin Storage, Empty Banknote storage, Refill Coin Storage, Refill Banknote storage)
         
         // Create Components -------------------------------------------------
+        
+        hiddenPanel.setBorder(BorderFactory.createTitledBorder("STATION MUST BE BLOCKED TO ACCESS"));
         
         paperBtn = new JButton("Add Paper");
         paperBtn.setFont(new Font("Arial", Font.PLAIN, 30));
@@ -169,9 +166,6 @@ public class AdminGUI extends MainGUI {
         refillNoteBtn.setEnabled(false);
         
         // Hidden Panel Setting ------------------------------------------------
-		size = hiddenPanel.getPreferredSize();
-		size.width = 1175;
-		hiddenPanel.setPreferredSize(size); // set it back on panel
 		
 		hiddenPanel.setBackground(white);
 		        
@@ -189,24 +183,24 @@ public class AdminGUI extends MainGUI {
 		gc.gridy = 0;
 		hiddenPanel.add(paperBtn,gc);
 		
-		gc.gridx = 0;
-		gc.gridy = 1;
-		hiddenPanel.add(inkBtn,gc);
-		
 		gc.gridx = 1;
 		gc.gridy = 0;
+		hiddenPanel.add(inkBtn,gc);
+		
+		gc.gridx = 0;
+		gc.gridy = 1;
 		hiddenPanel.add(emptyCoinBtn,gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 1;
 		hiddenPanel.add(emptyNoteBtn,gc);
 		
-		gc.gridx = 2;
-		gc.gridy = 0;
+		gc.gridx = 0;
+		gc.gridy = 2;
 		hiddenPanel.add(refillCoinBtn,gc);
 		
-		gc.gridx = 2;
-		gc.gridy = 1;
+		gc.gridx = 1;
+		gc.gridy = 2;
 		hiddenPanel.add(refillNoteBtn,gc);
 		
         adminPanel.add(hiddenPanel,BorderLayout.EAST);
@@ -222,6 +216,7 @@ public class AdminGUI extends MainGUI {
 		emptyNoteBtnAction();
 		refillCoinBtnAction();
 		refillNoteBtnAction();
+		backBtnAction();
 
         frame.setVisible(true);
 	}
@@ -233,7 +228,7 @@ public class AdminGUI extends MainGUI {
 			public void actionPerformed(ActionEvent e) {
 				ControlUnit.startupShutdown.shutdown();
 				System.out.println("System has been shut down");
-				//Make black screen later, go to black screen
+				switchScreen(15);
 			}
 			
 		});
@@ -284,13 +279,25 @@ public class AdminGUI extends MainGUI {
 		});
 	}
 	
+	public static void backBtnAction () {
+		backBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Transition: Switch to previous screen
+				switchScreen(CurrentScreen);
+			}
+			
+		});
+	}
+	
 	public static void removeBtnAction () {
 		removeBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControlUnit.attendantRemovesProduct.setAttendantApproval(true); // items are now able to be removed			
-				System.out.print("You can remove an item now");
+				ControlUnit.attendantRemovesProduct.setAttendantApproval(true); // items are now able to be removed	
+				System.out.println("You can remove an item now");
 			}
 			
 		});
