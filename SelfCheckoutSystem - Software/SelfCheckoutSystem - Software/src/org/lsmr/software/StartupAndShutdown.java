@@ -102,7 +102,7 @@ public class StartupAndShutdown {
 		emptyBanknote = null;
 		emptyCoin = null;
 		membershipEnter = null;
-		sessionData = new CurrentSessionData();
+		sessionData = null;
 		paymentProcessing = null;
 		blocker = null;
 		paperLow = null;
@@ -121,6 +121,6 @@ public class StartupAndShutdown {
 		startupShutdown = null;
 		attendantRemovesProduct = null;
 		enterPLU = null;
-		//System.exit(1);
+		PowerOn = false;
 	}
 }

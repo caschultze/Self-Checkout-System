@@ -168,6 +168,9 @@ public class ControlUnit {
 		return scaleSensitivity;
 	}
 	
+	
+	
+	
 //	public static void setCurrentState(int option) {
 //		if (option == 1) {
 //			currentState = State.SCAN;
