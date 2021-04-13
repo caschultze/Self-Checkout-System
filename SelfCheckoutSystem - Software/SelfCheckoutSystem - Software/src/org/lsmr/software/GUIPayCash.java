@@ -46,7 +46,7 @@ public class GUIPayCash extends MainGUI{
 		
 		touchscreen = new TouchScreen();
         JFrame frame = touchscreen.getFrame();
-        frame.setVisible(true);
+        frame.setVisible(false);
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();

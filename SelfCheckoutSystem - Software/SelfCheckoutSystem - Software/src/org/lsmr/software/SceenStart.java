@@ -26,7 +26,7 @@ public class SceenStart extends MainGUI {
 	public SceenStart() {
 		touchscreen = new TouchScreen();
 		frame = touchscreen.getFrame();
-        frame.setVisible(true);
+        frame.setVisible(false);
         frame.setName("name");
         JPanel jp = new JPanel();
         jp.setLayout(new GridBagLayout());

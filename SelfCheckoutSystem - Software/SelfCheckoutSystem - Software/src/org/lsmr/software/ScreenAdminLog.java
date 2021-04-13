@@ -71,7 +71,6 @@ public class ScreenAdminLog {
 		
 		TouchScreen tsl = new TouchScreen();
         JFrame frame = tsl.getFrame();
-        frame.setVisible(true);
         frame.setName("name");
         JPanel jp = new JPanel();
         jp.setLayout(new GridBagLayout());
@@ -460,7 +459,7 @@ public class ScreenAdminLog {
 
 		
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // So we can click X to close
-        frame.setVisible(true);
+        frame.setVisible(false);
 		
 		
 }

@@ -197,7 +197,7 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			ShutdownScreen.tsl.setVisible(false);
 
 			ThanksForShoppingScreen.tsl.setVisible(false);
-
+			SceenScan.updateList();
 
 			break;
 		

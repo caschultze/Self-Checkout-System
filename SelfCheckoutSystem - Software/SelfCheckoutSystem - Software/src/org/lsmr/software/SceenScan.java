@@ -33,7 +33,7 @@ public class SceenScan extends MainGUI {
     public SceenScan(){
     	touchscreen = new TouchScreen();
         JFrame frame = touchscreen.getFrame();
-        frame.setVisible(true);
+        frame.setVisible(false);
         frame.setName("name");
         frame.setLayout(new BorderLayout());
         

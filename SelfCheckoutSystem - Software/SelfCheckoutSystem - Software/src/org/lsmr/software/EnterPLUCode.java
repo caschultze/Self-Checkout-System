@@ -25,7 +25,7 @@ public class EnterPLUCode {
 	
 	public EnterPLUCode(SelfCheckoutStation station) {
 		this.station = station;
-		this.data = new CurrentSessionData();
+		data = new CurrentSessionData();
 		registerListeners();
 	}
 	
@@ -99,6 +99,7 @@ public class EnterPLUCode {
 		
 		PLUCodedProduct product = getPLUProduct(plu);
 		data.addPLUProduct(product);
+		System.out.println("Your product has been added");
 		
 		
 	}

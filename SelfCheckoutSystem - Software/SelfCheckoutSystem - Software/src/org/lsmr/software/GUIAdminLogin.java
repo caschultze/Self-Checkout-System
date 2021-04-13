@@ -72,7 +72,7 @@ public class GUIAdminLogin extends MainGUI {
 		
 		touchscreen = new TouchScreen();
         JFrame frame = touchscreen.getFrame();
-        frame.setVisible(true);
+        frame.setVisible(false);
         frame.setName("name");
         JPanel jp = new JPanel();
         jp.setLayout(new GridBagLayout());

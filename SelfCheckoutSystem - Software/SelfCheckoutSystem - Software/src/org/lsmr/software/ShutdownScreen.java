@@ -43,6 +43,6 @@ public class ShutdownScreen extends MainGUI{
         	
         });
         
-        frame.setVisible(true);
+        frame.setVisible(false);
 	}
 }

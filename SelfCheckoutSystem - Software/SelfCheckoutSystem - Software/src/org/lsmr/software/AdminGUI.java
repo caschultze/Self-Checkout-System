@@ -218,7 +218,7 @@ public class AdminGUI extends MainGUI {
 		refillNoteBtnAction();
 		backBtnAction();
 
-        frame.setVisible(true);
+        frame.setVisible(false);
 	}
 	
 	public static void shutdownBtnAction () {

@@ -154,6 +154,19 @@ public class CurrentSessionData {
 		}
 	}
 	
+	public void addBarcodeProductsToTotalPrice() {
+		int i = 0;
+		BigDecimal price = new BigDecimal("0.0");
+		for (PLUCodedProduct product : PLUProducts) {
+			BigDecimal weightInKg = BigDecimal.valueOf(PLUWeights.get(i));
+			price = (product.getPrice()).multiply(weightInKg);
+			totalPrice = totalPrice.add(price);
+			currentAmountOwing = currentAmountOwing.add(price);
+			i++;
+		}
+		
+	}
+	
 	/**
 	 * Warning: Only use this method for simplification of test cases. You cannot use this for the 3rd Iteration.
 	 * @param temp
