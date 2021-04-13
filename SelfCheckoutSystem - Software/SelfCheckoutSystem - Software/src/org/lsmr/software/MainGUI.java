@@ -29,7 +29,7 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 	public static Card card1 = new Card("Credit", "4500123412341234", "Dr. Walker", "123", "1234", true, true);
 	public static Card card2 = new Card("Debit", "4500123412341235", "Dr. Walker", "123", "1234", true, true);
 	public static Card card3 = new Card("Giftcard", "30031234", "Dr. Walker", "123", "1234", true, true);
-
+	public static int CurrentScreen;
 	
 	public static void main(String[] args) {
 		Currency currency = Currency.getInstance(Locale.CANADA);
@@ -55,7 +55,7 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 		ThanksForShoppingScreen = new ThanksForShoppingScreen();
 		ShutdownScreen = new ShutdownScreen();
 		control.sessionData.setAndGetTotalPrice(new BigDecimal("10"));
-		switchScreen(10);
+		switchScreen(4);
 		
 //		GUIEnterPin.setVisible(true);
 	}
@@ -64,7 +64,8 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 		switch (screenNum) {
 		case 1:
 			PayingBy = 1;
-
+			CurrentScreen = 1;
+			
 			GUICreditScreen.touchscreen.setVisible(true);
 			GUIDebitScreen.touchscreen.setVisible(false);	
 			GUIEnterPin.touchscreen.setVisible(false);
@@ -84,6 +85,7 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			break;
 		case 2:
 			PayingBy = 2;
+			CurrentScreen = 2;
 			
 			GUICreditScreen.touchscreen.setVisible(false);
 			GUIDebitScreen.touchscreen.setVisible(true);	
@@ -103,6 +105,9 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 
 			break;
 		case 3:
+			
+			CurrentScreen = 3;
+			
 			GUICreditScreen.touchscreen.setVisible(false);
 			GUIDebitScreen.touchscreen.setVisible(false);	
 			GUIEnterPin.touchscreen.setVisible(true);
@@ -139,6 +144,9 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 
 			break;
 		case 5:
+			
+			CurrentScreen = 5;
+			
 			GUICreditScreen.touchscreen.setVisible(false);
 			GUIDebitScreen.touchscreen.setVisible(false);	
 			GUIEnterPin.touchscreen.setVisible(false);
@@ -157,6 +165,9 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 
 			break;
 		case 6:
+			
+			CurrentScreen = 6;
+			
 			GUICreditScreen.touchscreen.setVisible(false);
 			GUIDebitScreen.touchscreen.setVisible(false);	
 			GUIEnterPin.touchscreen.setVisible(false);
@@ -175,7 +186,7 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 
 			break;
 		
-		case 7:
+		case 7:		
 			GUICreditScreen.touchscreen.setVisible(false);
 			GUIDebitScreen.touchscreen.setVisible(false);	
 			GUIEnterPin.touchscreen.setVisible(false);
@@ -194,6 +205,9 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 
 			break;
 		case 8:
+			
+			CurrentScreen = 8;
+			
 			GUICreditScreen.touchscreen.setVisible(false);
 			GUIDebitScreen.touchscreen.setVisible(false);	
 			GUIEnterPin.touchscreen.setVisible(false);
@@ -213,6 +227,9 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			break;
 		
 		case 9:
+			
+			CurrentScreen = 9;
+			
 			GUICreditScreen.touchscreen.setVisible(false);
 			GUIDebitScreen.touchscreen.setVisible(false);	
 			GUIEnterPin.touchscreen.setVisible(false);
@@ -249,6 +266,9 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 
 			break;
 		case 11:
+			
+			CurrentScreen = 11;
+			
 			GUICreditScreen.touchscreen.setVisible(false);
 			GUIDebitScreen.touchscreen.setVisible(false);	
 			GUIEnterPin.touchscreen.setVisible(false);
@@ -267,6 +287,9 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 
 			break;
 		case 12:
+			
+			CurrentScreen = 12;
+			
 			GUICreditScreen.touchscreen.setVisible(false);
 			GUIDebitScreen.touchscreen.setVisible(false);	
 			GUIEnterPin.touchscreen.setVisible(false);
@@ -284,7 +307,10 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			ShutdownScreen.tsl.setVisible(false);
 
 			break;
-		case 13:			
+		case 13:		
+			
+			CurrentScreen = 13;
+			
 			GUICreditScreen.touchscreen.setVisible(false);
 			GUIDebitScreen.touchscreen.setVisible(false);	
 			GUIEnterPin.touchscreen.setVisible(false);
@@ -303,7 +329,10 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 
 			break;
 			
-		case 14:			
+		case 14:	
+			
+			CurrentScreen = 14;
+			
 			GUICreditScreen.touchscreen.setVisible(false);
 			GUIDebitScreen.touchscreen.setVisible(false);	
 			GUIEnterPin.touchscreen.setVisible(false);

@@ -40,6 +40,7 @@ public class AdminGUI extends MainGUI {
 	private static JButton emptyNoteBtn;
 	private static JButton refillCoinBtn;
 	private static JButton refillNoteBtn;
+	private static JButton backBtn;
 	
 	public AdminGUI() {
 		tsl = new TouchScreen();
@@ -80,7 +81,10 @@ public class AdminGUI extends MainGUI {
         removeBtn = new JButton("Remove Products");
         removeBtn.setFont(new Font("Arial", Font.PLAIN, 30));
         removeBtn.setBackground(white);
-          
+        
+        backBtn = new JButton("Back");
+        backBtn.setFont(new Font("Arial", Font.PLAIN, 30));
+        backBtn.setBackground(white);
         
         // General Panel Setting --------------------------------------------
         
@@ -120,6 +124,7 @@ public class AdminGUI extends MainGUI {
 		gc.gridx = 0;
 		gc.gridy = 4;
 		gc.weighty = 0;
+		generalPanel.add(backBtn,gc);
 		
         adminPanel.add(generalPanel,BorderLayout.WEST);
 		
@@ -211,6 +216,7 @@ public class AdminGUI extends MainGUI {
 		emptyNoteBtnAction();
 		refillCoinBtnAction();
 		refillNoteBtnAction();
+		backBtnAction();
 
         frame.setVisible(true);
 	}
@@ -273,13 +279,25 @@ public class AdminGUI extends MainGUI {
 		});
 	}
 	
+	public static void backBtnAction () {
+		backBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Transition: Switch to previous screen
+				switchScreen(CurrentScreen);
+			}
+			
+		});
+	}
+	
 	public static void removeBtnAction () {
 		removeBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControlUnit.attendantRemovesProduct.setAttendantApproval(true); // items are now able to be removed			
-				System.out.print("You can remove an item now");
+				ControlUnit.attendantRemovesProduct.setAttendantApproval(true); // items are now able to be removed	
+				System.out.println("You can remove an item now");
 			}
 			
 		});
