@@ -53,6 +53,7 @@ public class ThanksForShoppingScreen extends MainGUI{
 				}
 				ControlUnit.sessionData = new CurrentSessionData();
 				switchScreen(5);
+				ControlUnit.sessionData.restart();
 			}
 		});
 		
