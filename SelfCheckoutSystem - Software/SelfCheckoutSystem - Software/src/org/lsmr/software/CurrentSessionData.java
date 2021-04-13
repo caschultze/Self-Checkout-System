@@ -89,12 +89,18 @@ public class CurrentSessionData {
 	 * Jeremy: I added this function to support the use case: Attendant removes product from purchases 
 	 */
 	public void removeScannedItem(BarcodedItem item) {
+		Integer i = scannedProductsDup.get(item.getBarcode());
+		if (i<2) {
 		scannedItems.remove(item);
 		
 		Barcode code = item.getBarcode();
 		scannedProducts.remove(code);
 		currentTotalWeight -= item.getWeight();
-		
+		scannedProductsDup.remove(code);
+		}else {
+			i -= 1;
+			scannedProductsDup.put(item.getBarcode(), i);
+		}
 	}
 	
 	
