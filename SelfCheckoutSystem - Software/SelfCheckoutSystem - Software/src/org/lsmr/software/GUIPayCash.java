@@ -44,6 +44,9 @@ public class GUIPayCash extends MainGUI{
 	private static JLabel cash;
 	private static JLabel change;
 	
+	private static Color blue = new Color(237, 246, 249);
+    private static Color white = new Color(255, 255, 255);
+	
 	//public GUI (/*MainGUI main*/) {
 	public GUIPayCash() {
 		
@@ -103,6 +106,16 @@ public class GUIPayCash extends MainGUI{
         change.setFont(newbuttonFont);
         finish.setFont(newbuttonFont);
         
+        hundred.setBackground(white);
+        fifty.setBackground(white);
+        twenty.setBackground(white);
+        ten.setBackground(white);
+        five.setBackground(white);
+        help.setBackground(white);
+        admin.setBackground(white);
+        back.setBackground(white);
+        finish.setBackground(white);
+        
         //MOVE BUTTONS 
         gc.gridx = 0;
         gc.gridy = 1;
@@ -149,7 +162,7 @@ public class GUIPayCash extends MainGUI{
         finish.addActionListener(new finishButtonHandler());
         
         //COLOR
-        mainPanel.setBackground(Color.decode("#48cae4"));
+        mainPanel.setBackground(blue);
         
         frame.add(mainPanel);
    

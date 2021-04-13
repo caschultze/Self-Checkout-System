@@ -30,7 +30,7 @@ public class GUIMembershipLogIn extends MainGUI {
 	private static String membershipID = "";
 	private static int style;
 	private static int fontSize;
-	private static Color blue = new Color(204, 219, 253);
+	private static Color blue = new Color(237, 246, 249);
     private static Color white = new Color(255, 255, 255);
 	
 	public GUIMembershipLogIn () {
