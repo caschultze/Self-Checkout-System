@@ -13,6 +13,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import java.util.Currency;
 
 import org.lsmr.software.CurrentSessionData;
@@ -40,6 +41,7 @@ public class GUIPayCash extends MainGUI{
 	private static JButton back;
 	private static JLabel total;
 	private static JLabel cash;
+	private static JLabel change;
 	
 	//public GUI (/*MainGUI main*/) {
 	public GUIPayCash() {
@@ -78,7 +80,10 @@ public class GUIPayCash extends MainGUI{
         admin = new JButton("Admin");
         back = new JButton("Back");
         cash = new JLabel("CASH");
-        total = new JLabel("Total: " + ControlUnit.sessionData.getTotalPrice());
+        total = new JLabel();
+        change = new JLabel();
+        updateTotalInitial();
+        updateTotal();
         //total = new JLabel("Total: $$$");
         
         //SET BUTTON FONT
@@ -92,7 +97,8 @@ public class GUIPayCash extends MainGUI{
         admin.setFont(newbuttonFont);
         cash.setFont(newbuttonFont);
         back.setFont(newbuttonFont);
-        //total.setFont(newbuttonFont);
+        total.setFont(newbuttonFont);
+        change.setFont(newbuttonFont);
         
         //MOVE BUTTONS 
         gc.gridx = 0;
@@ -116,6 +122,11 @@ public class GUIPayCash extends MainGUI{
         gc.gridy = 1;
         gc.ipady = 40;
         mainPanel.add(total, gc);
+        
+        gc.gridx = 5;
+        gc.gridy = 1;
+        gc.ipady = 40;
+        mainPanel.add(change, gc);
 
 
         //REGISTER ACTION EVENTS FOR BUTTONS
@@ -179,8 +190,8 @@ public class GUIPayCash extends MainGUI{
 			
 			ControlUnit.payBanknote.payWithBanknotes(hundred);
 			//CurrentSessionData.payBanknote(value);
-			total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
-			
+			//total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+			updateTotal();
 		}
 		
 	}
@@ -195,7 +206,8 @@ public class GUIPayCash extends MainGUI{
 			ControlUnit.payBanknote.payWithBanknotes(fifty);
 			//CurrentSessionData.payBanknote(value);
 			//total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
-			total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+			//total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+			updateTotal();
 
 					
 		}
@@ -212,7 +224,8 @@ public class GUIPayCash extends MainGUI{
 			ControlUnit.payBanknote.payWithBanknotes(twenty);
 			//CurrentSessionData.payBanknote(value);
 			//total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
-			total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+			//total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+			updateTotal();
 
 							
 		}
@@ -229,7 +242,8 @@ public class GUIPayCash extends MainGUI{
 			ControlUnit.payBanknote.payWithBanknotes(ten);
 			//CurrentSessionData.payBanknote(value);
 			//total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
-			total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+			//total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+			updateTotal();
 
 		}
 						
@@ -246,7 +260,8 @@ public class GUIPayCash extends MainGUI{
 			ControlUnit.payBanknote.payWithBanknotes(five);
 			//CurrentSessionData.payBanknote(value);
 			//total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
-			total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+			//total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+			updateTotal();
 
 							
 		}
@@ -292,6 +307,31 @@ public class GUIPayCash extends MainGUI{
 							
 		}
 						
+	}
+		
+	//THIS IS NOT WORKING, TOTAL PRICE HAS NOT BEEN UPDATED
+	public static void updateTotalInitial() {
+		total.setText("Total = $ " + ControlUnit.sessionData.getTotalPrice());
+		change.setText("Change: $0");
+		
+	}
+		
+	
+	public static void updateTotal() {
+		BigDecimal temp = ControlUnit.sessionData.getCurrentAmountOwing();
+		if(ControlUnit.sessionData.getCurrentAmountOwing().compareTo(BigDecimal.ZERO) > 0) {
+			total.setText("Total = $ " + ControlUnit.sessionData.getCurrentAmountOwing());
+		}
+		else {
+			total.setText("Total = $0");
+			BigDecimal neg1 = new BigDecimal("-1.0");
+			temp.multiply(neg1);
+			change.setText("Change: $ " + temp);
+			
+			
+		}
+		
+		
 	}
 		
 	
