@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.devices.AbstractDevice;
 import org.lsmr.selfcheckout.devices.ElectronicScale;
+import org.lsmr.selfcheckout.devices.OverloadException;
 import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.devices.SimulationException;
 import org.lsmr.selfcheckout.devices.listeners.AbstractDeviceListener;
@@ -16,6 +17,7 @@ public class BagItem {
 	public SelfCheckoutStation scs;
 	public ElectronicScaleListener esl;
 	public CurrentSessionData sessionData = new CurrentSessionData();
+	private PlaceItemFail check;
 	private static boolean validWeightCheck = false;
 	private static boolean checkOverloaded = false;
 	private boolean enableCheck = false;
@@ -26,6 +28,7 @@ public class BagItem {
 	
 	public BagItem(SelfCheckoutStation checkoutStation) {
 		scs = checkoutStation;
+		check = new PlaceItemFail(scs);
 		registerListeners();
 	}
 	
@@ -106,7 +109,7 @@ public class BagItem {
 //		}
 //	}
 	
-	public void bagItems(BarcodedItem item) {
+	public void bagItems(BarcodedItem item) throws OverloadException {
 		if (item == null) {
 			throw new SimulationException(new NullPointerException("No argument may be null."));
 		}
@@ -115,6 +118,12 @@ public class BagItem {
 		checkOverloaded = false;
 		
 		scs.baggingArea.add(item);
+		
+		boolean validWeights = check.checkWeights();
+		
+		if(!validWeights)
+			scs.baggingArea.remove(item);
+		
 		if(checkOverloaded) {
 			scs.baggingArea.disable();
 		}
