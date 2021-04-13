@@ -118,6 +118,8 @@ public class CurrentSessionData {
 	 */
 	public BigDecimal getTotalPrice() {
 		
+		
+		totalPrice = new BigDecimal("0.00");
 		Collection<BarcodedProduct> calcPrice = scannedProducts.values();
 		
 		for (BarcodedProduct currentProduct : calcPrice) {
