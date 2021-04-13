@@ -26,8 +26,8 @@ public class SceenScan extends MainGUI {
 	
 	public static TouchScreen touchscreen;
 	CurrentSessionData session = new CurrentSessionData();
-    static JLabel shopCartPrice = new JLabel("Prices\n");
-    static JLabel shopCart = new JLabel("Items\n");
+    static JLabel shopCartPrice = new JLabel("<html>Prices<br/></html>");
+    static JLabel shopCart = new JLabel("<html>Items<br/></html>");
     static JLabel totalPrice = new JLabel("Total = $$$");
 	
     public SceenScan(){
@@ -182,34 +182,33 @@ public class SceenScan extends MainGUI {
 	//Call if transitions into this screen.
 	public void updateList() {
 		
+		shopCartPrice.setText("<html>Prices<br/></html>");
+		shopCart.setText("<html>Items<br/></html>");
+		
 		for(BarcodedProduct item : session.getScannedProducts().values()) {
-			String textItem = shopCart.getText();
-			String textPrice = shopCartPrice.getText();
+			String textItem = shopCart.getText().substring(0,shopCart.getText().length()-8);
+			String textPrice = shopCartPrice.getText().substring(0,shopCartPrice.getText().length()-8);
 			
-			textItem = textItem.concat(item.getDescription());
-			textItem = textItem.concat("\n");
+			textItem = textItem.concat(item.getDescription()+"<br/></html>");
 			shopCart.setText(textItem);
 			
 			
 			textPrice = textPrice.concat("$");
-			textPrice = textPrice.concat(item.getPrice().toString());
-			textPrice = textPrice.concat("\n");
+			textPrice = textPrice.concat(item.getPrice().toString()+ "<br/></html>");
 			shopCartPrice.setText(textPrice);
 			
 			totalPrice.setText("Total = " + session.getTotalPrice());
 		}
 		for(PLUCodedProduct item : session.getPLUProducts()) {
-			String textItem = shopCart.getText();
-			String textPrice = shopCartPrice.getText();
+			String textItem = shopCart.getText().substring(0,shopCart.getText().length()-8);
+			String textPrice = shopCartPrice.getText().substring(0,shopCartPrice.getText().length()-8);
 			
-			textItem = textItem.concat(item.getDescription());
-			textItem = textItem.concat("\n");
+			textItem = textItem.concat(item.getDescription()+"<br/></html>");
 			shopCart.setText(textItem);
 			
 			
 			textPrice = textPrice.concat("$");
-			textPrice = textPrice.concat(item.getPrice().toString());
-			textPrice = textPrice.concat("\n");
+			textPrice = textPrice.concat(item.getPrice().toString()+ "<br/></html>");
 			shopCartPrice.setText(textPrice);
 			
 			totalPrice.setText("Total = " + session.getTotalPrice());
