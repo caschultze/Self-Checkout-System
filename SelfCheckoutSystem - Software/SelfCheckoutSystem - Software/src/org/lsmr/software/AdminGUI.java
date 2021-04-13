@@ -41,6 +41,7 @@ public class AdminGUI extends MainGUI {
 	private static JButton refillCoinBtn;
 	private static JButton refillNoteBtn;
 	private static JButton backBtn;
+	private static JButton weightBtn;
 	private static JPanel adminPanel;
 	private static JPanel generalPanel;
 	private static JPanel hiddenPanel;
@@ -89,6 +90,10 @@ public class AdminGUI extends MainGUI {
         backBtn.setFont(new Font("Arial", Font.PLAIN, 30));
         backBtn.setBackground(white);
         
+        weightBtn = new JButton("Approve Weight");
+        weightBtn.setFont(new Font("Arial", Font.PLAIN, 30));
+        weightBtn.setBackground(white);
+        
         textOut = new JLabel("");
         
         // General Panel Setting --------------------------------------------
@@ -118,6 +123,10 @@ public class AdminGUI extends MainGUI {
 		gc.gridy = 2;
 		gc.ipadx = 0;
 		generalPanel.add(removeBtn,gc);
+		
+		gc.gridx = 0;
+		gc.gridy = 3;
+		generalPanel.add(weightBtn,gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 5;
@@ -227,6 +236,7 @@ public class AdminGUI extends MainGUI {
 		refillCoinBtnAction();
 		refillNoteBtnAction();
 		backBtnAction();
+		weightBtnAction();
 
        // frame.setVisible(true);
 	}
@@ -552,6 +562,17 @@ public class AdminGUI extends MainGUI {
 					ControlUnit.banknoteRefill.loadBanknotes(notes5);
 
 				} catch (OverloadException e1) {}
+			}
+			
+		});
+	}
+	
+	public static void weightBtnAction () {
+		weightBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				textOut.setText("Weight Discrepancy Approved");
 			}
 			
 		});
