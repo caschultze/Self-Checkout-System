@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,9 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.lsmr.selfcheckout.devices.AbstractDevice;
+import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.devices.TouchScreen;
-import org.lsmr.selfcheckout.devices.listeners.TouchScreenListener;
 
 public class ThanksForShoppingScreen extends MainGUI{
 	
@@ -27,12 +25,7 @@ public class ThanksForShoppingScreen extends MainGUI{
 		
 		tsl = new TouchScreen();
 		frame = tsl.getFrame();
-		enterPanel(frame);
-
-	}
-	
-	public static void enterPanel(JFrame frame) {
-
+		
 		jp.setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
 		
@@ -47,7 +40,6 @@ public class ThanksForShoppingScreen extends MainGUI{
 		
 		JButton finish = new JButton("Finish");
 		finish.setFont(new Font("Arial", Font.PLAIN, 40));
-		finish.setBackground(new Color(152, 251, 152));
 		finish.setForeground(new Color(204, 136, 153));
 		gc.gridx = 0;
 		gc.gridy = 1;
@@ -55,23 +47,17 @@ public class ThanksForShoppingScreen extends MainGUI{
 		jp.add(finish, gc);
 		finish.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// go back to the start screen
-				// we just set visible to false here to exit easily for now
-				frame.setVisible(false);
+				for (BarcodedItem item : ControlUnit.sessionData.getScannedItems())
+				{
+					ControlUnit.removesItems.removesItems(item);
+				}
+				ControlUnit.sessionData = new CurrentSessionData();
+				switchScreen(5);
 			}
 		});
 		
 		jp.setBackground(new Color(204, 136, 153));
 		frame.add(jp);
-		frame.setVisible(true);
-		
-	}
-	
-	public JFrame getFrame() {
-		return frame;
-	}
-	
-	public void setVisible(boolean visible) {
-		frame.setVisible(visible);
+		frame.setVisible(false);
 	}
 }
