@@ -130,9 +130,9 @@ public class CurrentSessionData {
 			totalPrice = totalPrice.add(currentProduct.getPrice());
 			i++;
 		}
-		BigDecimal GST = new BigDecimal("1.05");
-		totalPrice = totalPrice.multiply(GST);
-		totalPrice = totalPrice.setScale(2, RoundingMode.HALF_EVEN);
+		//BigDecimal GST = new BigDecimal("1.05");
+		//totalPrice = totalPrice.multiply(GST);
+		//totalPrice = totalPrice.setScale(2, RoundingMode.HALF_EVEN);
 		
 		currentAmountOwing = totalPrice;
 		return totalPrice;
