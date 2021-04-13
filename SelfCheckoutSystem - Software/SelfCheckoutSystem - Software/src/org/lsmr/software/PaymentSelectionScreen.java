@@ -98,6 +98,19 @@ public class PaymentSelectionScreen extends MainGUI {
 			}
 		});
 		
+		JButton back_key = new JButton("Back");
+		back_key.setFont(new Font("Arial", Font.PLAIN, 40));
+		back_key.setForeground(new Color(204, 136, 153));
+		gc.gridx = 0;
+		gc.gridy = 1;
+		gc.ipady = 40;
+		jp.add(back_key,gc);
+		back_key.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchScreen(6);
+			}
+		});
+		
 		JButton help_key = new JButton("Help");
 		help_key.setFont(new Font("Arial", Font.PLAIN, 40));
 		help_key.setForeground(new Color(204, 136, 153));
