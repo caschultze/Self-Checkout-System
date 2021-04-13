@@ -22,14 +22,7 @@ public class refillCoin extends CoinPayment {
 	
 	@Override
 	public void registerListeners() {
-		coinDispensersLis = new HashMap<>();
 		
-		for(int i = 0; i < super.scs.coinDenominations.size(); i++)
-			coinDispensersLis.put(super.scs.coinDenominations.get(i), new CoinDispenserListenerStub(super.scs.coinDenominations.get(i)));
-
-		for(CoinDispenserListenerStub coinDispenerLisn: coinDispensersLis.values()) {
-			super.scs.coinDispensers.get(coinDispenerLisn.getValue()).register(coinDispenerLisn);
-		}
 	}
 	
 	
