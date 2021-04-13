@@ -25,6 +25,7 @@ public class CurrentSessionData {
 	 */
 	
 	private static HashMap<Barcode, BarcodedProduct> scannedProducts = new HashMap<Barcode,BarcodedProduct>(); 
+	private static HashMap<Barcode, Integer> scannedProductsDup = new HashMap<Barcode,Integer>(); 
 	private static ArrayList <BarcodedItem> scannedItems = new ArrayList<BarcodedItem>();
 	private static BigDecimal currentAmountOwing = new BigDecimal("0.00");
 	private static BigDecimal totalPrice = new BigDecimal("0.00");
@@ -51,6 +52,11 @@ public class CurrentSessionData {
 	public HashMap<Barcode, BarcodedProduct> getScannedProducts() {
 		return scannedProducts;
 	}
+	
+	
+	public HashMap<Barcode, Integer> getScannedProductsDup(){
+		return scannedProductsDup;
+	}
 
 	/*
 	 * Function to add items to saved ArrayList of scanned items -> used to determine use cases about the bagging area
@@ -66,6 +72,14 @@ public class CurrentSessionData {
 		Barcode code = item.getBarcode();
 		BarcodedProduct pro = ProductDatabases.BARCODED_PRODUCT_DATABASE.get(code);
 		scannedProducts.put(code, pro);
+		if(scannedProductsDup.containsKey(code)) {
+			Integer i = scannedProductsDup.get(code);
+			i += 1;
+			scannedProductsDup.put(code, i);
+		}else {
+			scannedProductsDup.put(code, 1);
+		}
+		
 		currentTotalWeight += item.getWeight();
 	}
 	
@@ -122,18 +136,25 @@ public class CurrentSessionData {
 		totalPrice = new BigDecimal("0.00");
 		Collection<BarcodedProduct> calcPrice = scannedProducts.values();
 		
-		for (BarcodedProduct currentProduct : calcPrice) {
-			totalPrice = totalPrice.add(currentProduct.getPrice());
+		if (calcPrice.size() != 0) {
+			for (BarcodedProduct currentProduct : calcPrice) {
+				Integer i = scannedProductsDup.get(currentProduct.getBarcode());
+				while (i>0) {
+					totalPrice = totalPrice.add(currentProduct.getPrice());
+					i -= 1;
+				}
+			}
 		}
-
 
 		ArrayList<PLUCodedProduct> pluPrice = PLUProducts;
+		
 		int i = 0;
-		for (PLUCodedProduct currentProduct : pluPrice) {
-			totalPrice = totalPrice.add(currentProduct.getPrice());
-			i++;
+		if (calcPrice.size() != 0) {
+			for (PLUCodedProduct currentProduct : pluPrice) {
+				totalPrice = totalPrice.add(currentProduct.getPrice());
+				i++;
+			}
 		}
-
 		
 		currentAmountOwing = totalPrice;
 		return totalPrice;
