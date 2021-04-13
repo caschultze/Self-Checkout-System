@@ -39,6 +39,7 @@ public class GUIPayCash extends MainGUI{
 	private static JButton help;
 	private static JButton admin;
 	private static JButton back;
+	private static JButton finish;
 	private static JLabel total;
 	private static JLabel cash;
 	private static JLabel change;
@@ -82,6 +83,7 @@ public class GUIPayCash extends MainGUI{
         cash = new JLabel("CASH");
         total = new JLabel();
         change = new JLabel();
+        finish = new JButton("Finish");
         updateTotalInitial();
         updateTotal();
         //total = new JLabel("Total: $$$");
@@ -99,6 +101,7 @@ public class GUIPayCash extends MainGUI{
         back.setFont(newbuttonFont);
         total.setFont(newbuttonFont);
         change.setFont(newbuttonFont);
+        finish.setFont(newbuttonFont);
         
         //MOVE BUTTONS 
         gc.gridx = 0;
@@ -111,6 +114,11 @@ public class GUIPayCash extends MainGUI{
         gc.gridy = 1;
         gc.ipady = 40;
         mainPanel.add(help, gc);
+        
+        gc.gridx = 2;
+        gc.gridy = 1;
+        gc.ipady = 40;
+        mainPanel.add(finish, gc);
         
         gc.gridx = 4;
         gc.gridy = 2;
@@ -138,6 +146,7 @@ public class GUIPayCash extends MainGUI{
         help.addActionListener(new helpButtonHandler());
         admin.addActionListener(new adminButtonHandler());
         back.addActionListener(new backButtonHandler());
+        finish.addActionListener(new finishButtonHandler());
         
         //COLOR
         mainPanel.setBackground(Color.decode("#48cae4"));
@@ -281,6 +290,16 @@ public class GUIPayCash extends MainGUI{
 						
 	}		
 		
+		static class finishButtonHandler implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				switchScreen(14);
+								
+			}
+							
+		}
+		
 
 		//HANDLE EVENTS FOR BUTTON ADMIN
 		static class adminButtonHandler implements ActionListener{
@@ -293,7 +312,9 @@ public class GUIPayCash extends MainGUI{
 							
 		}
 						
-	}		
+	}	
+		
+		
 		
 
 		//HANDLE EVENTS FOR BUTTON BACK
