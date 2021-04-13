@@ -66,18 +66,18 @@ public class SceenBootUp extends MainGUI {
     
     static boolean shifted = false;
     static JTextField selected = jtext;
-    
+    Color blue = new Color(237, 246, 249);
+    Color white = new Color(255, 255, 255);
     
 	public SceenBootUp() {
 		
 		touchscreen = new TouchScreen();
         JFrame frame = touchscreen.getFrame();
-        frame.setVisible(false);
         frame.setName("name");
         JPanel jp = new JPanel();
         jp.setLayout(new GridBagLayout());
         frame.add(jp);
-        jp.setBackground(Color.green);
+        jp.setBackground(blue);
         
         GridBagConstraints gc = new GridBagConstraints();
         gc.anchor = GridBagConstraints.CENTER;
@@ -97,7 +97,7 @@ public class SceenBootUp extends MainGUI {
         JButton enterButton = new JButton("ENTER");
         enterButton.setPreferredSize(new Dimension(frame.getWidth()/6,frame.getHeight()/20));
         jp.add(enterButton,gc);
-       
+        enterButton.setBackground(white);
         
         
         
@@ -113,156 +113,185 @@ public class SceenBootUp extends MainGUI {
         gc.gridx = 0;
         gc.gridy = 0;
         jpkey.add(oneButton,gc);
-        
+        oneButton.setBackground(white);
         
         gc.gridx = 1;
         gc.gridy = 0;
         jpkey.add(twoButton,gc);
+        twoButton.setBackground(white);
         
         gc.gridx = 2;
         gc.gridy = 0;
         jpkey.add(threeButton,gc);
+        threeButton.setBackground(white);
         
         gc.gridx = 3;
         gc.gridy = 0;
         jpkey.add(fourButton,gc);
+        fourButton.setBackground(white);
+            
         
         gc.gridx = 4;
         gc.gridy = 0;
         jpkey.add(fiveButton,gc);
+        fiveButton.setBackground(white);
         
         gc.gridx = 5;
         gc.gridy = 0;
         jpkey.add(sixButton,gc);
+        sixButton.setBackground(white);
         
         gc.gridx = 6;
         gc.gridy = 0;
         jpkey.add(sevenButton,gc);
+        sevenButton.setBackground(white);
+        
         
         gc.gridx = 7;
         gc.gridy = 0;
         jpkey.add(eightButton,gc);
+        eightButton.setBackground(white);
         
         gc.gridx = 8;
         gc.gridy = 0;
         jpkey.add(nineButton,gc);
-        
+        nineButton.setBackground(white);
         gc.gridx = 9;
         gc.gridy = 0;
         jpkey.add(zeroButton,gc);
-        
+        zeroButton.setBackground(white);
         gc.gridx = 0;
         gc.gridy = 1;
         jpkey.add(qButton,gc);
-        
+        qButton.setBackground(white);
         gc.gridx = 1;
         gc.gridy = 1;
         jpkey.add(wButton,gc);
-        
+        wButton.setBackground(white);
         gc.gridx = 2;
         gc.gridy = 1;
         jpkey.add(eButton,gc);
-        
+        eButton.setBackground(white);
         gc.gridx = 3;
         gc.gridy = 1;
         jpkey.add(rButton,gc);
-        
+        rButton.setBackground(white);
         gc.gridx = 4;
         gc.gridy = 1;
         jpkey.add(tButton,gc);
-        
+        tButton.setBackground(white);
         gc.gridx = 5;
         gc.gridy = 1;
         jpkey.add(yButton,gc);
-        
+        yButton.setBackground(white);
         gc.gridx = 6;
         gc.gridy = 1;
         jpkey.add(uButton,gc);
-        
+        uButton.setBackground(white);
         gc.gridx = 7;
         gc.gridy = 1;
         jpkey.add(iButton,gc);
-        
+        iButton.setBackground(white);
         gc.gridx = 8;
         gc.gridy = 1;
         jpkey.add(oButton,gc);
+        oButton.setBackground(white);
         
         gc.gridx = 9;
         gc.gridy = 1;
         jpkey.add(pButton,gc);
+        pButton.setBackground(white);
         
         gc.gridx = 0;
         gc.gridy = 2;
         jpkey.add(aButton,gc);
+        aButton.setBackground(white);
         
         gc.gridx = 1;
         gc.gridy = 2;
         jpkey.add(sButton,gc);
+        sButton.setBackground(white);
         
         gc.gridx = 2;
         gc.gridy = 2;
         jpkey.add(dButton,gc);
+        dButton.setBackground(white);
         
         gc.gridx = 3;
         gc.gridy = 2;
         jpkey.add(fButton,gc);
+        fButton.setBackground(white);
         
         gc.gridx = 4;
         gc.gridy = 2;
         jpkey.add(gButton,gc);
+        gButton.setBackground(white);
         
         gc.gridx = 5;
         gc.gridy = 2;
         jpkey.add(hButton,gc);
+        hButton.setBackground(white);
         
         gc.gridx = 6;
         gc.gridy = 2;
         jpkey.add(jButton,gc);
+        jButton.setBackground(white);
         
         gc.gridx = 7;
         gc.gridy = 2;
         jpkey.add(kButton,gc);
+        kButton.setBackground(white);
         
         gc.gridx = 8;
         gc.gridy = 2;
         jpkey.add(lButton,gc);
-
+        lButton.setBackground(white);
+        
         gc.gridx = 0;
         gc.gridy = 3;
         jpkey.add(shiftButton,gc);
+        shiftButton.setBackground(white);
         
         gc.gridx = 1;
         gc.gridy = 3;
         jpkey.add(zButton,gc);
+        zButton.setBackground(white);
         
         gc.gridx = 2;
         gc.gridy = 3;
         jpkey.add(xButton,gc);
+        xButton.setBackground(white);
         
         gc.gridx = 3;
         gc.gridy = 3;
         jpkey.add(cButton,gc);
+        cButton.setBackground(white);
         
         gc.gridx = 4;
         gc.gridy = 3;
         jpkey.add(vButton,gc);
+        vButton.setBackground(white);
         
         gc.gridx = 5;
         gc.gridy = 3;
         jpkey.add(bButton,gc);
         
+        bButton.setBackground(white);
         gc.gridx = 6;
         gc.gridy = 3;
         jpkey.add(nButton,gc);
+        nButton.setBackground(white);
         
         gc.gridx = 7;
         gc.gridy = 3;
         jpkey.add(mButton,gc);
+        mButton.setBackground(white);
         
         gc.gridx = 0;
         gc.gridy = 10;
         JButton deleteButton = new JButton("Delete");
         jpkey.add(deleteButton,gc);
+        deleteButton.setBackground(white);
         
         gc.ipady = 40;
         gc.ipadx = 100;
@@ -271,6 +300,7 @@ public class SceenBootUp extends MainGUI {
         gc.gridx = 0;
         gc.gridy = 3;
         jp.add(jpkey,gc);
+        jpkey.setBackground(blue);
         
         class enterButtoneHandler implements ActionListener{
 		@Override
@@ -462,8 +492,9 @@ public class SceenBootUp extends MainGUI {
 
 		
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // So we can click X to close
-        frame.setVisible(false);		
 }
+	
+	
 	
 	
 	public static void buttonHandler(JButton button) {
