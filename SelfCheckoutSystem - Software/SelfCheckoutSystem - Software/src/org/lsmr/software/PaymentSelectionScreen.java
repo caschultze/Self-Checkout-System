@@ -22,6 +22,9 @@ public class PaymentSelectionScreen extends MainGUI {
 
 	public PaymentSelectionScreen() {
 
+		Color blue = new Color(237, 246, 249);
+        Color white = new Color(255, 255, 255);
+		
 		tsl = new TouchScreen();
 		frame = tsl.getFrame();
 		
@@ -35,7 +38,7 @@ public class PaymentSelectionScreen extends MainGUI {
 		
 		JButton debit_key = new JButton("Debit");
 		debit_key.setFont(new Font("Arial", Font.PLAIN, 40));
-		debit_key.setForeground(new Color(204, 136, 153));
+		debit_key.setBackground(white);
 		gc.gridx = 0;
 		gc.gridy = 0;
 		gc.ipady = 40;
@@ -48,7 +51,7 @@ public class PaymentSelectionScreen extends MainGUI {
 		
 		JButton credit_key = new JButton("Credit");
 		credit_key.setFont(new Font("Arial", Font.PLAIN, 40));
-		credit_key.setForeground(new Color(204, 136, 153));
+		credit_key.setBackground(white);
 		gc.gridx = 1;
 		gc.gridy = 0;
 		gc.ipady = 40;
@@ -61,7 +64,7 @@ public class PaymentSelectionScreen extends MainGUI {
 		
 		JButton cash_key = new JButton("Cash");
 		cash_key.setFont(new Font("Arial", Font.PLAIN, 40));
-		cash_key.setForeground(new Color(204, 136, 153));
+		cash_key.setBackground(white);
 		gc.gridx = 2;
 		gc.gridy = 0;
 		gc.ipady = 40;
@@ -74,7 +77,7 @@ public class PaymentSelectionScreen extends MainGUI {
 		
 		JButton admin_key = new JButton("Admin");
 		admin_key.setFont(new Font("Arial", Font.PLAIN, 40));
-		admin_key.setForeground(new Color(204, 136, 153));
+		admin_key.setBackground(white);
 		gc.gridx = 4;
 		gc.gridy = 0;
 		gc.ipady = 40;
@@ -87,7 +90,7 @@ public class PaymentSelectionScreen extends MainGUI {
 		
 		JButton giftcard_key = new JButton("Gift Card");
 		giftcard_key.setFont(new Font("Arial", Font.PLAIN, 40));
-		giftcard_key.setForeground(new Color(204, 136, 153));
+		giftcard_key.setBackground(white);
 		gc.gridx = 1;
 		gc.gridy = 1;
 		gc.ipady = 40;
@@ -100,7 +103,7 @@ public class PaymentSelectionScreen extends MainGUI {
 		
 		JButton back_key = new JButton("Back");
 		back_key.setFont(new Font("Arial", Font.PLAIN, 40));
-		back_key.setForeground(new Color(204, 136, 153));
+		back_key.setBackground(white);
 		gc.gridx = 0;
 		gc.gridy = 1;
 		gc.ipady = 40;
@@ -113,7 +116,7 @@ public class PaymentSelectionScreen extends MainGUI {
 		
 		JButton help_key = new JButton("Help");
 		help_key.setFont(new Font("Arial", Font.PLAIN, 40));
-		help_key.setForeground(new Color(204, 136, 153));
+		help_key.setBackground(white);
 		gc.gridx = 4;
 		gc.gridy = 1;
 		jp.add(help_key,gc);
@@ -123,7 +126,7 @@ public class PaymentSelectionScreen extends MainGUI {
 			}
 		});
 		
-		jp.setBackground(new Color(204, 136, 153));
+		jp.setBackground(blue);
 		frame.add(jp);
 		frame.setVisible(false);
 	}	

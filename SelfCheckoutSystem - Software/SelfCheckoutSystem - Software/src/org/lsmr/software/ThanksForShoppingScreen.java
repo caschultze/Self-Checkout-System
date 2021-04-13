@@ -23,6 +23,9 @@ public class ThanksForShoppingScreen extends MainGUI{
 	
 	public ThanksForShoppingScreen() {
 		
+		Color blue = new Color(237, 246, 249);
+        Color white = new Color(255, 255, 255);
+		
 		tsl = new TouchScreen();
 		frame = tsl.getFrame();
 		
@@ -40,7 +43,7 @@ public class ThanksForShoppingScreen extends MainGUI{
 		
 		JButton finish = new JButton("Finish");
 		finish.setFont(new Font("Arial", Font.PLAIN, 40));
-		finish.setForeground(new Color(204, 136, 153));
+		finish.setForeground(white);
 		gc.gridx = 0;
 		gc.gridy = 1;
 		gc.ipady = 40;
@@ -56,7 +59,7 @@ public class ThanksForShoppingScreen extends MainGUI{
 			}
 		});
 		
-		jp.setBackground(new Color(204, 136, 153));
+		jp.setBackground(blue);
 		frame.add(jp);
 		frame.setVisible(false);
 	}
