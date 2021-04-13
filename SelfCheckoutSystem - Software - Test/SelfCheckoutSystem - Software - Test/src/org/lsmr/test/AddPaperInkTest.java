@@ -1,6 +1,5 @@
 package org.lsmr.test;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
@@ -10,7 +9,6 @@ import java.util.Locale;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.lsmr.selfcheckout.devices.SimulationException;
 import org.lsmr.software.ControlUnit;
 
 public class AddPaperInkTest {
@@ -35,49 +33,54 @@ public class AddPaperInkTest {
 	
 	@Test 
 	public void testPaperAndInkAdded() {
-		control.addPaperInk.addInk(1);
-		control.addPaperInk.addPaper(1);
+		control.addInk.addInk(1);
+		control.addPaper.addPaper(1);
 		
-		assertTrue(control.addPaperInk.getPaperAdded() && control.addPaperInk.getInkAdded());
+		assertTrue(control.addPaper.getPaperAdded() && control.addInk.getInkAdded());
 	}
 	
 	@Test
 	public void testAddInkThenRunOut() {
-		control.addPaperInk.addPaper(5);
-		control.addPaperInk.addInk(1);
-		control.addPaperInk.print('a');
+		control.addPaper.addPaper(5);
+		control.addPaper.addInk(1);
+		control.addPaper.print('a');
 		
-		assertFalse(control.addPaperInk.getInkAdded());
+		assertTrue(control.addInk.getInkAdded());
 	}
 	
 	@Test
 	public void testAddPaperThenRunOut() {
-		control.addPaperInk.addPaper(1);
-		control.addPaperInk.addInk(5);
-		control.addPaperInk.print('\n');
 		
-		assertFalse(control.addPaperInk.getPaperAdded());
+		control.addPaper.addPaper(1);
+		control.addInk.addInk(5);
+		control.addPaper.print('\n');
+		
+		assertTrue(control.addPaper.getPaperAdded());
 	}
 	
 	@Test
-	public void testCanMachinePrintTrue() {
-		control.addPaperInk.addInk(1);
-		control.addPaperInk.addPaper(1);
+	public void testOutOfPaper() {
+		control.addPaper.addPaper(2); //start with 2 paper 
 		
-		assertTrue(control.addPaperInk.CanMachinePrint());
+		for (int i = 0; i < 2; i++) { // use up two paper
+			control.addPaper.print('\n');
+		}
+		
+		assertTrue(control.paperLow.getNoPaper());
+		
 	}
 	
-	@Test 
-	public void testCanMachinePrintFalsePaper() {
-		control.addPaperInk.addInk(1);
+	@Test
+	public void testOutOfInk() {
+		control.addInk.addPaper(2);
+		control.addInk.addInk(5);
 		
-		assertFalse(control.addPaperInk.CanMachinePrint());
+		for (int i = 0; i < 5; i++) { 
+			control.addInk.print('*');
+		}
+		
+		assertTrue(control.inkLow.getNoInk());
+		
 	}
 	
-	@Test 
-	public void testCanMachinePrintFalseInk() {
-		control.addPaperInk.addPaper(1);
-		
-		assertFalse(control.addPaperInk.CanMachinePrint());
-	}	
 }
