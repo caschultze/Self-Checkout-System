@@ -18,20 +18,22 @@ import org.lsmr.selfcheckout.devices.TouchScreen;
 import org.lsmr.selfcheckout.devices.listeners.TouchScreenListener;
 
 public class SceenStart extends MainGUI {
+	
 	public static TouchScreen touchscreen;
 	static BoxLayout centerButtons;
 	static JButton startButton;
 	static JFrame frame;
+	Color blue = new Color(237, 246, 249);
+	 Color white = new Color(255, 255, 255);
 	
 	public SceenStart() {
 		touchscreen = new TouchScreen();
 		frame = touchscreen.getFrame();
-        frame.setVisible(false);
         frame.setName("name");
         JPanel jp = new JPanel();
         jp.setLayout(new GridBagLayout());
         frame.add(jp);
-        jp.setBackground(Color.green);
+        jp.setBackground(blue);
         
         GridBagConstraints gc = new GridBagConstraints();
         gc.weightx = 0.5;
@@ -44,6 +46,7 @@ public class SceenStart extends MainGUI {
         JButton adminButton = new JButton("Admin");
         adminButton.setPreferredSize(new Dimension(frame.getWidth()/20,frame.getHeight()/20));
         jp.add(adminButton,gc);
+        adminButton.setBackground(white);
         
         gc.anchor = GridBagConstraints.PAGE_END;
         gc.weighty = 100;
@@ -52,6 +55,7 @@ public class SceenStart extends MainGUI {
         startButton = new JButton("Start Checkout");
         startButton.setPreferredSize(new Dimension(frame.getWidth()/3,frame.getHeight()/5));
         jp.add(startButton, gc);
+        startButton.setBackground(white);
         
         gc.insets = new Insets(10,0,0,0);
         gc.anchor = GridBagConstraints.PAGE_START;
@@ -61,7 +65,7 @@ public class SceenStart extends MainGUI {
         JButton memButton = new JButton("Member Start");
         memButton.setPreferredSize(new Dimension(frame.getWidth()/3,frame.getHeight()/5));
         jp.add(memButton, gc);
-        
+        memButton.setBackground(white);
         
         class memButtoneHandler implements ActionListener{
         	
@@ -104,7 +108,6 @@ public class SceenStart extends MainGUI {
         
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // So we can click X to close
-        frame.setVisible(false);
 	}
 	
 }

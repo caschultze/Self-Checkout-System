@@ -29,7 +29,10 @@ public class SceenScan extends MainGUI {
     static JLabel shopCartPrice = new JLabel("<html>Prices<br/></html>");
     static JLabel shopCart = new JLabel("<html>Items<br/></html>");
     static JLabel totalPrice = new JLabel("Total = $$$");
-	
+    Color blue = new Color(237, 246, 249);
+	 Color white = new Color(255, 255, 255);
+    
+    
     public SceenScan(){
     	touchscreen = new TouchScreen();
         JFrame frame = touchscreen.getFrame();
@@ -39,14 +42,14 @@ public class SceenScan extends MainGUI {
         JPanel jpleft = new JPanel();
         jpleft.setLayout(new GridBagLayout());
         frame.add(jpleft,BorderLayout.WEST);
-        jpleft.setBackground(Color.green);
+        jpleft.setBackground(blue);
         jpleft.setPreferredSize(new Dimension(frame.getWidth()/2,frame.getHeight()));
         jpleft.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black),"Shopping Cart"));
    
         JPanel jpright = new JPanel();
         jpright.setLayout(new GridBagLayout());
         frame.add(jpright,BorderLayout.EAST);
-        jpright.setBackground(Color.green);
+        jpright.setBackground(blue);
         jpright.setPreferredSize(new Dimension(frame.getWidth()/2,frame.getHeight()));
         
         GridBagConstraints gc = new GridBagConstraints();
@@ -62,22 +65,25 @@ public class SceenScan extends MainGUI {
         JButton adminButton = new JButton("Admin");
         adminButton.setPreferredSize(new Dimension(frame.getWidth()/20,frame.getHeight()/20));
         jpright.add(adminButton,gc);
-        
+        adminButton.setBackground(white);
+        gc.ipady = 40;
         gc.gridwidth = 2;
         gc.fill = GridBagConstraints.BOTH;
         gc.anchor = GridBagConstraints.CENTER;
         gc.gridx = 0;
         gc.gridy = 1;
-        gc.insets = new Insets(10,0,0,10);
+        gc.insets = new Insets(10,10,10,10);
         JButton lookButton = new JButton("Lookup Product/PLU");
       //  adminButton.setPreferredSize(new Dimension(frame.getWidth()/20,frame.getHeight()/20));
         jpright.add(lookButton,gc);
+        lookButton.setBackground(white);
         gc.fill = GridBagConstraints.BOTH;
         gc.anchor = GridBagConstraints.CENTER;
         gc.gridx = 1;
         gc.gridy = 1;
-        gc.insets = new Insets(10,0,0,10);
-
+        gc.insets = new Insets(10,10,10,10);
+        gc.ipady = frame.getWidth()/12;
+        gc.ipadx = frame.getWidth()/12;
         gc.gridwidth = 1;
         gc.fill = GridBagConstraints.NONE;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
@@ -87,7 +93,7 @@ public class SceenScan extends MainGUI {
         JButton helpButton = new JButton("Help");
         helpButton.setPreferredSize(new Dimension(frame.getWidth()/6,frame.getHeight()/20));
         jpright.add(helpButton,gc);
-        
+        helpButton.setBackground(white);
         gc.anchor = GridBagConstraints.PAGE_END;
         gc.fill = GridBagConstraints.BOTH;
         gc.gridwidth = 2;
@@ -98,13 +104,14 @@ public class SceenScan extends MainGUI {
         JButton finishButton = new JButton("Finish and Pay");
         finishButton.setPreferredSize(new Dimension(frame.getWidth()/2,frame.getHeight()/5));
         jpright.add(finishButton,gc);
-        
+        finishButton.setBackground(white);
         
         gc.gridx = 0;
         gc.gridy = 1;
         totalPrice.setOpaque(true);
         jpleft.add(totalPrice,gc);
-        
+        totalPrice.setBackground(white);
+        totalPrice.setBorder(BorderFactory.createLineBorder(Color.black));
         gc.weighty = 100;
         gc.fill = GridBagConstraints.BOTH;
         gc.weightx = 1000;
@@ -116,6 +123,7 @@ public class SceenScan extends MainGUI {
         shopCart.setOpaque(true);
         shopCart.setVerticalAlignment(SwingConstants.TOP);
         shopCart.setHorizontalAlignment(SwingConstants.LEFT);
+        shopCart.setBorder(BorderFactory.createLineBorder(Color.black));
         jpleft.add(shopCart,gc);
         
         gc.weightx = 1;
@@ -125,6 +133,7 @@ public class SceenScan extends MainGUI {
 
         shopCartPrice.setBackground(Color.white);
         shopCartPrice.setOpaque(true);
+        shopCartPrice.setBorder(BorderFactory.createLineBorder(Color.black));
         shopCartPrice.setVerticalAlignment(SwingConstants.TOP);
         shopCartPrice.setHorizontalAlignment(SwingConstants.LEFT);
         jpleft.add(shopCartPrice,gc);
