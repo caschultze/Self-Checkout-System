@@ -253,4 +253,17 @@ public class CurrentSessionData {
 		}
 	}
 	
+	public void restart() {
+		scannedProducts = new HashMap<Barcode,BarcodedProduct>(); 
+		scannedItems = new ArrayList<BarcodedItem>();
+		currentAmountOwing = new BigDecimal("0.00");
+		totalPrice = new BigDecimal("0.00");
+		attendantLoggedIn = false;
+		currentAttendant = null;
+		attendantLoggedInMiddleCheck = false;
+		currentTotalWeight = 0.0;
+		PLUProducts = new ArrayList<PLUCodedProduct>();
+		PLUWeights = new ArrayList<Double>();
+	}
+	
 }
