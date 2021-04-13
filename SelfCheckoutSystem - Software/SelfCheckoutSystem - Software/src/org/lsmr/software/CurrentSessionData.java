@@ -117,12 +117,19 @@ public class CurrentSessionData {
 	 */
 	public BigDecimal getTotalPrice() {
 		
+		totalPrice = new BigDecimal("0.00");
 		Collection<BarcodedProduct> calcPrice = scannedProducts.values();
 		
 		for (BarcodedProduct currentProduct : calcPrice) {
 			totalPrice = totalPrice.add(currentProduct.getPrice());
 		}
-		
+
+		ArrayList<PLUCodedProduct> pluPrice = PLUProducts;
+		int i = 0;
+		for (PLUCodedProduct currentProduct : pluPrice) {
+			totalPrice = totalPrice.add(currentProduct.getPrice());
+			i++;
+		}
 		BigDecimal GST = new BigDecimal("1.05");
 		totalPrice = totalPrice.multiply(GST);
 		totalPrice = totalPrice.setScale(2, RoundingMode.HALF_EVEN);

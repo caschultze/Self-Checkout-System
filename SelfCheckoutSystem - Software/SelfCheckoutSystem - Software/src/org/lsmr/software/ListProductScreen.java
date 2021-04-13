@@ -322,7 +322,7 @@ public class ListProductScreen extends MainGUI {
 		jp.add(water);
 		water.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String waterString = "52345678910";
+				String waterString = "5345678910";
 				Barcode waterBarcode = new Barcode(waterString);
 				ArrayList<BarcodedItem> BarcodeList = new ArrayList<BarcodedItem>();
 				BarcodedItem Water = new BarcodedItem(waterBarcode, 500.0);
