@@ -62,7 +62,6 @@ public class ThanksForShoppingScreen extends MainGUI{
 			}
 		});
 		
-<<<<<<< HEAD
 		
 		JButton help = new JButton("Help");
 		help.setFont(new Font("Arial", Font.PLAIN, 40));
@@ -87,9 +86,7 @@ public class ThanksForShoppingScreen extends MainGUI{
 		jp.add(finalChange, gc);
 
 		jp.setBackground(new Color(204, 136, 153));
-=======
-		jp.setBackground(blue);
->>>>>>> 53a166998e23d2b863742f6e7ee30a4f7e727fae
+
 		frame.add(jp);
 		frame.setVisible(false);
 	}
