@@ -175,7 +175,7 @@ public class ListProductScreen extends MainGUI {
 		//frame.add(jp, gc);
 		jp = new JPanel(new GridLayout(4, 3, 40, 40));
 		
-		JButton apple = new JButton("<html>APPLE<br>PLU CODE: 4123<br> Click to add 1</html>", new ImageIcon(ListProductScreen.class.getResource("apple.jpeg")));
+		JButton apple = new JButton("<html>APPLE<br>PLU CODE: 4123<br> Click to add 1</html>", new ImageIcon(ListProductScreen.class.getResource("apple.jpg")));
 		apple.setFont(new Font("Arial", Font.BOLD,20));
 		apple.setBackground(Color.white);
 		apple.setVerticalTextPosition(SwingConstants.CENTER);

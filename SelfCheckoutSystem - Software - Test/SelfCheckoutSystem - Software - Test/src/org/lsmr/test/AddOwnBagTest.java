@@ -90,7 +90,7 @@ public class AddOwnBagTest {
 	@Test
 	public void testScaleLimit() throws OverloadException {
 		bagged.add(BarcodeDatabase.get(itemB2));
-		cu.itemBag.bagItems(bagged);
+		cu.itemBag.bagItems(BarcodeDatabase.get(itemB2));
 		cu.ownBag.addOwnBag(bag);
 		assertEquals(true, cu.ownBag.getCheckOverloaded());
 	}
@@ -101,16 +101,14 @@ public class AddOwnBagTest {
 	public void testItemList() {
 		cu.ownBag.addOwnBag(bag);
 		bagged.add(BarcodeDatabase.get(itemB1));
-		cu.itemBag.bagItems(bagged);
+		cu.itemBag.bagItems(BarcodeDatabase.get(itemB1));
 		Barcode bb = null;
 		Barcode cc = null;
-		for(BarcodedItem b : bagged) {
-			bb = b.getBarcode();
-		}
+		Barcode expected = null;
 		for (BarcodedItem c: cu.itemBag.getBaggedItems()) {
 			cc = c.getBarcode();
 		}
-		assertEquals(bb,cc);
+		assertEquals(expected,cc);
 	}
 	
 
