@@ -318,15 +318,13 @@ public class GUIPayCash extends MainGUI{
 		
 	
 	public static void updateTotal() {
-		BigDecimal temp = ControlUnit.sessionData.getCurrentAmountOwing();
 		if(ControlUnit.sessionData.getCurrentAmountOwing().compareTo(BigDecimal.ZERO) > 0) {
 			total.setText("Total = $ " + ControlUnit.sessionData.getCurrentAmountOwing());
 		}
 		else {
+			BigDecimal temp = ControlUnit.sessionData.getCurrentAmountOwing();
 			total.setText("Total = $0");
-			BigDecimal neg1 = new BigDecimal("-1.0");
-			temp.multiply(neg1);
-			change.setText("Change: $ " + temp);
+			change.setText("Change: $ " + temp.abs());
 			
 			
 		}
