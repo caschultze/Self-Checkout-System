@@ -269,7 +269,7 @@ public class CurrentSessionData {
 		
 		for (Iterator<PLUCodedProduct> iterator = PLUProducts.iterator(); iterator.hasNext(); ) {
 		    PLUCodedProduct value = iterator.next();
-		    if (value.getPLUCode() != null) {
+		    if (value.equals(product)) {
 		        iterator.remove();
 		    }
 		}

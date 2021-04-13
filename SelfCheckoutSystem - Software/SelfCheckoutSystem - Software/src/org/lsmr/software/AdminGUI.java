@@ -44,6 +44,7 @@ public class AdminGUI extends MainGUI {
 	private static JPanel adminPanel;
 	private static JPanel generalPanel;
 	private static JPanel hiddenPanel;
+	private static JLabel textOut;
 	
 	public AdminGUI() {
 		tsl = new TouchScreen();
@@ -67,7 +68,6 @@ public class AdminGUI extends MainGUI {
         // (Buttons: shutdown, logout, block, remove products) 
         
         // Create Components -------------------------------------------------
-       
         
         shutdownBtn = new JButton("Shutdown System");
         shutdownBtn.setFont(new Font("Arial", Font.PLAIN, 30));
@@ -88,6 +88,8 @@ public class AdminGUI extends MainGUI {
         backBtn = new JButton("Back");
         backBtn.setFont(new Font("Arial", Font.PLAIN, 30));
         backBtn.setBackground(white);
+        
+        textOut = new JLabel("");
         
         // General Panel Setting --------------------------------------------
         
@@ -128,6 +130,11 @@ public class AdminGUI extends MainGUI {
 		gc.gridy = 6;
 		gc.weighty = 0;
 		generalPanel.add(backBtn,gc);
+		
+		gc.gridx = 1;
+		gc.gridy = 6;
+		gc.fill = GridBagConstraints.CENTER;
+		generalPanel.add(textOut,gc);
 		
         adminPanel.add(generalPanel,BorderLayout.WEST);
 		
@@ -231,6 +238,7 @@ public class AdminGUI extends MainGUI {
 			public void actionPerformed(ActionEvent e) {
 				ControlUnit.startupShutdown.shutdown();
 				System.out.println("System has been shut down");
+				textOut.setText(" ");
 				switchScreen(15);
 			}
 			
@@ -278,6 +286,7 @@ public class AdminGUI extends MainGUI {
 			public void actionPerformed(ActionEvent e) {
 				ControlUnit.login.attendantLogOut();
 				System.out.println("You have been logged out");
+				textOut.setText(" ");
 				switchScreen(5);
 			}
 			
@@ -289,7 +298,7 @@ public class AdminGUI extends MainGUI {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Transition: Switch to previous screen
+				textOut.setText(" ");
 				switchScreen(CurrentScreen);
 			}
 			
@@ -328,10 +337,13 @@ public class AdminGUI extends MainGUI {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						String code = codeTextField.getText();
+						int added = 0;
 						for (BarcodedItem item: ControlUnit.sessionData.getScannedItems()) {
 							if (item.getBarcode().toString().equals(code)) {
 								ControlUnit.sessionData.removeScannedItem(item);
 								System.out.println("A scanned product has been removed from purchases");
+								textOut.setText("A scanned product has been removed from purchases");
+								added++;
 								break;
 							}
 						}
@@ -340,9 +352,16 @@ public class AdminGUI extends MainGUI {
 							if (product.getPLUCode().toString().equals(code)) {
 								ControlUnit.sessionData.removePLUProduct(product);
 								System.out.println("A PLU product has been removed from purchases");
+								textOut.setText("A PLU product has been removed from purchases");
+								added++;
 								break;					
 							}
-						}		
+						}
+						
+						if (added == 0) {
+							System.out.println("Product is not in purchases");
+							textOut.setText("Product is not in purchases");
+						}
 					}		
 				});
 				
@@ -360,9 +379,11 @@ public class AdminGUI extends MainGUI {
 					ControlUnit.addPaper.addPaper(1 << 10);
 					ControlUnit.PaperCounter = 4;
 					System.out.println("Paper has been added");
+					textOut.setText("Paper had been added");
 				}
 				else {
 					System.out.println("Paper has already been added recently");
+					textOut.setText("Paper has already been added recently");
 				}
 			}
 			
@@ -378,9 +399,11 @@ public class AdminGUI extends MainGUI {
 					ControlUnit.addInk.addInk(50);
 					ControlUnit.InkCounter = 4;
 					System.out.println("Ink has been added");
+					textOut.setText("Ink has been added");
 				}
 				else {
 					System.out.println("Ink has already been added recently");
+					textOut.setText("Ink has already been added recently");
 				}
 			}
 			
@@ -394,6 +417,7 @@ public class AdminGUI extends MainGUI {
 			public void actionPerformed(ActionEvent e) {
 				ControlUnit.emptyCoin.emptyCoinStorage();
 				System.out.println("Coin Storage has been emptied");
+				textOut.setText("Coin Storage has been emptied");
 				
 			}
 			
@@ -407,6 +431,7 @@ public class AdminGUI extends MainGUI {
 			public void actionPerformed(ActionEvent e) {
 				ControlUnit.emptyBanknote.emptyBanknoteStorage();
 				System.out.println("Banknote Storage has been emptied");
+				textOut.setText("Banknote Storage has been emptied");
 				
 			}
 			
@@ -426,8 +451,9 @@ public class AdminGUI extends MainGUI {
 				}
 				try {
 					ControlUnit.coinRefill.loadCoins(coins);
+					textOut.setText("Coins were loaded to dispensers");
 
-				} catch (OverloadException e1) {}
+				} catch (OverloadException e1) {textOut.setText("Dispensers will overflow when loading these coins");}
 				
 				// 0.10  ------------------------------------------------------------------------------
 				Coin[] coins2 = new Coin[200];
@@ -483,8 +509,9 @@ public class AdminGUI extends MainGUI {
 				}
 				try {
 					ControlUnit.banknoteRefill.loadBanknotes(notes);
+					textOut.setText("Banknotes were loaded to dispensers");
 
-				} catch (OverloadException e1) {}
+				} catch (OverloadException e1) {textOut.setText("Dispensers will overflow when loading these banknotes");}
 				
 				// 10  ------------------------------------------------------------------------------
 				Banknote[] notes2 = new Banknote[100];
