@@ -64,12 +64,13 @@ public class SceenScan extends MainGUI {
         adminButton.setPreferredSize(new Dimension(frame.getWidth()/20,frame.getHeight()/20));
         jpright.add(adminButton,gc);
         
+        gc.gridwidth = 2;
         gc.fill = GridBagConstraints.BOTH;
         gc.anchor = GridBagConstraints.CENTER;
         gc.gridx = 0;
         gc.gridy = 1;
         gc.insets = new Insets(10,0,0,10);
-        JButton lookButton = new JButton("Lookup Product");
+        JButton lookButton = new JButton("Lookup Product/PLU");
       //  adminButton.setPreferredSize(new Dimension(frame.getWidth()/20,frame.getHeight()/20));
         jpright.add(lookButton,gc);
         gc.fill = GridBagConstraints.BOTH;
@@ -78,7 +79,7 @@ public class SceenScan extends MainGUI {
         gc.gridy = 1;
         gc.insets = new Insets(10,0,0,10);
 
-        
+        gc.gridwidth = 1;
         gc.fill = GridBagConstraints.NONE;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         gc.gridx = 0;
@@ -165,7 +166,7 @@ public class SceenScan extends MainGUI {
 
     		@Override
     		public void actionPerformed(ActionEvent e) {
-    			//move to frame 3
+    			switchScreen(11);
     			
     		}
         
