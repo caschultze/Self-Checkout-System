@@ -78,8 +78,8 @@ public class GUIPayCash extends MainGUI{
         admin = new JButton("Admin");
         back = new JButton("Back");
         cash = new JLabel("CASH");
-        //total = new JLabel("Total: " + CurrentSessionData.getTotalPrice());
-        total = new JLabel("Total: $$$");
+        total = new JLabel("Total: " + ControlUnit.sessionData.getTotalPrice());
+        //total = new JLabel("Total: $$$");
         
         //SET BUTTON FONT
     	Font newbuttonFont = new Font(hundred.getFont().getName(), hundred.getFont().getStyle(), 16);
@@ -161,7 +161,7 @@ public class GUIPayCash extends MainGUI{
        
        
         
-        frame.setVisible(true);
+        frame.setVisible(false);
        
     
 	}
@@ -179,7 +179,7 @@ public class GUIPayCash extends MainGUI{
 			
 			ControlUnit.payBanknote.payWithBanknotes(hundred);
 			//CurrentSessionData.payBanknote(value);
-			//total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
+			total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
 			
 		}
 		
@@ -195,6 +195,8 @@ public class GUIPayCash extends MainGUI{
 			ControlUnit.payBanknote.payWithBanknotes(fifty);
 			//CurrentSessionData.payBanknote(value);
 			//total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
+			total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+
 					
 		}
 				
@@ -210,6 +212,8 @@ public class GUIPayCash extends MainGUI{
 			ControlUnit.payBanknote.payWithBanknotes(twenty);
 			//CurrentSessionData.payBanknote(value);
 			//total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
+			total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+
 							
 		}
 						
@@ -225,6 +229,8 @@ public class GUIPayCash extends MainGUI{
 			ControlUnit.payBanknote.payWithBanknotes(ten);
 			//CurrentSessionData.payBanknote(value);
 			//total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
+			total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+
 		}
 						
 	}
@@ -240,6 +246,8 @@ public class GUIPayCash extends MainGUI{
 			ControlUnit.payBanknote.payWithBanknotes(five);
 			//CurrentSessionData.payBanknote(value);
 			//total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
+			total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+
 							
 		}
 						
@@ -251,6 +259,7 @@ public class GUIPayCash extends MainGUI{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("help");
+			help.setBackground(Color.green);
 			//call for help
 							
 		}

@@ -55,7 +55,9 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 		ThanksForShoppingScreen = new ThanksForShoppingScreen();
 		ShutdownScreen = new ShutdownScreen();
 		control.sessionData.setAndGetTotalPrice(new BigDecimal("10"));
+
 		switchScreen(4);
+
 		
 //		GUIEnterPin.setVisible(true);
 	}
@@ -79,9 +81,10 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			PaymentSelectionScreen.tsl.setVisible(false);
 			GUIPayCash.touchscreen.setVisible(false);
 			GUIPayGiftCardScreen.touchscreen.setVisible(false);
-			ThanksForShoppingScreen.setVisible(false);
+
 			ShutdownScreen.tsl.setVisible(false);
-			
+			ThanksForShoppingScreen.tsl.setVisible(false);
+
 			break;
 		case 2:
 			PayingBy = 2;
@@ -100,8 +103,11 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			PaymentSelectionScreen.tsl.setVisible(false);
 			GUIPayCash.touchscreen.setVisible(false);
 			GUIPayGiftCardScreen.touchscreen.setVisible(false);
-			ThanksForShoppingScreen.setVisible(false);
+
 			ShutdownScreen.tsl.setVisible(false);
+
+			ThanksForShoppingScreen.tsl.setVisible(false);
+
 
 			break;
 		case 3:
@@ -121,8 +127,11 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			PaymentSelectionScreen.tsl.setVisible(false);
 			GUIPayCash.touchscreen.setVisible(false);
 			GUIPayGiftCardScreen.touchscreen.setVisible(false);
-			ThanksForShoppingScreen.setVisible(false);
+
 			ShutdownScreen.tsl.setVisible(false);
+
+			ThanksForShoppingScreen.tsl.setVisible(false);
+
 
 			break;
 		case 4:
@@ -139,8 +148,10 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			PaymentSelectionScreen.tsl.setVisible(false);
 			GUIPayCash.touchscreen.setVisible(false);
 			GUIPayGiftCardScreen.touchscreen.setVisible(false);
-			ThanksForShoppingScreen.setVisible(false);
+
 			ShutdownScreen.tsl.setVisible(false);
+			ThanksForShoppingScreen.tsl.setVisible(false);
+
 
 			break;
 		case 5:
@@ -160,8 +171,9 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			PaymentSelectionScreen.tsl.setVisible(false);
 			GUIPayCash.touchscreen.setVisible(false);
 			GUIPayGiftCardScreen.touchscreen.setVisible(false);
-			ThanksForShoppingScreen.setVisible(false);
+
 			ShutdownScreen.tsl.setVisible(false);
+			ThanksForShoppingScreen.tsl.setVisible(false);
 
 			break;
 		case 6:
@@ -181,8 +193,11 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			PaymentSelectionScreen.tsl.setVisible(false);
 			GUIPayCash.touchscreen.setVisible(false);
 			GUIPayGiftCardScreen.touchscreen.setVisible(false);
-			ThanksForShoppingScreen.setVisible(false);
+
 			ShutdownScreen.tsl.setVisible(false);
+
+			ThanksForShoppingScreen.tsl.setVisible(false);
+
 
 			break;
 		
@@ -200,8 +215,10 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			PaymentSelectionScreen.tsl.setVisible(false);
 			GUIPayCash.touchscreen.setVisible(false);
 			GUIPayGiftCardScreen.touchscreen.setVisible(false);
-			ThanksForShoppingScreen.setVisible(false);
+
 			ShutdownScreen.tsl.setVisible(false);
+
+			ThanksForShoppingScreen.tsl.setVisible(false);
 
 			break;
 		case 8:
@@ -221,8 +238,11 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			PaymentSelectionScreen.tsl.setVisible(false);
 			GUIPayCash.touchscreen.setVisible(false);
 			GUIPayGiftCardScreen.touchscreen.setVisible(false);
-			ThanksForShoppingScreen.setVisible(false);
+
 			ShutdownScreen.tsl.setVisible(false);
+
+			ThanksForShoppingScreen.tsl.setVisible(false);
+
 
 			break;
 		
@@ -243,8 +263,11 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			PaymentSelectionScreen.tsl.setVisible(false);
 			GUIPayCash.touchscreen.setVisible(false);
 			GUIPayGiftCardScreen.touchscreen.setVisible(false);
-			ThanksForShoppingScreen.setVisible(false);
+
 			ShutdownScreen.tsl.setVisible(false);
+
+			ThanksForShoppingScreen.tsl.setVisible(false);
+
 
 			break;
 		case 10:
@@ -261,8 +284,11 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			PaymentSelectionScreen.tsl.setVisible(false);
 			GUIPayCash.touchscreen.setVisible(false);
 			GUIPayGiftCardScreen.touchscreen.setVisible(false);
-			ThanksForShoppingScreen.setVisible(false);
+
 			ShutdownScreen.tsl.setVisible(false);
+
+			ThanksForShoppingScreen.tsl.setVisible(false);
+
 
 			break;
 		case 11:
@@ -282,8 +308,11 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			PaymentSelectionScreen.tsl.setVisible(true);
 			GUIPayCash.touchscreen.setVisible(false);
 			GUIPayGiftCardScreen.touchscreen.setVisible(false);
-			ThanksForShoppingScreen.setVisible(false);
+
 			ShutdownScreen.tsl.setVisible(false);
+
+			ThanksForShoppingScreen.tsl.setVisible(false);
+
 
 			break;
 		case 12:
@@ -303,8 +332,11 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			PaymentSelectionScreen.tsl.setVisible(false);
 			GUIPayCash.touchscreen.setVisible(true);
 			GUIPayGiftCardScreen.touchscreen.setVisible(false);
-			ThanksForShoppingScreen.setVisible(false);
+
 			ShutdownScreen.tsl.setVisible(false);
+
+			ThanksForShoppingScreen.tsl.setVisible(false);
+
 
 			break;
 		case 13:		
@@ -324,8 +356,11 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			PaymentSelectionScreen.tsl.setVisible(false);
 			GUIPayCash.touchscreen.setVisible(false);
 			GUIPayGiftCardScreen.touchscreen.setVisible(true);
-			ThanksForShoppingScreen.setVisible(false);
+
 			ShutdownScreen.tsl.setVisible(false);
+
+			ThanksForShoppingScreen.tsl.setVisible(false);
+
 
 			break;
 			
@@ -346,8 +381,11 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			PaymentSelectionScreen.tsl.setVisible(false);
 			GUIPayCash.touchscreen.setVisible(false);
 			GUIPayGiftCardScreen.touchscreen.setVisible(false);
-			ThanksForShoppingScreen.setVisible(true);
+
 			ShutdownScreen.tsl.setVisible(false);
+
+			ThanksForShoppingScreen.tsl.setVisible(true);
+
 
 			break;
 			

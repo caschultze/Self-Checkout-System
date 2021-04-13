@@ -25,7 +25,7 @@ public class EnterPLUCode {
 	
 	public EnterPLUCode(SelfCheckoutStation station) {
 		this.station = station;
-		this.data = data;
+		this.data = new CurrentSessionData();
 		registerListeners();
 	}
 	
