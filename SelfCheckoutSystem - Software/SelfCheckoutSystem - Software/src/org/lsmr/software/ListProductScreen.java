@@ -1,16 +1,13 @@
 package org.lsmr.software;
-import java.awt.BorderLayout;
-import java.awt.Button;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -102,7 +99,7 @@ public class ListProductScreen extends MainGUI {
 		public static void backButton() {
 			JButton back = new JButton("BACK");
 			back.setFont(new Font("Arial", Font.BOLD,20));
-			back.setBackground(Color.LIGHT_GRAY);
+			back.setBackground(Color.white);
 			back.setForeground(Color.black);
 			back.setVerticalTextPosition(SwingConstants.CENTER);
 			back.setPreferredSize(new Dimension(500, 500));
@@ -178,10 +175,8 @@ public class ListProductScreen extends MainGUI {
 		
 		JButton apple = new JButton("<html>APPLE<br>PLU CODE: 4123<br> Click to add 1</html>", new ImageIcon(ListProductScreen.class.getResource("apple.jpeg")));
 		apple.setFont(new Font("Arial", Font.BOLD,20));
-		apple.setBackground(Color.LIGHT_GRAY);
-		apple.setForeground(Color.black);
+		apple.setBackground(Color.white);
 		apple.setVerticalTextPosition(SwingConstants.CENTER);
-		apple.setPreferredSize(new Dimension(500, 500));
 		jp.add(apple);
 		apple.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -193,10 +188,8 @@ public class ListProductScreen extends MainGUI {
 		
 		JButton mango = new JButton("<html>MANGO<br>PLU CODE: 4051<br> Click to add 1</html>", new ImageIcon(ListProductScreen.class.getResource("mango.jpg")));
 		mango.setFont(new Font("Arial", Font.BOLD,20));
-		mango.setBackground(Color.LIGHT_GRAY);
-		mango.setForeground(Color.black);
+		mango.setBackground(Color.white);
 		mango.setVerticalTextPosition(SwingConstants.CENTER);
-		mango.setPreferredSize(new Dimension(500, 500));
 		jp.add(mango);
 		mango.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -208,10 +201,8 @@ public class ListProductScreen extends MainGUI {
 		
 		JButton grapes = new JButton("<html>GRAPES<br>PLU CODE: 4022<br> Click to add 1</html>", new ImageIcon(ListProductScreen.class.getResource("grapes.jpg")));
 		grapes.setFont(new Font("Arial", Font.BOLD,20));
-		grapes.setBackground(Color.LIGHT_GRAY);
-		grapes.setForeground(Color.black);
+		grapes.setBackground(Color.white);
 		grapes.setVerticalTextPosition(SwingConstants.CENTER);
-		grapes.setPreferredSize(new Dimension(500, 500));
 		jp.add(grapes);
 		grapes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -225,10 +216,8 @@ public class ListProductScreen extends MainGUI {
 		
 		JButton bananas = new JButton("<html>BANANA<br>PLU CODE: 4011<br> Click to add 1</html>", new ImageIcon(ListProductScreen.class.getResource("banana.jpeg")));
 		bananas.setFont(new Font("Arial", Font.BOLD,20));
-		bananas.setBackground(Color.LIGHT_GRAY);
-		bananas.setForeground(Color.black);
+		bananas.setBackground(Color.white);
 		bananas.setVerticalTextPosition(SwingConstants.CENTER);
-		bananas.setPreferredSize(new Dimension(500, 500));
 		jp.add(bananas);
 		bananas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -240,9 +229,7 @@ public class ListProductScreen extends MainGUI {
 	
 		JButton chocolate = new JButton("<html>CHOCOLATE<br>(CLICK TO SCAN)</html>", new ImageIcon(ListProductScreen.class.getResource("choco.jpg")));
 		chocolate.setFont(new Font("Arial", Font.BOLD,20));
-		chocolate.setBackground(Color.LIGHT_GRAY);
-		chocolate.setForeground(Color.black);
-		chocolate.setPreferredSize(new Dimension(500, 500));
+		chocolate.setBackground(Color.white);
 		jp.add(chocolate);
 		chocolate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -252,6 +239,7 @@ public class ListProductScreen extends MainGUI {
 				BarcodedItem Chocolate = new BarcodedItem(chocoBarcode, 200.0);
 				BarcodeList.add(Chocolate);
 				ControlUnit.itemScan.scanItems(BarcodeList);
+				ControlUnit.itemBag.bagItems(Chocolate);
 				switchScreen(6);
 	
 			}
@@ -260,9 +248,7 @@ public class ListProductScreen extends MainGUI {
 	
 		JButton cupcake = new JButton("<html>CUPCAKE<br>(CLICK TO SCAN)</html>", new ImageIcon(ListProductScreen.class.getResource("cupcake.jpeg")));
 		cupcake.setFont(new Font("Arial", Font.BOLD,20));
-		cupcake.setBackground(Color.LIGHT_GRAY);
-		cupcake.setForeground(Color.black);
-		cupcake.setPreferredSize(new Dimension(500, 500));
+		cupcake.setBackground(Color.white);
 		jp.add(cupcake);
 		cupcake.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -272,6 +258,7 @@ public class ListProductScreen extends MainGUI {
 				BarcodedItem Cupcake = new BarcodedItem(cupBarcode, 500.0);
 				BarcodeList.add(Cupcake);
 				ControlUnit.itemScan.scanItems(BarcodeList);
+				ControlUnit.itemBag.bagItems(Cupcake);
 				switchScreen(6);
 
 			}
@@ -281,9 +268,7 @@ public class ListProductScreen extends MainGUI {
 		
 		JButton eggs = new JButton("<html>EGGS<br>(CLICK TO SCAN)</html>", new ImageIcon(ListProductScreen.class.getResource("eggs.jpg")));
 		eggs.setFont(new Font("Arial", Font.BOLD,20));
-		eggs.setBackground(Color.LIGHT_GRAY);
-		eggs.setForeground(Color.black);
-		eggs.setPreferredSize(new Dimension(500, 500));
+		eggs.setBackground(Color.white);
 		jp.add(eggs);
 		eggs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -293,14 +278,14 @@ public class ListProductScreen extends MainGUI {
 				BarcodedItem Eggs = new BarcodedItem(eggBarcode, 500.0);
 				BarcodeList.add(Eggs);
 				ControlUnit.itemScan.scanItems(BarcodeList);
+				ControlUnit.itemBag.bagItems(Eggs);
 				switchScreen(6);
 			}
 		});
 		
 		JButton milk = new JButton("<html>MILK<br>(CLICK TO SCAN)</html>", new ImageIcon(ListProductScreen.class.getResource("milk.jpg")));
 		milk.setFont(new Font("Arial", Font.BOLD,20));
-		milk.setForeground(Color.black);
-		milk.setPreferredSize(new Dimension(500, 500));
+		milk.setBackground(Color.white);
 		jp.add(milk);
 		milk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -310,15 +295,14 @@ public class ListProductScreen extends MainGUI {
 				BarcodedItem Milk = new BarcodedItem(milkBarcode, 1000.0);
 				BarcodeList.add(Milk);
 				ControlUnit.itemScan.scanItems(BarcodeList);
+				ControlUnit.itemBag.bagItems(Milk);
 				switchScreen(6);
 			}
 		});
 		
 		JButton water = new JButton("<html>WATER<br>(CLICK TO SCAN)</html>", new ImageIcon(ListProductScreen.class.getResource("water.jpg")));
 		water.setFont(new Font("Arial", Font.BOLD,20));
-		water.setBackground(new Color(152, 251, 152));
-		water.setForeground(Color.black);
-		water.setPreferredSize(new Dimension(500, 500));
+		water.setBackground(Color.white);
 		jp.add(water);
 		water.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -328,6 +312,7 @@ public class ListProductScreen extends MainGUI {
 				BarcodedItem Water = new BarcodedItem(waterBarcode, 500.0);
 				BarcodeList.add(Water);
 				ControlUnit.itemScan.scanItems(BarcodeList);
+				ControlUnit.itemBag.bagItems(Water);
 				switchScreen(6);
  
 			}
@@ -335,9 +320,7 @@ public class ListProductScreen extends MainGUI {
 		
 		JButton bag = new JButton("<html>SHOPPING BAG<br>PLU CODE: 8011<br> Click to add 1</html>", new ImageIcon(ListProductScreen.class.getResource("bag.jpg")));
 		bag.setFont(new Font("Arial", Font.BOLD,20));
-		bag.setBackground(new Color(152, 251, 152));
-		bag.setForeground(Color.black);
-		bag.setPreferredSize(new Dimension(500, 500));
+		bag.setBackground(Color.white);
 		jp.add(bag);
 		bag.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
