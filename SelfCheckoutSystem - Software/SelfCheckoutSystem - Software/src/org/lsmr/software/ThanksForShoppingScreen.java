@@ -54,9 +54,21 @@ public class ThanksForShoppingScreen extends MainGUI{
 				{
 					ControlUnit.removesItems.removesItems(item);
 				}
-				ControlUnit.sessionData = new CurrentSessionData();
-				switchScreen(5);
-				ControlUnit.sessionData.restart();
+				ControlUnit.InkCounter--;
+                ControlUnit.PaperCounter--;
+                ControlUnit.sessionData.restart();
+                if (ControlUnit.InkCounter != 0 && ControlUnit.PaperCounter != 0) {
+                	switchScreen(5);
+                }
+                if (ControlUnit.InkCounter == 0) {
+                    switchScreen(7);
+                    System.out.print("Need to refill ink\n");
+                } 
+                if (ControlUnit.PaperCounter == 0) {
+                    switchScreen(7);
+                    System.out.print("Need to refill paper\n");
+                }
+                
 			}
 		});
 		

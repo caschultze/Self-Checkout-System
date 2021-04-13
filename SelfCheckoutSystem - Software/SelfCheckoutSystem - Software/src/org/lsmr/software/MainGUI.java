@@ -56,7 +56,7 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 		ShutdownScreen = new ShutdownScreen();
 		//control.sessionData.setAndGetTotalPrice(new BigDecimal("10"));
 
-		switchScreen(6);
+		switchScreen(14);
 
 		
 //		GUIEnterPin.setVisible(true);
@@ -336,7 +336,7 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			ShutdownScreen.tsl.setVisible(false);
 
 			ThanksForShoppingScreen.tsl.setVisible(false);
-
+			GUIPayCash.updateTotal();
 
 			break;
 		case 13:		

@@ -358,7 +358,7 @@ public class AdminGUI extends MainGUI {
 			public void actionPerformed(ActionEvent e) {;
 				if (!ControlUnit.addPaper.getPaperAdded() || ControlUnit.paperLow.getNoPaper()) {
 					ControlUnit.addPaper.addPaper(1 << 10);
-					ControlUnit.PaperCounter = 3;
+					ControlUnit.PaperCounter = 4;
 					System.out.println("Paper has been added");
 				}
 				else {
@@ -376,7 +376,7 @@ public class AdminGUI extends MainGUI {
 			public void actionPerformed(ActionEvent e) {	
 				if (!ControlUnit.addInk.getInkAdded() || ControlUnit.inkLow.getNoInk()) {
 					ControlUnit.addInk.addInk(50);
-					ControlUnit.InkCounter = 3;
+					ControlUnit.InkCounter = 4;
 					System.out.println("Ink has been added");
 				}
 				else {

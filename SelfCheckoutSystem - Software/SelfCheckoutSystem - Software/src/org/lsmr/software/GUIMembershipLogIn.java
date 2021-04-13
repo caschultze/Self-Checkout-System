@@ -1,6 +1,7 @@
 package org.lsmr.software;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -14,9 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import org.lsmr.selfcheckout.devices.AbstractDevice;
 import org.lsmr.selfcheckout.devices.TouchScreen;
-import org.lsmr.selfcheckout.devices.listeners.AbstractDeviceListener;
 
 public class GUIMembershipLogIn extends MainGUI {
 	public static TouchScreen touchScreen;
@@ -31,6 +30,8 @@ public class GUIMembershipLogIn extends MainGUI {
 	private static String membershipID = "";
 	private static int style;
 	private static int fontSize;
+	private static Color blue = new Color(204, 219, 253);
+    private static Color white = new Color(255, 255, 255);
 	
 	public GUIMembershipLogIn () {
 		makeFrame();
@@ -44,19 +45,24 @@ public class GUIMembershipLogIn extends MainGUI {
 		
 		topPanel = new JPanel(new BorderLayout());
 		windowPanel.add(topPanel, BorderLayout.PAGE_START);
+		windowPanel.setBackground(blue);
 		
 		textPanel = new JPanel(new BorderLayout());
 		textPanel.setPreferredSize(new Dimension(500, 200));
 		textPanel.setBorder(new EmptyBorder(50, 50, 50, 50));;
 		topPanel.add(textPanel, BorderLayout.PAGE_END);
+		topPanel.setBackground(blue);
+		textPanel.setBackground(blue);
 		
 		padPanel = new JPanel(new GridLayout(4, 3, 10, 10));
 		padPanel.setBorder(new EmptyBorder(50, 50, 50, 50));;
 		windowPanel.add(padPanel, BorderLayout.CENTER);
+		padPanel.setBackground(blue);
 		
 		extraPanel = new JPanel(new GridLayout(2,1,50,50));
 		extraPanel.setBorder(new EmptyBorder(50, 50, 50, 50));;
 		windowPanel.add(extraPanel ,BorderLayout.LINE_END);
+		extraPanel.setBackground(blue);
 		
 		windowTitle("Membership Login");
 		addTextfield();
@@ -87,6 +93,7 @@ public class GUIMembershipLogIn extends MainGUI {
 		JButton key_1 = new JButton("1");
 		key_1.setPreferredSize(new Dimension(10, 10));
 		padPanel.add(key_1);
+		
 		
 		key_1.addActionListener(new ActionListener() {
 			@Override
@@ -256,6 +263,19 @@ public class GUIMembershipLogIn extends MainGUI {
 		key_Enter.setFont(new Font(fontname, style, fontSize));
 		key_back.setFont(new Font(fontname, style, fontSize));
 		
+		key_1.setBackground(white);
+		key_2.setBackground(white);
+		key_3.setBackground(white);
+		key_4.setBackground(white);
+		key_5.setBackground(white);
+		key_6.setBackground(white);
+		key_7.setBackground(white);
+		key_8.setBackground(white);
+		key_9.setBackground(white);
+		key_0.setBackground(white);
+		key_Enter.setBackground(white);
+		key_back.setBackground(white);
+		
 		touchScreen.setVisible(false);
 	}
 	
@@ -275,6 +295,7 @@ public class GUIMembershipLogIn extends MainGUI {
 			}
 		});
 		
+		
 		JButton key_NonMem = new JButton("NonMember");
 		key_NonMem.setPreferredSize(new Dimension(500, 50));
 		extraPanel.add(key_NonMem);
@@ -289,5 +310,8 @@ public class GUIMembershipLogIn extends MainGUI {
 		
 		key_ADMIN.setFont(new Font(fontname, style, fontSize));
 		key_NonMem.setFont(new Font(fontname, style, fontSize));
+		
+		key_ADMIN.setBackground(white);
+		key_NonMem.setBackground(white);
 	}
 }

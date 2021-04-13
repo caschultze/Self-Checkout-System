@@ -40,8 +40,8 @@ public class ControlUnit {
 	public static refillBanknote banknoteRefill;
 	public static CustomerNoBagScannedItemAttendantRemovesProduct attendantRemovesProduct;
 	public static StartupAndShutdown startupShutdown;
-	public static int InkCounter;
-	public static int PaperCounter;
+	public static int InkCounter = 3;
+	public static int PaperCounter = 3;
 	public static EnterPLUCode enterPLU;
 	
 	// instantiate station variables below
@@ -101,9 +101,6 @@ public class ControlUnit {
 		startupShutdown = new StartupAndShutdown(checkoutStation);
 		attendantRemovesProduct = new CustomerNoBagScannedItemAttendantRemovesProduct(checkoutStation);
 		enterPLU = new EnterPLUCode(checkoutStation);
-		InkCounter =  3;
-		PaperCounter = 3;
-		
 		
 		
 		// Instantiate attendant-specific use cases in here
