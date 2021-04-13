@@ -2,7 +2,6 @@ package org.lsmr.software;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -19,13 +18,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import org.lsmr.selfcheckout.Banknote;
+import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.Coin;
-import org.lsmr.selfcheckout.devices.AbstractDevice;
 import org.lsmr.selfcheckout.devices.OverloadException;
 import org.lsmr.selfcheckout.devices.TouchScreen;
-import org.lsmr.selfcheckout.devices.listeners.TouchScreenListener;
+import org.lsmr.selfcheckout.products.PLUCodedProduct;
 
 public class AdminGUI extends MainGUI {
 	public static TouchScreen tsl;
@@ -41,6 +41,9 @@ public class AdminGUI extends MainGUI {
 	private static JButton refillCoinBtn;
 	private static JButton refillNoteBtn;
 	private static JButton backBtn;
+	private static JPanel adminPanel;
+	private static JPanel generalPanel;
+	private static JPanel hiddenPanel;
 	
 	public AdminGUI() {
 		tsl = new TouchScreen();
@@ -50,9 +53,9 @@ public class AdminGUI extends MainGUI {
 	}
 	
 	public static void adminPanel() {	
-        JPanel adminPanel = new JPanel();
-        JPanel generalPanel = new JPanel();
-        JPanel hiddenPanel = new JPanel();
+        adminPanel = new JPanel();
+        generalPanel = new JPanel();
+        hiddenPanel = new JPanel();
         frame.add(adminPanel);
         adminPanel.setLayout(new GridLayout());
         
@@ -115,14 +118,14 @@ public class AdminGUI extends MainGUI {
 		generalPanel.add(removeBtn,gc);
 		
 		gc.gridx = 0;
-		gc.gridy = 3;
+		gc.gridy = 5;
 		gc.anchor = GridBagConstraints.PAGE_END;
 		gc.insets = new Insets(2,2,2,2);
 		gc.weighty = 1.0;
 		generalPanel.add(logoutBtn,gc);
 		
 		gc.gridx = 0;
-		gc.gridy = 4;
+		gc.gridy = 6;
 		gc.weighty = 0;
 		generalPanel.add(backBtn,gc);
 		
@@ -218,7 +221,7 @@ public class AdminGUI extends MainGUI {
 		refillNoteBtnAction();
 		backBtnAction();
 
-        frame.setVisible(false);
+       // frame.setVisible(true);
 	}
 	
 	public static void shutdownBtnAction () {
@@ -247,6 +250,7 @@ public class AdminGUI extends MainGUI {
 					emptyNoteBtn.setEnabled(true);
 					refillCoinBtn.setEnabled(true);
 					refillNoteBtn.setEnabled(true);
+					backBtn.setEnabled(false);
 					blockBtn.setForeground(new Color(230, 57, 70));
 					ControlUnit.blocker.blockStation();
 					
@@ -258,6 +262,7 @@ public class AdminGUI extends MainGUI {
 					emptyNoteBtn.setEnabled(false);
 					refillCoinBtn.setEnabled(false);
 					refillNoteBtn.setEnabled(false);
+					backBtn.setEnabled(true);
 					blockBtn.setForeground(new Color(0, 0, 0));
 					ControlUnit.blocker.unblockStation();
 				}
@@ -297,7 +302,50 @@ public class AdminGUI extends MainGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ControlUnit.attendantRemovesProduct.setAttendantApproval(true); // items are now able to be removed	
-				System.out.println("You can remove an item now");
+				
+				JButton enterBtn = new JButton("Enter");
+				JTextField codeTextField = new JTextField(16);
+				JLabel enterLabel = new JLabel("Enter the barcode/PLU code of the product to be removed: ");
+				
+				GridBagConstraints gc = new GridBagConstraints();
+				
+				gc.gridx = 1;
+				gc.gridy = 3;
+				generalPanel.add(codeTextField,gc);
+				
+				gc.gridx = 1;
+				gc.gridy = 4;
+				generalPanel.add(enterBtn,gc);
+				
+				gc.gridx = 1;
+				gc.gridy = 2;
+				generalPanel.add(enterLabel,gc);
+				
+				generalPanel.validate();
+							
+				enterBtn.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						String code = codeTextField.getText();
+						for (BarcodedItem item: ControlUnit.sessionData.getScannedItems()) {
+							if (item.getBarcode().toString().equals(code)) {
+								ControlUnit.sessionData.removeScannedItem(item);
+								System.out.println("A scanned product has been removed from purchases");
+								break;
+							}
+						}
+						
+						for (PLUCodedProduct product : ControlUnit.sessionData.getPLUProducts()) {
+							if (product.getPLUCode().toString().equals(code)) {
+								ControlUnit.sessionData.removePLUProduct(product);
+								System.out.println("A PLU product has been removed from purchases");
+								break;					
+							}
+						}		
+					}		
+				});
+				
 			}
 			
 		});
