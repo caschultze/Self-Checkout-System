@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.BarcodedItem;
@@ -117,19 +118,12 @@ public class CurrentSessionData {
 	 */
 	public BigDecimal getTotalPrice() {
 		
-		totalPrice = new BigDecimal("0.00");
 		Collection<BarcodedProduct> calcPrice = scannedProducts.values();
 		
 		for (BarcodedProduct currentProduct : calcPrice) {
 			totalPrice = totalPrice.add(currentProduct.getPrice());
 		}
-
-		ArrayList<PLUCodedProduct> pluPrice = PLUProducts;
-		int i = 0;
-		for (PLUCodedProduct currentProduct : pluPrice) {
-			totalPrice = totalPrice.add(currentProduct.getPrice());
-			i++;
-		}
+		
 		BigDecimal GST = new BigDecimal("1.05");
 		totalPrice = totalPrice.multiply(GST);
 		totalPrice = totalPrice.setScale(2, RoundingMode.HALF_EVEN);
@@ -240,6 +234,16 @@ public class CurrentSessionData {
 	
 	public ArrayList<Double> getPLUWeights() {
 		return PLUWeights;
+	}
+	
+	public void removePLUProduct(PLUCodedProduct product) {
+		
+		for (Iterator<PLUCodedProduct> iterator = PLUProducts.iterator(); iterator.hasNext(); ) {
+		    PLUCodedProduct value = iterator.next();
+		    if (value.getPLUCode() != null) {
+		        iterator.remove();
+		    }
+		}
 	}
 	
 }
