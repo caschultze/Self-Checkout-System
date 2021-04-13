@@ -403,7 +403,7 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			PaymentSelectionScreen.tsl.setVisible(false);
 			GUIPayCash.touchscreen.setVisible(false);
 			GUIPayGiftCardScreen.touchscreen.setVisible(false);
-			ThanksForShoppingScreen.setVisible(false);
+			ThanksForShoppingScreen.tsl.setVisible(false);
 			ShutdownScreen.tsl.setVisible(true);
 			
 			break;

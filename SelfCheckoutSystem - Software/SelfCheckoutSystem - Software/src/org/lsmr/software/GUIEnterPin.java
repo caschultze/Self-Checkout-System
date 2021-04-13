@@ -71,7 +71,7 @@ public class GUIEnterPin extends MainGUI {
 		addExtraButtons();
 		frame.add(windowPanel);
 		
-		frame.setVisible(true);
+		frame.setVisible(false);
 	}
 	
 	public static void windowTitle(String string) {
