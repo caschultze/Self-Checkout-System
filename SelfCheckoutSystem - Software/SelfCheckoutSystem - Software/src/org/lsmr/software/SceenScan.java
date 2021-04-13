@@ -33,7 +33,6 @@ public class SceenScan extends MainGUI {
     public SceenScan(){
     	touchscreen = new TouchScreen();
         JFrame frame = touchscreen.getFrame();
-        frame.setVisible(false);
         frame.setName("name");
         frame.setLayout(new BorderLayout());
         
@@ -175,7 +174,6 @@ public class SceenScan extends MainGUI {
         
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // So we can click X to close
-        frame.setVisible(false);
 	}
 	
 	
@@ -186,17 +184,21 @@ public class SceenScan extends MainGUI {
 		shopCart.setText("<html>Items<br/></html>");
 		
 		for(BarcodedProduct item : session.getScannedProducts().values()) {
+			Integer i = session.getScannedProductsDup().get(item.getBarcode());
+			while(i>0) {
 			String textItem = shopCart.getText().substring(0,shopCart.getText().length()-8);
 			String textPrice = shopCartPrice.getText().substring(0,shopCartPrice.getText().length()-8);
 			
-			textItem = textItem.concat(item.getDescription()+"<br/></html>");
-			shopCart.setText(textItem);
 			
-			
-			textPrice = textPrice.concat("$");
-			textPrice = textPrice.concat(item.getPrice().toString()+ "<br/></html>");
-			shopCartPrice.setText(textPrice);
-			
+				textItem = textItem.concat(item.getDescription()+"<br/></html>");
+				shopCart.setText(textItem);
+				
+				System.out.println(i);
+				textPrice = textPrice.concat("$");
+				textPrice = textPrice.concat(item.getPrice().toString()+ "<br/></html>");
+				shopCartPrice.setText(textPrice);
+				i -= 1;
+			}
 			totalPrice.setText("Total = " + session.getTotalPrice());
 		}
 		for(PLUCodedProduct item : session.getPLUProducts()) {
@@ -213,6 +215,7 @@ public class SceenScan extends MainGUI {
 			
 			totalPrice.setText("Total = " + session.getTotalPrice());
 		}
+		totalPrice.setText("Total = " + session.getTotalPrice());
 		
 	}
 	

@@ -38,6 +38,7 @@ public class ShutdownScreen extends MainGUI{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				ControlUnit.sessionData.restart();
 				switchScreen(4);
 			}
         	

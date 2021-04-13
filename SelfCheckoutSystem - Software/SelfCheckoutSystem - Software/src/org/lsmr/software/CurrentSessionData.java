@@ -25,6 +25,7 @@ public class CurrentSessionData {
 	 */
 	
 	private static HashMap<Barcode, BarcodedProduct> scannedProducts = new HashMap<Barcode,BarcodedProduct>(); 
+	private static HashMap<Barcode, Integer> scannedProductsDup = new HashMap<Barcode,Integer>(); 
 	private static ArrayList <BarcodedItem> scannedItems = new ArrayList<BarcodedItem>();
 	private static BigDecimal currentAmountOwing = new BigDecimal("0.00");
 	private static BigDecimal totalPrice = new BigDecimal("0.00");
@@ -51,6 +52,11 @@ public class CurrentSessionData {
 	public HashMap<Barcode, BarcodedProduct> getScannedProducts() {
 		return scannedProducts;
 	}
+	
+	
+	public HashMap<Barcode, Integer> getScannedProductsDup(){
+		return scannedProductsDup;
+	}
 
 	/*
 	 * Function to add items to saved ArrayList of scanned items -> used to determine use cases about the bagging area
@@ -66,6 +72,14 @@ public class CurrentSessionData {
 		Barcode code = item.getBarcode();
 		BarcodedProduct pro = ProductDatabases.BARCODED_PRODUCT_DATABASE.get(code);
 		scannedProducts.put(code, pro);
+		if(scannedProductsDup.containsKey(code)) {
+			Integer i = scannedProductsDup.get(code);
+			i += 1;
+			scannedProductsDup.put(code, i);
+		}else {
+			scannedProductsDup.put(code, 1);
+		}
+		
 		currentTotalWeight += item.getWeight();
 	}
 	
@@ -75,12 +89,18 @@ public class CurrentSessionData {
 	 * Jeremy: I added this function to support the use case: Attendant removes product from purchases 
 	 */
 	public void removeScannedItem(BarcodedItem item) {
+		Integer i = scannedProductsDup.get(item.getBarcode());
+		if (i<2) {
 		scannedItems.remove(item);
 		
 		Barcode code = item.getBarcode();
 		scannedProducts.remove(code);
 		currentTotalWeight -= item.getWeight();
-		
+		scannedProductsDup.remove(code);
+		}else {
+			i -= 1;
+			scannedProductsDup.put(item.getBarcode(), i);
+		}
 	}
 	
 	
@@ -123,18 +143,20 @@ public class CurrentSessionData {
 		Collection<BarcodedProduct> calcPrice = scannedProducts.values();
 		
 		for (BarcodedProduct currentProduct : calcPrice) {
-			totalPrice = totalPrice.add(currentProduct.getPrice());
+			Integer i = scannedProductsDup.get(currentProduct.getBarcode());
+			while (i>0) {
+				totalPrice = totalPrice.add(currentProduct.getPrice());
+				i -= 1;
+			}
 		}
 
-
 		ArrayList<PLUCodedProduct> pluPrice = PLUProducts;
+		
 		int i = 0;
 		for (PLUCodedProduct currentProduct : pluPrice) {
 			totalPrice = totalPrice.add(currentProduct.getPrice());
 			i++;
 		}
-
-		
 		currentAmountOwing = totalPrice;
 		return totalPrice;
 	}
@@ -251,6 +273,19 @@ public class CurrentSessionData {
 		        iterator.remove();
 		    }
 		}
+	}
+	
+	public void restart() {
+		scannedProducts = new HashMap<Barcode,BarcodedProduct>(); 
+		scannedItems = new ArrayList<BarcodedItem>();
+		currentAmountOwing = new BigDecimal("0.00");
+		totalPrice = new BigDecimal("0.00");
+		attendantLoggedIn = false;
+		currentAttendant = null;
+		attendantLoggedInMiddleCheck = false;
+		currentTotalWeight = 0.0;
+		PLUProducts = new ArrayList<PLUCodedProduct>();
+		PLUWeights = new ArrayList<Double>();
 	}
 	
 }

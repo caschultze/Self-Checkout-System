@@ -43,7 +43,7 @@ public class refillCoin_BanknoteTest {
 			notes[i] = new Coin(new BigDecimal("0.05"),currency);
 		}
 		try {
-		cu.refillMoney.loadCoins(notes);
+		cu.coinRefill.loadCoins(notes);
 		assertTrue("Error should've been thrown",false);
 		}catch(Exception e) {
 			if (e instanceof SimulationException) {
@@ -61,7 +61,7 @@ public class refillCoin_BanknoteTest {
 			notes[i] = new Banknote(5,currency);
 		}
 		try {
-		cu.refillMoney.loadBanknotes(notes);
+		cu.banknoteRefill.loadBanknotes(notes);
 		assertTrue("Error should've been thrown",false);
 		}catch(Exception e) {
 			if (e instanceof SimulationException) {
@@ -76,7 +76,7 @@ public class refillCoin_BanknoteTest {
 		notes[1] = new Banknote(5,currency);
 		notes[2] = new Banknote(10,currency);
 		try {
-			cu.refillMoney.loadBanknotes(notes);
+			cu.banknoteRefill.loadBanknotes(notes);
 			assertTrue("Should've thrown an error",false);
 		}catch(Exception e){}		
 	}
@@ -88,7 +88,7 @@ public class refillCoin_BanknoteTest {
 		notes[1] = new Coin(new BigDecimal("0.05"),currency);
 		notes[2] = new Coin(new BigDecimal("0.10"),currency);
 		try {
-			cu.refillMoney.loadCoins(notes);
+			cu.coinRefill.loadCoins(notes);
 			assertTrue("Should've thrown an error",false);
 		}catch(Exception e){}		
 	}
@@ -100,7 +100,7 @@ public class refillCoin_BanknoteTest {
 		notes[1] = new Coin(new BigDecimal("0.05"),currency);
 		notes[2] = new Coin(new BigDecimal("0.05"),currency);
 		try {
-			cu.refillMoney.loadCoins(notes);
+			cu.coinRefill.loadCoins(notes);
 			assertEquals("The dispenser should be empty",3,cu.checkoutStation.coinDispensers.get(new BigDecimal("0.05")).size());
 		}catch(Exception e){}		
 	}
@@ -112,7 +112,7 @@ public class refillCoin_BanknoteTest {
 		notes[1] = new Banknote(5,currency);
 		notes[2] = new Banknote(5,currency);
 		try {
-			cu.refillMoney.loadBanknotes(notes);
+			cu.banknoteRefill.loadBanknotes(notes);
 			assertEquals("The dispenser should be empty",3,cu.checkoutStation.banknoteDispensers.get(5).size());
 		}catch(Exception e){}		
 	}
