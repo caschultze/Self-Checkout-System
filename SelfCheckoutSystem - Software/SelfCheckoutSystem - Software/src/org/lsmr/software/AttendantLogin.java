@@ -31,7 +31,6 @@ public class AttendantLogin {
 			loginDatabase.put("rayray22", "meOrangutanOohOohAhAh111");
 			loginDatabase.put("Bruh", "#$4CalgarybornChimpanzeeAustron");
 			loginDatabase.put("Mana24129", "SCARYguineaBaboon#587");
-			loginDatabase.put("rjwalker", "realWorld123");
 		}
 	}
 	
