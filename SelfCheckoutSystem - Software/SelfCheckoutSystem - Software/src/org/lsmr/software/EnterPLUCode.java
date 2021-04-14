@@ -1,6 +1,11 @@
 package org.lsmr.software;
 
 import org.lsmr.selfcheckout.PriceLookupCode;
+import org.lsmr.selfcheckout.devices.AbstractDevice;
+import org.lsmr.selfcheckout.devices.ElectronicScale;
+import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
+import org.lsmr.selfcheckout.devices.listeners.AbstractDeviceListener;
+import org.lsmr.selfcheckout.devices.listeners.ElectronicScaleListener;
 import org.lsmr.selfcheckout.external.ProductDatabases;
 import org.lsmr.selfcheckout.products.PLUCodedProduct;
 
@@ -12,10 +17,57 @@ import org.lsmr.selfcheckout.products.PLUCodedProduct;
 
 public class EnterPLUCode {
 
+	private SelfCheckoutStation station;
 	private CurrentSessionData data;
+	private ElectronicScaleListener esl; 
+	private boolean isEnabled = false;
+	private boolean isDisabled= false;
 	
-	public EnterPLUCode(CurrentSessionData data) {
-		this.data = data;
+	public EnterPLUCode(SelfCheckoutStation station) {
+		this.station = station;
+		data = new CurrentSessionData();
+		registerListeners();
+	}
+	
+	public void registerListeners() {
+		esl = new ElectronicScaleListener() {
+
+			@Override
+			public void enabled(AbstractDevice<? extends AbstractDeviceListener> device) {
+				isEnabled = true;
+				
+			}
+
+			@Override
+			public void disabled(AbstractDevice<? extends AbstractDeviceListener> device) {
+				isDisabled = true;
+				
+			}
+
+			@Override
+			public void weightChanged(ElectronicScale scale, double weightInGrams) {
+
+				double weightInKilograms = weightInGrams * 0.001;
+				if (weightInKilograms != 0.0) {
+					data.addPLUWeight(weightInKilograms);
+				}
+				
+			}
+
+			@Override
+			public void overload(ElectronicScale scale) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void outOfOverload(ElectronicScale scale) {
+				// TODO Auto-generated method stub
+				
+			} 
+			
+		};
+		station.scale.register(esl);
 	}
 	
 	/**
@@ -47,8 +99,17 @@ public class EnterPLUCode {
 		
 		PLUCodedProduct product = getPLUProduct(plu);
 		data.addPLUProduct(product);
+		System.out.println("Your product has been added");
 		
 		
+	}
+	
+	public boolean getEnabled() {
+		return isEnabled;
+	}
+	
+	public boolean getDisabled() {
+		return isDisabled;
 	}
 	
 }

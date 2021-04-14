@@ -3,6 +3,7 @@ package org.lsmr.software;
 import org.lsmr.selfcheckout.Item;
 import org.lsmr.selfcheckout.devices.AbstractDevice;
 import org.lsmr.selfcheckout.devices.ElectronicScale;
+import org.lsmr.selfcheckout.devices.OverloadException;
 import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.devices.listeners.AbstractDeviceListener;
 import org.lsmr.selfcheckout.devices.listeners.ElectronicScaleListener;
@@ -38,12 +39,25 @@ public class RemovesItems {
 	public void removesItems(Item item) {
 		
 		station.baggingArea.remove(item);
-		
-		if (weight == 0.0) {
-			
-			sessionData.setCurrentExpectedWeight(0.0);
-			
+
+		try {
+			if (station.baggingArea.getCurrentWeight() == 0.0) {
+				ControlUnit.InkCounter--;
+				ControlUnit.PaperCounter--;
+			}
+		} catch (OverloadException e) {
 		}
+	}
+	
+	/**
+	 * Adds an item to the station's baggingArea 
+	 * 
+	 * @param item
+	 * 		The Item to be added to the station's baggingArea
+	 */
+	public void placesItems(Item item) {
+		
+		station.baggingArea.add(item);
 		
 	}
 	

@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.BarcodedItem;
@@ -24,14 +25,16 @@ public class CurrentSessionData {
 	 */
 	
 	private static HashMap<Barcode, BarcodedProduct> scannedProducts = new HashMap<Barcode,BarcodedProduct>(); 
+	private static HashMap<Barcode, Integer> scannedProductsDup = new HashMap<Barcode,Integer>(); 
 	private static ArrayList <BarcodedItem> scannedItems = new ArrayList<BarcodedItem>();
 	private static BigDecimal currentAmountOwing = new BigDecimal("0.00");
 	private static BigDecimal totalPrice = new BigDecimal("0.00");
 	private static boolean attendantLoggedIn = false;
 	private static Attendant currentAttendant = null;
 	private static boolean attendantLoggedInMiddleCheck = false;
-	private static double currentExpectedWeight = 0.0;
+	private static double currentTotalWeight = 0.0;
 	private static ArrayList<PLUCodedProduct> PLUProducts = new ArrayList<PLUCodedProduct>();
+	private static ArrayList<Double> PLUWeights = new ArrayList<Double>();
 	
 	/*
 	 * Function to add products to a saved HashMap of items scanned -> this HashMap explicitly associates each item scanned with 
@@ -49,6 +52,11 @@ public class CurrentSessionData {
 	public HashMap<Barcode, BarcodedProduct> getScannedProducts() {
 		return scannedProducts;
 	}
+	
+	
+	public HashMap<Barcode, Integer> getScannedProductsDup(){
+		return scannedProductsDup;
+	}
 
 	/*
 	 * Function to add items to saved ArrayList of scanned items -> used to determine use cases about the bagging area
@@ -64,7 +72,15 @@ public class CurrentSessionData {
 		Barcode code = item.getBarcode();
 		BarcodedProduct pro = ProductDatabases.BARCODED_PRODUCT_DATABASE.get(code);
 		scannedProducts.put(code, pro);
-		currentExpectedWeight += item.getWeight();
+		if(scannedProductsDup.containsKey(code)) {
+			Integer i = scannedProductsDup.get(code);
+			i += 1;
+			scannedProductsDup.put(code, i);
+		}else {
+			scannedProductsDup.put(code, 1);
+		}
+		
+		currentTotalWeight += item.getWeight();
 	}
 	
 	/*
@@ -73,12 +89,18 @@ public class CurrentSessionData {
 	 * Jeremy: I added this function to support the use case: Attendant removes product from purchases 
 	 */
 	public void removeScannedItem(BarcodedItem item) {
+		Integer i = scannedProductsDup.get(item.getBarcode());
+		if (i<2) {
 		scannedItems.remove(item);
 		
 		Barcode code = item.getBarcode();
 		scannedProducts.remove(code);
-		currentExpectedWeight -= item.getWeight();
-		
+		currentTotalWeight -= item.getWeight();
+		scannedProductsDup.remove(code);
+		}else {
+			i -= 1;
+			scannedProductsDup.put(item.getBarcode(), i);
+		}
 	}
 	
 	
@@ -116,16 +138,25 @@ public class CurrentSessionData {
 	 */
 	public BigDecimal getTotalPrice() {
 		
+		
+		totalPrice = new BigDecimal("0.00");
 		Collection<BarcodedProduct> calcPrice = scannedProducts.values();
 		
 		for (BarcodedProduct currentProduct : calcPrice) {
-			totalPrice = totalPrice.add(currentProduct.getPrice());
+			Integer i = scannedProductsDup.get(currentProduct.getBarcode());
+			while (i>0) {
+				totalPrice = totalPrice.add(currentProduct.getPrice());
+				i -= 1;
+			}
 		}
+
+		ArrayList<PLUCodedProduct> pluPrice = PLUProducts;
 		
-		BigDecimal GST = new BigDecimal("1.05");
-		totalPrice = totalPrice.multiply(GST);
-		totalPrice = totalPrice.setScale(2, RoundingMode.HALF_EVEN);
-		
+		int i = 0;
+		for (PLUCodedProduct currentProduct : pluPrice) {
+			totalPrice = totalPrice.add(currentProduct.getPrice());
+			i++;
+		}
 		currentAmountOwing = totalPrice;
 		return totalPrice;
 	}
@@ -139,6 +170,31 @@ public class CurrentSessionData {
 				currentAmountOwing = currentAmountOwing.add(bag);
 			}
 		}
+	}
+	
+	public void addPLUItemsToTotalPrice() {
+		int i = 0;
+		BigDecimal price = new BigDecimal("0.0");
+		for (PLUCodedProduct product : PLUProducts) {
+			BigDecimal weightInKg = BigDecimal.valueOf(PLUWeights.get(i));
+			price = (product.getPrice()).multiply(weightInKg);
+			totalPrice = totalPrice.add(price);
+			currentAmountOwing = currentAmountOwing.add(price);
+			i++;
+		}
+	}
+	
+	public void addBarcodeProductsToTotalPrice() {
+		int i = 0;
+		BigDecimal price = new BigDecimal("0.0");
+		for (PLUCodedProduct product : PLUProducts) {
+			BigDecimal weightInKg = BigDecimal.valueOf(PLUWeights.get(i));
+			price = (product.getPrice()).multiply(weightInKg);
+			totalPrice = totalPrice.add(price);
+			currentAmountOwing = currentAmountOwing.add(price);
+			i++;
+		}
+		
 	}
 	
 	/**
@@ -184,13 +240,13 @@ public class CurrentSessionData {
 	public void setCurrentAttendant(Attendant attendant) {
 		currentAttendant = attendant;
 	}
-	
-	public double getCurrentExpectedWeight() {
-		return currentExpectedWeight;
+
+	public double getCurrentTotalWeight() {
+		return currentTotalWeight;
 	}
 	
-	public void setCurrentExpectedWeight(double deduction) {
-		currentExpectedWeight += deduction;
+	public void setCurrentTotalWeight(double deduction) {
+		currentTotalWeight -= deduction;
 	}
 	
 	public void addPLUProduct(PLUCodedProduct product) {
@@ -199,6 +255,38 @@ public class CurrentSessionData {
 	
 	public ArrayList<PLUCodedProduct> getPLUProducts() {
 		return PLUProducts;
+	}
+	
+	public void addPLUWeight(double weight) {
+		PLUWeights.add(weight);
+	}
+	
+	public ArrayList<Double> getPLUWeights() {
+		return PLUWeights;
+	}
+	
+	public void removePLUProduct(PLUCodedProduct product) {
+		
+		for (Iterator<PLUCodedProduct> iterator = PLUProducts.iterator(); iterator.hasNext(); ) {
+		    PLUCodedProduct value = iterator.next();
+		    if (value.equals(product)) {
+		        iterator.remove();
+		    }
+		}
+	}
+	
+	public void restart() {
+		scannedProducts = new HashMap<Barcode,BarcodedProduct>(); 
+		scannedProductsDup = new HashMap<Barcode,Integer>(); 
+		scannedItems = new ArrayList<BarcodedItem>();
+		currentAmountOwing = new BigDecimal("0.00");
+		totalPrice = new BigDecimal("0.00");
+		attendantLoggedIn = false;
+		currentAttendant = null;
+		attendantLoggedInMiddleCheck = false;
+		currentTotalWeight = 0.0;
+		PLUProducts = new ArrayList<PLUCodedProduct>();
+		PLUWeights = new ArrayList<Double>();
 	}
 	
 }

@@ -123,8 +123,7 @@ public class CoinPayment {
 			
 			@Override
 			public void coinsFull(CoinDispenser dispenser) {
-				// TODO Auto-generated method stub
-
+			
 			}
 
 			@Override
@@ -214,6 +213,8 @@ public class CoinPayment {
 	public boolean getEmptyDispenserCheck() {
 		return emptyDispenserCheck;
 	}
+	
+
 	
 	public void setEmptyDispenserCheck(boolean flag) {
 		emptyDispenserCheck = flag;

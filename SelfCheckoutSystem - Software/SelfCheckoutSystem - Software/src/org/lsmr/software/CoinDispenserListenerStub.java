@@ -5,12 +5,14 @@ import java.math.BigDecimal;
 import org.lsmr.selfcheckout.Coin;
 import org.lsmr.selfcheckout.devices.AbstractDevice;
 import org.lsmr.selfcheckout.devices.CoinDispenser;
+import org.lsmr.selfcheckout.devices.SimulationException;
 import org.lsmr.selfcheckout.devices.listeners.AbstractDeviceListener;
 import org.lsmr.selfcheckout.devices.listeners.CoinDispenserListener;
 
 public class CoinDispenserListenerStub implements CoinDispenserListener{
 	
 	BigDecimal value;
+	//private static boolean dispenserFull = false;
 	
 	public CoinDispenserListenerStub(BigDecimal v){
 		value = v;
@@ -29,8 +31,9 @@ public class CoinDispenserListenerStub implements CoinDispenserListener{
 	}
 
 	@Override
-	public void coinsFull(CoinDispenser dispenser) {
+	public void coinsFull(CoinDispenser dispenser){
 		System.out.println("The coin dispenser for " + value +" is full");
+		 //dispenserFull = true;
 		
 	}
 
@@ -83,5 +86,9 @@ public class CoinDispenserListenerStub implements CoinDispenserListener{
 	public BigDecimal getValue() {
 		return value;
 	}
+	
+//	public boolean getDispenserFull() {
+//		return dispenserFull;
+//	}
 
 }

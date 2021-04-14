@@ -87,43 +87,49 @@ public class PayDebit {
 		station.cardReader.register(cardListener);
 	}
 	
-	public void debitTap(Card card) throws IOException {
+	public CardData debitTap(Card card) throws IOException {
 		
 		if (card == null) {
 			throw new NullPointerException("No argument may be null");
 		}
 		
-		station.cardReader.tap(card);
+		CardData data = station.cardReader.tap(card);
 		
 		if (!(type.equalsIgnoreCase(typeCard))) {
 			throw new SimulationException("Type of card is not debit");
 		}
+		return data;
+
 	}
 	
-	public void debitSwipe(Card card, BufferedImage signature) throws IOException {
+	public CardData debitSwipe(Card card, BufferedImage signature) throws IOException {
 		
 		if (card == null || signature == null) {
 			throw new NullPointerException("No argument may be null");
 		}
 		
-		station.cardReader.swipe(card, signature);
+		CardData data = station.cardReader.swipe(card, signature);
 		
 		if (!(type.equalsIgnoreCase(typeCard))) {
 			throw new SimulationException("Type of card is not debit");
 		}
+		return data;
+
 	}
 
-	public void debitInsert(Card card, String pin) throws IOException {
+	public CardData debitInsert(Card card, String pin) throws IOException {
 	
 		if (card == null || pin == null) {
 			throw new NullPointerException("No argument may be null");
 		}
 		
-		station.cardReader.insert(card, pin);
+		CardData data = station.cardReader.insert(card, pin);
 		
 		if (!(type.equalsIgnoreCase(typeCard))) {
 			throw new SimulationException("Type of card is not debit");
 		}
+		return data;
+
 	}
 	
 	public void debitRemove() {

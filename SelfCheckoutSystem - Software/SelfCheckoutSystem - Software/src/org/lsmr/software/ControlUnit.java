@@ -32,10 +32,16 @@ public class ControlUnit {
 	public static DetectUnexpectedWeight checkWrongWeight;
 	public static PaperLow paperLow;
 	public static InkLow inkLow;
-	public static AddPaper addPaperInk;
+	public static AddPaper addPaper;
+	public static AddInk addInk;
 	public static RemovesItems removesItems;
 	public static refillCoin coinRefill;
 	public static refillBanknote banknoteRefill;
+	public static CustomerNoBagScannedItemAttendantRemovesProduct attendantRemovesProduct;
+	public static StartupAndShutdown startupShutdown;
+	public static int InkCounter = 3;
+	public static int PaperCounter = 3;
+	public static EnterPLUCode enterPLU;
 	
 	// instantiate station variables below
 	private static Currency currency;
@@ -83,14 +89,18 @@ public class ControlUnit {
 		login = new AttendantLogin();
 		enterNumBags = new EnterNumberOfBags();
 		removesItems = new RemovesItems(checkoutStation);
-		addPaperInk = new AddPaper(checkoutStation);
+//		addPaperInk = new AddPaper(checkoutStation);
+//		placesItems = new RemovesItems(checkoutStation);
+		addPaper = new AddPaper(checkoutStation);
 		login = new AttendantLogin();
 		approveWeight = new AttendantApprovesWeight();
 		checkWrongWeight = new DetectUnexpectedWeight(checkoutStation);
 		coinRefill = new refillCoin(checkoutStation);
 		banknoteRefill = new refillBanknote(checkoutStation);
-		
-		
+		addInk = new AddInk(checkoutStation);
+		startupShutdown = new StartupAndShutdown(checkoutStation);
+		attendantRemovesProduct = new CustomerNoBagScannedItemAttendantRemovesProduct(checkoutStation);
+		enterPLU = new EnterPLUCode(checkoutStation);
 		
 		
 		// Instantiate attendant-specific use cases in here
@@ -154,6 +164,9 @@ public class ControlUnit {
 	public int getScaleSensitivity() {
 		return scaleSensitivity;
 	}
+	
+	
+	
 	
 //	public static void setCurrentState(int option) {
 //		if (option == 1) {

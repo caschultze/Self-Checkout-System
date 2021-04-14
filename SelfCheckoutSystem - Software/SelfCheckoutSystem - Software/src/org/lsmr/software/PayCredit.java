@@ -8,6 +8,7 @@ import org.lsmr.selfcheckout.Card.CardData;
 import org.lsmr.selfcheckout.Card.CardInsertData;
 import org.lsmr.selfcheckout.Card.CardSwipeData;
 import org.lsmr.selfcheckout.Card.CardTapData;
+import org.lsmr.selfcheckout.InvalidPINException;
 import org.lsmr.selfcheckout.devices.AbstractDevice;
 import org.lsmr.selfcheckout.devices.CardReader;
 import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
@@ -87,43 +88,48 @@ public class PayCredit {
 		station.cardReader.register(cardListener);
 	}
 	
-	public void creditTap(Card card) throws IOException {
+	public CardData creditTap(Card card) throws IOException {
 		
 		if (card == null) {
 			throw new NullPointerException("No argument may be null");
 		}
 		
-		station.cardReader.tap(card);
+		CardData data = station.cardReader.tap(card);
 		
 		if (!(type.equalsIgnoreCase(typeCard))) {
 			throw new SimulationException("Type of card is not credit");
 		}
+		return data;
 	}
 	
-	public void creditSwipe(Card card, BufferedImage signature) throws IOException {
+	public CardData creditSwipe(Card card, BufferedImage signature) throws IOException {
 		
 		if (card == null || signature == null) {
 			throw new NullPointerException("No argument may be null");
 		}
 		
-		station.cardReader.swipe(card, signature);
+		CardData data = station.cardReader.swipe(card, signature);
 		
 		if (!(type.equalsIgnoreCase(typeCard))) {
 			throw new SimulationException("Type of card is not credit");
 		}
+		return data;
+
 	}
 
-	public void creditInsert(Card card, String pin) throws IOException {
+	public CardData creditInsert(Card card, String pin) throws IOException, InvalidPINException {
 	
 		if (card == null || pin == null) {
 			throw new NullPointerException("No argument may be null");
 		}
 		
-		station.cardReader.insert(card, pin);
+		CardData data = station.cardReader.insert(card, pin);
 		
 		if (!(type.equalsIgnoreCase(typeCard))) {
 			throw new SimulationException("Type of card is not credit");
 		}
+		return data;
+
 	}
 	
 	public void creditRemove() {

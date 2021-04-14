@@ -14,7 +14,7 @@ import org.lsmr.selfcheckout.devices.SimulationException;
 
 public class PlaceItemFail extends BagItem{
 
-	CurrentSessionData data = ControlUnit.sessionData;
+	CurrentSessionData data = new CurrentSessionData();
 	SelfCheckoutStation station;
 	private double pastWeight = 0.0;
 	private boolean discrepancy;
@@ -71,7 +71,7 @@ public class PlaceItemFail extends BagItem{
 		}
 		
 		this.discrepancy = false;
-		data.setCurrentExpectedWeight(station.baggingArea.getCurrentWeight());
+		data.setCurrentTotalWeight(station.baggingArea.getCurrentWeight());
 		
 		//reset scannedItems
 		scannedItems.clear();

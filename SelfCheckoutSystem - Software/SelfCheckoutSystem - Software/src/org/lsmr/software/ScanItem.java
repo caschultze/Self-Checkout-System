@@ -21,6 +21,7 @@ public class ScanItem {
 
 	
 	public ScanItem(SelfCheckoutStation checkoutStation) {
+		data = new CurrentSessionData();
 		scs = checkoutStation;
 		registerListeners();
 	}
@@ -75,7 +76,7 @@ public class ScanItem {
 			scs.mainScanner.scan(currentBarcode);
 			if (scanSuccess) {
 				data.addScannedItem(currentBarcode);
-//				data.addScannedProducts(currentBarcode.getBarcode());
+				System.out.println("You have Scanned an Item");
 			}
 		 }
 	}
