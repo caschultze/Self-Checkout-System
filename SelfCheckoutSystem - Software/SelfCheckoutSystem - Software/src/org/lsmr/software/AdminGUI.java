@@ -40,7 +40,6 @@ public class AdminGUI extends MainGUI {
 	private static JButton emptyNoteBtn;
 	private static JButton refillCoinBtn;
 	private static JButton refillNoteBtn;
-	private static JButton backBtn;
 	private static JButton weightBtn;
 	private static JPanel adminPanel;
 	private static JPanel generalPanel;
@@ -86,10 +85,6 @@ public class AdminGUI extends MainGUI {
         removeBtn.setFont(new Font("Arial", Font.PLAIN, 30));
         removeBtn.setBackground(white);
         
-        backBtn = new JButton("Back");
-        backBtn.setFont(new Font("Arial", Font.PLAIN, 30));
-        backBtn.setBackground(white);
-        
         weightBtn = new JButton("Approve Weight");
         weightBtn.setFont(new Font("Arial", Font.PLAIN, 30));
         weightBtn.setBackground(white);
@@ -129,16 +124,11 @@ public class AdminGUI extends MainGUI {
 		generalPanel.add(weightBtn,gc);
 		
 		gc.gridx = 0;
-		gc.gridy = 5;
+		gc.gridy = 6;
 		gc.anchor = GridBagConstraints.PAGE_END;
 		gc.insets = new Insets(2,2,2,2);
 		gc.weighty = 1.0;
 		generalPanel.add(logoutBtn,gc);
-		
-		gc.gridx = 0;
-		gc.gridy = 6;
-		gc.weighty = 0;
-		generalPanel.add(backBtn,gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 6;
@@ -235,7 +225,6 @@ public class AdminGUI extends MainGUI {
 		emptyNoteBtnAction();
 		refillCoinBtnAction();
 		refillNoteBtnAction();
-		backBtnAction();
 		weightBtnAction();
 
        // frame.setVisible(true);
@@ -268,7 +257,7 @@ public class AdminGUI extends MainGUI {
 					emptyNoteBtn.setEnabled(true);
 					refillCoinBtn.setEnabled(true);
 					refillNoteBtn.setEnabled(true);
-					backBtn.setEnabled(false);
+					logoutBtn.setEnabled(false);
 					blockBtn.setForeground(new Color(230, 57, 70));
 					ControlUnit.blocker.blockStation();
 					
@@ -280,7 +269,7 @@ public class AdminGUI extends MainGUI {
 					emptyNoteBtn.setEnabled(false);
 					refillCoinBtn.setEnabled(false);
 					refillNoteBtn.setEnabled(false);
-					backBtn.setEnabled(true);
+					logoutBtn.setEnabled(true);
 					blockBtn.setForeground(new Color(0, 0, 0));
 					ControlUnit.blocker.unblockStation();
 				}
@@ -297,23 +286,12 @@ public class AdminGUI extends MainGUI {
 				ControlUnit.login.attendantLogOut();
 				System.out.println("You have been logged out");
 				textOut.setText(" ");
-				switchScreen(5);
-			}
-			
-		});
-	}
-	
-	public static void backBtnAction () {
-		backBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				textOut.setText(" ");
 				switchScreen(CurrentScreen);
 			}
 			
 		});
 	}
+	
 	
 	public static void removeBtnAction () {
 		removeBtn.addActionListener(new ActionListener() {

@@ -86,7 +86,7 @@ public class GUIPayGiftCardScreen extends MainGUI {
 	public GUIPayGiftCardScreen () {
 		Calendar expiry = Calendar.getInstance(TimeZone.getTimeZone("MDT"));
 		expiry.add(Calendar.YEAR, 2);
-		BigDecimal creditLimit = new BigDecimal("20000.00");
+		BigDecimal creditLimit = new BigDecimal("200.00");
 		ControlUnit.paymentProcessing.addData("30031234", "Dr. Walker", expiry, "555", creditLimit);
 		
 		BigDecimal totalPrice = ControlUnit.sessionData.getTotalPrice();
