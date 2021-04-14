@@ -314,4 +314,9 @@ public class GUIMembershipLogIn extends MainGUI {
 		key_ADMIN.setBackground(white);
 		key_NonMem.setBackground(white);
 	}
+	
+	public static void setMembership() {
+		membershipID = "";
+		numberDisplay.setText(membershipID);
+	}
 }

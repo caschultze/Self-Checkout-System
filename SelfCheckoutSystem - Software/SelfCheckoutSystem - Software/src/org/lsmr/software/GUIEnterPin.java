@@ -360,5 +360,10 @@ public class GUIEnterPin extends MainGUI {
 		key_ADMIN.setBackground(white);
 		key_backScreen.setBackground(white);
 	}
+	
+	public void setPin () {
+		membershipID = "";
+		numberDisplay.setText(membershipID);
+	}
 }
 
