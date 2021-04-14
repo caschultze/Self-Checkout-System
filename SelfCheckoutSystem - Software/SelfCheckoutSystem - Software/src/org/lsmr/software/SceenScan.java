@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -174,8 +175,9 @@ public class SceenScan extends MainGUI {
 
     		@Override
     		public void actionPerformed(ActionEvent e) {
+    			if (session.getTotalPrice().compareTo(BigDecimal.ZERO) != 0) {
     			switchScreen(11);
-    			
+    			}
     		}
         
         }
