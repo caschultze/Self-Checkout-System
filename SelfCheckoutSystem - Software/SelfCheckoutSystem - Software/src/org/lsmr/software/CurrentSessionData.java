@@ -277,6 +277,7 @@ public class CurrentSessionData {
 	
 	public void restart() {
 		scannedProducts = new HashMap<Barcode,BarcodedProduct>(); 
+		scannedProductsDup = new HashMap<Barcode,Integer>(); 
 		scannedItems = new ArrayList<BarcodedItem>();
 		currentAmountOwing = new BigDecimal("0.00");
 		totalPrice = new BigDecimal("0.00");

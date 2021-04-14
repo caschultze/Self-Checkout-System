@@ -84,7 +84,7 @@ public class PaymentSelectionScreen extends MainGUI {
 		jp.add(admin_key,gc);
 		admin_key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switchScreen(10);
+				switchScreen(7);
 			}
 		});
 		

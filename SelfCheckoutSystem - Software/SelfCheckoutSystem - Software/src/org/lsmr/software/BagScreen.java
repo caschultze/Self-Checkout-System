@@ -44,13 +44,14 @@ public class BagScreen extends MainGUI {
 		public static TouchScreen tsl;
 		private static Color blue = new Color(237, 246, 249);
 	    private static Color white = new Color(255, 255, 255);
+	    private static Font font = new Font("Arial", Font.PLAIN, 40);
 		
 		public BagScreen () {
 		
 		tsl = new TouchScreen();
 		frame = tsl.getFrame();
 		bagMenu();
-		frame.setVisible(false);
+		
 		
 		}
 		
@@ -65,7 +66,7 @@ public class BagScreen extends MainGUI {
 	        
 	        gc.gridx = 0;
 	        gc.gridy = 1;
-			JLabel BagQ = new JLabel("Would you like to bag your item");
+			JLabel BagQ = new JLabel("Would you like to bag your item?");
 			BagQ.setFont(new Font("Arial", Font.BOLD,30));;
 			bagPanel.add(BagQ, gc);
 	        
@@ -80,17 +81,11 @@ public class BagScreen extends MainGUI {
 		    JButton yesBag = new JButton ("Yes, Add a Bag");
 		    yesBag.setBackground(white);
 		    bagPanel.add(yesBag, gc);
-		    
-		    
-		    gc.gridx = 2;
-		    gc.gridy = 3;
-			JButton no = new JButton ("No");
-			no.setBackground(white);
-			bagPanel.add(no, gc);
+		   
 			
 			gc.gridx = 0;
 		    gc.gridy = 5;
-		    JButton adminHelp = new JButton ("Admin Help");
+		    JButton adminHelp = new JButton ("Admin Help / Not Bagging");
 		    adminHelp.setBackground(white);
 		    bagPanel.add(adminHelp, gc);
 			
@@ -112,16 +107,16 @@ public class BagScreen extends MainGUI {
 					}
 				});
 		    
-		    no.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							switchScreen(6);
-						}
-					});
-		    
 			adminHelp.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					switchScreen(7);
 				}
 			});
+			
+			yesBag.setFont(font);
+			yes.setFont(font);
+			adminHelp.setFont(font);
+			BagQ.setFont(font);
+			frame.setVisible(false);
 		}
 }
