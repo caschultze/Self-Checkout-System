@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.BarcodedItem;
@@ -38,16 +39,20 @@ public class PlaceItemFailTest {
 	Barcode five = new Barcode("5555");
 	double weightFive = 9.29;
 	
-	BarcodedItem itemOne;
-	BarcodedItem itemTwo;
-	BarcodedItem itemThree;
+	//Test to see how checkWeights works with an empty list
+	@Test
+	(expected = SimulationException.class)
+	public void testNoScannedItems() throws OverloadException {		
+		cu.failPlaceItem.checkWeights();
+	}
+	
 	
 	@Before
 	public void setup() {
 		
-		itemOne = new BarcodedItem(one, weightOne);
-		itemTwo = new BarcodedItem(two, weightTwo);
-		itemThree = new BarcodedItem(three, weightThree);
+		BarcodedItem itemOne = new BarcodedItem(one, weightOne);
+		BarcodedItem itemTwo = new BarcodedItem(two, weightTwo);
+		BarcodedItem itemThree = new BarcodedItem(three, weightThree);
 		
 		BarcodedProduct firstProduct = new BarcodedProduct(one, "Chess set", new BigDecimal(10.40));
 		BarcodedProduct secondProduct = new BarcodedProduct(two, "Monopoly", new BigDecimal(11.12));
@@ -75,53 +80,43 @@ public class PlaceItemFailTest {
 		data.addScannedItem(itemTwo);
 		data.addScannedItem(itemThree);
 	} 
-	
-	//Test to see how checkWeights works with an empty list
-	@Test
-	(expected = SimulationException.class)
-	public void testNoScannedItems() throws OverloadException {	
-		data.removeScannedItem(itemOne);
-		data.removeScannedItem(itemTwo);
-		data.removeScannedItem(itemThree);
-		cu.failPlaceItem.checkWeights();
-	}
-	
-	//Test to deteremine if the function predicts the right weight/compares weights properly
+
+	//Test to determine if the function predicts the right weight/compares weights properly
 	@Test
 	public void testCheckWeightsRight() throws OverloadException {
-		for (BarcodedItem item : data.getScannedItems()) {
-			cu.itemBag.bagItems(item);
+		for(BarcodedItem i : data.getScannedItems()) {
+			cu.itemBag.bagItems(i);
 		}
 		cu.failPlaceItem.checkWeights();
 
 		BarcodedItem itemFour = new BarcodedItem(four, weightFour);
-		
+
 		data.addScannedItem(itemFour);
 		cu.itemBag.bagItems(itemFour);
-		cu.failPlaceItem.checkWeights();
-		
-		assertFalse(cu.failPlaceItem.getDiscrepancy());
+		boolean actual = cu.failPlaceItem.checkWeights();
+		assertTrue(actual);
 	}
 	
 	//Test to determine if the function handles no weight change properly
 	@Test
-	(expected = SimulationException.class)
 	public void testCheckWeightsNoChange() throws OverloadException {
-		cu.failPlaceItem.checkWeights();
+		boolean actual = cu.failPlaceItem.checkWeights();
+		assertFalse(actual);
 	}
 	
 	
 	//Test to determine if the program correctly registers when an item has not been placed
 	@Test
 	public void checkItemPlacedFalse() throws OverloadException {
-		System.out.println("CHECKITEMPLACEDFALSE");
-		for (BarcodedItem item : data.getScannedItems()) {
-			cu.itemBag.bagItems(item);
+		for(BarcodedItem i : data.getScannedItems()) {
+			cu.itemBag.bagItems(i);
 		}
 		
 		cu.failPlaceItem.checkWeights();
 		
 		BarcodedItem itemFive = new BarcodedItem(five, weightFive);
+		ArrayList<BarcodedItem> addedItem = new ArrayList<BarcodedItem>();
+		addedItem.add(itemFive);
 		
 		data.addScannedItem(itemFive);
 		cu.itemBag.bagItems(itemFive);
