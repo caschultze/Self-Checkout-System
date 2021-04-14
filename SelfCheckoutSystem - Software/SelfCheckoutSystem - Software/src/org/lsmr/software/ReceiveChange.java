@@ -87,6 +87,7 @@ public class ReceiveChange {
 
 		station.coinDispensers.get(val).unload();
 	
+	
 	}
 	
 	
@@ -123,7 +124,7 @@ public class ReceiveChange {
 					station.coinDispensers.get(amo).emit();
 					change = change.subtract(amo);
 					}catch(DisabledException e) {System.out.println("The system is disabled");throw new DisabledException();}
-					catch(EmptyException e) {System.out.println("The is no more notes of this value");throw new EmptyException();}
+					catch(EmptyException e) {System.out.println("The is no more coins of this value");throw new EmptyException();}
 					catch(OverloadException e) {System.out.println("The deliver sink is full");throw new OverloadException();}
 				}
 			}

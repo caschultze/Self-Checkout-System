@@ -22,6 +22,7 @@ import java.awt.Insets;
 
 import org.lsmr.software.BanknotePayment;
 import org.lsmr.selfcheckout.Banknote;
+import org.lsmr.selfcheckout.Coin;
 import org.lsmr.selfcheckout.devices.AbstractDevice;
 import org.lsmr.selfcheckout.devices.TouchScreen;
 import org.lsmr.selfcheckout.devices.listeners.TouchScreenListener;
@@ -43,6 +44,11 @@ public class GUIPayCash extends MainGUI{
 	private static JLabel total;
 	private static JLabel cash;
 	private static JLabel change;
+	private static JButton toonie;
+	private static JButton loonie;
+	private static JButton quarter;
+	private static JButton dime;
+	private static JButton nickel;
 	
 	private static Color blue = new Color(237, 246, 249);
     private static Color white = new Color(255, 255, 255);
@@ -80,6 +86,14 @@ public class GUIPayCash extends MainGUI{
         five = new JButton("$5");
        // five.setPreferredSize(new Dimension(100,100));
         
+      
+    	
+    	toonie = new JButton("$2");
+    	loonie = new JButton("$1");
+    	quarter = new JButton("¢25");
+    	dime = new JButton("¢10");
+    	nickel = new JButton("¢5");
+    	
         help = new JButton("Help");
         admin = new JButton("Admin");
         back = new JButton("Back");
@@ -105,6 +119,11 @@ public class GUIPayCash extends MainGUI{
         total.setFont(newbuttonFont);
         change.setFont(newbuttonFont);
         finish.setFont(newbuttonFont);
+        toonie.setFont(newbuttonFont);
+        loonie.setFont(newbuttonFont);
+        quarter.setFont(newbuttonFont);
+        dime.setFont(newbuttonFont);
+        nickel.setFont(newbuttonFont);
         
         hundred.setBackground(white);
         fifty.setBackground(white);
@@ -114,38 +133,44 @@ public class GUIPayCash extends MainGUI{
         help.setBackground(white);
         admin.setBackground(white);
         back.setBackground(white);
-        finish.setBackground(white);
+        finish.setBackground(white); 
+        toonie.setBackground(white);
+        loonie.setBackground(white);
+        quarter.setBackground(white);
+        dime.setBackground(white);
+        nickel.setBackground(white);
+        
         
         //MOVE BUTTONS 
         gc.gridx = 0;
-        gc.gridy = 1;
+        gc.gridy = 2;
         gc.ipady = 40;
         mainPanel.add(admin, gc);
         
         
         gc.gridx = 1;
-        gc.gridy = 1;
+        gc.gridy = 2;
         gc.ipady = 40;
         mainPanel.add(help, gc);
         
         gc.gridx = 2;
-        gc.gridy = 1;
+        gc.gridy = 2;
         gc.ipady = 40;
         mainPanel.add(finish, gc);
         
-        gc.gridx = 4;
+        gc.gridx = 3;
         gc.gridy = 2;
         gc.ipady = 40;
         mainPanel.add(back, gc);
         
         
         gc.gridx = 4;
-        gc.gridy = 1;
+        gc.gridy = 2;
         gc.ipady = 40;
         mainPanel.add(total, gc);
         
         gc.gridx = 5;
-        gc.gridy = 1;
+        gc.gridy = 2;
         gc.ipady = 40;
         mainPanel.add(change, gc);
 
@@ -160,6 +185,11 @@ public class GUIPayCash extends MainGUI{
         admin.addActionListener(new adminButtonHandler());
         back.addActionListener(new backButtonHandler());
         finish.addActionListener(new finishButtonHandler());
+        toonie.addActionListener(new toonieButtonHandler());
+        loonie.addActionListener(new loonieButtonHandler());
+        quarter.addActionListener(new quarterButtonHandler());
+        dime.addActionListener(new dimeButtonHandler());
+        nickel.addActionListener(new nickelButtonHandler());
         
         //COLOR
         mainPanel.setBackground(blue);
@@ -194,6 +224,32 @@ public class GUIPayCash extends MainGUI{
        
        
         
+        gc.gridx = 0;
+        gc.gridy = 1;
+        gc.ipady = 40;
+        mainPanel.add(toonie, gc);
+        
+        gc.gridx = 1;
+        gc.gridy = 1;
+        gc.ipady = 40;
+        mainPanel.add(loonie, gc);
+        
+        gc.gridx = 2;
+        gc.gridy = 1;
+        gc.ipady = 40;
+        mainPanel.add(quarter, gc);
+       
+        
+        gc.gridx = 3;
+        gc.gridy = 1;
+        gc.ipady = 40;
+        mainPanel.add(dime, gc);
+        
+        gc.gridx = 4;
+        gc.gridy = 1;
+        gc.ipady = 40;
+        mainPanel.add(nickel, gc);
+        
         frame.setVisible(false);
        
     
@@ -208,13 +264,15 @@ public class GUIPayCash extends MainGUI{
 			int value = 100;
 			Banknote hundred = new Banknote(value, Currency.getInstance("CAD"));
 			
+			try {
+				ControlUnit.payBanknote.payWithBanknotes(hundred);
+			}catch (Exception e21) {
+				updateError();
+			}
 			
-			
-			ControlUnit.payBanknote.payWithBanknotes(hundred);
-			//CurrentSessionData.payBanknote(value);
-			//total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
 			updateTotal();
 		}
+		
 		
 	}
 		
@@ -225,10 +283,12 @@ public class GUIPayCash extends MainGUI{
 		public void actionPerformed(ActionEvent e) {
 			int value = 50;
 			Banknote fifty = new Banknote(value, Currency.getInstance("CAD"));
-			ControlUnit.payBanknote.payWithBanknotes(fifty);
-			//CurrentSessionData.payBanknote(value);
-			//total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
-			//total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+			try {
+				ControlUnit.payBanknote.payWithBanknotes(fifty);
+			}catch (Exception e21) {
+				updateError();
+			}
+			
 			updateTotal();
 
 					
@@ -243,10 +303,11 @@ public class GUIPayCash extends MainGUI{
 		public void actionPerformed(ActionEvent e) {
 			int value = 20;
 			Banknote twenty = new Banknote(value, Currency.getInstance("CAD"));
-			ControlUnit.payBanknote.payWithBanknotes(twenty);
-			//CurrentSessionData.payBanknote(value);
-			//total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
-			//total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+			try {
+				ControlUnit.payBanknote.payWithBanknotes(twenty);
+			}catch (Exception e21) {
+				updateError();
+			}
 			updateTotal();
 
 							
@@ -261,10 +322,11 @@ public class GUIPayCash extends MainGUI{
 		public void actionPerformed(ActionEvent e) {
 			int value = 10;
 			Banknote ten = new Banknote(value, Currency.getInstance("CAD"));
-			ControlUnit.payBanknote.payWithBanknotes(ten);
-			//CurrentSessionData.payBanknote(value);
-			//total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
-			//total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+			try {
+				ControlUnit.payBanknote.payWithBanknotes(ten);
+			}catch (Exception e21) {
+				updateError();
+			}
 			updateTotal();
 
 		}
@@ -279,10 +341,11 @@ public class GUIPayCash extends MainGUI{
 		public void actionPerformed(ActionEvent e) {
 			int value = 5;
 			Banknote five = new Banknote(value, Currency.getInstance("CAD"));
-			ControlUnit.payBanknote.payWithBanknotes(five);
-			//CurrentSessionData.payBanknote(value);
-			//total = new JLabel("Total: " + CurrentSessionData.getCurrentAmountOwing());
-			//total = new JLabel("Total: " + ControlUnit.sessionData.getCurrentAmountOwing());
+			try {
+				ControlUnit.payBanknote.payWithBanknotes(five);
+			}catch (Exception e21) {
+				updateError();
+			}
 			updateTotal();
 
 							
@@ -343,10 +406,146 @@ public class GUIPayCash extends MainGUI{
 						
 	}
 		
+		static class toonieButtonHandler implements ActionListener{
+
+			//what to do about currency?
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				BigDecimal value = new BigDecimal("2.00");
+				Coin c = new Coin(value, Currency.getInstance("CAD"));
+				
+				try {
+					ControlUnit.payCoin.payWithCoins(c);
+//					if(ControlUnit.payCoin.getDispenserFull() == true) {
+//						updateDispenser();
+//					}
+//					
+				}catch (Exception e21){
+					updateError();
+					
+				}
+	
+				updateTotal();
+			}
+			
+		}
+		
+		
+		static class loonieButtonHandler implements ActionListener{
+
+			//what to do about currency?
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				BigDecimal value = new BigDecimal("1.00");
+				Coin c = new Coin(value, Currency.getInstance("CAD"));
+				
+				
+				try {
+					ControlUnit.payCoin.payWithCoins(c);
+//					if(ControlUnit.payCoin.getDispenserFull() == true) {
+//						updateDispenser();
+//					}
+					
+				}catch (Exception e21){
+					updateError();
+					
+				}
+	
+				updateTotal();
+			}
+			
+		}
+		
+		static class quarterButtonHandler implements ActionListener{
+
+			//what to do about currency?
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				BigDecimal value = new BigDecimal("0.25");
+				Coin c = new Coin(value, Currency.getInstance("CAD"));
+			
+				try {
+					ControlUnit.payCoin.payWithCoins(c);
+//					if(ControlUnit.payCoin.getDispenserFull() == true) {
+//						updateDispenser();
+//					}
+//					
+				}catch (Exception e21){
+					updateError();
+					
+				}
+				updateTotal();
+			}
+			
+		}
+		
+		static class dimeButtonHandler implements ActionListener{
+
+			//what to do about currency?
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				BigDecimal value = new BigDecimal("0.10");
+				Coin c = new Coin(value, Currency.getInstance("CAD"));
+				
+				try {
+					ControlUnit.payCoin.payWithCoins(c);
+//					if(ControlUnit.payCoin.getDispenserFull() == true) {
+//						updateDispenser();
+//					}
+					
+				}catch (Exception e21){
+					updateError();
+					
+				}
+	
+				updateTotal();
+			}
+			
+		}
+		
+		static class nickelButtonHandler implements ActionListener{
+
+			//what to do about currency?
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				BigDecimal value = new BigDecimal("0.05");
+				Coin c = new Coin(value, Currency.getInstance("CAD"));
+			
+				try {
+					ControlUnit.payCoin.payWithCoins(c);
+//					if(ControlUnit.payCoin.cdl.getClass()) {
+//						updateDispenser();
+//					}
+					
+				}catch (Exception e21){
+					updateError();
+					
+					
+				}
+	
+				updateTotal();
+			}
+			
+		}
+		
 	//THIS IS NOT WORKING, TOTAL PRICE HAS NOT BEEN UPDATED
 	public static void updateTotalInitial() {
 		total.setText("Total = $ " + ControlUnit.sessionData.getTotalPrice());
 		change.setText("Change: $0");
+		
+	}
+		
+	public static void updateError() {
+		total.setText("Error! Please call an attendant");
+		total.setBackground(Color.red);
+		change.setText("");
+		
+	}
+	
+	public static void updateDispenser() {
+		total.setText("Error! Please call an attendant");
+		total.setBackground(Color.red);
+		change.setText("");
 		
 	}
 		
