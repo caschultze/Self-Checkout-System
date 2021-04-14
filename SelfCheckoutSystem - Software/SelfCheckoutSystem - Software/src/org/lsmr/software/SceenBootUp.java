@@ -310,10 +310,10 @@ public class SceenBootUp extends MainGUI {
 			if (control.login.verifyLogin(username, password)) {
 				switchScreen(5);
 				
-			}else {
+			}
 				jtext.setText("");
 				jPass.setText("");
-			}
+			
 		}
         
         }

@@ -158,6 +158,8 @@ public class ListProductScreen extends MainGUI {
 							ControlUnit.enterPLU.enterPLUProduct(tryPlu);
 						}
 						switchScreen(16);
+						enterQ.setText("");
+						enterP.setText("");
 					}
 				}
 			});

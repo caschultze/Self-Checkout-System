@@ -310,10 +310,10 @@ public class GUIAdminLogin extends MainGUI {
 			if (control.login.verifyLogin(username, password)) {
 				switchScreen(10);
 				
-			}else {
+			}
 				jtext.setText("");
 				jPass.setText("");
-			}
+
 		}
         
         }
