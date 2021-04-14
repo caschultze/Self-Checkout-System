@@ -45,6 +45,9 @@ public class AdminGUI extends MainGUI {
 	private static JPanel generalPanel;
 	private static JPanel hiddenPanel;
 	private static JLabel textOut;
+	private static JButton enterBtn;
+	private static JTextField codeTextField;
+	private static JLabel enterLabel;
 	
 	public AdminGUI() {
 		tsl = new TouchScreen();
@@ -286,6 +289,9 @@ public class AdminGUI extends MainGUI {
 				ControlUnit.login.attendantLogOut();
 				System.out.println("You have been logged out");
 				textOut.setText(" ");
+				generalPanel.remove(enterLabel);
+				generalPanel.remove(enterBtn);
+				generalPanel.remove(codeTextField);
 				switchScreen(CurrentScreen);
 			}
 			
@@ -300,9 +306,9 @@ public class AdminGUI extends MainGUI {
 			public void actionPerformed(ActionEvent e) {
 				ControlUnit.attendantRemovesProduct.setAttendantApproval(true); // items are now able to be removed	
 				
-				JButton enterBtn = new JButton("Enter");
-				JTextField codeTextField = new JTextField(16);
-				JLabel enterLabel = new JLabel("Enter the barcode/PLU code of the product to be removed: ");
+				enterBtn = new JButton("Enter");
+				codeTextField = new JTextField(16);
+				enterLabel = new JLabel("Enter the barcode/PLU code of the product to be removed: ");
 				
 				GridBagConstraints gc = new GridBagConstraints();
 				
