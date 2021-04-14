@@ -31,7 +31,7 @@ public class SceenScan extends MainGUI {
     static JLabel shopCart = new JLabel("<html>Items<br/></html>");
     static JLabel totalPrice = new JLabel("Total = $$$");
     Color blue = new Color(237, 246, 249);
-	 Color white = new Color(255, 255, 255);
+	Color white = new Color(255, 255, 255);
     
     
     public SceenScan(){

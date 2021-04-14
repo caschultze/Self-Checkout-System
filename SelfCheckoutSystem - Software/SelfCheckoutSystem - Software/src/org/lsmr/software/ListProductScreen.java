@@ -26,6 +26,7 @@ import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.PLUCodedItem;
 import org.lsmr.selfcheckout.PriceLookupCode;
 import org.lsmr.selfcheckout.devices.AbstractDevice;
+import org.lsmr.selfcheckout.devices.OverloadException;
 import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.devices.TouchScreen;
 import org.lsmr.selfcheckout.devices.listeners.TouchScreenListener;
@@ -243,7 +244,12 @@ public class ListProductScreen extends MainGUI {
 				BarcodedItem Chocolate = new BarcodedItem(chocoBarcode, 200.0);
 				BarcodeList.add(Chocolate);
 				ControlUnit.itemScan.scanItems(BarcodeList);
-				ControlUnit.itemBag.bagItems(Chocolate);
+				try {
+					ControlUnit.itemBag.bagItems(Chocolate);
+				} catch (OverloadException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				switchScreen(16);
 	
 			}
@@ -262,7 +268,12 @@ public class ListProductScreen extends MainGUI {
 				BarcodedItem Cupcake = new BarcodedItem(cupBarcode, 500.0);
 				BarcodeList.add(Cupcake);
 				ControlUnit.itemScan.scanItems(BarcodeList);
-				ControlUnit.itemBag.bagItems(Cupcake);
+				try {
+					ControlUnit.itemBag.bagItems(Cupcake);
+				} catch (OverloadException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				switchScreen(16);
 
 			}
@@ -282,7 +293,12 @@ public class ListProductScreen extends MainGUI {
 				BarcodedItem Eggs = new BarcodedItem(eggBarcode, 500.0);
 				BarcodeList.add(Eggs);
 				ControlUnit.itemScan.scanItems(BarcodeList);
-				ControlUnit.itemBag.bagItems(Eggs);
+				try {
+					ControlUnit.itemBag.bagItems(Eggs);
+				} catch (OverloadException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				switchScreen(16);
 			}
 		});
@@ -299,7 +315,12 @@ public class ListProductScreen extends MainGUI {
 				BarcodedItem Milk = new BarcodedItem(milkBarcode, 1000.0);
 				BarcodeList.add(Milk);
 				ControlUnit.itemScan.scanItems(BarcodeList);
-				ControlUnit.itemBag.bagItems(Milk);
+				try {
+					ControlUnit.itemBag.bagItems(Milk);
+				} catch (OverloadException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				switchScreen(16);
 			}
 		});
@@ -316,7 +337,12 @@ public class ListProductScreen extends MainGUI {
 				BarcodedItem Water = new BarcodedItem(waterBarcode, 500.0);
 				BarcodeList.add(Water);
 				ControlUnit.itemScan.scanItems(BarcodeList);
-				ControlUnit.itemBag.bagItems(Water);
+				try {
+					ControlUnit.itemBag.bagItems(Water);
+				} catch (OverloadException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				switchScreen(16);
  
 			}

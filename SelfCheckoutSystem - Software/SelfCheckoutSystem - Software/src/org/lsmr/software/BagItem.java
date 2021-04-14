@@ -28,7 +28,7 @@ public class BagItem {
 	
 	public BagItem(SelfCheckoutStation checkoutStation) {
 		scs = checkoutStation;
-		check = new PlaceItemFail(scs);
+		check = ControlUnit.failPlaceItem;
 		registerListeners();
 	}
 	

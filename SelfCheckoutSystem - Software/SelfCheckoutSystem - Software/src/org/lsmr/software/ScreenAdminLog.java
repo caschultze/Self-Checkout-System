@@ -308,10 +308,10 @@ public class ScreenAdminLog {
 			String password = jPass.getText();
 			if (control.login.verifyLogin(username, password)) {
 				//swap to 6	
-			}else {
+			}
 				jtext.setText("");
 				jPass.setText("");
-			}
+			
 		}
         
         }
