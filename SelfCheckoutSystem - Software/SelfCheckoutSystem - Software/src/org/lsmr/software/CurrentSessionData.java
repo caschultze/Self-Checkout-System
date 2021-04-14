@@ -123,6 +123,9 @@ public class CurrentSessionData {
 	public BigDecimal getCurrentAmountOwing() {
 		return currentAmountOwing;
 	}
+	public BigDecimal getTotal() {
+		return totalPrice;
+	}
 	
 	public void deductCurrentAmountOwing(BigDecimal deduction) {
 		

@@ -400,8 +400,9 @@ public class GUIPayCash extends MainGUI{
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("back");
 			//go back to previous screen 
+			if(ControlUnit.sessionData.getCurrentAmountOwing().compareTo(ControlUnit.sessionData.getTotal()) == 0) {
 			switchScreen(11);
-							
+			}		
 		}
 						
 	}
