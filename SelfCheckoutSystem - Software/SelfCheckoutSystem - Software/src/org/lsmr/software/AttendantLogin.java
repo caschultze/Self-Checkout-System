@@ -15,7 +15,6 @@ public class AttendantLogin {
 		private Attendant Raymond = new Attendant("Raymond Vong", "rayray22", "meOrangutanOohOohAhAh111", "Utility Clerk", "Customer Service");
 		private Attendant Austin = new Attendant("Austin Ficzere", "Bruh", "#$4CalgarybornChimpanzeeAustron", "Cashier", "Customer Service");
 		private Attendant Manbir = new Attendant("Manbir Sandhu", "Mana24129", "SCARYguineaBaboon#587", "Grocery Clerk", "Produce");
-		private Attendant Robert = new Attendant("Robert James Walker", "rjwalker", "realWorld123", "Store Manager", "Human Resources");
 		
 		private ArrayList<Attendant> employees = new ArrayList<Attendant>();
 		private HashMap<String, String> loginDatabase= new HashMap<String, String>();
@@ -26,7 +25,6 @@ public class AttendantLogin {
 			employees.add(Raymond);
 			employees.add(Austin);
 			employees.add(Manbir);
-			employees.add(Robert);
 				
 			loginDatabase.put("geesjake", "freshwaterGORILLA@9to5");
 			loginDatabase.put("samiz50", "monkeLegion!");
