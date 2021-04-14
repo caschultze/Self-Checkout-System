@@ -81,7 +81,7 @@ public class GUIPayGiftCardScreen extends MainGUI {
 	
 	public static JLabel invalidCardMsg = new JLabel("Card could not be scanned. Please try again (this may be because the card is invalid, or because of a random chance of failure).");
 	public static JLabel PayFailedMsg = new JLabel("Payment not processed. Please try again (this may be because of insufficient funds).");
-	public static JLabel invalidPIN = new JLabel("Invalid PIN entered, try again.");
+	public static JLabel invalidPIN = new JLabel("Swipe , try again.");
 	
 	public GUIPayGiftCardScreen () {
 		Calendar expiry = Calendar.getInstance(TimeZone.getTimeZone("MDT"));
@@ -89,8 +89,6 @@ public class GUIPayGiftCardScreen extends MainGUI {
 		BigDecimal creditLimit = new BigDecimal("200.00");
 		ControlUnit.paymentProcessing.addData("30031234", "Dr. Walker", expiry, "555", creditLimit);
 		
-		BigDecimal totalPrice = ControlUnit.sessionData.getTotalPrice();
-
 		touchscreen = new TouchScreen();
         frame = touchscreen.getFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
@@ -158,6 +156,7 @@ public class GUIPayGiftCardScreen extends MainGUI {
 			public void actionPerformed(ActionEvent e) {
 				invalidCardMsg.setVisible(false);
 				PayFailedMsg.setVisible(false);
+				BigDecimal totalPrice = ControlUnit.sessionData.getTotalPrice();
 				try {
 					CardData data = ControlUnit.giftcardPayment.swipeGiftCard(card3, image);
 					int holdNumber = ControlUnit.paymentProcessing.authorize(data.getNumber(), totalPrice);

@@ -104,8 +104,6 @@ public class GUIDebitScreen extends MainGUI {
 		BigDecimal creditLimit = new BigDecimal("1000.00");
 		ControlUnit.paymentProcessing.addData("4500123412341235", "Dr. Walker", expiry, "555", creditLimit);
 		
-		BigDecimal totalPrice = ControlUnit.sessionData.getTotalPrice();
-
 		touchscreen = new TouchScreen();
         frame = touchscreen.getFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
@@ -181,6 +179,7 @@ public class GUIDebitScreen extends MainGUI {
 			public void actionPerformed(ActionEvent e) {
 				invalidCardMsg.setVisible(false);
 				PayFailedMsg.setVisible(false);
+				BigDecimal totalPrice = ControlUnit.sessionData.getTotalPrice();
 				try {
 					CardData data = ControlUnit.debitPayment.debitTap(card2);
 					int holdNumber = ControlUnit.paymentProcessing.authorize(data.getNumber(), totalPrice);
@@ -205,6 +204,7 @@ public class GUIDebitScreen extends MainGUI {
 			public void actionPerformed(ActionEvent e) {
 				invalidCardMsg.setVisible(false);
 				PayFailedMsg.setVisible(false);
+				BigDecimal totalPrice = ControlUnit.sessionData.getTotalPrice();
 				try {
 					CardData data = ControlUnit.debitPayment.debitSwipe(card2, image);
 					int holdNumber = ControlUnit.paymentProcessing.authorize(data.getNumber(), totalPrice);
