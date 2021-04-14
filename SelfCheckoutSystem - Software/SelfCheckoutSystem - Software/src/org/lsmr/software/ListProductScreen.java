@@ -157,7 +157,7 @@ public class ListProductScreen extends MainGUI {
 						for (int i = 0; i < inum; i++) {
 							ControlUnit.enterPLU.enterPLUProduct(tryPlu);
 						}
-						switchScreen(6);
+						switchScreen(16);
 					}
 				}
 			});
@@ -184,7 +184,7 @@ public class ListProductScreen extends MainGUI {
 			public void actionPerformed(ActionEvent e) {
 				PriceLookupCode AppleCode = new PriceLookupCode("4123");
 				ControlUnit.enterPLU.enterPLUProduct(AppleCode);
-				switchScreen(6);
+				switchScreen(16);
 			}
 		});
 		
@@ -197,7 +197,7 @@ public class ListProductScreen extends MainGUI {
 			public void actionPerformed(ActionEvent e) {
 				PriceLookupCode MangoCode = new PriceLookupCode("4051");
 				ControlUnit.enterPLU.enterPLUProduct(MangoCode);
-				switchScreen(6);
+				switchScreen(16);
 			}
 		});
 		
@@ -210,7 +210,7 @@ public class ListProductScreen extends MainGUI {
 			public void actionPerformed(ActionEvent e) {
 				PriceLookupCode GrapeCode = new PriceLookupCode("4022");
 				ControlUnit.enterPLU.enterPLUProduct(GrapeCode);
-				switchScreen(6);
+				switchScreen(16);
 		
 			}
 		});
@@ -225,7 +225,7 @@ public class ListProductScreen extends MainGUI {
 			public void actionPerformed(ActionEvent e) {
 				PriceLookupCode bananaCode = new PriceLookupCode("4011");
 				ControlUnit.enterPLU.enterPLUProduct(bananaCode);
-				switchScreen(6);
+				switchScreen(16);
 			}
 		});
 	
@@ -242,7 +242,7 @@ public class ListProductScreen extends MainGUI {
 				BarcodeList.add(Chocolate);
 				ControlUnit.itemScan.scanItems(BarcodeList);
 				ControlUnit.itemBag.bagItems(Chocolate);
-				switchScreen(6);
+				switchScreen(16);
 	
 			}
 		});
@@ -261,7 +261,7 @@ public class ListProductScreen extends MainGUI {
 				BarcodeList.add(Cupcake);
 				ControlUnit.itemScan.scanItems(BarcodeList);
 				ControlUnit.itemBag.bagItems(Cupcake);
-				switchScreen(6);
+				switchScreen(16);
 
 			}
 		});
@@ -281,7 +281,7 @@ public class ListProductScreen extends MainGUI {
 				BarcodeList.add(Eggs);
 				ControlUnit.itemScan.scanItems(BarcodeList);
 				ControlUnit.itemBag.bagItems(Eggs);
-				switchScreen(6);
+				switchScreen(16);
 			}
 		});
 		
@@ -298,7 +298,7 @@ public class ListProductScreen extends MainGUI {
 				BarcodeList.add(Milk);
 				ControlUnit.itemScan.scanItems(BarcodeList);
 				ControlUnit.itemBag.bagItems(Milk);
-				switchScreen(6);
+				switchScreen(16);
 			}
 		});
 		
@@ -315,7 +315,7 @@ public class ListProductScreen extends MainGUI {
 				BarcodeList.add(Water);
 				ControlUnit.itemScan.scanItems(BarcodeList);
 				ControlUnit.itemBag.bagItems(Water);
-				switchScreen(6);
+				switchScreen(16);
  
 			}
 		});
