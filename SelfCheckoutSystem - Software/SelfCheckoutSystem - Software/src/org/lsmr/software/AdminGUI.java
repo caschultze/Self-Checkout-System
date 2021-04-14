@@ -43,12 +43,12 @@ public class AdminGUI extends MainGUI {
 	public static JButton refillNoteBtn;
 	public static JButton weightBtn;
 	public static JButton enterBtn;
+	public static JTextField codeTextField;
 	
 	private static JPanel adminPanel;
 	private static JPanel generalPanel;
 	private static JPanel hiddenPanel;
 	private static JLabel textOut;
-	private static JTextField codeTextField;
 	private static JLabel enterLabel;
 	private static boolean removeClicked = false;
 	
