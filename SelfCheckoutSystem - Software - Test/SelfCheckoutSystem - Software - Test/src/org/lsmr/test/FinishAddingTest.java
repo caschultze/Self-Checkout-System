@@ -53,7 +53,6 @@ public class FinishAddingTest {
 		control = new ControlUnit(currency, banknoteDenominations, coinDenominations, scaleMaximumWeight, scaleSensitivity);
 		control.main(null);
 		
-//		data = control.sessionData;
 		code1 = new Barcode("1234");
 		code2 = new Barcode("1235");
 		code3 = new Barcode("1236");
@@ -93,8 +92,6 @@ public class FinishAddingTest {
 	public void testBaggingAreaDisabled() { 
 		
 		control.addFinish.finish(0, total);
-		
-		control.itemBag.bagItems(bagged);
 		
 		boolean expected = true; 
 		boolean actual = control.itemBag.getDisabledCheck();
