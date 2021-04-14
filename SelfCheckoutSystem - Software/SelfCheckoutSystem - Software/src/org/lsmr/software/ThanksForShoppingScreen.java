@@ -66,11 +66,11 @@ public class ThanksForShoppingScreen extends MainGUI{
                 	switchScreen(5);
                 }
                 if (ControlUnit.InkCounter == 0) {
-                    switchScreen(7);
+                    switchScreen(17);
                     System.out.print("Need to refill ink\n");
                 } 
                 if (ControlUnit.PaperCounter == 0) {
-                    switchScreen(7);
+                    switchScreen(17);
                     System.out.print("Need to refill paper\n");
                 }
                 

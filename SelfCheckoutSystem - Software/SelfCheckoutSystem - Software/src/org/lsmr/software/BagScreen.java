@@ -51,7 +51,7 @@ public class BagScreen extends MainGUI {
 		tsl = new TouchScreen();
 		frame = tsl.getFrame();
 		bagMenu();
-		frame.setVisible(false);
+		
 		
 		}
 		
@@ -117,5 +117,6 @@ public class BagScreen extends MainGUI {
 			yes.setFont(font);
 			adminHelp.setFont(font);
 			BagQ.setFont(font);
+			frame.setVisible(false);
 		}
 }
