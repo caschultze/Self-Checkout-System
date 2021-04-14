@@ -30,24 +30,27 @@ import org.lsmr.selfcheckout.products.PLUCodedProduct;
 public class AdminGUI extends MainGUI {
 	public static TouchScreen tsl;
 	private static JFrame frame;
-	private static JButton shutdownBtn;
-	private static JButton blockBtn;
-	private static JButton logoutBtn;
-	private static JButton removeBtn;
-	private static JButton paperBtn;
-	private static JButton inkBtn;
-	private static JButton emptyCoinBtn;
-	private static JButton emptyNoteBtn;
-	private static JButton refillCoinBtn;
-	private static JButton refillNoteBtn;
-	private static JButton weightBtn;
+	
+	public static JButton shutdownBtn;
+	public static JButton blockBtn;
+	public static JButton logoutBtn;
+	public static JButton removeBtn;
+	public static JButton paperBtn;
+	public static JButton inkBtn;
+	public static JButton emptyCoinBtn;
+	public static JButton emptyNoteBtn;
+	public static JButton refillCoinBtn;
+	public static JButton refillNoteBtn;
+	public static JButton weightBtn;
+	public static JButton enterBtn;
+	
 	private static JPanel adminPanel;
 	private static JPanel generalPanel;
 	private static JPanel hiddenPanel;
 	private static JLabel textOut;
-	private static JButton enterBtn;
 	private static JTextField codeTextField;
 	private static JLabel enterLabel;
+	private static boolean removeClicked = false;
 	
 	public AdminGUI() {
 		tsl = new TouchScreen();
@@ -252,7 +255,6 @@ public class AdminGUI extends MainGUI {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				if (ControlUnit.blocker.isBlocked() == false) {
 					paperBtn.setEnabled(true);
 					inkBtn.setEnabled(true);
@@ -289,9 +291,13 @@ public class AdminGUI extends MainGUI {
 				ControlUnit.login.attendantLogOut();
 				System.out.println("You have been logged out");
 				textOut.setText(" ");
-				generalPanel.remove(enterLabel);
-				generalPanel.remove(enterBtn);
-				generalPanel.remove(codeTextField);
+				
+				if (removeClicked == true) {
+					generalPanel.remove(enterLabel);
+					generalPanel.remove(enterBtn);
+					generalPanel.remove(codeTextField);
+					removeClicked = false;
+				}
 				switchScreen(CurrentScreen);
 			}
 			
@@ -305,6 +311,7 @@ public class AdminGUI extends MainGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ControlUnit.attendantRemovesProduct.setAttendantApproval(true); // items are now able to be removed	
+				removeClicked = true;
 				
 				enterBtn = new JButton("Enter");
 				codeTextField = new JTextField(16);
@@ -368,7 +375,8 @@ public class AdminGUI extends MainGUI {
 		paperBtn.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {;
+			public void actionPerformed(ActionEvent e) {
+				
 				if (!ControlUnit.addPaper.getPaperAdded() || ControlUnit.paperLow.getNoPaper()) {
 					ControlUnit.addPaper.addPaper(1 << 10);
 					ControlUnit.PaperCounter = 4;
