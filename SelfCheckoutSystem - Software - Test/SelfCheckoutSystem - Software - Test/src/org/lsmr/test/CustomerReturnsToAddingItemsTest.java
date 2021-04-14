@@ -32,16 +32,24 @@ import org.lsmr.software.CustomerReturnsToAddingItems;
 public class CustomerReturnsToAddingItemsTest {
 	
 	public ControlUnit cu;
-	CurrentSessionData data;
 	
-	Barcode one = new Barcode("12345");
-	Barcode two = new Barcode("000");
-	Barcode three = new Barcode("19823");
+	private Barcode one = new Barcode("12345");
+	private Barcode two = new Barcode("000");
+	private Barcode three = new Barcode("19823");
+	private BarcodedItem itemOne;
+	private BarcodedItem itemTwo;
+	private BarcodedItem itemThree;
+	
+	
 	public ArrayList<BarcodedItem> itemsToBeBagged = new ArrayList<BarcodedItem>();
 	
 	@Before
 	public void setup() {
 	
+		double weightOne = 56.3;
+		double weightTwo = 100.6;
+		double weightThree = 462.3;
+		
 		BarcodedItem itemOne = new BarcodedItem(one, weightOne);
 		BarcodedItem itemTwo = new BarcodedItem(two, weightTwo);
 		BarcodedItem itemThree = new BarcodedItem(three, weightThree);
@@ -55,18 +63,17 @@ public class CustomerReturnsToAddingItemsTest {
 		ProductDatabases.BARCODED_PRODUCT_DATABASE.put(three, thirdProduct);
 		
 		itemsToBeBagged.add(itemOne);
-		itemsToBeBagged.add(itemTwo);
+		itemsToBeBagged.add(itemTwo); 
 		itemsToBeBagged.add(itemThree);
 		
 		Currency currency = Currency.getInstance(Locale.CANADA);
 		int[] banknoteDenominations = new int[] {5, 10, 20, 50, 100};
 		BigDecimal[] coinDenominations = new BigDecimal[] {new BigDecimal("0.05"), new BigDecimal("0.10"), new BigDecimal("0.25"), new BigDecimal("1.00"), new BigDecimal("2.00")};
-		int scaleMaximumWeight = 300;
+		int scaleMaximumWeight = 1000;
 		int scaleSensitivity = 1;
 		
 		cu = new ControlUnit(currency, banknoteDenominations, coinDenominations, scaleMaximumWeight, scaleSensitivity);	
 		cu.main(null);
-		data = cu.sessionData;
 		cu.customerReturnsToAddingItems.setHelpNeeded(false);
 		
 	}
@@ -76,8 +83,11 @@ public class CustomerReturnsToAddingItemsTest {
 	@Test
 	public void checkItemPlacedWhenHelpNotNeeded() {
 		
-		cu.customerReturnsToAddingItems.returnAndBagItems(itemsToBeBagged);
-		assertTrue(itemBag.getBaggedItems.equals(itemsToBeBagged));
+		for (BarcodedItem item : itemsToBeBagged) {
+			cu.customerReturnsToAddingItems.returnAndBagItems(item);
+		}
+		
+		assertEquals(3,cu.customerReturnsToAddingItems.getCountWeightChanged());
 	}
 	
 	//test for when the user doe need help and tries to bag an item, all items are expected not be bagged
@@ -86,10 +96,15 @@ public class CustomerReturnsToAddingItemsTest {
 	@Test
 	public void checkItemPlacedWhenHelpNeeded() {
 		
-		cu.customerReturnsToAddingItems.setHelpNeeded(false);
-		cu.customerReturnsToAddingItems.returnAndBagItems(itemsToBeBagged);
-		assertFalse(itemBag.getBaggedItems.equals(itemsToBeBagged));
+		if (!cu.customerReturnsToAddingItems.getHelpNeeded()) {
+			cu.customerReturnsToAddingItems.setHelpNeeded(true);
+		}
 		
+		for (BarcodedItem item : itemsToBeBagged) {
+			cu.customerReturnsToAddingItems.returnAndBagItems(item);
+		}
+		
+		assertEquals(0,cu.customerReturnsToAddingItems.getCountWeightChanged());
 		
 	}
 	
