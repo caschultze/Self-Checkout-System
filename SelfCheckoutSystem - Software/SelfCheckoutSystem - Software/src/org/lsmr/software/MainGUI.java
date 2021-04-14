@@ -9,23 +9,23 @@ import org.lsmr.selfcheckout.devices.AbstractDevice;
 import org.lsmr.selfcheckout.devices.listeners.TouchScreenListener;
 
 public class MainGUI extends AbstractDevice <TouchScreenListener> {
-	private static GUICreditScreen GUICreditScreen;	//1
-	private static GUIDebitScreen GUIDebitScreen;	//2
-	private static GUIEnterPin GUIEnterPin;	//3	
-	private static SceenBootUp SceenBootUp;	//4
-	private static SceenStart SceenStart;	//5
-	private static SceenScan SceenScan;	//6
-	private static GUIAdminLogin GUIAdminLogin;	//7
-	private static GUIMembershipLogIn GUIMembershipLogIn;	//8
-	private static ListProductScreen ListProductScreen;	//9
-	private static AdminGUI AdminGUI;	//10
-	private static PaymentSelectionScreen PaymentSelectionScreen;	//11
-	private static GUIPayCash GUIPayCash;	//12
-	private static GUIPayGiftCardScreen GUIPayGiftCardScreen;	//13
-	private static ThanksForShoppingScreen ThanksForShoppingScreen; //14
-	private static ShutdownScreen ShutdownScreen; //15
-	private static BagScreen bagScreen; //16
-	private static GUIOutofInkPaper outofInkPaper; //17
+	public static GUICreditScreen GUICreditScreen;	//1
+	public static GUIDebitScreen GUIDebitScreen;	//2
+	public static GUIEnterPin GUIEnterPin;	//3	
+	public static SceenBootUp SceenBootUp;	//4
+	public static SceenStart SceenStart;	//5
+	public static SceenScan SceenScan;	//6
+	public static GUIAdminLogin GUIAdminLogin;	//7
+	public static GUIMembershipLogIn GUIMembershipLogIn;	//8
+	public static ListProductScreen ListProductScreen;	//9
+	public static AdminGUI AdminGUI;	//10
+	public static PaymentSelectionScreen PaymentSelectionScreen;	//11
+	public static GUIPayCash GUIPayCash;	//12
+	public static GUIPayGiftCardScreen GUIPayGiftCardScreen;	//13
+	public static ThanksForShoppingScreen ThanksForShoppingScreen; //14
+	public static ShutdownScreen ShutdownScreen; //15
+	public static BagScreen bagScreen; //16
+	public static GUIOutofInkPaper outofInkPaper; //17
 	
 	public static int PayingBy; //credit = 1, debit = 2
 	public static Card card1 = new Card("Credit", "4500123412341234", "Dr. Walker", "123", "1234", true, true);
