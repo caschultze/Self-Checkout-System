@@ -59,7 +59,7 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 		bagScreen = new BagScreen();
 		outofInkPaper = new GUIOutofInkPaper();
 
-		switchScreen(17);
+		switchScreen(4);
 
 
 //		GUIEnterPin.setVisible(true);
@@ -336,6 +336,7 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			ThanksForShoppingScreen.tsl.setVisible(false);
 			bagScreen.tsl.setVisible(false);
 			outofInkPaper.tsl.setVisible(false);
+			GUIPayCash.updateTotalInitial();
 			GUIPayCash.updateTotal();
 
 			break;

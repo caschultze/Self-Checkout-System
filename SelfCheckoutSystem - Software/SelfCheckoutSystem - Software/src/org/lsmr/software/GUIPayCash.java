@@ -90,9 +90,9 @@ public class GUIPayCash extends MainGUI{
     	
     	toonie = new JButton("$2");
     	loonie = new JButton("$1");
-    	quarter = new JButton("Â¢25");
-    	dime = new JButton("Â¢10");
-    	nickel = new JButton("Â¢5");
+    	quarter = new JButton("¢25");
+    	dime = new JButton("¢10");
+    	nickel = new JButton("¢5");
     	
         help = new JButton("Help");
         admin = new JButton("Admin");
