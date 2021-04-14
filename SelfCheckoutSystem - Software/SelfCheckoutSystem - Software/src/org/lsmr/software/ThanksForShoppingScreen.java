@@ -76,34 +76,11 @@ public class ThanksForShoppingScreen extends MainGUI{
                     System.out.print("Need to refill paper\n");
                 }
                 
-                //Clear BankNotes 
-                int noteHundred = 100;
-                int noteFifty = 50;
-                int noteTwenty = 20;
-                int noteTen = 10;
-                int noteFive = 5;
+                //Clear dangling banknote
                   
-                ControlUnit.changeReceive.unloadBanknotes(noteHundred);
-                ControlUnit.changeReceive.unloadBanknotes(noteFifty);
-                ControlUnit.changeReceive.unloadBanknotes(noteTwenty);
-                ControlUnit.changeReceive.unloadBanknotes(noteTen);
-                ControlUnit.changeReceive.unloadBanknotes(noteFive);
+                ControlUnit.checkoutStation.banknoteOutput.removeDanglingBanknote();
                 
-                //Clear Coins
-                
-                
-                
-                BigDecimal toonie = new BigDecimal("2.00");
-                BigDecimal loonie = new BigDecimal("1.00");
-                BigDecimal quarter = new BigDecimal("0.25");
-                BigDecimal dime = new BigDecimal("0.10");
-                BigDecimal nickel = new BigDecimal("0.05");
-            
-                ControlUnit.changeReceive.unloadCoins(toonie);
-                ControlUnit.changeReceive.unloadCoins(loonie);
-                ControlUnit.changeReceive.unloadCoins(quarter);
-                ControlUnit.changeReceive.unloadCoins(dime);
-                ControlUnit.changeReceive.unloadCoins(nickel);
+               
                 
                 
                 

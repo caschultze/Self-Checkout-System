@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import org.lsmr.selfcheckout.devices.TouchScreen;
 
 public class GUIOutofInkPaper extends MainGUI {
-	static JPanel jp = new JPanel(new BorderLayout());
+	static JPanel jp;
 	public static TouchScreen tsl;
 	private static JFrame frame;
 	private static JLabel refillRequired;
@@ -24,6 +24,8 @@ public class GUIOutofInkPaper extends MainGUI {
     private static Font font = new Font("Arial", Font.PLAIN, 40);
 	
 	public GUIOutofInkPaper() {
+		jp = new JPanel();
+		jp.setLayout(new BorderLayout());
         jp.setBackground(blue);
 		
 		tsl = new TouchScreen();
