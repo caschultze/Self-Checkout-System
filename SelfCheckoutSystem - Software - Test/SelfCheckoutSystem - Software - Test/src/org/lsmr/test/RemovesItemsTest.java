@@ -46,7 +46,12 @@ public class RemovesItemsTest {
 	public void testRemoveAnItem() {
 		
 		Barcode itemCode = new Barcode("2222");
-		control.itemBag.bagItems(itemsDatabase.get(itemCode));
+		try {
+			control.itemBag.bagItems(itemsDatabase.get(itemCode));
+		} catch (OverloadException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		control.removesItems.removesItems(itemsDatabase.get(itemCode));
 		assertEquals(control.removesItems.getCountWeightChanged(), 2);
 		
@@ -71,11 +76,11 @@ public class RemovesItemsTest {
 		Barcode itemCode0 = new Barcode("1111");
 		Barcode itemCode1 = new Barcode("2222");
 		Barcode itemCode2 = new Barcode("3333");
-		
+		try {
 		control.itemBag.bagItems(itemsDatabase.get(itemCode0));
 		control.itemBag.bagItems(itemsDatabase.get(itemCode1));
 		control.itemBag.bagItems(itemsDatabase.get(itemCode2));
-		
+		}catch(Exception e){}
 		control.removesItems.removesItems(itemsDatabase.get(itemCode0));
 		control.removesItems.removesItems(itemsDatabase.get(itemCode1));
 		control.removesItems.removesItems(itemsDatabase.get(itemCode2));
@@ -109,7 +114,12 @@ public class RemovesItemsTest {
 	public void testRemoveWeightBelowSensitivity() {
 		
 		Barcode itemCode = new Barcode("4444");
-		control.itemBag.bagItems(itemsDatabase.get(itemCode));
+		try {
+			control.itemBag.bagItems(itemsDatabase.get(itemCode));
+		} catch (OverloadException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		control.removesItems.removesItems(itemsDatabase.get(itemCode));
 		assertEquals(control.removesItems.getCountWeightChanged(), 0);
 		

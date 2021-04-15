@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.PriceLookupCode;
+import org.lsmr.selfcheckout.devices.OverloadException;
 import org.lsmr.selfcheckout.external.ProductDatabases;
 import org.lsmr.selfcheckout.products.BarcodedProduct;
 import org.lsmr.selfcheckout.products.PLUCodedProduct;
@@ -153,7 +154,12 @@ public class AdminGUITest {
 		ArrayList<BarcodedItem> items = new ArrayList<BarcodedItem>();
 		items.add(item);
 		ControlUnit.itemScan.scanItems(items);
-		ControlUnit.itemBag.bagItems(item);
+		try {
+			ControlUnit.itemBag.bagItems(item);
+		} catch (OverloadException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		assertEquals(1,ControlUnit.sessionData.getScannedItems().size()); // item entered
 		

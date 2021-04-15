@@ -101,7 +101,12 @@ public class AddOwnBagTest {
 	public void testItemList() {
 		cu.ownBag.addOwnBag(bag);
 		bagged.add(BarcodeDatabase.get(itemB1));
-		cu.itemBag.bagItems(BarcodeDatabase.get(itemB1));
+		try {
+			cu.itemBag.bagItems(BarcodeDatabase.get(itemB1));
+		} catch (OverloadException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Barcode bb = null;
 		Barcode cc = null;
 		Barcode expected = null;
