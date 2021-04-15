@@ -67,10 +67,6 @@ public class GUIPayCash extends MainGUI{
 		gc.weightx = 0.5;
 		gc.weighty = 0.5;
 		
-		//centerPanel = new JPanel();
-		//tsl = new TouchScreen();
-        //frame = tsl.getFrame();
-        
         hundred = new JButton("$100");
         //hundred.setPreferredSize(new Dimension(100,100));
         
