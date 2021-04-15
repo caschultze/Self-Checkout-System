@@ -266,7 +266,6 @@ public class GUIEnterPin extends MainGUI {
 						}
 					} catch (IOException e1) {
 						ControlUnit.creditPayment.creditRemove();
-						GUICreditScreen.invalidCardMsg.setVisible(true);
 						switchScreen(1);
 					}
 				}
@@ -282,12 +281,10 @@ public class GUIEnterPin extends MainGUI {
 							System.out.print("Debit card succesfully inserted and pin is correct, payment succesfully processed.\n");
 							switchScreen(14);
 						} else {
-							GUIDebitScreen.invalidPIN.setVisible(true);
 							switchScreen(2);
 						}
 					} catch (IOException e1) {
 						ControlUnit.debitPayment.debitRemove();
-						GUIDebitScreen.invalidCardMsg.setVisible(true);
 						switchScreen(2);
 					}
 				}

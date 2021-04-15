@@ -56,6 +56,7 @@ public class GUIPayCashTest {
 		BigDecimal zero = BigDecimal.ZERO;
 		assertEquals(zero, ControlUnit.sessionData.getCurrentAmountOwing());
 	}
+	
 	@Test
 	public void testtoonieButton() {
 		ControlUnit.sessionData.setAndGetTotalPrice(new BigDecimal("2"));
@@ -64,6 +65,7 @@ public class GUIPayCashTest {
 		boolean result = zero.compareTo(ControlUnit.sessionData.getCurrentAmountOwing()) == 0;
 		assertTrue(result);
 	}
+	
 	@Test
 	public void testquarterButton() {
 		ControlUnit.sessionData.setAndGetTotalPrice(new BigDecimal("0.25"));
@@ -72,6 +74,7 @@ public class GUIPayCashTest {
 		boolean result = zero.compareTo(ControlUnit.sessionData.getCurrentAmountOwing()) == 0;
 		assertTrue(result);
 	}
+	
 	@Test
 	public void testdimeButton() {
 		ControlUnit.sessionData.setAndGetTotalPrice(new BigDecimal("0.1"));
@@ -80,6 +83,7 @@ public class GUIPayCashTest {
 		boolean result = zero.compareTo(ControlUnit.sessionData.getCurrentAmountOwing()) == 0;
 		assertTrue(result);
 	}
+	
 	@Test
 	public void testnickelButton() {
 		ControlUnit.sessionData.setAndGetTotalPrice(new BigDecimal("0.05"));

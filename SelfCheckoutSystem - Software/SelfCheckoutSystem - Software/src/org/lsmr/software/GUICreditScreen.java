@@ -2,60 +2,25 @@ package org.lsmr.software;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Frame;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Calendar;
-import java.util.Currency;
-import java.util.Locale;
 import java.util.TimeZone;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.border.EmptyBorder;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-
-import org.lsmr.selfcheckout.Card;
 import org.lsmr.selfcheckout.Card.CardData;
-import org.lsmr.selfcheckout.devices.AbstractDevice;
-import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.devices.TouchScreen;
-import org.lsmr.selfcheckout.devices.listeners.TouchScreenListener;
-
-import java.awt.Color;
-import java.awt.Frame;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import org.lsmr.selfcheckout.devices.AbstractDevice;
-import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
-import org.lsmr.selfcheckout.devices.TouchScreen;
-import org.lsmr.selfcheckout.devices.listeners.TouchScreenListener;
 
 public class GUICreditScreen extends MainGUI {
 	
@@ -66,14 +31,12 @@ public class GUICreditScreen extends MainGUI {
 	private static JPanel bottomPanel;
 	private static JPanel centerPanel;
 	private static JPanel centerPanel2;
-	
 	private static JButton helpButton;
 	private static JButton adminLoginButton;
 	private static JButton backButton;
 	private static JButton tapButton;
 	private static JButton swipeButton;
 	private static JButton insertButton;
-	private static JButton invalidCardButton;
 	private static JButton tryAgainButton;
 	BufferedImage image = new BufferedImage(1, 1, 1);
 	private static ControlUnit control;
@@ -81,7 +44,6 @@ public class GUICreditScreen extends MainGUI {
     private static Color white = new Color(255, 255, 255);
     private static Font font = new Font("Arial", Font.PLAIN, 40);
 	
-	public static JLabel invalidCardMsg = new JLabel("Card could not be scanned. Please try again (this may be because the card is invalid, or because of a random chance of failure).");
 	public static JLabel PayFailedMsg = new JLabel("Payment not processed. Please try again (this may be because of insufficient funds).");
 	public static JLabel invalidPIN = new JLabel("Invalid PIN entered, try again.");
 	
@@ -103,6 +65,9 @@ public class GUICreditScreen extends MainGUI {
 		expiry.add(Calendar.YEAR, 2);
 		BigDecimal creditLimit = new BigDecimal("1000.00");
 		ControlUnit.paymentProcessing.addData("4500123412341234", "Dr. Walker", expiry, "555", creditLimit);
+		
+		BigDecimal totalPrice = ControlUnit.sessionData.getTotalPrice();
+
 		touchscreen = new TouchScreen();
         frame = touchscreen.getFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
@@ -132,7 +97,6 @@ public class GUICreditScreen extends MainGUI {
 		tapButton = new JButton("Tap");
 		swipeButton = new JButton("Swipe");
 		insertButton = new JButton("Insert");
-		invalidCardButton = new JButton("Use card that doesn't scan");
 		
 		adminLoginButton.setBackground(white);
 		helpButton.setBackground(white);
@@ -140,7 +104,6 @@ public class GUICreditScreen extends MainGUI {
 		tapButton.setBackground(white);
 		swipeButton.setBackground(white);
 		insertButton.setBackground(white);
-		invalidCardButton.setBackground(white);
 		centerPanel.setBackground(blue);
 		bottomPanel.setBackground(blue);
 		topPanel.setBackground(blue);
@@ -151,17 +114,12 @@ public class GUICreditScreen extends MainGUI {
 		tapButton.setFont(font);
 		swipeButton.setFont(font);
 		insertButton.setFont(font);
-		invalidCardButton.setFont(font);
 		
 		backButton.setPreferredSize(new Dimension(500, 100));
 
 		centerPanel.add(tapButton);
 		centerPanel.add(swipeButton);
 		centerPanel.add(insertButton);
-		centerPanel.add(invalidCardButton);
-		
-		centerPanel.add(invalidCardMsg);
-		invalidCardMsg.setVisible(false);
 		
 		centerPanel.add(PayFailedMsg);
 		PayFailedMsg.setVisible(false);
@@ -176,9 +134,7 @@ public class GUICreditScreen extends MainGUI {
 		
 		tapButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				invalidCardMsg.setVisible(false);
 				PayFailedMsg.setVisible(false);
-				BigDecimal totalPrice = ControlUnit.sessionData.getTotalPrice();
 				try {
 					CardData data = ControlUnit.creditPayment.creditTap(card1);
 					int holdNumber = ControlUnit.paymentProcessing.authorize(data.getNumber(), totalPrice);
@@ -194,16 +150,13 @@ public class GUICreditScreen extends MainGUI {
 
 				} catch (IOException e1) {
 					ControlUnit.creditPayment.creditRemove();
-					invalidCardMsg.setVisible(true);
 				}
 			}
 		});
 		
 		swipeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				invalidCardMsg.setVisible(false);
 				PayFailedMsg.setVisible(false);
-				BigDecimal totalPrice = ControlUnit.sessionData.getTotalPrice();
 				try {
 					CardData data = ControlUnit.creditPayment.creditSwipe(card1, image);
 					int holdNumber = ControlUnit.paymentProcessing.authorize(data.getNumber(), totalPrice);
@@ -218,7 +171,6 @@ public class GUICreditScreen extends MainGUI {
 					}
 					
 				} catch (IOException e1) {
-					invalidCardMsg.setVisible(true);
 					ControlUnit.creditPayment.creditRemove();
 				}
 			}
@@ -226,16 +178,8 @@ public class GUICreditScreen extends MainGUI {
 		
 		insertButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				invalidCardMsg.setVisible(false);
 				PayFailedMsg.setVisible(false);
 				switchScreen(3);	//Go to GUI PIN screen, make sure enter button in pin screen executes appropriate code
-			}
-		});
-		
-		invalidCardButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				invalidCardMsg.setVisible(true);
-				PayFailedMsg.setVisible(false);
 			}
 		});
 		

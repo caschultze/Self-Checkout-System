@@ -73,7 +73,6 @@ public class GUIDebitScreen extends MainGUI {
 	private static JButton tapButton;
 	private static JButton swipeButton;
 	private static JButton insertButton;
-	private static JButton invalidCardButton;
 	private static JButton tryAgainButton;
 	BufferedImage image = new BufferedImage(1, 1, 1);
 	private static ControlUnit control;
@@ -81,7 +80,6 @@ public class GUIDebitScreen extends MainGUI {
     private static Color white = new Color(255, 255, 255);
     private static Font font = new Font("Arial", Font.PLAIN, 40);
 	
-	public static JLabel invalidCardMsg = new JLabel("Card could not be scanned. Please try again (this may be because the card is invalid, or because of a random chance of failure).");
 	public static JLabel PayFailedMsg = new JLabel("Payment not processed. Please try again (this may be because of insufficient funds).");
 	public static JLabel invalidPIN = new JLabel("Invalid PIN entered, try again.");
 	
@@ -133,7 +131,6 @@ public class GUIDebitScreen extends MainGUI {
 		tapButton = new JButton("Tap");
 		swipeButton = new JButton("Swipe");
 		insertButton = new JButton("Insert");
-		invalidCardButton = new JButton("Use card that doesn't scan");
 		
 		adminLoginButton.setBackground(white);
 		helpButton.setBackground(white);
@@ -141,7 +138,6 @@ public class GUIDebitScreen extends MainGUI {
 		tapButton.setBackground(white);
 		swipeButton.setBackground(white);
 		insertButton.setBackground(white);
-		invalidCardButton.setBackground(white);
 		centerPanel.setBackground(blue);
 		bottomPanel.setBackground(blue);
 		topPanel.setBackground(blue);
@@ -152,17 +148,12 @@ public class GUIDebitScreen extends MainGUI {
 		tapButton.setFont(font);
 		swipeButton.setFont(font);
 		insertButton.setFont(font);
-		invalidCardButton.setFont(font);
 		
 		backButton.setPreferredSize(new Dimension(500, 100));
 
 		centerPanel.add(tapButton);
 		centerPanel.add(swipeButton);
 		centerPanel.add(insertButton);
-		centerPanel.add(invalidCardButton);
-		
-		centerPanel.add(invalidCardMsg);
-		invalidCardMsg.setVisible(false);
 		
 		centerPanel.add(PayFailedMsg);
 		PayFailedMsg.setVisible(false);
@@ -177,7 +168,6 @@ public class GUIDebitScreen extends MainGUI {
 		
 		tapButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				invalidCardMsg.setVisible(false);
 				PayFailedMsg.setVisible(false);
 				BigDecimal totalPrice = ControlUnit.sessionData.getTotalPrice();
 				try {
@@ -195,14 +185,12 @@ public class GUIDebitScreen extends MainGUI {
 
 				} catch (IOException e1) {
 					ControlUnit.debitPayment.debitRemove();
-					invalidCardMsg.setVisible(true);
 				}
 			}
 		});
 		
 		swipeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				invalidCardMsg.setVisible(false);
 				PayFailedMsg.setVisible(false);
 				BigDecimal totalPrice = ControlUnit.sessionData.getTotalPrice();
 				try {
@@ -219,7 +207,6 @@ public class GUIDebitScreen extends MainGUI {
 					}
 					
 				} catch (IOException e1) {
-					invalidCardMsg.setVisible(true);
 					ControlUnit.debitPayment.debitRemove();
 				}
 			}
@@ -227,18 +214,11 @@ public class GUIDebitScreen extends MainGUI {
 		
 		insertButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				invalidCardMsg.setVisible(false);
 				PayFailedMsg.setVisible(false);
 				switchScreen(3);	//Go to GUI PIN screen, make sure enter button in pin screen executes appropriate code
 			}
 		});
 		
-		invalidCardButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				invalidCardMsg.setVisible(true);
-				PayFailedMsg.setVisible(false);
-			}
-		});
 		
 		helpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
