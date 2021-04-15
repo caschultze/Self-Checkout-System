@@ -44,7 +44,19 @@ public class ListProductScreen extends MainGUI {
 		private static JPanel jp;
 		public static TouchScreen tsl;
 		private static Color blue = new Color(237, 246, 249);
-	    private static Color white = new Color(255, 255, 255);
+	    public static Color white = new Color(255, 255, 255);
+	    public static JButton apple;
+	    public static JButton mango;
+	    public static JButton grapes;
+	    public static JButton bananas;
+	    public static JButton chocolate;
+	    public static JButton cupcake;
+	    public static JButton eggs;
+	    public static JButton milk;
+	    public static JButton water;
+	    public static JButton bag;
+	    
+	     
 		
 		public ListProductScreen () {
 		
@@ -159,8 +171,6 @@ public class ListProductScreen extends MainGUI {
 							ControlUnit.enterPLU.enterPLUProduct(tryPlu);
 						}
 						switchScreen(16);
-						enterQ.setText("");
-						enterP.setText("");
 					}
 				}
 			});
@@ -171,197 +181,197 @@ public class ListProductScreen extends MainGUI {
 		
 		
 		public static void shopItems() {
-		GridBagConstraints gc = new GridBagConstraints();
-		gc.insets = new Insets(15,15,15,15);
-		gc.gridx = 0;
-		gc.gridy = 0;
-		//frame.add(jp, gc);
-		jp = new JPanel(new GridLayout(4, 3, 40, 40));
+			GridBagConstraints gc = new GridBagConstraints();
+			gc.insets = new Insets(15,15,15,15);
+			gc.gridx = 0;
+			gc.gridy = 0;
+			//frame.add(jp, gc);
+			jp = new JPanel(new GridLayout(4, 3, 40, 40));
+			
+			apple = new JButton("<html>APPLE<br>PLU CODE: 4123<br> Click to add 1</html>", new ImageIcon(ListProductScreen.class.getResource("apple.jpg")));
+			apple.setFont(new Font("Arial", Font.BOLD,20));
+			apple.setBackground(Color.white);
+			apple.setVerticalTextPosition(SwingConstants.CENTER);
+			jp.add(apple);
+			apple.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					PriceLookupCode AppleCode = new PriceLookupCode("4123");
+					ControlUnit.enterPLU.enterPLUProduct(AppleCode);
+					switchScreen(16);
+				}
+			});
+			
+			mango = new JButton("<html>MANGO<br>PLU CODE: 4051<br> Click to add 1</html>", new ImageIcon(ListProductScreen.class.getResource("mango.jpg")));
+			mango.setFont(new Font("Arial", Font.BOLD,20));
+			mango.setBackground(Color.white);
+			mango.setVerticalTextPosition(SwingConstants.CENTER);
+			jp.add(mango);
+			mango.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					PriceLookupCode MangoCode = new PriceLookupCode("4051");
+					ControlUnit.enterPLU.enterPLUProduct(MangoCode);
+					switchScreen(16);
+				}
+			});
+			
+			grapes = new JButton("<html>GRAPES<br>PLU CODE: 4022<br> Click to add 1</html>", new ImageIcon(ListProductScreen.class.getResource("grapes.jpg")));
+			grapes.setFont(new Font("Arial", Font.BOLD,20));
+			grapes.setBackground(Color.white);
+			grapes.setVerticalTextPosition(SwingConstants.CENTER);
+			jp.add(grapes);
+			grapes.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					PriceLookupCode GrapeCode = new PriceLookupCode("4022");
+					ControlUnit.enterPLU.enterPLUProduct(GrapeCode);
+					switchScreen(16);
+			
+				}
+			});
+			
+			
+			bananas = new JButton("<html>BANANA<br>PLU CODE: 4011<br> Click to add 1</html>", new ImageIcon(ListProductScreen.class.getResource("banana.jpeg")));
+			bananas.setFont(new Font("Arial", Font.BOLD,20));
+			bananas.setBackground(Color.white);
+			bananas.setVerticalTextPosition(SwingConstants.CENTER);
+			jp.add(bananas);
+			bananas.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					PriceLookupCode bananaCode = new PriceLookupCode("4011");
+					ControlUnit.enterPLU.enterPLUProduct(bananaCode);
+					switchScreen(16);
+				}
+			});
 		
-		JButton apple = new JButton("<html>APPLE<br>PLU CODE: 4123<br> Click to add 1</html>", new ImageIcon(ListProductScreen.class.getResource("apple.jpg")));
-		apple.setFont(new Font("Arial", Font.BOLD,20));
-		apple.setBackground(Color.white);
-		apple.setVerticalTextPosition(SwingConstants.CENTER);
-		jp.add(apple);
-		apple.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				PriceLookupCode AppleCode = new PriceLookupCode("4123");
-				ControlUnit.enterPLU.enterPLUProduct(AppleCode);
-				switchScreen(16);
-			}
-		});
+			chocolate = new JButton("<html>CHOCOLATE<br>(CLICK TO SCAN)</html>", new ImageIcon(ListProductScreen.class.getResource("choco.jpg")));
+			chocolate.setFont(new Font("Arial", Font.BOLD,20));
+			chocolate.setBackground(Color.white);
+			jp.add(chocolate);
+			chocolate.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String chocoString = "12345678910";
+					Barcode chocoBarcode = new Barcode(chocoString);
+					ArrayList<BarcodedItem> BarcodeList = new ArrayList<BarcodedItem>();
+					BarcodedItem Chocolate = new BarcodedItem(chocoBarcode, 200.0);
+					BarcodeList.add(Chocolate);
+					ControlUnit.itemScan.scanItems(BarcodeList);
+					try {
+						ControlUnit.itemBag.bagItems(Chocolate);
+					} catch (OverloadException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					switchScreen(16);
 		
-		JButton mango = new JButton("<html>MANGO<br>PLU CODE: 4051<br> Click to add 1</html>", new ImageIcon(ListProductScreen.class.getResource("mango.jpg")));
-		mango.setFont(new Font("Arial", Font.BOLD,20));
-		mango.setBackground(Color.white);
-		mango.setVerticalTextPosition(SwingConstants.CENTER);
-		jp.add(mango);
-		mango.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				PriceLookupCode MangoCode = new PriceLookupCode("4051");
-				ControlUnit.enterPLU.enterPLUProduct(MangoCode);
-				switchScreen(16);
-			}
-		});
+				}
+			});
+			
 		
-		JButton grapes = new JButton("<html>GRAPES<br>PLU CODE: 4022<br> Click to add 1</html>", new ImageIcon(ListProductScreen.class.getResource("grapes.jpg")));
-		grapes.setFont(new Font("Arial", Font.BOLD,20));
-		grapes.setBackground(Color.white);
-		grapes.setVerticalTextPosition(SwingConstants.CENTER);
-		jp.add(grapes);
-		grapes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				PriceLookupCode GrapeCode = new PriceLookupCode("4022");
-				ControlUnit.enterPLU.enterPLUProduct(GrapeCode);
-				switchScreen(16);
-		
-			}
-		});
-		
-		
-		JButton bananas = new JButton("<html>BANANA<br>PLU CODE: 4011<br> Click to add 1</html>", new ImageIcon(ListProductScreen.class.getResource("banana.jpeg")));
-		bananas.setFont(new Font("Arial", Font.BOLD,20));
-		bananas.setBackground(Color.white);
-		bananas.setVerticalTextPosition(SwingConstants.CENTER);
-		jp.add(bananas);
-		bananas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				PriceLookupCode bananaCode = new PriceLookupCode("4011");
-				ControlUnit.enterPLU.enterPLUProduct(bananaCode);
-				switchScreen(16);
-			}
-		});
+			cupcake = new JButton("<html>CUPCAKE<br>(CLICK TO SCAN)</html>", new ImageIcon(ListProductScreen.class.getResource("cupcake.jpeg")));
+			cupcake.setFont(new Font("Arial", Font.BOLD,20));
+			cupcake.setBackground(Color.white);
+			jp.add(cupcake);
+			cupcake.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String cupString = "22345678910";
+					Barcode cupBarcode = new Barcode(cupString);
+					ArrayList<BarcodedItem> BarcodeList = new ArrayList<BarcodedItem>();
+					BarcodedItem Cupcake = new BarcodedItem(cupBarcode, 500.0);
+					BarcodeList.add(Cupcake);
+					ControlUnit.itemScan.scanItems(BarcodeList);
+					try {
+						ControlUnit.itemBag.bagItems(Cupcake);
+					} catch (OverloadException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					switchScreen(16);
 	
-		JButton chocolate = new JButton("<html>CHOCOLATE<br>(CLICK TO SCAN)</html>", new ImageIcon(ListProductScreen.class.getResource("choco.jpg")));
-		chocolate.setFont(new Font("Arial", Font.BOLD,20));
-		chocolate.setBackground(Color.white);
-		jp.add(chocolate);
-		chocolate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String chocoString = "12345678910";
-				Barcode chocoBarcode = new Barcode(chocoString);
-				ArrayList<BarcodedItem> BarcodeList = new ArrayList<BarcodedItem>();
-				BarcodedItem Chocolate = new BarcodedItem(chocoBarcode, 200.0);
-				BarcodeList.add(Chocolate);
-				ControlUnit.itemScan.scanItems(BarcodeList);
-				try {
-					ControlUnit.itemBag.bagItems(Chocolate);
-				} catch (OverloadException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
-				switchScreen(16);
+			});
+			
 	
-			}
-		});
-		
-	
-		JButton cupcake = new JButton("<html>CUPCAKE<br>(CLICK TO SCAN)</html>", new ImageIcon(ListProductScreen.class.getResource("cupcake.jpeg")));
-		cupcake.setFont(new Font("Arial", Font.BOLD,20));
-		cupcake.setBackground(Color.white);
-		jp.add(cupcake);
-		cupcake.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String cupString = "22345678910";
-				Barcode cupBarcode = new Barcode(cupString);
-				ArrayList<BarcodedItem> BarcodeList = new ArrayList<BarcodedItem>();
-				BarcodedItem Cupcake = new BarcodedItem(cupBarcode, 500.0);
-				BarcodeList.add(Cupcake);
-				ControlUnit.itemScan.scanItems(BarcodeList);
-				try {
-					ControlUnit.itemBag.bagItems(Cupcake);
-				} catch (OverloadException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+			
+			eggs = new JButton("<html>EGGS<br>(CLICK TO SCAN)</html>", new ImageIcon(ListProductScreen.class.getResource("eggs.jpg")));
+			eggs.setFont(new Font("Arial", Font.BOLD,20));
+			eggs.setBackground(Color.white);
+			jp.add(eggs);
+			eggs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String eggString = "32345678910";
+					Barcode eggBarcode = new Barcode(eggString);
+					ArrayList<BarcodedItem> BarcodeList = new ArrayList<BarcodedItem>();
+					BarcodedItem Eggs = new BarcodedItem(eggBarcode, 500.0);
+					BarcodeList.add(Eggs);
+					ControlUnit.itemScan.scanItems(BarcodeList);
+					try {
+						ControlUnit.itemBag.bagItems(Eggs);
+					} catch (OverloadException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					switchScreen(16);
 				}
-				switchScreen(16);
-
-			}
-		});
-		
-
-		
-		JButton eggs = new JButton("<html>EGGS<br>(CLICK TO SCAN)</html>", new ImageIcon(ListProductScreen.class.getResource("eggs.jpg")));
-		eggs.setFont(new Font("Arial", Font.BOLD,20));
-		eggs.setBackground(Color.white);
-		jp.add(eggs);
-		eggs.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String eggString = "32345678910";
-				Barcode eggBarcode = new Barcode(eggString);
-				ArrayList<BarcodedItem> BarcodeList = new ArrayList<BarcodedItem>();
-				BarcodedItem Eggs = new BarcodedItem(eggBarcode, 500.0);
-				BarcodeList.add(Eggs);
-				ControlUnit.itemScan.scanItems(BarcodeList);
-				try {
-					ControlUnit.itemBag.bagItems(Eggs);
-				} catch (OverloadException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+			});
+			
+			milk = new JButton("<html>MILK<br>(CLICK TO SCAN)</html>", new ImageIcon(ListProductScreen.class.getResource("milk.jpg")));
+			milk.setFont(new Font("Arial", Font.BOLD,20));
+			milk.setBackground(Color.white);
+			jp.add(milk);
+			milk.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String milkString = "42345678910";
+					Barcode milkBarcode = new Barcode(milkString);
+					ArrayList<BarcodedItem> BarcodeList = new ArrayList<BarcodedItem>();
+					BarcodedItem Milk = new BarcodedItem(milkBarcode, 1000.0);
+					BarcodeList.add(Milk);
+					ControlUnit.itemScan.scanItems(BarcodeList);
+					try {
+						ControlUnit.itemBag.bagItems(Milk);
+					} catch (OverloadException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					switchScreen(16);
 				}
-				switchScreen(16);
-			}
-		});
-		
-		JButton milk = new JButton("<html>MILK<br>(CLICK TO SCAN)</html>", new ImageIcon(ListProductScreen.class.getResource("milk.jpg")));
-		milk.setFont(new Font("Arial", Font.BOLD,20));
-		milk.setBackground(Color.white);
-		jp.add(milk);
-		milk.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String milkString = "42345678910";
-				Barcode milkBarcode = new Barcode(milkString);
-				ArrayList<BarcodedItem> BarcodeList = new ArrayList<BarcodedItem>();
-				BarcodedItem Milk = new BarcodedItem(milkBarcode, 1000.0);
-				BarcodeList.add(Milk);
-				ControlUnit.itemScan.scanItems(BarcodeList);
-				try {
-					ControlUnit.itemBag.bagItems(Milk);
-				} catch (OverloadException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+			});
+			
+			water = new JButton("<html>WATER<br>(CLICK TO SCAN)</html>", new ImageIcon(ListProductScreen.class.getResource("water.jpg")));
+			water.setFont(new Font("Arial", Font.BOLD,20));
+			water.setBackground(Color.white);
+			jp.add(water); 
+			water.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String waterString = "5345678910";
+					Barcode waterBarcode = new Barcode(waterString);
+					ArrayList<BarcodedItem> BarcodeList = new ArrayList<BarcodedItem>();
+					BarcodedItem Water = new BarcodedItem(waterBarcode, 500.0);
+					BarcodeList.add(Water);
+					ControlUnit.itemScan.scanItems(BarcodeList);
+					try {
+						ControlUnit.itemBag.bagItems(Water);
+					} catch (OverloadException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					switchScreen(16);
+	 
 				}
-				switchScreen(16);
-			}
-		});
-		
-		JButton water = new JButton("<html>WATER<br>(CLICK TO SCAN)</html>", new ImageIcon(ListProductScreen.class.getResource("water.jpg")));
-		water.setFont(new Font("Arial", Font.BOLD,20));
-		water.setBackground(Color.white);
-		jp.add(water);
-		water.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String waterString = "5345678910";
-				Barcode waterBarcode = new Barcode(waterString);
-				ArrayList<BarcodedItem> BarcodeList = new ArrayList<BarcodedItem>();
-				BarcodedItem Water = new BarcodedItem(waterBarcode, 500.0);
-				BarcodeList.add(Water);
-				ControlUnit.itemScan.scanItems(BarcodeList);
-				try {
-					ControlUnit.itemBag.bagItems(Water);
-				} catch (OverloadException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+			});
+			
+			bag = new JButton("<html>SHOPPING BAG<br>PLU CODE: 8011<br> Click to add 1</html>", new ImageIcon(ListProductScreen.class.getResource("bag.jpg")));
+			bag.setFont(new Font("Arial", Font.BOLD,20));
+			bag.setBackground(Color.white);
+			jp.add(bag);
+			bag.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					PriceLookupCode BagCode = new PriceLookupCode("8011");
+					ControlUnit.enterPLU.enterPLUProduct(BagCode);
+					switchScreen(6);
 				}
-				switchScreen(16);
- 
-			}
-		});
-		
-		JButton bag = new JButton("<html>SHOPPING BAG<br>PLU CODE: 8011<br> Click to add 1</html>", new ImageIcon(ListProductScreen.class.getResource("bag.jpg")));
-		bag.setFont(new Font("Arial", Font.BOLD,20));
-		bag.setBackground(Color.white);
-		jp.add(bag);
-		bag.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				PriceLookupCode BagCode = new PriceLookupCode("8011");
-				ControlUnit.enterPLU.enterPLUProduct(BagCode);
-				switchScreen(6);
-			}
-		});
-		frame.add(jp);
-		jp.setBackground(blue);
-	}
+			});
+			frame.add(jp);
+			jp.setBackground(blue);
+		}
 			
 		
 	}
