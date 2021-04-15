@@ -68,14 +68,6 @@ public class AttendantLoginTest {
 	}
 	
 	@Test
-	public void testVerifyLoginRobertLoggedIn() {
-		control.login.verifyLogin("rjwalker", "realWorld123");
-		
-		boolean expected = true;
-		assertEquals(expected, control.sessionData.getAttendantLoggedIn());
-	}
-	
-	@Test
 	public void testVerifyLoginNonexistentUsername() {
 		boolean actual = control.login.verifyLogin("kanyewest", "freshwaterGORILLA@9to5");
 		
