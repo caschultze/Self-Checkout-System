@@ -262,6 +262,8 @@ public class GUIPayCash extends MainGUI{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			int value = 100;
+			ControlUnit.checkoutStation.banknoteInput.removeDanglingBanknote();
+			ControlUnit.checkoutStation.banknoteOutput.removeDanglingBanknote();
 			Banknote hundred = new Banknote(value, Currency.getInstance("CAD"));
 			
 			try {
@@ -282,6 +284,8 @@ public class GUIPayCash extends MainGUI{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			int value = 50;
+			ControlUnit.checkoutStation.banknoteInput.removeDanglingBanknote();
+			ControlUnit.checkoutStation.banknoteOutput.removeDanglingBanknote();
 			Banknote fifty = new Banknote(value, Currency.getInstance("CAD"));
 			try {
 				ControlUnit.payBanknote.payWithBanknotes(fifty);
@@ -302,6 +306,8 @@ public class GUIPayCash extends MainGUI{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			int value = 20;
+			ControlUnit.checkoutStation.banknoteInput.removeDanglingBanknote();
+			ControlUnit.checkoutStation.banknoteOutput.removeDanglingBanknote();
 			Banknote twenty = new Banknote(value, Currency.getInstance("CAD"));
 			try {
 				ControlUnit.payBanknote.payWithBanknotes(twenty);
@@ -321,6 +327,8 @@ public class GUIPayCash extends MainGUI{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			int value = 10;
+			ControlUnit.checkoutStation.banknoteInput.removeDanglingBanknote();
+			ControlUnit.checkoutStation.banknoteOutput.removeDanglingBanknote();
 			Banknote ten = new Banknote(value, Currency.getInstance("CAD"));
 			try {
 				ControlUnit.payBanknote.payWithBanknotes(ten);
@@ -340,6 +348,8 @@ public class GUIPayCash extends MainGUI{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			int value = 5;
+			ControlUnit.checkoutStation.banknoteInput.removeDanglingBanknote();
+			ControlUnit.checkoutStation.banknoteOutput.removeDanglingBanknote();
 			Banknote five = new Banknote(value, Currency.getInstance("CAD"));
 			try {
 				ControlUnit.payBanknote.payWithBanknotes(five);

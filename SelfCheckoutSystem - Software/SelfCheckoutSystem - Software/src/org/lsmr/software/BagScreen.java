@@ -66,26 +66,26 @@ public class BagScreen extends MainGUI {
 	        
 	        gc.gridx = 0;
 	        gc.gridy = 1;
-			JLabel BagQ = new JLabel("Would you like to bag?");
+			JLabel BagQ = new JLabel("Please bag this item");
 			BagQ.setFont(new Font("Arial", Font.BOLD,30));;
 			bagPanel.add(BagQ, gc);
 	        
 			gc.gridx = 0;
 		    gc.gridy = 3;
-		    JButton yes = new JButton ("No, I have a my own Bag");
+		    JButton yes = new JButton ("I have a bag");
 		    yes.setBackground(white);
 		    bagPanel.add(yes, gc);
 		    
 		    gc.gridx = 1;
 		    gc.gridy = 3;
-		    JButton yesBag = new JButton ("Yes, Add a Bag");
+		    JButton yesBag = new JButton ("Add a bag");
 		    yesBag.setBackground(white);
 		    bagPanel.add(yesBag, gc);
 		   
 			
 			gc.gridx = 0;
 		    gc.gridy = 5;
-		    JButton adminHelp = new JButton ("Admin Help / Not Bagging");
+		    JButton adminHelp = new JButton ("Admin Help / I don't want to bag this item");
 		    adminHelp.setBackground(white);
 		    bagPanel.add(adminHelp, gc);
 			

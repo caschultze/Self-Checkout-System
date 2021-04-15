@@ -38,6 +38,8 @@ public class ShutdownScreen extends MainGUI{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				ControlUnit.checkoutStation.banknoteInput.removeDanglingBanknote();
+				ControlUnit.checkoutStation.banknoteOutput.removeDanglingBanknote();
 				ControlUnit.sessionData.restart();
 				switchScreen(4);
 			}
