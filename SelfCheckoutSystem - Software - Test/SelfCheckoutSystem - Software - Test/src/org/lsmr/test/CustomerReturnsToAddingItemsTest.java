@@ -87,7 +87,7 @@ public class CustomerReturnsToAddingItemsTest {
 			cu.customerReturnsToAddingItems.returnAndBagItems(item);
 		}
 		
-		assertEquals(3,cu.customerReturnsToAddingItems.getCountWeightChanged());
+		assertEquals(6,cu.customerReturnsToAddingItems.getCountWeightChanged());
 	}
 	
 	//test for when the user doe need help and tries to bag an item, all items are expected not be bagged
