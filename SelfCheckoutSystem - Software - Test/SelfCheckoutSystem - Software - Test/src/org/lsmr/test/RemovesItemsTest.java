@@ -52,8 +52,10 @@ public class RemovesItemsTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		control.checkoutStation.baggingArea.add(itemsDatabase.get(itemCode));
 		control.removesItems.removesItems(itemsDatabase.get(itemCode));
-		assertEquals(control.sessionData.getCurrentTotalWeight(), 0);
+		boolean result = control.sessionData.getCurrentTotalWeight() == 0;
+		assertTrue(result);
 		
 	}
 	
@@ -63,6 +65,7 @@ public class RemovesItemsTest {
 		Barcode itemCode = new Barcode("2222");
 		
 		control.itemBag.bagItems(itemsDatabase.get(itemCode));
+		control.checkoutStation.baggingArea.add(itemsDatabase.get(itemCode));
 		assertTrue("20.0".equals(String.valueOf(control.itemBag.scs.baggingArea.getCurrentWeight())));
 		
 		control.removesItems.removesItems(itemsDatabase.get(itemCode));
@@ -81,11 +84,14 @@ public class RemovesItemsTest {
 		control.itemBag.bagItems(itemsDatabase.get(itemCode1));
 		control.itemBag.bagItems(itemsDatabase.get(itemCode2));
 		}catch(Exception e){}
+		control.checkoutStation.baggingArea.add(itemsDatabase.get(itemCode0));
+		control.checkoutStation.baggingArea.add(itemsDatabase.get(itemCode1));
+		control.checkoutStation.baggingArea.add(itemsDatabase.get(itemCode2));
 		control.removesItems.removesItems(itemsDatabase.get(itemCode0));
 		control.removesItems.removesItems(itemsDatabase.get(itemCode1));
 		control.removesItems.removesItems(itemsDatabase.get(itemCode2));
 		
-		assertEquals(control.removesItems.getCountWeightChanged(), 6);
+		assertEquals(control.removesItems.getCountWeightChanged(), 12);
 		
 	}
 	
@@ -99,6 +105,9 @@ public class RemovesItemsTest {
 		control.itemBag.bagItems(itemsDatabase.get(itemCode0));
 		control.itemBag.bagItems(itemsDatabase.get(itemCode1));
 		control.itemBag.bagItems(itemsDatabase.get(itemCode2));
+		control.checkoutStation.baggingArea.add(itemsDatabase.get(itemCode0));
+		control.checkoutStation.baggingArea.add(itemsDatabase.get(itemCode1));
+		control.checkoutStation.baggingArea.add(itemsDatabase.get(itemCode2));
 		
 		assertTrue("545.0".equals(String.valueOf(control.itemBag.scs.baggingArea.getCurrentWeight())));
 		
@@ -120,6 +129,9 @@ public class RemovesItemsTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		control.checkoutStation.baggingArea.add(itemsDatabase.get(itemCode));
+		control.PaperCounter = 2;
+		control.InkCounter = 2;
 		control.removesItems.removesItems(itemsDatabase.get(itemCode));
 		assertEquals(control.removesItems.getCountWeightChanged(), 0);
 		
