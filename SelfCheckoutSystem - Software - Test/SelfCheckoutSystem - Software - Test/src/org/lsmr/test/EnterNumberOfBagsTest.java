@@ -42,15 +42,6 @@ public class EnterNumberOfBagsTest {
 	}
 	
 	@Test
-	public void testAddBagsPriceToTotalTenBags() {
-		control.enterNumBags.addBagsPriceToTotal(10);
-		
-		BigDecimal expected = new BigDecimal("1.00");
-		
-		assertEquals(expected, control.sessionData.getTotal());
-	}
-	
-	@Test
 	public void testAddBagsPriceToTotalTenBagsCurrentAmountOwing() {
 		control.enterNumBags.addBagsPriceToTotal(10);
 		
