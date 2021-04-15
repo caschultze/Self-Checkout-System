@@ -179,7 +179,7 @@ public class CurrentSessionData {
 	public void addNumberOfBagsToTotalPrice(int numBags) {
 		
 		if (numBags >= 0) {
-			BigDecimal bag = new BigDecimal("0.05");
+			BigDecimal bag = new BigDecimal("0.10");
 			for (int i = 0; i < numBags; i++) {
 				totalPrice = totalPrice.add(bag);
 				currentAmountOwing = currentAmountOwing.add(bag);

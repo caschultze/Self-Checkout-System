@@ -36,40 +36,27 @@ public class EnterNumberOfBagsTest {
 	public void testAddBagsPriceToTotalOneBag() {
 		control.enterNumBags.addBagsPriceToTotal(1);
 		
-		BigDecimal expected = new BigDecimal("0.05");
-		BigDecimal actual = control.sessionData.getTotalPrice();
+		BigDecimal expected = new BigDecimal("0.10");
 		
-		assertEquals(expected, actual);
-	}
-	
-	@Test
-	public void testAddBagsPriceToTotalOneBagCurrentAmountOwing() {
-		control.enterNumBags.addBagsPriceToTotal(1);
-		
-		BigDecimal expected = new BigDecimal("0.05");
-		BigDecimal actual = control.sessionData.getCurrentAmountOwing();
-		
-		assertEquals(expected, actual);
+		assertEquals(expected, control.sessionData.getTotal());
 	}
 	
 	@Test
 	public void testAddBagsPriceToTotalTenBags() {
 		control.enterNumBags.addBagsPriceToTotal(10);
 		
-		BigDecimal expected = new BigDecimal("0.50");
-		BigDecimal actual = control.sessionData.getTotalPrice();
+		BigDecimal expected = new BigDecimal("1.00");
 		
-		assertEquals(expected, actual);
+		assertEquals(expected, control.sessionData.getTotal());
 	}
 	
 	@Test
 	public void testAddBagsPriceToTotalTenBagsCurrentAmountOwing() {
 		control.enterNumBags.addBagsPriceToTotal(10);
 		
-		BigDecimal expected = new BigDecimal("0.50");
-		BigDecimal actual = control.sessionData.getCurrentAmountOwing();
+		BigDecimal expected = new BigDecimal("1.00");
 		
-		assertEquals(expected, actual);
+		assertEquals(expected, control.sessionData.getCurrentAmountOwing());
 	}
 	
 	@Test
@@ -77,6 +64,7 @@ public class EnterNumberOfBagsTest {
 		control.enterNumBags.addBagsPriceToTotal(-1);
 		
 		BigDecimal expected = new BigDecimal("0.00");
+		control.sessionData.getTotal();
 		BigDecimal actual = control.sessionData.getTotalPrice();
 		
 		assertEquals(expected, actual);
