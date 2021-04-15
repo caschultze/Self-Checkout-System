@@ -51,6 +51,7 @@ public class AdminGUI extends MainGUI {
 	private static JLabel textOut;
 	private static JLabel enterLabel;
 	private static boolean removeClicked = false;
+	private static int logoutOkay = 0;
 	
 	public AdminGUI() {
 		tsl = new TouchScreen();
@@ -276,6 +277,11 @@ public class AdminGUI extends MainGUI {
 					refillNoteBtn.setEnabled(false);
 					logoutBtn.setEnabled(true);
 					blockBtn.setForeground(new Color(0, 0, 0));
+					
+					if (CurrentScreen == 17 && logoutOkay != 2) {
+						logoutBtn.setEnabled(false);
+					}
+					
 					ControlUnit.blocker.unblockStation();
 				}
 			}
@@ -297,6 +303,10 @@ public class AdminGUI extends MainGUI {
 					generalPanel.remove(enterBtn);
 					generalPanel.remove(codeTextField);
 					removeClicked = false;
+				}
+				
+				if (CurrentScreen == 17) {
+					switchScreen(5);
 				}
 				switchScreen(CurrentScreen);
 			}
@@ -382,6 +392,10 @@ public class AdminGUI extends MainGUI {
 					ControlUnit.PaperCounter = 4;
 					System.out.println("Paper has been added");
 					textOut.setText("Paper had been added");
+					
+					if (CurrentScreen == 17) {
+						logoutOkay++;
+					}
 				}
 				else {
 					System.out.println("Paper has already been added recently");
@@ -402,6 +416,11 @@ public class AdminGUI extends MainGUI {
 					ControlUnit.InkCounter = 4;
 					System.out.println("Ink has been added");
 					textOut.setText("Ink has been added");
+					
+					if (CurrentScreen == 17) {
+						logoutOkay++;
+					}
+					
 				}
 				else {
 					System.out.println("Ink has already been added recently");
