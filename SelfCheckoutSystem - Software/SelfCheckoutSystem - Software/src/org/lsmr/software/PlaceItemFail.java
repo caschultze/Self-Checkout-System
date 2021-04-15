@@ -14,7 +14,7 @@ import org.lsmr.selfcheckout.devices.SimulationException;
 
 public class PlaceItemFail extends BagItem{
 
-	CurrentSessionData data = ControlUnit.sessionData;
+	CurrentSessionData data = new CurrentSessionData();
 	SelfCheckoutStation station;
 	private double pastWeight = 0.0;
 	private boolean discrepancy;
@@ -37,16 +37,17 @@ public class PlaceItemFail extends BagItem{
 	 */
 	public boolean checkWeights() throws OverloadException {
 		scannedItems.addAll(data.getScannedItems());
-		
+		baggedItems.addAll(data.getBaggedItems());		
 		//items should be bagged in the order they were scanned -> first scanned, first bagged
 		//as such, can simply access the first index of scannedItems (that has not already been bagged) to check what weight should be placed
 		
 		double currentWeight = ControlUnit.itemBag.scs.baggingArea.getCurrentWeight();
-		
-		if(!checkItemPlaced() || scannedItems.isEmpty()) {
-			this.discrepancy = true;
-			throw new SimulationException("Weight should have changed");
-		}
+
+//		if(!checkItemPlaced() || scannedItems.isEmpty()) {
+//			System.out.println(""+scannedItems.isEmpty() + !checkItemPlaced());
+//			this.discrepancy = true;
+//			throw new SimulationException("Weight should have changed");
+//		}
 		
 		double predicted = 0.0;
 		
@@ -76,6 +77,7 @@ public class PlaceItemFail extends BagItem{
 		
 		//reset scannedItems
 		scannedItems.clear();
+		baggedItems.clear();
 		
 		return true;
 	}

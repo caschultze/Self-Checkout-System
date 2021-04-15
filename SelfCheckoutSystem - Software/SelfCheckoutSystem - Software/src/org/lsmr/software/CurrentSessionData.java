@@ -35,6 +35,7 @@ public class CurrentSessionData {
 	private static double currentTotalWeight = 0.0;
 	private static ArrayList<PLUCodedProduct> PLUProducts = new ArrayList<PLUCodedProduct>();
 	private static ArrayList<Double> PLUWeights = new ArrayList<Double>();
+	private static ArrayList<BarcodedItem> baggedItems = new ArrayList<BarcodedItem>();
 	
 	/*
 	 * Function to add products to a saved HashMap of items scanned -> this HashMap explicitly associates each item scanned with 
@@ -108,6 +109,17 @@ public class CurrentSessionData {
 		
 		ArrayList<BarcodedItem> newArray = new ArrayList<BarcodedItem>();
 		for (BarcodedItem newItem : scannedItems) {
+			newArray.add(newItem);
+		}
+		
+		return new ArrayList<BarcodedItem>(newArray);
+	}
+	
+	
+	public ArrayList<BarcodedItem> getBaggedItems() {
+		
+		ArrayList<BarcodedItem> newArray = new ArrayList<BarcodedItem>();
+		for (BarcodedItem newItem : baggedItems) {
 			newArray.add(newItem);
 		}
 		
@@ -290,6 +302,8 @@ public class CurrentSessionData {
 		currentTotalWeight = 0.0;
 		PLUProducts = new ArrayList<PLUCodedProduct>();
 		PLUWeights = new ArrayList<Double>();
+		baggedItems = new ArrayList<BarcodedItem>();
+		
 	}
 	
 }

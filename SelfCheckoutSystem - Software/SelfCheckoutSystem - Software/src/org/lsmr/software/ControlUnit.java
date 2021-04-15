@@ -66,6 +66,7 @@ public class ControlUnit {
 	
 		checkoutStation = new SelfCheckoutStation(currency, banknoteDenominations, coinDenominations, scaleMaximumWeight, scaleSensitivity);
 		itemScan = new ScanItem(checkoutStation);
+		failPlaceItem = new PlaceItemFail(checkoutStation);
 		itemBag = new BagItem(checkoutStation);
 		payCoin = new CoinPayment(checkoutStation);
 		payBanknote = new BanknotePayment(checkoutStation);
@@ -74,7 +75,6 @@ public class ControlUnit {
 		creditPayment = new PayCredit(checkoutStation);
 		debitPayment = new PayDebit(checkoutStation);
 		giftcardPayment = new PayGiftCard(checkoutStation);
-		failPlaceItem = new PlaceItemFail(checkoutStation);
 		customerReturnsToAddingItems = new CustomerReturnsToAddingItems(checkoutStation);
 		changeReceive = new ReceiveChange(checkoutStation);
 		membershipScan = new ScanMembership(checkoutStation);
