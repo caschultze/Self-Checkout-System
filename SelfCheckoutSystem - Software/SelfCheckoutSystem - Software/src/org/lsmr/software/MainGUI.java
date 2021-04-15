@@ -434,6 +434,7 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			break;
 			
 		case 17:
+			CurrentScreen = 17;
 			GUICreditScreen.touchscreen.setVisible(false);
 			GUIDebitScreen.touchscreen.setVisible(false);	
 			GUIEnterPin.touchscreen.setVisible(false);
@@ -451,7 +452,7 @@ public class MainGUI extends AbstractDevice <TouchScreenListener> {
 			ShutdownScreen.tsl.setVisible(false);
 			bagScreen.tsl.setVisible(false);
 			outofInkPaper.tsl.setVisible(true);
-			
+			AdminGUI.logoutBtn.setEnabled(false);
 			break;
 		}
 		
