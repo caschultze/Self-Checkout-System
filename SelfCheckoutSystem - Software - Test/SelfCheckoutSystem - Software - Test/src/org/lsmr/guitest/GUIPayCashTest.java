@@ -1,4 +1,4 @@
-package org.lsmr.test;
+package org.lsmr.guitest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

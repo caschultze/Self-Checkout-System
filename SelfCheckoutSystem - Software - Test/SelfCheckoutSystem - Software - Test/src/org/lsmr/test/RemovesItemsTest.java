@@ -53,7 +53,7 @@ public class RemovesItemsTest {
 			e.printStackTrace();
 		}
 		control.removesItems.removesItems(itemsDatabase.get(itemCode));
-		assertEquals(control.removesItems.getCountWeightChanged(), 2);
+		assertEquals(control.sessionData.getCurrentTotalWeight(), 0);
 		
 	}
 	
