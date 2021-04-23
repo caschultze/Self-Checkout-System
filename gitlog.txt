@@ -1,0 +1,212 @@
+cae2646 - (HEAD -> main, origin/main) final tests <austinficzere>
+d5b29ea - Update CustomerReturnsToAddingItemsTest.java <raymond-vong>
+f1fa91f - enter bags test <austinficzere>
+c39609a - Merge branch 'main' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3.git into main <HaydenMcNally>
+28f2824 - fixed tests <HaydenMcNally>
+8eb983a - Merge branch 'main' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3 into main <raymond-vong>
+33c1617 - Added Sanjita Updated class and GUI test <raymond-vong>
+248185b - fixed test <austinficzere>
+0442c92 - Removed previous iteration test cases <raymond-vong>
+cc20794 - Removed worthless button on payment screens <raymond-vong>
+3b90c76 - Fixed test by adding try catch for the itembag function <HaydenMcNally>
+bb3e287 - Merge branch 'main' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3.git into main <HaydenMcNally>
+0b37dbf - Khanh changes <HaydenMcNally>
+2c31dad - Fixed logout button issue <dohkhanh>
+e35331c - fixed the bagging problem <HaydenMcNally>
+e264aa7 - Finished JUNIT for AdminGUI <dohkhanh>
+0e283fe - made it work <HaydenMcNally>
+4316489 - Merge branch 'main' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3 into main <raymond-vong>
+32f9e87 - Testing for GuiPayCash <raymond-vong>
+f5a63f0 - removed one more rob thing <austinficzere>
+4c27cc8 - Made buttons public in AdminGUI and fixed error <dohkhanh>
+7232d51 - Fixed <Bhoang01>
+c1e4298 - Update return type of checkWeight() <Bhoang01>
+0bff6e1 - Updated to check weights when item is bagged <Bhoang01>
+69c0dee - fixed credit/debit/gift card GUIs so the credit limit would actually apply <tintincan>
+d8ef0e8 - removed rob <austinficzere>
+82447b8 - cleared Jtextfields when switching back to keypad screens <raymond-vong>
+ce7d0a4 - Merge branch 'main' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3.git into main <HaydenMcNally>
+336f1b0 - once payed with cash can't go back <HaydenMcNally>
+4614d17 - public screens in MainGUI <austinficzere>
+a2d0210 - Can't pay with no items <HaydenMcNally>
+f86ee28 - Merge branch 'main' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3.git into main <HaydenMcNally>
+ff909e7 - clear text when leaving screen, and bag item text <HaydenMcNally>
+a6f2a99 - Updated Admingui - Khanh <raymond-vong>
+e1798c6 - Merge branch 'main' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3 into main <Christopher-Schultze>
+c0de6eb - pushed organization document <Christopher-Schultze>
+4be9a5c - Update README.md <khushi-bhatt1>
+1682566 - changed 6 to 4 <Christopher-Schultze>
+7e9c8f6 - merged CreditDebitGUIv2 <Christopher-Schultze>
+9108297 - (origin/CreditDebitGUIv2) Fix PlaceItemFail test case <dohkhanh>
+cfc6842 - Fixed finish adding items test case <dohkhanh>
+50f4a4b - Fixed CustomerReturnsToAddingItems test case <dohkhanh>
+ce43162 - Removed back button on Admin - Khanh <raymond-vong>
+5463200 - Fixed Cash Payment - Sami <raymond-vong>
+7e6769b - Clear dangling banknote <sami-z>
+ed36957 - Merge branch 'CreditDebitGUIv2' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3 into CreditDebitGUIv2 <sami-z>
+cf54aab - Added coins and logic to buttons <sami-z>
+2f84e89 - Added out of ink / paper screen <raymond-vong>
+f0b11d0 - Increase font size on screens <raymond-vong>
+d2e43ca - BagScreen - Sanjita <raymond-vong>
+9524141 - Updated pin pad screen + credit + debit <raymond-vong>
+203eb62 - Added approve weight button on AdminGUI <dohkhanh>
+4c334e2 - Merge branch 'CreditDebitGUIv2' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3 into CreditDebitGUIv2 <raymond-vong>
+addb105 - Updated the Color Scheme on the credit card screen <raymond-vong>
+7d07d92 - Added a label in AdminGUI that updates. Fixed removing a PLU product <dohkhanh>
+5fbb655 - Updated new images + Test files for Sanjita <raymond-vong>
+f2e7ae9 - Updated ListProductScreen Colors <raymond-vong>
+01b1a35 - Updated Color on Thank you screen and Cash screen <raymond-vong>
+05ba48d - Merge branch 'CreditDebitGUIv2' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3 into CreditDebitGUIv2 <raymond-vong>
+6ea8dcf - Simulated ink and paper <raymond-vong>
+519908a - double registered listeners with the recievechange fixed <HaydenMcNally>
+9d8445c - Fixed color scheme <HaydenMcNally>
+8417a15 - Merge branch 'CreditDebitGUIv2' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3 into CreditDebitGUIv2 <sami-z>
+5661a6f - Fixed merge issues <sami-z>
+a4187ac - Fix add ink/paper test cases <dohkhanh>
+04becc8 - Merge branch 'CreditDebitGUIv2' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3 into CreditDebitGUIv2 <sami-z>
+c088fd7 - added change functionality on thank you screen <sami-z>
+53a1669 - Merge branch 'CreditDebitGUIv2' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3 into CreditDebitGUIv2 <austinficzere>
+d806e9c - colors <austinficzere>
+4ab54e2 - Update ThanksForShoppingScreen.java <raymond-vong>
+a704263 - back button <austinficzere>
+25329b8 - Merge branch 'CreditDebitGUIv2' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3 into CreditDebitGUIv2 <raymond-vong>
+71e4e0a - Sanjitas button updates <raymond-vong>
+a7589a2 - Fixed price when removing <Hayden McNally>
+555becb - Fix refill banknote/coin test case <dohkhanh>
+6084800 - Merge branch 'CreditDebitGUIv2' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3.git into CreditDebitGUIv2 <Hayden McNally>
+a174a0b - removed dup item <Hayden McNally>
+64558d5 - Fixed EnterPLUCode test case <dohkhanh>
+3da9007 - Merge branch 'CreditDebitGUIv2' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3.git into CreditDebitGUIv2 <Hayden McNally>
+06df5b7 - Restart current sesssion data <raymond-vong>
+092f274 - fixed dup items <Hayden McNally>
+7c62702 - Added finish button to cash screen & transition <sami-z>
+4ec6faa - fixed price <Hayden McNally>
+4b0d3a8 - Merge pull request #6 from Christopher-Schultze/AdminGUIv3 <HaydenMcNally>
+24e76f3 - (origin/AdminGUIv3) Merge branch 'CreditDebitGUIv2' into AdminGUIv3 <HaydenMcNally>
+c527970 - Fixed change again <sami-z>
+1be8bd5 - Commented out GST <raymond-vong>
+31b6003 - Added functionality for removing products from purchases <dohkhanh>
+44ed58c - Fixed price updating and change <sami-z>
+f6aebf2 - fixed scanned item <Hayden McNally>
+9fbd5a9 - fixed printing the of items <Hayden McNally>
+f7d0814 - Screens set to false and added images + Sanjitas files <raymond-vong>
+f508e49 - Set screens to false <raymond-vong>
+8acfda6 - Merge pull request #4 from Christopher-Schultze/AdminGUIv2 <HaydenMcNally>
+304bc96 - (origin/AdminGUIv2) Merge branch 'CreditDebitGUIv2' into AdminGUIv2 <HaydenMcNally>
+61a8590 - Fixed transitions <sami-z>
+29faa17 - Merge pull request #3 from Christopher-Schultze/haydenbranch <HaydenMcNally>
+a18242f - Merge pull request #2 from Christopher-Schultze/PaymentSelectionScreenv2-branchfromCreditDebitGUIv2 <austinficzere>
+94a5c12 - added the screen change <Hayden McNally>
+a0eb2a6 - Added back button to AdminGUI <dohkhanh>
+005f6d1 - Added a border label to hidden panel <dohkhanh>
+36a627d - final logic <austinficzere>
+ceb9304 - comment <austinficzere>
+45e5d80 - update session data and remove items from scale <austinficzere>
+f409731 - Made a shutdown screen and set transitions to and from it <dohkhanh>
+084ed1f - Changed Admin screen so it could work on other resolutions <dohkhanh>
+f93b724 - tidied up both screens <austinficzere>
+7534610 - added switchscreen <austinficzere>
+ab10fa2 - added switch statements <austinficzere>
+cdc8395 - Merge branch 'CreditDebitGUIv2' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3 into CreditDebitGUIv2 <sami-z>
+381c148 - Fixed Screen issue with JLabel <sami-z>
+c265a71 - Merge branch 'CreditDebitGUIv2' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3 into CreditDebitGUIv2 <raymond-vong>
+6ed3793 - Transitions for Membership screen <raymond-vong>
+ecd32ac - Fixed transitions between screens <sami-z>
+0678206 - Fixed GUIPayCash screen <sami-z>
+61395c6 - Updated Credit/Debit/Gift card GUI stuff <tintincan>
+8715164 - All of the GUI classes are now here (except for the GUI class for when the system is shut down). <tintincan>
+c36e31f - Update RemovesItemsTest.java <kkluddu>
+ff41706 - Update RemovesItems.java <kkluddu>
+ee2e946 - Update ControlUnit.java <kkluddu>
+f3f8bf7 - Updated Credit/Debit GUI, started MainGUI <tintincan>
+8acdd0d - adjusted BlockStationSetup again <tintincan>
+b5974a7 - Adjusted BlockStationSetup so that it doesn't disable or enable the TouchScreen <tintincan>
+b36b3b7 - Fixed errors occurring regarding super constructors <geesjake>
+f1be13c - Fixed a minor issue <geesjake>
+5ae1023 - Merge branch 'main' of https://github.com/Christopher-Schultze/SENG300-GroupIteration3.git into main <geesjake>
+54bb8f6 - Fixed errors occurring regarding station <geesjake>
+8c90379 - added hardwarev3.1 to main <Christopher-Schultze>
+dce43bb - Update PlaceItemFail.java <Bhoang01>
+44f9898 - Added some minor changes to BagItem.java <geesjake>
+730d9b4 - implemented attendant interaction functionality <Christopher-Schultze>
+da4c705 - merged refillDispensers <Christopher-Schultze>
+9f68b47 - merged khanh branch <Christopher-Schultze>
+18679c5 - merged WeightDiscrepancies <Christopher-Schultze>
+ec30116 - merged origin/Printer stuff <Christopher-Schultze>
+f92949f - Merge remote-tracking branch 'origin/PowerOnOff' into main merging PowerOnOff <Christopher-Schultze>
+6b685e3 - merged EnterMembership <Christopher-Schultze>
+1575f3b - merged customerReturnsToAddingItems <Christopher-Schultze>
+4823c1a - merged RemovesItems use case <Christopher-Schultze>
+159dd34 - fixed naming errors in CustomerNoBagScannedItemAttendantRemovesProduct.java <Christopher-Schultze>
+d19f296 - merged CustomerNoBagScannedItem <Christopher-Schultze>
+bba4392 - added package declaration to Empty tests <Christopher-Schultze>
+e95c214 - merged and resolved conflicts for AttendantLogInandLogOut <Christopher-Schultze>
+2095f65 - merged and resovled conflict <Christopher-Schultze>
+86285be - Merge remote-tracking branch 'origin/AttendantBlocksStation' into main merging a branch to main <Christopher-Schultze>
+065921c - updated CurrentSessionData with a counter for the expected weight <jermr>
+82279dd - test <jermr>
+6796583 - completed the customer does not want to bag a scanned item & attendant <jermr>
+d2ec267 - (origin/AttendantEmptiesStorage) Add files via upload <kennedyromick>
+17a9a81 - Delete EmptyCoinStorageTest.java <kennedyromick>
+4b0c67c - Delete EmptyBanknoteStorageTest.java <kennedyromick>
+7059e6e - Add files via upload <kennedyromick>
+1b1a4c2 - Rename CustomerNoBagScannedItemTest.java to CustomerNoBagScannedItem-AttendantRemovesProductTest.java <jeremyrupprecht>
+359f65d - Delete AttendantRemovesProductFromPurchasesTest.java <jeremyrupprecht>
+a695e5a - Delete AttendantRemovesProductFromPurchases.java <jeremyrupprecht>
+04deb00 - Rename CustomerNoBagScannedItem.java to CustomerNoBagScannedItem-AttendantRemovesProduct.java <jeremyrupprecht>
+5d8b148 - (origin/AttendantLogInandLogOut, AttendantLogInandLogOut) Took care of minor errors in other use cases <geesjake>
+9c1cd1f - Completed "Customer enters number of plastic bags used" use case <geesjake>
+225455e - Fixed wrong code in CurrentSessionData.java <geesjake>
+4177006 - (origin/refillDispensers) Did my use case :) <Hayden McNally>
+15a7a5e - Create AttendantRemovesProductFromPurchasesTest.java <jeremyrupprecht>
+6ecc2a4 - Create AttendantRemovesProductFromPurchases.java <jeremyrupprecht>
+2ccdcf8 - Create CustomerNoBagScannedItemTest.java <jeremyrupprecht>
+46f057a - Create CustomerNoBagScannedItem.java <jeremyrupprecht>
+64f8600 - test <jermr>
+ee20cfa - Added a test class for CustomerReturnsToAddingItems (not tested yet) <jermr>
+ebd471b - Improved security measures for username and password <geesjake>
+3740223 - (origin/AttendantBlocksStation) added BlockStationSetup use case, corresponding tests, updatedd ControlUnit to include instance of BlockStationSetup <tintincan>
+670fdf0 - Create CustomerReturnsToAddingItemsTest.java <jeremyrupprecht>
+6fda3d5 - Create CustomerReturnsToAddingItems.java <jeremyrupprecht>
+a5bc70e - Delete CustomerReturnsToAddingItems <jeremyrupprecht>
+00c767c - Test commit <tintincan>
+f0af7c5 - (origin/lookup-enter-products_cases_3,4,14) Got rid of any unused code <dohkhanh>
+4177323 - Create CustomerReturnsToAddingItems <jeremyrupprecht>
+e53a964 - (origin/EnterMembershipGiftCard) Test Cases for Enter Membership and Giftcard <smitra33>
+617367c - (origin/CustomerRemovesItems) Update RemovesItemsTest.java, Added Documentation <kkluddu>
+1ac5df3 - Update RemovesItems.java <kkluddu>
+21ad131 - (origin/WeightDiscrepancies) Completed <Bhoang01>
+bf25d54 - Added exception coverage - completed <Bhoang01>
+7678086 - Completed <Bhoang01>
+2fbbce9 - Completed <Bhoang01>
+f14cc05 - Updated to cover new classes <Bhoang01>
+1ce0478 - Fixed bugs <Bhoang01>
+858f2f2 - 100% coverage <Bhoang01>
+d9c49bc - Updated to account for AttendantApprovesWeight <Bhoang01>
+484cf5c - Completed <Bhoang01>
+3839c91 - (origin/PowerOnOff) Update StartupAndShutdown.java <raymond-vong>
+931f102 - Created/Updated to suit Attendant data <Bhoang01>
+7f5995f - PowerOnAndOff Use Case <raymond-vong>
+554515b - Added more tests to RemovesItemsTest.java <kkluddu>
+c277441 - Update RemovesItems.java and Added Documentation <kkluddu>
+85d5ca8 - Create RemovesItemsTest.java <kkluddu>
+55b57c0 - Update ControlUnit.java <kkluddu>
+1cb20fe - Create RemovesItems.java <kkluddu>
+ff2c5de - (origin/Printer) more coverage added <austinficzere>
+29df21e - added testing for add ink/paper use cases <austinficzere>
+60ba90f - attendant ink/paper use case <austinficzere>
+f9f157c - Included imporved security measures <geesjake>
+02e5f69 - Completed test class for AttendantLoginAndLogout <geesjake>
+ca6266a - Completed attendant logs in and logs out use cases <geesjake>
+ccc276e - Added testing for EnterPLUCode <dohkhanh>
+fb9b45f - Finished use case for entering PLU code for a product <dohkhanh>
+326b1c1 - Added testing for LookUpProducts <dohkhanh>
+247f883 - Completed use cases for looking up products (use cases 3,14) <dohkhanh>
+bbbe007 - added documentation to InkLow and PaperLow files <Christopher-Schultze>
+fbcf7cf - Added test for InkLowTest & PaperLowTest <sami-z>
+0db6dd7 - Partially completed use cases InkLow/PaperLow & tests <sami-z>
+3c227a7 - Fixed Project build path <sami-z>
+5df72c7 - Unzipped the zips <Christopher-Schultze>
+22ab7d3 - Added previous iteration's software, and added Hardware v3.0 <Christopher-Schultze>
+0cd101f - Update .gitignore <Christopher Schultze>
+06f7e05 - Initial commit <Christopher Schultze>
