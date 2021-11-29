@@ -1,4 +1,3 @@
-# SENG300-GroupIteration3
+# Self Checkout System
 
-Submitted to D2L: 
-- 
+A project in Java that simulates the self checkout system of a grocery store.
